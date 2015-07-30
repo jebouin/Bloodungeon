@@ -1,10 +1,15 @@
 package com.xay.util;
-
+#if openfl
 import openfl.Lib;
 import openfl.display.Sprite;
 import openfl.display.DisplayObject;
 import openfl.display.Shape;
-
+#elseif flash
+import flash.Lib;
+import flash.display.Sprite;
+import flash.display.DisplayObject;
+import flash.display.Shape;
+#end
 class LayerManager {
 	var container : Sprite;
 	var layers : Array<DisplayObject>;

@@ -1,8 +1,14 @@
 package com.xay.util;
 import haxe.ds.StringMap;
+#if openfl
 import openfl.events.KeyboardEvent;
 import openfl.events.MouseEvent;
 import openfl.Lib;
+#elseif flash
+import flash.events.KeyboardEvent;
+import flash.events.MouseEvent;
+import flash.Lib;
+#end
 class Input {
 	static var keys : StringMap<Bool>;
 	static var oldKeys : StringMap<Bool>;

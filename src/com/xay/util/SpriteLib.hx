@@ -1,14 +1,21 @@
 package com.xay.util;
-
+#if openfl
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
 import openfl.display.Graphics;
 import openfl.display.Sprite;
-import openfl.display.Tilesheet;
 import openfl.geom.Point;
 import openfl.geom.Rectangle;
 import openfl.Lib;
-
+#elseif flash
+import flash.display.Bitmap;
+import flash.display.BitmapData;
+import flash.display.Graphics;
+import flash.display.Sprite;
+import flash.geom.Point;
+import flash.geom.Rectangle;
+import flash.Lib;
+#end
 typedef Animation = {
 	wid : Int,
 	hei : Int,
