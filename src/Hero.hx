@@ -7,22 +7,23 @@ class Hero extends Entity {
 		graphics.drawCircle(0, 0, 8);
 		graphics.endFill();
 		Game.CUR.lm.addChild(this, Const.HERO_L);
+		maxSpeed = 3.;
 	}
 	override function delete() {
 		super.delete();
 	}
 	override function update() {
 		if(Input.keyDown("left")) {
-			vx -= 1.5;
+			vx -= speed;
 		}
 		if(Input.keyDown("right")) {
-			vx += 1.5;
+			vx += speed;
 		}
 		if(Input.keyDown("up")) {
-			vy -= 1.5;
+			vy -= speed;
 		}
 		if(Input.keyDown("down")) {
-			vy += 1.5;
+			vy += speed;
 		}
 		if(Input.oldKeyDown("action")) {
 			jump();

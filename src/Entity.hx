@@ -12,6 +12,8 @@ class Entity extends XSprite {
 	public var gravity : Float;
 	public var frictionZ : Float;
 	public var friction : Float;
+	public var speed : Float;
+	public var maxSpeed : Float;
 	public var shadow : Shape;
 	public var onGround : Bool;
 	public function new() {
@@ -20,9 +22,11 @@ class Entity extends XSprite {
 		yy = Const.HEI * .5;
 		zz = 0.;
 		vx = vy = vz = 0.;
+		maxSpeed = -1.;
 		friction = .3;
 		frictionZ = .01;
 		gravity = .8;
+		speed = 2.;
 		onGround = false;
 		shadow = new Shape();
 		renderShadow();
@@ -36,6 +40,14 @@ class Entity extends XSprite {
 		vx -= vx * friction;
 		vy -= vy * friction;
 		vz -= vz * frictionZ;
+		if(maxSpeed > 0) {
+			var s = vx*vx + vy*vy;
+			if(s > maxSpeed*maxSpeed) {
+				s = Math.sqrt(s);
+				vx = vx / s * maxSpeed;
+				vy = vy / s * maxSpeed;
+			}
+		}
 		xx += vx;
 		yy += vy;
 		zz += vz;
