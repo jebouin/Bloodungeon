@@ -16,6 +16,9 @@ class Entity extends XSprite {
 	public var maxSpeed : Float;
 	public var shadow : Shape;
 	public var onGround : Bool;
+	public var collides : Bool;
+	public var locked : Bool;
+	public var cradius : Float;
 	public function new() {
 		super();
 		xx = Const.WID * .5;
@@ -27,7 +30,8 @@ class Entity extends XSprite {
 		frictionZ = .01;
 		gravity = .8;
 		speed = 2.;
-		onGround = false;
+		cradius = 6;
+		onGround = collides = locked = false;
 		shadow = new Shape();
 		renderShadow();
 		Game.CUR.lm.addChild(shadow, Const.SHADOW_L);
@@ -36,6 +40,7 @@ class Entity extends XSprite {
 		super.delete();
 	}
 	public function update() {
+		if(locked) return;
 		vz -= gravity;
 		vx -= vx * friction;
 		vy -= vy * friction;
@@ -48,8 +53,7 @@ class Entity extends XSprite {
 				vy = vy / s * maxSpeed;
 			}
 		}
-		xx += vx;
-		yy += vy;
+		tryMove(vx, vy);
 		zz += vz;
 		if(zz < 0) {
 			onGround = true;
@@ -63,6 +67,33 @@ class Entity extends XSprite {
 		shadow.x = Std.int(xx);
 		shadow.y = Std.int(yy + height*.35);
 		super.updateAnim();
+	}
+	function tryMove(dx:Float, dy:Float) {
+		if(collides) {
+			if(Game.CUR.level.entityCollides(this, xx+dx, yy)) {
+				if(dx > 0) {
+					xx = Std.int(xx / 16 + 1.) * 16 - cradius - .2;
+				} else if(dx < 0) {
+					xx = Std.int(xx / 16) * 16 + cradius + .2;
+				}
+				vx = 0;
+			} else {
+				xx += dx;
+			}
+			if(Game.CUR.level.entityCollides(this, xx, yy+dy)) {
+				if(dy > 0) {
+					yy = Std.int(yy / 16 + 1.) * 16 - cradius - .2;
+				} else if(dy < 0) {
+					yy = Std.int(yy / 16) * 16 + cradius + .2;
+				}
+				vy = 0;
+			} else {
+				yy += dy;
+			}
+		} else {
+			xx += dx;
+			yy += dy;
+		}
 	}
 	public function renderShadow(size=8.) {
 		shadow.graphics.clear();
