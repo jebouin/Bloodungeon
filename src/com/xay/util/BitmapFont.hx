@@ -1,8 +1,14 @@
 package com.xay.util;
 import com.xay.util.Util;
+#if openfl
 import openfl.display.BitmapData;
 import openfl.geom.Point;
 import openfl.geom.Rectangle;
+#elseif flash
+import flash.display.BitmapData;
+import flash.geom.Point;
+import flash.geom.Rectangle;
+#end
 class BitmapFont {
 	var bd : BitmapData;
 	var charWid : Int;

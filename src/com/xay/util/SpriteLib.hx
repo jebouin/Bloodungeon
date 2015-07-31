@@ -1,268 +1,136 @@
 package com.xay.util;
+import haxe.ds.StringMap;
 #if openfl
-import openfl.display.Bitmap;
 import openfl.display.BitmapData;
-import openfl.display.Graphics;
-import openfl.display.Sprite;
 import openfl.geom.Point;
 import openfl.geom.Rectangle;
-import openfl.Lib;
 #elseif flash
-import flash.display.Bitmap;
 import flash.display.BitmapData;
-import flash.display.Graphics;
-import flash.display.Sprite;
 import flash.geom.Point;
 import flash.geom.Rectangle;
-import flash.Lib;
 #end
-typedef Animation = {
-	wid : Int,
-	hei : Int,
-	anim : Array<Int>,
-	frameSetName : String
-};
-
-class XSprite extends Sprite {
-	public var bitmap : Bitmap;
-	var curAnim : Animation;
-	public var originX : Float;
-	public var originY : Float;
-	var centerX : Float;
-	var centerY : Float;
-	var frame : Int;
-	var animTimer : Int;
-	var animPlays : Int;
-	var animName : String;
-	public var playing : Bool;
-	var nbPlays : Int;
-	var animSet : Bool;
-	public var onEndAnim : Null<Void->Void>;
-	public var deleted : Bool;
-	override public function new(?anim:String=null, ?nframe=0) {
-		super();
-		mouseChildren = mouseEnabled = false;
-		bitmap = new Bitmap();
-		animSet = false;
-		playing = false;
-		animTimer = 0;
-		deleted = false;
-		nbPlays = 0;
-		if(anim!=null) {
-			setAnimation(anim, nframe);
-			playAnim(anim);
-			bitmap.bitmapData = new BitmapData(curAnim.wid, curAnim.hei, true, 0x00000000);
-			setFrameData();
-		}
-		setCenter(.5, .5);
-		addChild(bitmap);
-	}
-	public function delete() {
-		if(deleted) return;
-		deleted = true;
-		if(parent!=null) {
-			parent.removeChild(this);
-		}
-		if(bitmap.bitmapData!=null) {
-			bitmap.bitmapData.dispose();
-		}
-	}
-	public function playAnim(?nAnimName=null, ?nbPlays=-1) {
-		if(nAnimName==null) {
-			if(!animSet) return;
-			nAnimName = this.animName;
-		}
-		playing = true;
-		animTimer = 0;
-		frame = 0;
-		setAnimation(nAnimName);
-		this.nbPlays = nbPlays;
-	}
-	public function stopAnim() {
-		if(!playing) return;
-		playing = false;
-		setFrame(0);
-	}
-	public function updateAnim() {
-		if(!playing||!animSet) return;
-		var nextFrame = (frame+1);
-		if(nextFrame==curAnim.anim.length) {
-			if(onEndAnim!=null) onEndAnim();
-			nextFrame = 0;
-			if(nbPlays>0) {
-				nbPlays--;
-			}
-			if(nbPlays==0) {
-				stopAnim();
-				return;
-			}
-		}
-		setFrame(nextFrame);
-	}
-	public function setAnimation(anim:String, ?frame=0) {
-		animSet = true;
-		animName = anim;
-		this.frame = frame;
-		curAnim = SpriteLib.getAnim(animName);
-		setCenter(centerX, centerY);
-	}
-	public function getAnimation() {
-		return animName;
-	}
-	public function setFrame(f:Int) {
-		frame = f;
-		setFrameData();
-	}
-	public function getCurFrameId() {
-		return curAnim.anim[frame];
-	}
-	public function getFrame() {
-		return frame;
-	}
-	function setFrameData() {
-		if(!animSet) return;
-		SpriteLib.copyFramePixels(bitmap.bitmapData, curAnim.frameSetName, 0, 0, curAnim.anim[frame]);
-	}
-	public function setCenter(xRatio:Float, yRatio:Float) {
-		centerX = xRatio;
-		centerY = yRatio;
-		if(animSet) {
-			originX = xRatio*curAnim.wid;
-			originY = yRatio*curAnim.hei;
-		}
-		bitmap.x = -originX;
-		bitmap.y = -originY;
-	}
+typedef Slice = {
+	frameWid:Int,
+	frameHei:Int,
+	wid:Int,
+	hei:Int,
+	margin:Int,
+	bdName:String
 }
-
-typedef FrameSet = {
-	tilesheetOffset : Int,
-	wid: Int,
-	hei: Int
-};
-
+typedef AnimDef = {
+	sliceName:String,
+	frames:Array<Int>,
+	fps:Float,
+}
 class SpriteLib {
-	public static var sourceBDs : Array<BitmapData>;
-	public static var currentBDid : Int;
-	static var p0 : Point;
-	static var animations : Map<String, Animation>;
-	public static var bdSet = false;
-	static var curTilesheetOffset = 0;
-	static var frameSets : Map<String, FrameSet>;
-	static var curFrameSet : String;
-	static var frameRects : Array<Rectangle>;
-	public static function init() {
-		bdSet = false;
-		p0 = new Point(0, 0);
-		animations = new Map();
-		frameSets = new Map();
-		frameRects = new Array();
-		sourceBDs = new Array();
-		currentBDid = -1;
-	}
-	public static function addBD(bd:BitmapData) {
-		sourceBDs.push(bd);
-	}
-	public static function setBD(id:Int) {
-		if(id<0||id>=sourceBDs.length) return;
-		currentBDid = id;
-		bdSet = true;
-	}
-	public static function createAnim(animName:String, frameSet:String){
-		if(animations.exists(animName)) {
-			throw "Animation " + animName + " is already defined";
+	static var bds = new StringMap<BitmapData>();
+	public static var slices = new StringMap<Slice>();
+	static var animDefs = new StringMap<AnimDef>();
+	#if openfl
+	public static function sliceBD(path:String, sliceName:String, frameWid:Int, frameHei:Int, wid:Int=null, hei:Int=null, margin=0) {
+		var name = sliceName;
+		if(!bds.exists(path)) {
+			var bd = Assets.getBitmapData(path);
+			bds.set(name, bd);
 		}
-		if(!frameSets.exists(frameSet)) {
-			trace("FrameSet " + frameSet + " doesn't exist...");
-			return;
+		var bd = bds.get(name);
+		if(wid==null) wid = Std.int(bd.width/frameWid);
+		if(hei==null) hei = Std.int(bd.height/frameHei);
+		var slice : Slice = {frameWid:frameWid, frameHei:frameHei, wid:wid, hei:hei, margin:margin, bdName:name};
+		slices.set(name, slice);
+	}
+	#elseif flash
+	public static function addBD(bdName:String, bd:BitmapData) {
+		if(bds.exists(bdName)) return;
+		bds.set(bdName, bd);
+	}
+	public static function sliceBD(bdName:String, sliceName:String, frameWid:Int, frameHei:Int, wid:Int=null, hei:Int=null, margin=0) {
+		var name = sliceName;
+		var bd = getBD(bdName);
+		if(bd == null) return;
+		if(wid==null) wid = Std.int(bd.width / frameWid);
+		if(hei==null) hei = Std.int(bd.height / frameHei);
+		var slice : Slice = {frameWid:frameWid, frameHei:frameHei, wid:wid, hei:hei, margin:margin, bdName:name};
+		slices.set(name, slice);
+	}
+	#end
+	public static function getBD(name:String) {
+		if(!bds.exists(name)) {
+			trace("BD " + name + " not found");
+			return null;
 		}
-		animations[animName] = {wid: frameSets[frameSet].wid, hei: frameSets[frameSet].hei, anim: new Array(), frameSetName:frameSet};
+		return bds.get(name);
 	}
-	public static function getAnim(animName:String) {
-		if(animations.exists(animName)) {
-			return animations[animName];
-		} else {
-			throw "Animation " + animName + " doesn't exist";
+	public static function getSliceFrameRect(name:String, frame:Int) {
+		if(!slices.exists(name)) {
+			trace("Slice " + name + " not found");
+			return null;
 		}
-	}
-	public static function copyFramePixels(bd:BitmapData, frameSetName:String, xpos=0, ypos=0, ?frame=0) {
-		bd.copyPixels(sourceBDs[currentBDid], frameRects[frameSets[frameSetName].tilesheetOffset+frame], new Point(xpos, ypos));
-	}
-	public static function getFrameSetWid(frameSetName:String) {
-		return frameSets.get(frameSetName).wid;
-	}
-	public static function getFrameSetHei(frameSetName:String) {
-		return frameSets.get(frameSetName).hei;
-	}
-	public static function useFrameSet(name:String) {
-		curFrameSet = name;
-	}
-	public static function refreshAll() {
-		
-	}
-	public static function sliceFrameSet(frameSetName:String, x:Int, y:Int, wid:Int, hei:Int, ?repeatX=1, ?repeatY=1) {
-		if(!bdSet) {
-			trace("BD not set, can't slice!");
-			return;
+		var slice = slices.get(name);
+		if(frame<0 || frame>=slice.wid*slice.hei) {
+			trace("Invalid frame id " + frame + " in slice " + name);
+			return null;
 		}
-		if(frameSets.exists(frameSetName)) {
-			trace("FrameSet " + frameSetName + " already exists");
-			return;
-		}
-		var frameSet = {tilesheetOffset:curTilesheetOffset, wid:wid, hei:hei};
-		frameSets[frameSetName] = frameSet;
-		for(j in 0...repeatY) {
-			for(i in 0...repeatX) {
-				frameRects.push(new Rectangle(x+i*(wid), y+j*(hei), wid, hei));
-				curTilesheetOffset++;
-			}
-		}
-		curFrameSet = frameSetName;
+		return new Rectangle((frame%slice.wid)*(slice.frameWid+slice.margin), Std.int(frame/slice.wid)*(slice.frameHei+slice.margin), slice.frameWid, slice.frameHei);
 	}
-	public static function defineAnim(animName:String, content:String) {
-		if(curFrameSet==null) {
-			trace("FrameSet not defined!");
-			return;
+	public static function getNewAnim(name:String) {
+		if(!animDefs.exists(name)) {
+			trace("AnimDef " + name + " not found");
+			return null;
 		}
-		createAnim(animName, curFrameSet);
-		//remove spaces and replace par so we can split the string
+		var animDef = animDefs.get(name);
+		return new Anim(animDef.sliceName, animDef.frames, animDef.fps);
+	}
+	public static function copyFramePixelsFromSlice(destBD:BitmapData, sliceName:String, frame=0, destx=0, desty=0) {
+		var frameRect = getSliceFrameRect(sliceName, frame);
+		if(frameRect==null) return;
+		var slice = slices.get(sliceName);
+		destBD.copyPixels(bds.get(slice.bdName), frameRect, new Point(destx, desty));
+	}
+	public static function copyFramePixelsFromAnim(destBD:BitmapData, anim:Anim, destx=0, desty=0) {
+		var frameRect = anim.getFrameRect();
+		if(frameRect==null) return;
+		destBD.copyPixels(bds.get(slices.get(anim.getSliceName()).bdName), frameRect, new Point(destx, desty));
+	}
+	public static function addAnim(animName:String, sliceName:String, content:String, fps=60.) {
 		content = StringTools.replace(content, " ", "");
 		content = StringTools.replace(content, ")", "(");
-		//parse string into frames
-		var frames = new Array<Int>();
+		var frames = [];
 		var parts = content.split(",");
-		for(part in parts) {
-			var curTime=1;
-			var from=0;
-			var to=0;
+		for(p in parts) {
+			var nbFrames = 1;
+			var from = 0;
+			var to = 0;
 			var backwards = false;
-			if(part.indexOf("(")>0) {
-				var t = Std.parseInt(part.split("(")[1]);
-				if(Math.isNaN(t)) {
-					trace("Invalid frame time"); return;
+			if(p.indexOf("(") > 0) {
+				var nbf = Std.parseInt(p.split("(")[1]);
+				if(Math.isNaN(nbf)) {
+					trace("Invalid nb of frames");
+					return;
 				}
-				curTime = t;
-				part = part.substr(0, part.indexOf("("));
+				nbFrames = nbf;
+				p = p.substr(0, parts.indexOf("("));
 			}
-			if(part.indexOf("-")>0) {
-				from = Std.parseInt(part.split("-")[0]);
-				to = Std.parseInt(part.split("-")[1]);
-				if(from>to) {
+			if(p.indexOf("-") > 0) {
+				from = Std.parseInt(p.split("-")[0]);
+				to = Std.parseInt(p.split("-")[1]);
+				if(from > to) {
 					backwards = true;
 					from ^= to; to ^= from; from ^= to;
 				}
-			} else if(part.indexOf("-")<0) {
-				from = to = Std.parseInt(part);
+			} else if(p.indexOf("-") < 0) {
+				from = to = Std.parseInt(p);
 			} else {
-				trace("Invalid anim definition of " + animName); return;
+				trace("Invalid anim definition of " + animName + ": " + content);
+				return;
 			}
 			for(i in from...to+1) {
-				for(t in 0...curTime) {
-					if(backwards) frames.insert(0, i);
-					else frames.push(i);
+				for(t in 0...nbFrames) {
+					var f = backwards?to-i+from:i;
+					frames.push(f);
 				}
 			}
 		}
-		animations[animName].anim = frames;
+		animDefs.set(animName, {sliceName:sliceName, frames:frames, fps:fps});
 	}
 }

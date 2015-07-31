@@ -1,8 +1,15 @@
 package com.xay.util;
+#if openfl
 import openfl.events.Event;
 import openfl.media.Sound;
 import openfl.media.SoundChannel;
 import openfl.media.SoundTransform;
+#elseif flash
+import flash.events.Event;
+import flash.media.Sound;
+import flash.media.SoundChannel;
+import flash.media.SoundTransform;
+#end
 class XSound {
 	static var ALL : Array<XSound> = new Array();
 	static var muted = false;

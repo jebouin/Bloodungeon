@@ -19,7 +19,7 @@ class Game extends Scene {
 		frontlm = new LayerManager();
 		Main.renderer.addChild(frontlm.getContainer());
 		Main.renderer.addChild(lm.getContainer());
-		level = new Level();
+		//level = new Level();
 		entities = [];
 		hero = new Hero();
 		entities.push(hero);

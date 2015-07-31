@@ -1,9 +1,15 @@
 package com.xay.util;
-
+#if openfl
 import openfl.display.DisplayObject;
 import openfl.geom.Point;
 import openfl.text.Font;
-
+import openfl.utils.ByteArray;
+#elseif flash
+import flash.display.DisplayObject;
+import flash.geom.Point;
+import flash.text.Font;
+import flash.utils.ByteArray;
+#end
 typedef RGB = {
 	r:Int,
 	g:Int,
@@ -208,5 +214,11 @@ class Util {
 			}
 		}
 		return l;
+	}
+	static public function pathToFileName(path:String) {
+		var dotIndex = path.lastIndexOf(".");
+		var name = path.substr(0, dotIndex);
+		var slashIndex = name.lastIndexOf("/");
+		return name.substr(slashIndex+1);
 	}
 }

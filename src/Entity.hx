@@ -1,5 +1,5 @@
 package ;
-import com.xay.util.SpriteLib;
+import com.xay.util.XSprite;
 import flash.display.Shape;
 import flash.display.Sprite;
 class Entity extends XSprite {
@@ -39,7 +39,7 @@ class Entity extends XSprite {
 	override public function delete() {
 		super.delete();
 	}
-	public function update() {
+	public override function update() {
 		if(locked) return;
 		vz -= gravity;
 		vx -= vx * friction;
@@ -66,7 +66,7 @@ class Entity extends XSprite {
 		this.y = Std.int(yy - zz * .5);
 		shadow.x = Std.int(xx);
 		shadow.y = Std.int(yy + height*.35);
-		super.updateAnim();
+		super.update();
 	}
 	function tryMove(dx:Float, dy:Float) {
 		if(collides) {

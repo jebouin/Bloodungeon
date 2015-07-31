@@ -26,10 +26,8 @@ class Main {
 		Input.addKey("action", 32);
 	}
 	static function initGFX() {
-		SpriteLib.init();
-		SpriteLib.addBD(new TilesetBD(0, 0));
-		SpriteLib.setBD(0);
-		SpriteLib.sliceFrameSet("tileset", 0, 0, 16, 16, 16, 16);
+		SpriteLib.addBD("tileset", new TilesetBD(0, 0));
+		SpriteLib.sliceBD("tileset", "tileset", 16, 16);
 	}
 	static function main() {
 		var stage = Lib.current.stage;
