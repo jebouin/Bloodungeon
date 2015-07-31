@@ -8,8 +8,12 @@ import flash.filters.GlowFilter;
 import flash.geom.Point;
 @:bitmap("res/levels.png") class LevelsBD extends BitmapData {}
 class Level {
+	public static var RWID : Int;
+	public static var RHEI : Int;
 	public static var WID : Int;
 	public static var HEI : Int;
+	public var startX : Float;
+	public var startY : Float;
 	public var posX : Float;
 	public var posY : Float;
 	var levelIdX : Int;
@@ -23,21 +27,16 @@ class Level {
 	public function new() {
 		groundBmp = new Bitmap();
 		wallBmp = new Bitmap();
-		WID = Std.int(Const.WID / 16);
-		HEI = Std.int(Const.HEI / 16);
-		tiles = [];
-		for(j in 0...HEI) {
-			tiles[j] = [];
-		}
+		RWID = Std.int(Const.WID / 16);
+		RHEI = Std.int(Const.HEI / 16);
 		levelsBD = new LevelsBD(0, 0);
-		nbLevelsX = Std.int(levelsBD.width / (WID - 1));
-		nbLevelsY = Std.int(levelsBD.height / (HEI - 1));
-		posX = posY = 1 << 12;
-		updatePos();
-		loadLevel(0, 1);
+		load();
+		setRoomId(0, 1);
 		Game.CUR.lm.addChild(groundBmp, Const.BACK_L);
 		Game.CUR.lm.addChild(wallBmp, Const.BACK_L);
 		render();
+		Game.CUR.lm.getContainer().x = -posX;
+		Game.CUR.lm.getContainer().y = -posY;
 	}
 	public function render() {
 		var gbd : BitmapData, wbd : BitmapData;
@@ -45,13 +44,13 @@ class Level {
 			gbd = groundBmp.bitmapData;
 			gbd.fillRect(gbd.rect, 0x0);
 		} else {
-			gbd = new BitmapData(Const.WID, Const.HEI, true, 0x00000000);
+			gbd = new BitmapData(WID * 16, HEI * 16, true, 0x00000000);
 		}
 		if(wallBmp.bitmapData != null) {
 			wbd = wallBmp.bitmapData;
 			wbd.fillRect(gbd.rect, 0x0);
 		} else {
-			wbd = new BitmapData(Const.WID, Const.HEI, true, 0x00000000);
+			wbd = new BitmapData(WID * 16, HEI * 16, true, 0x00000000);
 		}
 		for(j in 0...HEI) {
 			for(i in 0...WID) {
@@ -62,56 +61,55 @@ class Level {
 				SpriteLib.copyFramePixels(gbd, "tileset", i*16, j*16, 0);
 			}
 		}
-		wbd.applyFilter(wbd, wbd.rect, new Point(0, 0), new DropShadowFilter(4, 270, 0, 1., 2., 2., 1., 0, true, false));
+		wbd.applyFilter(wbd, wbd.rect, new Point(0, 0), new DropShadowFilter(4, 270, 0, 1., 2., 2., 1., 1, true, false));
 		groundBmp.bitmapData = gbd;
 		wallBmp.bitmapData = wbd;
 	}
-	public function loadLevel(idx:Int, idy:Int) {
-		if(idx < 0 || idy < 0 || idx >= nbLevelsX || idy >= nbLevelsY) return false;
-		levelIdX = idx;
-		levelIdY = idy;
+	public function load() {
+		WID = levelsBD.width;
+		HEI = levelsBD.height;
+		nbLevelsX = Std.int(WID / (RWID - 1));
+		nbLevelsY = Std.int(HEI / (RHEI - 1));
+		tiles = [];
 		for(j in 0...HEI) {
+			tiles[j] = [];
 			for(i in 0...WID) {
-				var col = levelsBD.getPixel(i + levelIdX * (WID - 1), j + levelIdY * (HEI - 1));
+				var col = levelsBD.getPixel(i, j);
 				var tile = 0;
 				if(col == 0x303030) {
 					tile = 1;
+				} else if(col == 0xFF00FF) {
+					startX = i * 16;
+					startY = j * 16;
 				}
 				tiles[j][i] = tile;
 			}
 		}
+	}
+	public function loadEntities(idx:Int, idy:Int) {
+		if(idx < 0 || idy < 0 || idx >= nbLevelsX || idy >= nbLevelsY) return false;
 		return true;
 	}
 	public function nextLevel(dx:Int, dy:Int) {
 		if(Math.abs(dx) + Math.abs(dy) != 1) {
 			return false;
 		}
-		if(!loadLevel(levelIdX + dx, levelIdY + dy)) {
+		if(!loadEntities(levelIdX + dx, levelIdY + dy)) {
 			return false;
 		}
-		var px = posX;
-		var py = posY;
-		posX += dx * (WID - 1) * 16;
-		posY += dy * (HEI - 1) * 16;
-		updatePos();
-		var pbd = new BitmapData(groundBmp.bitmapData.width, groundBmp.bitmapData.height, true, 0x0);
-		pbd.copyPixels(groundBmp.bitmapData, groundBmp.bitmapData.rect, new Point(0, 0), groundBmp.bitmapData, new Point(0, 0), true);
-		pbd.copyPixels(wallBmp.bitmapData, wallBmp.bitmapData.rect, new Point(0, 0), wallBmp.bitmapData, new Point(0, 0), true);
-		var prevBitmap = new Bitmap(pbd);
-		prevBitmap.x = px;
-		prevBitmap.y = py;
-		Game.CUR.lm.addChild(prevBitmap, Const.BACK_L);
+		setRoomId(levelIdX + dx, levelIdY + dy);
 		Game.CUR.hero.locked = true;
 		Game.CUR.moveCameraTo(posX, posY, .5, function() {
-			prevBitmap.parent.removeChild(prevBitmap);
-			prevBitmap.bitmapData.dispose();
 			Game.CUR.hero.locked = false;
 		});
 		render();
 		return true;
 	}
-	function levelTransition() {
-		
+	function setRoomId(idx:Int, idy:Int) {
+		levelIdX = idx;
+		levelIdY = idy;
+		posX = idx * (RWID - 1) * 16;
+		posY = idy * (RHEI - 1) * 16;
 	}
 	public inline function isOnMap(x:Int, y:Int) {
 		return x >= 0 && y >= 0 && x < WID && y < HEI;
@@ -126,16 +124,10 @@ class Level {
 		return getTile(x, y) == 1;
 	}
 	public function entityCollides(e:Entity, x:Float, y:Float) {
-		x -= posX;
-		y -= posY;
 		if(tileCollides(Std.int(x - e.cradius) >> 4, Std.int(y - e.cradius) >> 4)) return true;
 		if(tileCollides(Std.int(x + e.cradius) >> 4, Std.int(y - e.cradius) >> 4)) return true;
 		if(tileCollides(Std.int(x + e.cradius) >> 4, Std.int(y + e.cradius) >> 4)) return true;
 		if(tileCollides(Std.int(x - e.cradius) >> 4, Std.int(y + e.cradius) >> 4)) return true;
 		return false;
 	}
-	public function updatePos() {
-		groundBmp.x = wallBmp.x = Std.int(posX);
-		groundBmp.y = wallBmp.y = Std.int(posY);
-	}	
 }

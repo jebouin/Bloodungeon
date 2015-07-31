@@ -23,7 +23,6 @@ class Game extends Scene {
 		entities = [];
 		hero = new Hero();
 		entities.push(hero);
-		moveCameraTo(level.posX, level.posY, 0);
 	}
 	override public function delete() {
 		super.delete();
