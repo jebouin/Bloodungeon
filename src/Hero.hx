@@ -8,9 +8,9 @@ class Hero extends Entity {
 		graphics.endFill();
 		Game.CUR.lm.addChild(this, Const.HERO_L);
 		maxSpeed = 2.3;
-		collides = false;
-		//xx = Game.CUR.level.startX;
-		//yy = Game.CUR.level.startY;
+		collides = true;
+		xx = Game.CUR.level.startX;
+		yy = Game.CUR.level.startY;
 	}
 	override function delete() {
 		super.delete();
@@ -33,7 +33,7 @@ class Hero extends Entity {
 			jump();
 		}
 		super.update();
-		/*var level = Game.CUR.level;
+		var level = Game.CUR.level;
 		if(xx > level.posX + Level.RWID * 16 - 8) {
 			level.nextRoom(1, 0);
 		}
@@ -45,6 +45,6 @@ class Hero extends Entity {
 		}
 		if(yy < level.posY + 8) {
 			level.nextRoom(0, -1);
-		}*/
+		}
 	}
 }
