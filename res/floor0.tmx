@@ -3,19 +3,29 @@
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16">
   <image source="tileset.png" width="256" height="256"/>
  </tileset>
- <layer name="ground" width="57" height="65">
+ <layer name="ground0" width="57" height="65">
   <data encoding="base64" compression="zlib">
-   eJzt1UESxCAIRFEnN5j7Xzb7qYqJAgMd/qJ3mvDEkmOMcTTIZyNK+5RqxYhRpVaMGFVqtRg7RKUf3FWMKrVixKhSK8a5sUNU+sFdxahSK0aMKrVmGK/mT7VZFTFjs+f9LF9Dfs/vak12HzFiVDHevX9P187OIdvo9U+MdYyrM/GtRsX8y1ixj3f73mjcDUaMEcaVfavvFsZYo/dc6GzMiOf5VO0jRowYMWLEaK3Tkujve9RlOR/LOoW76rW2qjFiPUaMGPeMHd4chdlB9HMCYiAZFQ==
+   eJztw0ENAAAMA6Grf9NzsRckrJqqqqqqqqqqqqqqqqqqqq8PWcUOeg==
   </data>
  </layer>
- <layer name="over" width="57" height="65">
+ <layer name="ground1" width="57" height="65" visible="0">
   <data encoding="base64" compression="zlib">
-   eJzt0kEKgzAQBdCB1nqBFi9g9f431KWEKYRQUOJ78DdhMvBhIgAAAAAAAPox7Hk1ZKzYlc2c4dP4b6rYlc2c4Q4dv3uWQ0rLj6zJ7FU7lh5Fag3J21U7tnhGfvM9dXxH/x3n6L8jAAAAAAAA/7cBVygD3w==
+   eJztwTEBAAAAwqD1T20LL6AAAAAAAAAAAAAAAAAAAHgbOeQAAQ==
   </data>
  </layer>
- <layer name="height" width="57" height="65" opacity="0.15">
+ <layer name="over" width="57" height="65" visible="0">
   <data encoding="base64" compression="zlib">
-   eJzt0MEJACAMBMGUYP/V2kJAH+acgXwPNlUAAAAAAAA51sF1tl6gUWNnK0n3D5NpzPBDIwAAAAAAAHdt1X4GgQ==
+   eJztwTEBAAAAwqD1T20LL6AAAAAAAAAAAAAAAAAAAHgbOeQAAQ==
+  </data>
+ </layer>
+ <layer name="wall0" width="57" height="65">
+  <data encoding="base64" compression="zlib">
+   eJzt0LEJADEQBDHj/ov+HibTrw82FAx3zzl3YOUkJ7VWJ7VWJ7VWJ7VWJ7VWJ7VWJ7VWt7L6H8VJrdVJrdVJrdVJrdVJrdVJrdVJrdWtrP5HcVJrdVJrdVJrdVJrdVJrdVJrdVJrdSur/1Gc1Fqd1Fqd1Fqd1Fqd1Fqd1Fqd1Frdyup/FCe1Vie1Vie1Vie1Vie1Vie1Vie1Vrey+h/FSa3VSa3VSa3VSa3VSa3VSa3VSa3Vraz+R3FSa3VSa3VSa3VSa3VSa3VSa3VSa3Vv/9gHgfMGMw==
+  </data>
+ </layer>
+ <layer name="wall1" width="57" height="65" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20LL6AAAAAAAAAAAAAAAAAAAHgbOeQAAQ==
   </data>
  </layer>
 </map>

@@ -1,5 +1,6 @@
 package ;
 import com.xay.util.SpriteLib;
+import flash.geom.Rectangle;
 import haxe.crypto.Base64;
 #if openfl
 import openfl.display.Bitmap;
@@ -74,8 +75,14 @@ class TiledLayer extends Sprite {
 			tiles[y][x] = tilesId[i];
 		}
 	}
-	function render() {
-		var bd = new BitmapData(wid*tileSize, hei*tileSize, true, 0x0);
+	public function render() {
+		var bd:BitmapData=null;
+		if(bmp != null && bmp.bitmapData != null) {
+			bd = bmp.bitmapData;
+			bd.fillRect(bd.rect, 0x0);
+		} else {
+			bd = new BitmapData(wid*tileSize, hei*tileSize, true, 0x0);
+		}
 		for(j in 0...hei) {
 			for(i in 0...wid) {
 				var tile = getTileAt(i, j)-1;

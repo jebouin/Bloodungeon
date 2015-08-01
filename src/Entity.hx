@@ -30,7 +30,7 @@ class Entity extends XSprite {
 		frictionZ = .01;
 		gravity = .8;
 		speed = 2.;
-		cradius = 6;
+		cradius = 5;
 		onGround = collides = locked = false;
 		shadow = new Shape();
 		renderShadow();
@@ -45,7 +45,6 @@ class Entity extends XSprite {
 		vx -= vx * friction;
 		vy -= vy * friction;
 		vz -= vz * frictionZ;
-		handleStairFriction();
 		if(maxSpeed > 0) {
 			var s = vx*vx + vy*vy;
 			if(s > maxSpeed*maxSpeed) {
@@ -56,20 +55,10 @@ class Entity extends XSprite {
 		}
 		tryMove(vx, vy, vz);
 		this.x = Std.int(xx);
-		this.y = Std.int(yy - zz * 16);
-		var groundZ = Game.CUR.level.getHeightAt(xx, yy);
+		this.y = Std.int(yy - zz * .5);
 		shadow.x = Std.int(xx);
-		shadow.y = Std.int(yy + height*.35 - groundZ * 16);
+		shadow.y = Std.int(yy + height*.35);
 		super.update();
-	}
-	function handleStairFriction() {
-		if(!onGround) return;
-		var col = Game.CUR.level.getCollisionAt(xx, yy);
-		if(col == USTR) {
-			vy /= 10.41;
-		} else if(col == LSTR || col == RSTR) {
-			vx /= 10.41;
-		}
 	}
 	function tryMove(dx:Float, dy:Float, dz:Float) {
 		if(collides) {
@@ -97,10 +86,9 @@ class Entity extends XSprite {
 			xx += dx;
 			yy += dy;
 		}
-		var groundZ = Game.CUR.level.getHeightAt(xx, yy);
-		if(zz + dz < groundZ) {
+		if(zz + dz < 0) {
 			onGround = true;
-			zz = groundZ;
+			zz = 0;
 			vz = 0;
 		} else if(dx > 0) {
 			onGround = false;

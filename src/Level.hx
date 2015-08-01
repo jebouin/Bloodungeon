@@ -1,4 +1,5 @@
 package ;
+import com.xay.util.LayerManager;
 import flash.utils.ByteArray;
 import com.xay.util.SpriteLib;
 import flash.display.Bitmap;
@@ -23,56 +24,69 @@ class Level {
 	var nbRoomsX : Int;
 	var nbRoomsY : Int;
 	var tiles : Array<Array<TILE_COLLISION_TYPE> >;
-	var heights : Array<Array<Int> >;
-	var groundLayer : TiledLayer;
+	var ground0Layer : TiledLayer;
+	var ground1Layer : TiledLayer;
 	var overLayer : TiledLayer;
-	var heightLayer : TiledLayer;
+	var wall0Layer : TiledLayer;
+	var wall1Layer : TiledLayer;
 	var map : TiledMap;
 	public function new() {
 		RWID = Std.int(Const.WID / 16);
 		RHEI = Std.int(Const.HEI / 16);
 		load();
-		Game.CUR.lm.addChild(groundLayer, Const.BACK_L);
+		Game.CUR.lm.addChild(ground0Layer, Const.BACK_L);
+		Game.CUR.lm.addChild(ground1Layer, Const.BACK_L);
 		Game.CUR.lm.addChild(overLayer, Const.BACK_L);
-		/*startX = 21 * 16 + 8;
-		startY = 59 * 16 + 8;*/
-		startX = 4 * 16 + 8;
-		startY = 34 * 16 + 8;
+		Game.CUR.lm.addChild(wall0Layer, Const.BACK_L);
+		Game.CUR.lm.addChild(wall1Layer, Const.FRONT_L);
+		startX = 21 * 16 + 8;
+		startY = 59 * 16 + 8;
+		/*startX = 4 * 16 + 8;
+		startY = 34 * 16 + 8;*/
 		setRoomId(Std.int(startX / 16 / (RWID - 1)), Std.int(startY / 16 / (RHEI - 1)));
 		Game.CUR.lm.getContainer().x = -posX;
 		Game.CUR.lm.getContainer().y = -posY;
 	}
 	public function load() {
 		map = new TiledMap(new Floor0TMX().toString());
-		groundLayer = map.getLayer("ground");
+		ground0Layer = map.getLayer("ground0");
+		ground1Layer = map.getLayer("ground1");
 		overLayer = map.getLayer("over");
-		heightLayer = map.getLayer("height");
+		wall0Layer = map.getLayer("wall0");
+		wall1Layer = map.getLayer("wall1");
 		WID = map.wid;
 		HEI = map.hei;
 		nbRoomsX = Std.int(WID / (RWID - 1));
 		nbRoomsY = Std.int(HEI / (RHEI - 1));
 		tiles = [];
-		heights = [];
 		for(j in 0...HEI) {
 			tiles[j] = [];
-			heights[j] = [];
 			for(i in 0...WID) {
-				var groundTileCol = Collision.TILE_COLLISIONS[groundLayer.getTileAt(i, j)];
 				var overTileCol = Collision.TILE_COLLISIONS[overLayer.getTileAt(i, j)];
+				var wall0TileCol = Collision.TILE_COLLISIONS[wall0Layer.getTileAt(i, j)];
+				var wall1TileCol = Collision.TILE_COLLISIONS[wall1Layer.getTileAt(i, j)];
 				var col = NONE;
-				if(overTileCol != NONE) {
-					col = overTileCol;
+				if(wall1TileCol != NONE) {
+					col = wall1TileCol;
 				} else {
-					col = groundTileCol;
+					col = wall0TileCol;
 				}
 				tiles[j][i] = col;
-				var heightTile = heightLayer.getTileAt(i, j);
-				var height = 0;
-				if(heightTile > 0) {
-					heights[j][i] = heightTile >> 4;
+			}
+		}
+		//set wall z order
+		for(j in 0...HEI) {
+			for(i in 0...WID) {
+				var tile = getCollision(i, j);
+				var btile = getCollision(i, j+1);
+				if(tile != NONE && btile != NONE) {
+					wall1Layer.setTileAt(i, j, wall0Layer.getTileAt(i, j));
+					wall0Layer.setTileAt(i, j, 0);
 				}
 			}
 		}
+		wall0Layer.render();
+		wall1Layer.render();
 	}
 	public function loadEntities(idx:Int, idy:Int) {
 		if(idx < 0 || idy < 0 || idx >= nbRoomsX || idy >= nbRoomsY) return false;
@@ -111,7 +125,7 @@ class Level {
 		if(!isOnMap(x, y)) {
 			return 0;
 		}
-		return heights[y][x];
+		return 0;
 	}
 	public function getCollisionAt(x:Float, y:Float) {
 		return getCollision(Std.int(x / 16), Std.int(y / 16));
@@ -119,18 +133,7 @@ class Level {
 	public function getHeightAt(x:Float, y:Float) {
 		var tx = Std.int(x) >> 4;
 		var ty = Std.int(y) >> 4;
-		var px = Std.int(x) & 0xF;
-		var py = Std.int(y) & 0xF;
-		var col = getCollision(tx, ty);
-		var h = getHeight(tx, ty);
-		if(col == LSTR) {
-			return h + px / 16;
-		} else if(col == RSTR) {
-			return h + 1 - py / 16.;
-		} else if(col == USTR) {
-			return h + 1 - py / 16.;
-		}
-		return h;
+		return getHeight(tx, ty);
 	}
 	public function tileCollides(x:Int, y:Int) {
 		return getCollision(x, y) == FULL;
