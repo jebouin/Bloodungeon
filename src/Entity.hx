@@ -19,8 +19,8 @@ class Entity extends XSprite {
 	public var collides : Bool;
 	public var locked : Bool;
 	public var cradius : Float;
-	public function new() {
-		super();
+	public function new(?animName:String) {
+		super(animName);
 		xx = Const.WID * .5;
 		yy = Const.HEI * .5;
 		zz = 0.;
@@ -57,7 +57,7 @@ class Entity extends XSprite {
 		this.x = Std.int(xx);
 		this.y = Std.int(yy - zz * .5);
 		shadow.x = Std.int(xx);
-		shadow.y = Std.int(yy + height*.35);
+		shadow.y = Std.int(yy + height * (1. - originYRatio));
 		super.update();
 	}
 	function tryMove(dx:Float, dy:Float, dz:Float) {

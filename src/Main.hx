@@ -1,4 +1,5 @@
 package;
+import com.xay.util.BitmapFont;
 import com.xay.util.Input;
 import com.xay.util.Renderer;
 import com.xay.util.SceneManager;
@@ -11,8 +12,11 @@ import flash.events.Event;
 import flash.Lib;
 import net.hires.debug.Stats;
 @:bitmap("res/tileset.png") class TilesetBD extends BitmapData {}
+@:bitmap("res/hero.png") class HeroBD extends BitmapData {}
+@:bitmap("res/fontTiny.png") class FontTinyBD extends BitmapData {}
 class Main {
 	public static var renderer : Renderer;
+	public static var font : BitmapFont;
 	static function initInput() {
 		Input.init();
 		Input.addKey("left", 65);
@@ -28,6 +32,10 @@ class Main {
 	static function initGFX() {
 		SpriteLib.addBD("tileset", new TilesetBD(0, 0));
 		SpriteLib.sliceBD("tileset", "tileset", 16, 16);
+		SpriteLib.addBD("hero", new HeroBD(0, 0));
+		SpriteLib.sliceBD("hero", "hero", 20, 21);
+		SpriteLib.addAnim("heroIdle", "hero", "0", 1);
+		font = new BitmapFont(new FontTinyBD(0, 0), 5, 5);
 	}
 	static function main() {
 		var stage = Lib.current.stage;

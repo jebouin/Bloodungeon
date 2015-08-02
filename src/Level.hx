@@ -38,7 +38,7 @@ class Level {
 		Game.CUR.lm.addChild(ground1Layer, Const.BACK_L);
 		Game.CUR.lm.addChild(overLayer, Const.BACK_L);
 		Game.CUR.lm.addChild(wall0Layer, Const.BACK_L);
-		Game.CUR.lm.addChild(wall1Layer, Const.FRONT_L);
+		Game.CUR.lm.addChild(wall1Layer, Const.BACK_L);
 		startX = 21 * 16 + 8;
 		startY = 59 * 16 + 8;
 		/*startX = 4 * 16 + 8;
@@ -75,7 +75,7 @@ class Level {
 			}
 		}
 		//set wall z order
-		for(j in 0...HEI) {
+		/*for(j in 0...HEI) {
 			for(i in 0...WID) {
 				var tile = getCollision(i, j);
 				var btile = getCollision(i, j+1);
@@ -86,7 +86,7 @@ class Level {
 			}
 		}
 		wall0Layer.render();
-		wall1Layer.render();
+		wall1Layer.render();*/
 	}
 	public function loadEntities(idx:Int, idy:Int) {
 		if(idx < 0 || idy < 0 || idx >= nbRoomsX || idy >= nbRoomsY) return false;
@@ -100,9 +100,9 @@ class Level {
 			return false;
 		}
 		setRoomId(roomIdX + dx, roomIdY + dy);
-		Game.CUR.hero.locked = true;
+		Game.CUR.lock();
 		Game.CUR.moveCameraTo(posX, posY, .5, function() {
-			Game.CUR.hero.locked = false;
+			Game.CUR.unlock();
 		});
 		return true;
 	}

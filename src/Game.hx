@@ -12,17 +12,21 @@ class Game extends Scene {
 	public var entities : Array<Entity>;
 	public var level : Level;
 	public var hero : Hero;
+	public var cd : Countdown;
+	var locked : Bool;
 	public function new() {
 		super();
 		CUR = this;
 		lm = new LayerManager();
 		frontlm = new LayerManager();
-		Main.renderer.addChild(frontlm.getContainer());
 		Main.renderer.addChild(lm.getContainer());
+		Main.renderer.addChild(frontlm.getContainer());
 		level = new Level();
 		entities = [];
 		hero = new Hero();
 		entities.push(hero);
+		cd = new Countdown();
+		locked = false;
 	}
 	override public function delete() {
 		super.delete();
@@ -43,5 +47,23 @@ class Game extends Scene {
 	}
 	public function moveCameraTo(x:Float, y:Float, t=.5, onEnd:Dynamic=null) {
 		Actuate.tween(lm.getContainer(), t, {x:-x, y:-y}).onComplete(onEnd).ease(Quad.easeOut);
+	}
+	public function nextRoom(dx:Int, dy:Int) {
+		level.nextRoom(dx, dy);
+		cd.reset();
+	}
+	public function lock() {
+		locked = true;
+		cd.lock();
+		for(e in entities) {
+			e.locked = true;
+		}
+	}
+	public function unlock() {
+		locked = false;
+		cd.unlock();
+		for(e in entities) {
+			e.locked = false;
+		}
 	}
 }

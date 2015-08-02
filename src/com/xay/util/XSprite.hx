@@ -11,8 +11,8 @@ import flash.display.Sprite;
 class XSprite extends Sprite {
 	public var bmp : Bitmap;
 	public var anim : Anim;
-	var originXRatio : Float;
-	var originYRatio : Float;
+	public var originXRatio : Float;
+	public var originYRatio : Float;
 	public var deleted : Bool;
 	public function new(?animName:String, ?loop:Bool) {
 		super();

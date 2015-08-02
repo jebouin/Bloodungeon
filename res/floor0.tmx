@@ -20,7 +20,7 @@
  </layer>
  <layer name="wall0" width="57" height="65">
   <data encoding="base64" compression="zlib">
-   eJzt0LEJADEQBDHj/ov+HibTrw82FAx3zzl3YOUkJ7VWJ7VWJ7VWJ7VWJ7VWJ7VWJ7VWt7L6H8VJrdVJrdVJrdVJrdVJrdVJrdVJrdWtrP5HcVJrdVJrdVJrdVJrdVJrdVJrdVJrdSur/1Gc1Fqd1Fqd1Fqd1Fqd1Fqd1Fqd1Frdyup/FCe1Vie1Vie1Vie1Vie1Vie1Vie1Vrey+h/FSa3VSa3VSa3VSa3VSa3VSa3VSa3Vraz+R3FSa3VSa3VSa3VSa3VSa3VSa3VSa3Vv/9gHgfMGMw==
+   eJzt1kEKgDAMAMHi/x/tDzwMVFlTIcfBNQjttda6Bow8JVdqVVdqVVdqVVdqVVdqVVdqVVdqVTdldD8VV2pVV2pVV2pVV2pVV2pVV2pVV2pVN2V0PxVXalVXalVXalVXalVXalVXalVXalU3ZXQ/FVdqVVdqVVdqVVdqVVdqVVdqVVdqVTdldD8VV2pVV2pVV2pVp1af8417XOmfU1dqVbfzrP363D93gL3vfNuVWtWVWtWVWtWVWtWVWtWVWtWdO8Dzfiqu1Kqu1Kqu1Kqu1Kqu1Kqu1Kqu1KruzD/mBo1UBiM=
   </data>
  </layer>
  <layer name="wall1" width="57" height="65" visible="0">

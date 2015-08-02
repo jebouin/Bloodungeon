@@ -4,11 +4,15 @@ import openfl.display.DisplayObject;
 import openfl.geom.Point;
 import openfl.text.Font;
 import openfl.utils.ByteArray;
+import openfl.text.TextFormat;
+import openfl.text.TextField;
 #elseif flash
 import flash.display.DisplayObject;
 import flash.geom.Point;
 import flash.text.Font;
 import flash.utils.ByteArray;
+import flash.text.TextFormat;
+import flash.text.TextField;
 #end
 typedef RGB = {
 	r:Int,
@@ -162,11 +166,11 @@ class Util {
 		return RGBToInt(rgb);
 	}
 	static public function createTextField(str:String, font:Font, ?maxWidth=null, ?tSize=8) {
-		var f = new openfl.text.TextFormat();
+		var f = new TextFormat();
 		f.font = font.fontName;
 		f.size = tSize;
 		f.color = 0xffffff;
-		var tf = new openfl.text.TextField();
+		var tf = new TextField();
 		tf.mouseEnabled = tf.selectable = false;
 		tf.defaultTextFormat = f;
 		tf.embedFonts = true;
