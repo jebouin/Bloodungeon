@@ -24,6 +24,7 @@ class Level {
 	var nbRoomsX : Int;
 	var nbRoomsY : Int;
 	var tiles : Array<Array<TILE_COLLISION_TYPE> >;
+	var spikePos : Array<{x:Int, y:Int}>;
 	var ground0Layer : TiledLayer;
 	var ground1Layer : TiledLayer;
 	var overLayer : TiledLayer;
@@ -41,6 +42,7 @@ class Level {
 		Game.CUR.lm.addChild(wall0Layer, Const.BACK_L);
 		Game.CUR.lm.addChild(wall1Layer, Const.BACK_L);
 		setRoomId(1, 6);
+		loadEntities(roomIdX, roomIdY);
 		Game.CUR.lm.getContainer().x = -posX;
 		Game.CUR.lm.getContainer().y = -posY;
 	}
@@ -57,10 +59,12 @@ class Level {
 		nbRoomsX = Std.int(WID / (RWID - 1));
 		nbRoomsY = Std.int(HEI / (RHEI - 1));
 		tiles = [];
+		spikePos = [];
 		for(j in 0...HEI) {
 			tiles[j] = [];
 			for(i in 0...WID) {
-				var overTileCol = Collision.TILE_COLLISIONS[overLayer.getTileAt(i, j)];
+				var overTile = overLayer.getTileAt(i, j);
+				var overTileCol = Collision.TILE_COLLISIONS[overTile];
 				var wall0TileCol = Collision.TILE_COLLISIONS[wall0Layer.getTileAt(i, j)];
 				var wall1TileCol = Collision.TILE_COLLISIONS[wall1Layer.getTileAt(i, j)];
 				var col = NONE;
@@ -70,13 +74,27 @@ class Level {
 					col = wall0TileCol;
 				}
 				tiles[j][i] = col;
+				if(overTile == 16) {
+					overLayer.setTileAt(i, j, 0);
+					spikePos.push({x:i, y:j});
+				}
 			}
 		}
+		overLayer.render(); //cleans spikes on tiles
 	}
 	public function loadEntities(idx:Int, idy:Int) {
 		if(idx < 0 || idy < 0 || idx >= nbRoomsX || idy >= nbRoomsY) return false;
 		var nextRoomX = idx * (RWID - 1) * 16;
 		var nextRoomY = idy * (RHEI - 1) * 16;
+		for(pos in spikePos) {
+			var tx = pos.x;
+			var ty = pos.y;
+			if(tx >= idx * (RWID - 1) && tx < (idx + 1) * (RWID - 1) && ty >= idy * (RHEI - 1) && ty < (idy + 1) * (RHEI - 1)) {
+				var s = new Spike(tx, ty);
+				s.roomId = ROOMID;
+				Game.CUR.addEntity(s);
+			}
+		}
 		for(o in activeGroup.objects) {
 			var x = Std.parseFloat(o.properties.get("x"));
 			var y = Std.parseFloat(o.properties.get("y"));

@@ -8,6 +8,7 @@ class Anim {
 	public var timer : Float;
 	public var loop : Bool;
 	public var playing : Bool;
+	public var onEnd : Dynamic;
 	public function new(sliceName:String, frames:Array<Int>, frameTime=10., loop=true) {
 		this.frames = frames;
 		this.frameTime = frameTime;
@@ -30,6 +31,10 @@ class Anim {
 				if(loop) {
 					frame %= frames.length;
 				} else {
+					if(onEnd != null) {
+						onEnd();
+					}
+					playing = false;
 					return;
 				}
 			}

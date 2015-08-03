@@ -32,13 +32,16 @@ class Main {
 	}
 	static function initGFX() {
 		SpriteLib.addBD("tileset", new TilesetBD(0, 0));
-		SpriteLib.sliceBD("tileset", "tileset", 16, 16);
+		SpriteLib.sliceBD("tileset", "tileset", 0, 0, 16, 16);
 		SpriteLib.addBD("hero", new HeroBD(0, 0));
-		SpriteLib.sliceBD("hero", "hero", 20, 21);
+		SpriteLib.sliceBD("hero", "hero", 0, 0, 20, 21);
 		SpriteLib.addAnim("heroIdle", "hero", "0", 1);
 		SpriteLib.addBD("enemies", new EnemiesBD(0, 0));
-		SpriteLib.sliceBD("enemies", "thwomp", 35, 32, 1, 1);
+		SpriteLib.sliceBD("enemies", "thwomp", 0, 0, 35, 32, 1, 1);
+		SpriteLib.sliceBD("enemies", "spike", 0, 33, 16, 26, 7, 1, 1);
 		SpriteLib.addAnim("thwompIdle", "thwomp", "0", 1);
+		SpriteLib.addAnim("spikeIdle", "spike", "0", 1);
+		SpriteLib.addAnim("spikeOut", "spike", "1-6", 4);
 		font = new BitmapFont(new FontTinyBD(0, 0), 5, 5);
 	}
 	static function main() {

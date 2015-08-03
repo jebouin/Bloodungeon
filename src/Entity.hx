@@ -115,4 +115,7 @@ class Entity extends XSprite {
 	public function die() {
 		delete();
 	}
+	public function fall() {
+		
+	}
 }

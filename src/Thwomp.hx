@@ -16,7 +16,6 @@ class Thwomp extends Enemy {
 		friction = 0;
 		this.maxSpeed = 6.;
 		charging = false;
-		Game.CUR.lm.addChild(this, Const.ENEMY_L);
 		update();
 	}
 	override public function update() {

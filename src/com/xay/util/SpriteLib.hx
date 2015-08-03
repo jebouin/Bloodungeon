@@ -10,6 +10,8 @@ import flash.geom.Point;
 import flash.geom.Rectangle;
 #end
 typedef Slice = {
+	xOff:Int,
+	yOff:Int,
 	frameWid:Int,
 	frameHei:Int,
 	wid:Int,
@@ -27,7 +29,7 @@ class SpriteLib {
 	public static var slices = new StringMap<Slice>();
 	static var animDefs = new StringMap<AnimDef>();
 	#if openfl
-	public static function sliceBD(path:String, sliceName:String, frameWid:Int, frameHei:Int, wid:Int=null, hei:Int=null, margin=0) {
+	public static function sliceBD(path:String, sliceName:String, xOff:Int, yOff:Int, frameWid:Int, frameHei:Int, wid:Int=null, hei:Int=null, margin=0) {
 		var name = sliceName;
 		if(!bds.exists(path)) {
 			var bd = Assets.getBitmapData(path);
@@ -36,7 +38,7 @@ class SpriteLib {
 		var bd = bds.get(name);
 		if(wid==null) wid = Std.int(bd.width/frameWid);
 		if(hei==null) hei = Std.int(bd.height/frameHei);
-		var slice : Slice = {frameWid:frameWid, frameHei:frameHei, wid:wid, hei:hei, margin:margin, bdName:name};
+		var slice : Slice = {xOff:xOff, yOff:yOff, frameWid:frameWid, frameHei:frameHei, wid:wid, hei:hei, margin:margin, bdName:name};
 		slices.set(name, slice);
 	}
 	#elseif flash
@@ -44,13 +46,13 @@ class SpriteLib {
 		if(bds.exists(bdName)) return;
 		bds.set(bdName, bd);
 	}
-	public static function sliceBD(bdName:String, sliceName:String, frameWid:Int, frameHei:Int, wid:Int=null, hei:Int=null, margin=0) {
+	public static function sliceBD(bdName:String, sliceName:String, xOff:Int, yOff:Int, frameWid:Int, frameHei:Int, wid:Int=null, hei:Int=null, margin=0) {
 		var name = sliceName;
 		var bd = getBD(bdName);
 		if(bd == null) return;
 		if(wid==null) wid = Std.int(bd.width / frameWid);
 		if(hei==null) hei = Std.int(bd.height / frameHei);
-		var slice : Slice = {frameWid:frameWid, frameHei:frameHei, wid:wid, hei:hei, margin:margin, bdName:bdName};
+		var slice : Slice = {xOff:xOff, yOff:yOff, frameWid:frameWid, frameHei:frameHei, wid:wid, hei:hei, margin:margin, bdName:bdName};
 		slices.set(name, slice);
 	}
 	#end
@@ -71,7 +73,7 @@ class SpriteLib {
 			trace("Invalid frame id " + frame + " in slice " + name);
 			return null;
 		}
-		return new Rectangle((frame%slice.wid)*(slice.frameWid+slice.margin), Std.int(frame/slice.wid)*(slice.frameHei+slice.margin), slice.frameWid, slice.frameHei);
+		return new Rectangle(slice.xOff + (frame%slice.wid)*(slice.frameWid+slice.margin), slice.yOff + Std.int(frame/slice.wid)*(slice.frameHei+slice.margin), slice.frameWid, slice.frameHei);
 	}
 	public static function getNewAnim(name:String) {
 		if(!animDefs.exists(name)) {

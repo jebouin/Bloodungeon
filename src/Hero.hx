@@ -92,7 +92,6 @@ class Hero extends Entity {
 		}
 		var stx = (sx + ex) >> 1;
 		var sty = (sy + ey) >> 1;
-		trace("spawn set to " + stx + " " + sty);
 		spawnX = stx * 16 + 8;
 		spawnY = sty * 16 + 8;
 	}
