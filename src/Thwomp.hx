@@ -1,5 +1,6 @@
 package ;
 import com.xay.util.Util;
+import flash.geom.Rectangle;
 import haxe.Timer;
 import motion.Actuate;
 class Thwomp extends Enemy {
@@ -62,5 +63,9 @@ class Thwomp extends Enemy {
 		charging = true;
 		chargeX = cx;
 		chargeY = cy;
+	}
+	override function collidesHero() {
+		var hero = Game.CUR.hero;
+		return Collision.circleToRect(hero.x, hero.y, hero.cradius, new Rectangle(xx + 4, yy + 3, 27, 27));
 	}
 }

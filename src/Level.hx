@@ -17,8 +17,6 @@ class Level {
 	public static var RHEI : Int;
 	public static var WID : Int;
 	public static var HEI : Int;
-	public var startX : Float;
-	public var startY : Float;
 	public var posX : Float;
 	public var posY : Float;
 	var roomIdX : Int;
@@ -42,11 +40,7 @@ class Level {
 		Game.CUR.lm.addChild(overLayer, Const.BACK_L);
 		Game.CUR.lm.addChild(wall0Layer, Const.BACK_L);
 		Game.CUR.lm.addChild(wall1Layer, Const.BACK_L);
-		startX = 21 * 16 + 8;
-		startY = 59 * 16 + 8;
-		/*startX = 4 * 16 + 8;
-		startY = 34 * 16 + 8;*/
-		setRoomId(Std.int(startX / 16 / (RWID - 1)), Std.int(startY / 16 / (RHEI - 1)));
+		setRoomId(1, 6);
 		Game.CUR.lm.getContainer().x = -posX;
 		Game.CUR.lm.getContainer().y = -posY;
 	}
@@ -104,11 +98,16 @@ class Level {
 		}
 		return true;
 	}
-	public function nextRoom(dx:Int, dy:Int) {
-		if(Math.abs(dx) + Math.abs(dy) != 1) {
-			return false;
-		}
+	public function reloadEntities() {
+		Game.CUR.clearEntities(true);
+		loadEntities(roomIdX, roomIdY);
+	}
+	public function nextRoom(dir:Const.DIR) {
 		ROOMID++;
+		var dx = (dir == RIGHT ? 1 : (dir == LEFT ? -1 : 0));
+		var dy = (dir == DOWN ? 1 : (dir == UP ? -1 : 0));
+		Game.CUR.hero.computeSpawnPos(dir == UP || dir == DOWN);
+		closeRoom(dir);
 		setRoomId(roomIdX + dx, roomIdY + dy);
 		loadEntities(roomIdX, roomIdY);
 		Game.CUR.lock();
@@ -124,6 +123,21 @@ class Level {
 			}
 		});
 		return true;
+	}
+	function closeRoom(dir:Const.DIR) {
+		var tx = roomIdX * (RWID - 1);
+		var ty = roomIdY * (RHEI - 1);
+		if(dir == LEFT || dir == RIGHT) {
+			var x = tx + (dir == RIGHT ? RWID-3:1);
+			for(j in 0...10) {
+				tiles[j + ty][x] = FULL;
+			}
+		} else {
+			var y = ty + (dir == DOWN ? RHEI-3:1);
+			for(i in 0...15) {
+				tiles[y][i + tx] = FULL;
+			}
+		}
 	}
 	function setRoomId(idx:Int, idy:Int) {
 		roomIdX = idx;

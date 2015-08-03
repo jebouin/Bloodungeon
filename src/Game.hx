@@ -46,16 +46,22 @@ class Game extends Scene {
 	public function addEntity(e:Entity) {
 		entities.push(e);
 	}
-	public function clearEntities() {
+	public function clearEntities(keepHero:Bool = false) {
 		for(e in entities) {
-			e.delete();
+			if(!keepHero || e != hero) {
+				e.delete();
+			}
+		}
+		entities = [];
+		if(keepHero) {
+			entities.push(hero);
 		}
 	}
 	public function moveCameraTo(x:Float, y:Float, t=.5, onEnd:Dynamic=null) {
 		Actuate.tween(lm.getContainer(), t, {x:-x, y:-y}).onComplete(onEnd).ease(Quad.easeOut);
 	}
-	public function nextRoom(dx:Int, dy:Int) {
-		level.nextRoom(dx, dy);
+	public function nextRoom(dir:Const.DIR) {
+		level.nextRoom(dir);
 		cd.reset();
 	}
 	public function lock() {
@@ -71,5 +77,8 @@ class Game extends Scene {
 		for(e in entities) {
 			e.locked = false;
 		}
+	}
+	public function onRespawn() {
+		level.reloadEntities();
 	}
 }

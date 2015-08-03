@@ -5,5 +5,11 @@ class Enemy extends Entity {
 	}
 	override public function update() {
 		super.update();
+		if(collidesHero()) {
+			Game.CUR.hero.die();
+		}
+	}
+	public function collidesHero() {
+		return false;
 	}
 }

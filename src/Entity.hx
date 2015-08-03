@@ -112,4 +112,7 @@ class Entity extends XSprite {
 		if(!onGround) return;
 		vz = 10.;
 	}
+	public function die() {
+		delete();
+	}
 }

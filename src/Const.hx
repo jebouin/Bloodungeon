@@ -1,4 +1,10 @@
 package ;
+enum DIR {
+	LEFT;
+	RIGHT;
+	UP;
+	DOWN;
+}
 class Const {
 	public static var WID : Int;
 	public static var HEI : Int;
