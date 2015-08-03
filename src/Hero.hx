@@ -1,5 +1,6 @@
 package ;
 import com.xay.util.Input;
+import motion.Actuate;
 class Hero extends Entity {
 	public var hooverTimer : Int;
 	public function new() {

@@ -3,6 +3,7 @@ import com.xay.util.XSprite;
 import flash.display.Shape;
 import flash.display.Sprite;
 class Entity extends XSprite {
+	public var roomId : Int;
 	public var xx : Float;
 	public var yy : Float;
 	public var zz : Float;
@@ -19,22 +20,25 @@ class Entity extends XSprite {
 	public var collides : Bool;
 	public var locked : Bool;
 	public var cradius : Float;
-	public function new(?animName:String) {
+	public function new(?animName:String, ?hasShadow=true) {
 		super(animName);
 		xx = Const.WID * .5;
 		yy = Const.HEI * .5;
 		zz = 0.;
 		vx = vy = vz = 0.;
 		maxSpeed = -1.;
+		roomId = -1;
 		friction = .3;
 		frictionZ = .01;
 		gravity = .8;
 		speed = 2.;
 		cradius = 5;
 		onGround = collides = locked = false;
-		shadow = new Shape();
-		renderShadow();
-		Game.CUR.lm.addChild(shadow, Const.SHADOW_L);
+		if(hasShadow) {
+			shadow = new Shape();
+			renderShadow();
+			Game.CUR.lm.addChild(shadow, Const.SHADOW_L);
+		}
 	}
 	override public function delete() {
 		super.delete();
@@ -56,8 +60,10 @@ class Entity extends XSprite {
 		tryMove(vx, vy, vz);
 		this.x = Std.int(xx);
 		this.y = Std.int(yy - zz * .5);
-		shadow.x = Std.int(xx);
-		shadow.y = Std.int(yy + height * (1. - originYRatio));
+		if(shadow != null) {
+			shadow.x = Std.int(xx);
+			shadow.y = Std.int(yy + height * (1. - originYRatio));
+		}
 		super.update();
 	}
 	function tryMove(dx:Float, dy:Float, dz:Float) {

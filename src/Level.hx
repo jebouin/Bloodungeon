@@ -1,5 +1,6 @@
 package ;
 import com.xay.util.LayerManager;
+import flash.net.drm.DRMVoucherDownloadContext;
 import flash.utils.ByteArray;
 import com.xay.util.SpriteLib;
 import flash.display.Bitmap;
@@ -11,6 +12,7 @@ import flash.geom.Point;
 import Collision;
 @:file("res/floor0.tmx") class Floor0TMX extends ByteArray {}
 class Level {
+	public static var ROOMID = 0;
 	public static var RWID : Int;
 	public static var RHEI : Int;
 	public static var WID : Int;
@@ -29,6 +31,7 @@ class Level {
 	var overLayer : TiledLayer;
 	var wall0Layer : TiledLayer;
 	var wall1Layer : TiledLayer;
+	var activeGroup : TiledGroup;
 	var map : TiledMap;
 	public function new() {
 		RWID = Std.int(Const.WID / 16);
@@ -54,6 +57,7 @@ class Level {
 		overLayer = map.getLayer("over");
 		wall0Layer = map.getLayer("wall0");
 		wall1Layer = map.getLayer("wall1");
+		activeGroup = map.getGroup("active");
 		WID = map.wid;
 		HEI = map.hei;
 		nbRoomsX = Std.int(WID / (RWID - 1));
@@ -74,35 +78,50 @@ class Level {
 				tiles[j][i] = col;
 			}
 		}
-		//set wall z order
-		/*for(j in 0...HEI) {
-			for(i in 0...WID) {
-				var tile = getCollision(i, j);
-				var btile = getCollision(i, j+1);
-				if(tile != NONE && btile != NONE) {
-					wall1Layer.setTileAt(i, j, wall0Layer.getTileAt(i, j));
-					wall0Layer.setTileAt(i, j, 0);
-				}
-			}
-		}
-		wall0Layer.render();
-		wall1Layer.render();*/
 	}
 	public function loadEntities(idx:Int, idy:Int) {
 		if(idx < 0 || idy < 0 || idx >= nbRoomsX || idy >= nbRoomsY) return false;
+		var nextRoomX = idx * (RWID - 1) * 16;
+		var nextRoomY = idy * (RHEI - 1) * 16;
+		for(o in activeGroup.objects) {
+			var x = Std.parseFloat(o.properties.get("x"));
+			var y = Std.parseFloat(o.properties.get("y"));
+			if(x > nextRoomX && y > nextRoomY && x < nextRoomX + Const.WID && y < nextRoomY + Const.HEI) {
+				var tx = Std.int(x / 16);
+				var ty = Std.int(y / 16);
+				var e : Entity = null;
+				switch(o.type) {
+					case "Thwomp":
+						e = new Thwomp(tx, ty);
+					default:
+						
+				}
+				if(e != null) {
+					e.roomId = ROOMID;
+					Game.CUR.addEntity(e);
+				}
+			}
+		}
 		return true;
 	}
 	public function nextRoom(dx:Int, dy:Int) {
 		if(Math.abs(dx) + Math.abs(dy) != 1) {
 			return false;
 		}
-		if(!loadEntities(roomIdX + dx, roomIdY + dy)) {
-			return false;
-		}
+		ROOMID++;
 		setRoomId(roomIdX + dx, roomIdY + dy);
+		loadEntities(roomIdX, roomIdY);
 		Game.CUR.lock();
 		Game.CUR.moveCameraTo(posX, posY, .5, function() {
 			Game.CUR.unlock();
+			for(e in Game.CUR.entities) {
+				if(e != Game.CUR.hero && e.roomId != -1) {
+					if(e.roomId != ROOMID) {
+						e.delete();
+						Game.CUR.entities.remove(e);
+					}
+				}
+			}
 		});
 		return true;
 	}
@@ -137,6 +156,9 @@ class Level {
 	}
 	public function tileCollides(x:Int, y:Int) {
 		return getCollision(x, y) == FULL;
+	}
+	public function pointCollides(x:Float, y:Float) {
+		return tileCollides(Std.int(x) >> 4, Std.int(y) >> 4);
 	}
 	public function entityCollides(e:Entity, x:Float, y:Float) {
 		y -= 16 * getHeightAt(x, y);

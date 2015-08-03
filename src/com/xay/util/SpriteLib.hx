@@ -50,7 +50,7 @@ class SpriteLib {
 		if(bd == null) return;
 		if(wid==null) wid = Std.int(bd.width / frameWid);
 		if(hei==null) hei = Std.int(bd.height / frameHei);
-		var slice : Slice = {frameWid:frameWid, frameHei:frameHei, wid:wid, hei:hei, margin:margin, bdName:name};
+		var slice : Slice = {frameWid:frameWid, frameHei:frameHei, wid:wid, hei:hei, margin:margin, bdName:bdName};
 		slices.set(name, slice);
 	}
 	#end

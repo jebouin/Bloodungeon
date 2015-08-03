@@ -21,8 +21,8 @@ class Game extends Scene {
 		frontlm = new LayerManager();
 		Main.renderer.addChild(lm.getContainer());
 		Main.renderer.addChild(frontlm.getContainer());
-		level = new Level();
 		entities = [];
+		level = new Level();
 		hero = new Hero();
 		entities.push(hero);
 		cd = new Countdown();
@@ -38,7 +38,13 @@ class Game extends Scene {
 		super.update();
 		for(e in entities) {
 			e.update();
+			if(e.deleted) {
+				entities.remove(e);
+			}
 		}
+	}
+	public function addEntity(e:Entity) {
+		entities.push(e);
 	}
 	public function clearEntities() {
 		for(e in entities) {

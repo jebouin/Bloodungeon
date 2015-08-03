@@ -13,6 +13,7 @@ import flash.Lib;
 import net.hires.debug.Stats;
 @:bitmap("res/tileset.png") class TilesetBD extends BitmapData {}
 @:bitmap("res/hero.png") class HeroBD extends BitmapData {}
+@:bitmap("res/enemies.png") class EnemiesBD extends BitmapData {}
 @:bitmap("res/fontTiny.png") class FontTinyBD extends BitmapData {}
 class Main {
 	public static var renderer : Renderer;
@@ -35,6 +36,9 @@ class Main {
 		SpriteLib.addBD("hero", new HeroBD(0, 0));
 		SpriteLib.sliceBD("hero", "hero", 20, 21);
 		SpriteLib.addAnim("heroIdle", "hero", "0", 1);
+		SpriteLib.addBD("enemies", new EnemiesBD(0, 0));
+		SpriteLib.sliceBD("enemies", "thwomp", 35, 32, 1, 1);
+		SpriteLib.addAnim("thwompIdle", "thwomp", "0", 1);
 		font = new BitmapFont(new FontTinyBD(0, 0), 5, 5);
 	}
 	static function main() {

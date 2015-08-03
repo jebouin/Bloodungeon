@@ -69,6 +69,12 @@ class TiledMap {
 		}
 		return layers.get(name);
 	}
+	public function getGroup(name:String) {
+		if(!groups.exists(name)) {
+			trace("Group " + name + " not found");
+		}
+		return groups.get(name);
+	}
 	public function getTileProps(id:Int) {
 		if(tileProperties.exists(id)) {
 			return tileProperties.get(id);

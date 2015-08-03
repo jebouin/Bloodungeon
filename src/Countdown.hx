@@ -24,6 +24,7 @@ class Countdown extends Sprite {
 		reset();
 		blendMode = BlendMode.ADD;
 		alpha = .2;
+		visible = false;
 	}
 	function createBDS() {
 		bds = [];
@@ -48,9 +49,9 @@ class Countdown extends Sprite {
 		text.y = -text.height * .5;
 	}
 	public function lock() {
-		visible = false;
+		//visible = false;
 	}
 	public function unlock() {
-		visible = true;
+		//visible = true;
 	}
 }
