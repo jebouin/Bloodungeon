@@ -63,15 +63,23 @@ class Level {
 		for(j in 0...HEI) {
 			tiles[j] = [];
 			for(i in 0...WID) {
+				var ground0Tile = ground0Layer.getTileAt(i, j);
+				var ground0TileCol = Collision.TILE_COLLISIONS[ground0Tile];
 				var overTile = overLayer.getTileAt(i, j);
 				var overTileCol = Collision.TILE_COLLISIONS[overTile];
 				var wall0TileCol = Collision.TILE_COLLISIONS[wall0Layer.getTileAt(i, j)];
 				var wall1TileCol = Collision.TILE_COLLISIONS[wall1Layer.getTileAt(i, j)];
 				var col = NONE;
-				if(wall1TileCol != NONE) {
-					col = wall1TileCol;
+				if(ground0Tile == 0) {
+					col = HOLE;
 				} else {
-					col = wall0TileCol;
+					if(wall1TileCol != NONE) {
+						col = wall1TileCol;
+					} else if(wall0TileCol != NONE) {
+						col = wall0TileCol;
+					} else if(ground0TileCol != NONE) {
+						col = ground0TileCol;
+					}
 				}
 				tiles[j][i] = col;
 				if(overTile == 16) {
@@ -193,11 +201,18 @@ class Level {
 		return tileCollides(Std.int(x) >> 4, Std.int(y) >> 4);
 	}
 	public function entityCollides(e:Entity, x:Float, y:Float) {
-		y -= 16 * getHeightAt(x, y);
+		//y -= 16 * getHeightAt(x, y);
 		if(tileCollides(Std.int(x - e.cradius) >> 4, Std.int(y - e.cradius) >> 4)) return true;
 		if(tileCollides(Std.int(x + e.cradius) >> 4, Std.int(y - e.cradius) >> 4)) return true;
 		if(tileCollides(Std.int(x + e.cradius) >> 4, Std.int(y + e.cradius) >> 4)) return true;
 		if(tileCollides(Std.int(x - e.cradius) >> 4, Std.int(y + e.cradius) >> 4)) return true;
 		return false;
+	}
+	public function entityCollidesFully(e:Entity, x:Float, y:Float, col:Collision.TILE_COLLISION_TYPE) {
+		if(getCollisionAt(x - e.cradius, y - e.cradius) != col) return false;
+		if(getCollisionAt(x + e.cradius, y - e.cradius) != col) return false;
+		if(getCollisionAt(x + e.cradius, y + e.cradius) != col) return false;
+		if(getCollisionAt(x - e.cradius, y + e.cradius) != col) return false;
+		return true;
 	}
 }

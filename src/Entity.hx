@@ -2,6 +2,11 @@ package ;
 import com.xay.util.XSprite;
 import flash.display.Shape;
 import flash.display.Sprite;
+import haxe.Timer;
+import motion.Actuate;
+import motion.easing.Cubic;
+import motion.easing.Linear;
+import motion.easing.Quad;
 class Entity extends XSprite {
 	public var roomId : Int;
 	public var xx : Float;
@@ -66,6 +71,9 @@ class Entity extends XSprite {
 			shadow.y = Std.int(yy + height * (1. - originYRatio));
 		}
 		super.update();
+		if(canFall()) {
+			fall();
+		}
 	}
 	function tryMove(dx:Float, dy:Float, dz:Float) {
 		if(collides) {
@@ -116,7 +124,20 @@ class Entity extends XSprite {
 	public function die() {
 		delete();
 	}
+	public function canFall() {
+		return Game.CUR.level.entityCollidesFully(this, xx, yy, HOLE);
+	}
 	public function fall() {
-		
+		locked = true;
+		if(shadow != null) {
+			shadow.visible = false;
+		}
+		parent.removeChild(this);
+		Game.CUR.lm.addChild(this, Const.VOID_L);
+		var tt = .5;
+		Actuate.tween(this, tt, {x: x + vx*tt*20}).ease(Cubic.easeOut);
+		Actuate.tween(this, tt, {y: y+20, scaleX: 0., scaleY: 0.}).onComplete(function() {
+			die();
+		}).ease(Linear.easeNone);
 	}
 }

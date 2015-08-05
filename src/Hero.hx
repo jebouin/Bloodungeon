@@ -16,7 +16,7 @@ class Hero extends Entity {
 		maxSpeed = 2.3;
 		collides = true;
 		spawnX = 21 * 16 + 8;
-		spawnY = 59 * 16 + 8;
+		spawnY = 61 * 16 + 8;
 		spawn();
 		hooverTimer = 0;
 		gravity = 0;
@@ -28,6 +28,9 @@ class Hero extends Entity {
 		visible = true;
 		locked = false;
 		dead = false;
+		scaleX = scaleY = 1;
+		parent.removeChild(this);
+		Game.CUR.lm.addChild(this, Const.HERO_L);
 	}
 	override function delete() {
 		super.delete();
@@ -76,7 +79,7 @@ class Hero extends Entity {
 		Timer.delay(function() {
 			Game.CUR.onRespawn();
 			spawn();
-		}, 1000);
+		}, 500);
 	}
 	public function computeSpawnPos(horizontal:Bool) {
 		var tx = Std.int(xx / 16);
