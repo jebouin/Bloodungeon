@@ -20,6 +20,7 @@ class Entity extends XSprite {
 	public var collides : Bool;
 	public var locked : Bool;
 	public var cradius : Float;
+	public var dead : Bool;
 	public function new(?animName:String, ?hasShadow=true) {
 		super(animName);
 		xx = Const.WID * .5;
@@ -33,7 +34,7 @@ class Entity extends XSprite {
 		gravity = .8;
 		speed = 2.;
 		cradius = 5;
-		onGround = collides = locked = false;
+		onGround = collides = locked = dead = false;
 		if(hasShadow) {
 			shadow = new Shape();
 			renderShadow();

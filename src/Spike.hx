@@ -16,11 +16,7 @@ class Spike extends Enemy {
 	}
 	override public function update() {
 		var hero = Game.CUR.hero;
-		if(out) {
-			if(hits(hero)) {
-				hero.die();
-			}
-		} else {
+		if(!out) {
 			if(isOnTop(hero)) {
 				Timer.delay(function() {
 					out = true;
@@ -29,6 +25,9 @@ class Spike extends Enemy {
 					anim.onEnd = function() {
 						out = false;
 						setAnim("spikeIdle");
+					}
+					if(hits(hero)) {
+						hero.die();
 					}
 				}, 300);
 			}
@@ -39,6 +38,7 @@ class Spike extends Enemy {
 		return otx == tx && oty == ty;
 	}
 	function isOnTop(e:Entity) {
+		if(e.dead) return false;
 		return (isSameTile(Std.int(e.xx - e.cradius) >> 4, Std.int(e.yy - e.cradius) >> 4))
 			|| (isSameTile(Std.int(e.xx + e.cradius) >> 4, Std.int(e.yy - e.cradius) >> 4))
 			|| (isSameTile(Std.int(e.xx + e.cradius) >> 4, Std.int(e.yy + e.cradius) >> 4))

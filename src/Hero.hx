@@ -27,6 +27,7 @@ class Hero extends Entity {
 		yy = spawnY;
 		visible = true;
 		locked = false;
+		dead = false;
 	}
 	override function delete() {
 		super.delete();
@@ -68,7 +69,9 @@ class Hero extends Entity {
 		zz = 2 + Math.sin(hooverTimer * .2) * 2;
 	}
 	override public function die() {
+		if(dead) return;
 		visible = shadow.visible = false;
+		dead = true;
 		locked = true;
 		Timer.delay(function() {
 			Game.CUR.onRespawn();
