@@ -5,7 +5,8 @@ class Button extends Entity {
 	var tx : Int;
 	var ty : Int;
 	var onEnd : Dynamic;
-	public function new(tx:Int, ty:Int, facesRight:Bool) {
+	var id : Int;
+	public function new(tx:Int, ty:Int, facesRight:Bool, id:Int) {
 		super("buttonOut", false);
 		setOrigin(1, .5);
 		this.facesRight = facesRight;
@@ -14,10 +15,17 @@ class Button extends Entity {
 		}
 		this.tx = tx;
 		this.ty = ty;
+		this.id = id;
 		pushed = false;
 		xx = tx * 16;
 		yy = ty * 16 + 16;
 		Game.CUR.lm.addChild(this, Const.FRONT_L);
+		onEnd = function() {
+			Door.openId(id);
+		};
+	}
+	override public function delete() {
+		super.delete();
 	}
 	override public function update() {
 		super.update();

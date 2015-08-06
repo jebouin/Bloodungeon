@@ -5,7 +5,7 @@
  </tileset>
  <layer name="ground0" width="43" height="65">
   <data encoding="base64" compression="zlib">
-   eJztlwGOwyAMBEl/AD/o/z95PamWRis7aROT4yQjrQIEyLIshmytta1QKBQKhUKhUCgUCoVCoVD4RziTrO/jhfFCl7pfPB3M4jo+4Lq9eXbJ9zffvX7ZXPsO1wc4DjzJ+w6upstA3tpb3ZB6W+fe4nnO4KreM45WHnjqOGyTzZU6UUN6j225zsbpCT4cJ5ur+U55WXlvP1tZ+czyAHUdUn/kEe+9rcsMXSOtTe9vv9HlOROMASN4F8WyhnYzPBBpyhhAr9qZtMeVY9EPGdw0Dui5SV8yrzHW+um+zOJq3/A8Z6COzHO9N6dsbQbyGR41jT2fRsl0fAYwfsxn6Mq1U67UhSk6n7SNpQyuxsfTlLrw3GotPtO8uXsanN1bnvfoZd4DlPvAOy3rHSKDq95FVgTjO+v0vNU4pncd6sczm+uSxVf/Q6I4pPzZ3puvp8VVnpw3/cB7tX5P+3ljZ/rKuzdTI9Z7vCK91BsZXLm3vP8W/R/QeXrj6dof6f+NBzh/b62j2Kl+3YL32aAXPF9GHvfu5954WT644h9vvjN4XUnR2mScT3dw5T/wjG+eTepf3fuRF/4ieZrpGbwyV3pW48IKXNWb3t1gFa7kd+SLVbhGd8TVuOp+WtWvd8b0s+lurj8B6RwJ
+   eJztlwuOwyAMRElvADfo/S+5XamWnkZ20iYmy0pGGoVfyDAMhmytta1QKBQKhUKhUCgUCoVCoVD4RziT7N3HC+OFLnW/eDqYxXV8wHV78+yS72++e+9lc+07XB/gOPAk7zu4mi4DeetvdUPqbZ17i+c5g6t6zzhaeeCp47BPNlfqRA3pPfblOhunJ/hwnGyu5jvlZeW9/Wxl5TPLA9R1SP2RR7x2W5cZukZam97ffqPLcyYYA0bQFsWyhn4zPBBpyhhAr9qZtMeVY9EPGdw0Dui5SV8yrzHW3tN9mcXVvuF5zkAdmed6b07Z+gzkMzxqGns+jZLp+Axg/JjP0JVrp1ypC1N0PmkfSxlcjY+nKXXhudVafKZ5c/c0OLu3PO/Ry7wHKPeBNi3rHSKDq95FVgTjO+v0vNU4pncd6sczm+uSxVf/Q6I4pPzZ35uvp8VVnpw3/cB7tX5P3/PGzvSVd2+mRqz3eEV6qTcyuHJvef8t+j+g8/TG07U/0v8bD3D+3lpHsVP9ugXt2aAXPF9GHvfu5954WT644h9vvjN4XUnR2mScT3dwPWq/+s2zSf2rez/ywl8kTzM9g1fmSs9qXFiBq8Yz726wClfyO/LFKlyjO+JqXHU/rerXO2P62XQ31x+CRhv1
   </data>
  </layer>
  <layer name="ground1" width="43" height="65" visible="0">
@@ -29,6 +29,15 @@
   </data>
  </layer>
  <objectgroup name="active" width="43" height="65">
-  <object type="Button" x="272" y="944" width="16" height="32"/>
+  <object type="Button" x="272" y="944" width="16" height="32">
+   <properties>
+    <property name="id" value="0"/>
+   </properties>
+  </object>
+  <object type="Door" x="320" y="880" width="48" height="16">
+   <properties>
+    <property name="id" value="0"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

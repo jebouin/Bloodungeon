@@ -114,6 +114,8 @@ class Level {
 		for(o in activeGroup.objects) {
 			var x = Std.parseFloat(o.properties.get("x"));
 			var y = Std.parseFloat(o.properties.get("y"));
+			var wid = Std.parseFloat(o.properties.get("width"));
+			var hei = Std.parseFloat(o.properties.get("height"));
 			if(x > nextRoomX && y > nextRoomY && x < nextRoomX + Const.WID && y < nextRoomY + Const.HEI) {
 				var tx = Std.int(x / 16);
 				var ty = Std.int(y / 16);
@@ -123,7 +125,11 @@ class Level {
 						e = new Thwomp(tx, ty);
 					case "Button":
 						var facesRight = getCollision(tx+1, ty) == NONE;
-						e = new Button(tx + (facesRight?0:1), ty, facesRight);
+						var id = Std.parseInt(o.properties.get("id"));
+						e = new Button(tx + (facesRight?0:1), ty, facesRight, id);
+					case "Door":
+						var id = Std.parseInt(o.properties.get("id"));
+						e = new Door(this, tx, ty, Std.int(wid), Std.int(hei), id);
 					default:
 						
 				}
@@ -190,6 +196,10 @@ class Level {
 			return NONE;
 		}
 		return tiles[y][x];
+	}
+	public function setCollision(x:Int, y:Int, type:TILE_COLLISION_TYPE) {
+		if(!isOnMap(x, y)) return;
+		tiles[y][x] = type;
 	}
 	public function getHeight(x:Int, y:Int) {
 		if(!isOnMap(x, y)) {
