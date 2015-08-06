@@ -89,6 +89,7 @@ class Level {
 			}
 		}
 		overLayer.render(); //cleans spikes on tiles
+		trace(getCollision(21, 41));
 	}
 	public function loadEntities(idx:Int, idy:Int) {
 		if(idx < 0 || idy < 0 || idx >= nbRoomsX || idy >= nbRoomsY) return false;
