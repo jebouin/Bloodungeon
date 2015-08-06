@@ -25,6 +25,7 @@ class Hero extends Entity {
 	public function spawn() {
 		xx = spawnX;
 		yy = spawnY;
+		vx = vy = 0;
 		visible = true;
 		locked = false;
 		dead = false;

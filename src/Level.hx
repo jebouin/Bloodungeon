@@ -1,5 +1,7 @@
 package ;
 import com.xay.util.LayerManager;
+import flash.display.DisplayObject;
+import flash.display.Sprite;
 import flash.net.drm.DRMVoucherDownloadContext;
 import flash.utils.ByteArray;
 import com.xay.util.SpriteLib;
@@ -155,12 +157,12 @@ class Level {
 		var tx = roomIdX * (RWID - 1);
 		var ty = roomIdY * (RHEI - 1);
 		if(dir == LEFT || dir == RIGHT) {
-			var x = tx + (dir == RIGHT ? RWID-3:1);
+			var x = tx + (dir == RIGHT ? RWID-2:1);
 			for(j in 0...10) {
 				tiles[j + ty][x] = FULL;
 			}
 		} else {
-			var y = ty + (dir == DOWN ? RHEI-3:1);
+			var y = ty + (dir == DOWN ? RHEI-2:1);
 			for(i in 0...15) {
 				tiles[y][i + tx] = FULL;
 			}
