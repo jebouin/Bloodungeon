@@ -1,7 +1,9 @@
 package ;
 import com.xay.util.LayerManager;
+import flash.accessibility.Accessibility;
 import flash.display.DisplayObject;
 import flash.display.Sprite;
+import flash.filters.ShaderFilter;
 import flash.net.drm.DRMVoucherDownloadContext;
 import flash.utils.ByteArray;
 import com.xay.util.SpriteLib;
@@ -91,6 +93,7 @@ class Level {
 			}
 		}
 		overLayer.render(); //cleans spikes on tiles
+		wall0Layer.bmp.bitmapData.applyFilter(wall0Layer.bmp.bitmapData, wall0Layer.bmp.bitmapData.rect, new Point(0, 0), new DropShadowFilter(1., -90, 0xFF000000, 1., 1., 8., 1., 1, true));
 	}
 	public function loadEntities(idx:Int, idy:Int) {
 		if(idx < 0 || idy < 0 || idx >= nbRoomsX || idy >= nbRoomsY) return false;
