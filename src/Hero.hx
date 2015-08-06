@@ -21,6 +21,7 @@ class Hero extends Entity {
 		hooverTimer = 0;
 		gravity = 0;
 		setOrigin(.5, .8);
+		prevRoomDir = Const.DIR.UP;
 	}
 	public function spawn() {
 		xx = spawnX;
@@ -32,6 +33,7 @@ class Hero extends Entity {
 		scaleX = scaleY = 1;
 		parent.removeChild(this);
 		Game.CUR.lm.addChild(this, Const.HERO_L);
+		//set dir
 	}
 	override function delete() {
 		super.delete();
@@ -54,6 +56,9 @@ class Hero extends Entity {
 		}
 		if(Input.oldKeyDown("action")) {
 			jump();
+		}
+		if(Input.oldKeyDown("suicide")) {
+			die();
 		}
 		super.update();
 		var level = Game.CUR.level;
@@ -97,10 +102,13 @@ class Hero extends Entity {
 			ex += dx;
 			ey += dy;
 		}
-		var stx = (sx + ex) >> 1;
-		var sty = (sy + ey) >> 1;
+		var stx = (sx + ex) * .5;
+		var sty = (sy + ey) * .5;
 		spawnX = stx * 16 + 8;
 		spawnY = sty * 16 + 8;
+		if(prevRoomDir == Const.DIR.DOWN) {
+			spawnY += 12;
+		}
 	}
 	function goToNextRoom(dir:Const.DIR) {
 		prevRoomDir = dir;

@@ -29,6 +29,7 @@ class Main {
 		Input.addKey("down", 83);
 		Input.addKey("down", 40);
 		Input.addKey("action", 32);
+		Input.addKey("suicide", 82);
 	}
 	static function initGFX() {
 		SpriteLib.addBD("tileset", new TilesetBD(0, 0));
@@ -42,6 +43,9 @@ class Main {
 		SpriteLib.addAnim("thwompIdle", "thwomp", "0", 1);
 		SpriteLib.addAnim("spikeIdle", "spike", "0", 1);
 		SpriteLib.addAnim("spikeOut", "spike", "1-6", 4);
+		SpriteLib.sliceBD("enemies", "button", 0, 60, 13, 46, 4, 1, 1);
+		SpriteLib.addAnim("buttonOut", "button", "0", 1);
+		SpriteLib.addAnim("buttonPushed", "button", "1-3", 3);
 		font = new BitmapFont(new FontTinyBD(0, 0), 5, 5);
 	}
 	static function main() {

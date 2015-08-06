@@ -34,7 +34,8 @@ class Anim {
 					if(onEnd != null) {
 						onEnd();
 					}
-					playing = false;
+					frame = frames.length - 1;
+					pause();
 					return;
 				}
 			}

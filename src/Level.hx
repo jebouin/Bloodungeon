@@ -93,7 +93,10 @@ class Level {
 			}
 		}
 		overLayer.render(); //cleans spikes on tiles
-		wall0Layer.bmp.bitmapData.applyFilter(wall0Layer.bmp.bitmapData, wall0Layer.bmp.bitmapData.rect, new Point(0, 0), new DropShadowFilter(1., -90, 0xFF000000, 1., 1., 8., 1., 1, true));
+		var bd = wall0Layer.bmp.bitmapData;
+		bd.applyFilter(bd, bd.rect, new Point(0, 0), new DropShadowFilter(1., -90, 0xFF000000, 1., 1., 8., 1., 1, true));
+		bd.applyFilter(bd, bd.rect, new Point(0, 0), new DropShadowFilter(1., 45, 0xFF000000, .2, 1., 1., 1., 1, false));
+		bd.applyFilter(bd, bd.rect, new Point(0, 0), new DropShadowFilter(1., 135, 0xFF000000, .2, 1., 1., 1., 1, false));
 	}
 	public function loadEntities(idx:Int, idy:Int) {
 		if(idx < 0 || idy < 0 || idx >= nbRoomsX || idy >= nbRoomsY) return false;
@@ -118,6 +121,9 @@ class Level {
 				switch(o.type) {
 					case "Thwomp":
 						e = new Thwomp(tx, ty);
+					case "Button":
+						var facesRight = getCollision(tx+1, ty) == NONE;
+						e = new Button(tx + (facesRight?0:1), ty, facesRight);
 					default:
 						
 				}

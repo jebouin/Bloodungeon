@@ -71,8 +71,10 @@ class Entity extends XSprite {
 			shadow.y = Std.int(yy + height * (1. - originYRatio));
 		}
 		super.update();
-		if(canFall()) {
-			fall();
+		if(collides) {
+			if(canFall()) {
+				fall();
+			}
 		}
 	}
 	function tryMove(dx:Float, dy:Float, dz:Float) {
