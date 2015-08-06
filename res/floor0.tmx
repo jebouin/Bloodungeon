@@ -5,7 +5,7 @@
  </tileset>
  <layer name="ground0" width="43" height="65">
   <data encoding="base64" compression="zlib">
-   eJztlksOwjAMRNMjcITsuP8J2brWODgfbANj6Ym2KdXLxKRcrbWLEEIIIYQQQgghhJAv4rmA57kdsOtq1buxlWd/0tUar+S68hy0zlVd0XdPu56gF3HtAD1m+US7ovL6RLv+AlZl59rbvVe701V7R+eojz1zjHSVOcpjz/yic7UK9YikifEoV5kLch3VTM+c7AFrfSsTvab/xGNwXTK6N9JVu6DPCr7aY+RSLVftk+1n+SJPb+bZ7t7r0W7e8yquOjd9fCLXnYrOZae87wK9v2bUqD9HfZpRKEOdLZpHRs38juR5Rs28X+U9GYV60vqfkp3r7N5ZLVcry2zXjD19taJdX1jeFLU=
+   eJztklEKAzEIBd2j+Nf7n7D0zwZtbTa6aTsPBgKSMFEPETkAAAAAAAAAAAC+iNsEmXfV4axrlHe1mbcrXaP6Tq4z73hz3tXVu7vadQW6ias6jLXIp9vVS9an2/UXiHJ1X1Wed1WTrqN3dx/Hc+aPna62j/ac+V93X6N4O2IRU+9ytX3xXF/lk51ZuQPRfHeme6YAAAAPzuQfXK8IrjXBtSa41gTXmnS73gHkdw81
   </data>
  </layer>
  <layer name="ground1" width="43" height="65" visible="0">
@@ -13,14 +13,14 @@
    eJztwTEBAAAAwqD1T20KP6AAAAAAAAAAAAAAgIcBK6wAAQ==
   </data>
  </layer>
- <layer name="over" width="43" height="65">
+ <layer name="over" width="43" height="65" visible="0">
   <data encoding="base64" compression="zlib">
-   eJztzkERAAAMAiBjrH/SpfD8QAISAAAAAAAAAADou3UAAGDgAQQbABk=
+   eJztwTEBAAAAwqD1T20KP6AAAAAAAAAAAAAAgIcBK6wAAQ==
   </data>
  </layer>
  <layer name="wall0" width="43" height="65">
   <data encoding="base64" compression="zlib">
-   eJztlUsOxCAMQ7lM73/F2aMW8rPBmkTKoqImLzQ1zxjjEcpInNA1K0bXrBhds2J0aqxKGe2TrWtWjK5ZMbpmxejUWJUy2idb16wYXbNidM2K0amxKmW2T68uU4+pbVZM/Bsri7ua1bKf0rye8qyV52b9mnk/VM8w8h67jXXFxGS1alfrlZH5hru+UKxfzx7t23plzDPnOSc2qzc8c32C1eOnN+dbX5a+I5HRebzD8j9YakZ1iHNFeKCF9Wt95SerfStZLfOwY93VjIRl/yrPmu+AiL7yn2ecK8rrrDoG644DfQ9k+/S+wwhP/ZtYx9hzNKstvLUVWOdzv5k1+n5lqPoAy9OVWH9D/WO7
+   eJztlmEOwiAMhTmEegL1BM77H83xg4Q0pdBCOxr7kpco25OPrWl9pZRejizRFblg1ckFq04uWHVy3lg9WXpO61yw6uSCVScXrDo5b6yeLD2ndS5YdXLBqpMLVp2cN1ZPnj0nNzezn2U2WHX0b6xW3KtZR37PU71e1bOonjvbry3nw+oa1pxju7FSTJaso1nq+krNvMPeubRYW985Wez6SsGa4zwna1auOHV9BSunn2YfhJ+n3517qOyqfpoaa7UKq0RPYY7bO8r6lazYem8/ivV2+kFkJWqxHtVnjAljrfk+p7+M/UY08v4xVoylxQe1+rnWktYltleWJmu+3qo9qJH7VvSBnu/AGBdWwzA3W69SQw7IOtv3uf8ZR89Z5lKtsrZqT6nKvmXWUoKz1Vo1axbV/7N2Yu31151Ye/LAWs+A3VmLdmAdmWu3tEfPas0FOKt2YrWYPz9DDWP6
   </data>
  </layer>
  <layer name="wall1" width="43" height="65" visible="0">
