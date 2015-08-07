@@ -16,7 +16,7 @@ class Hero extends Entity {
 		maxSpeed = 2.3;
 		collides = true;
 		spawnX = 21 * 16 + 8;
-		spawnY = 61 * 16 + 8;
+		spawnY = 34 * 16 + 8;
 		spawn();
 		hooverTimer = 0;
 		gravity = 0;

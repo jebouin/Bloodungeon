@@ -45,7 +45,7 @@ class Level {
 		Game.CUR.lm.addChild(overLayer, Const.BACK_L);
 		Game.CUR.lm.addChild(wall0Layer, Const.BACK_L);
 		Game.CUR.lm.addChild(wall1Layer, Const.BACK_L);
-		setRoomId(1, 6);
+		setRoomId(1, 3);
 		loadEntities(roomIdX, roomIdY);
 		Game.CUR.lm.getContainer().x = -posX;
 		Game.CUR.lm.getContainer().y = -posY;
@@ -129,7 +129,7 @@ class Level {
 						e = new Button(tx + (facesRight?0:1), ty, facesRight, id);
 					case "Door":
 						var id = Std.parseInt(o.properties.get("id"));
-						e = new Door(this, tx, ty, Std.int(wid), Std.int(hei), id);
+						e = new Door(this, tx, ty, Std.int(wid) >> 4, Std.int(hei) >> 4, id);
 					default:
 						
 				}

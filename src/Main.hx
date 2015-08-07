@@ -46,6 +46,7 @@ class Main {
 		SpriteLib.sliceBD("enemies", "button", 0, 60, 13, 46, 4, 1, 1);
 		SpriteLib.addAnim("buttonOut", "button", "0", 1);
 		SpriteLib.addAnim("buttonPushed", "button", "1-3", 3);
+		SpriteLib.sliceBD("enemies", "door", 0, 107, 16, 27, 3, 1, 1);
 		font = new BitmapFont(new FontTinyBD(0, 0), 5, 5);
 	}
 	static function main() {
