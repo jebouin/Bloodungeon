@@ -1,5 +1,6 @@
 package ;
 import com.xay.util.Input;
+import com.xay.util.Util;
 import haxe.Timer;
 import motion.Actuate;
 class Hero extends Entity {
@@ -33,49 +34,52 @@ class Hero extends Entity {
 		scaleX = scaleY = 1;
 		parent.removeChild(this);
 		Game.CUR.lm.addChild(this, Const.HERO_L);
+		setLightPos(xx, yy);
 		//set dir
 	}
 	override function delete() {
 		super.delete();
 	}
 	override function update() {
-		if(locked) return;
-		if(Input.keyDown("left")) {
-			vx -= speed;
-			scaleX = -1;
+		if(!locked) {
+			if(Input.keyDown("left")) {
+				vx -= speed;
+				scaleX = -1;
+			}
+			if(Input.keyDown("right")) {
+				vx += speed;
+				scaleX = 1;
+			}
+			if(Input.keyDown("up")) {
+				vy -= speed;
+			}
+			if(Input.keyDown("down")) {
+				vy += speed;
+			}
+			if(Input.oldKeyDown("action")) {
+				jump();
+			}
+			if(Input.oldKeyDown("suicide")) {
+				die();
+			}
+			super.update();
+			var level = Game.CUR.level;
+			if(xx > level.posX + Level.RWID * 16 - 8 && prevRoomDir != LEFT) {
+				goToNextRoom(RIGHT);
+			}
+			if(xx < level.posX + 8 && prevRoomDir != RIGHT) {
+				goToNextRoom(LEFT);
+			}
+			if(yy > level.posY + Level.RHEI * 16 - 8 && prevRoomDir != UP) {
+				goToNextRoom(DOWN);
+			}
+			if(yy < level.posY + 8 && prevRoomDir != DOWN) {
+				goToNextRoom(UP);
+			}
+			hooverTimer++;
+			zz = 2 + Math.sin(hooverTimer * .2) * 2;
 		}
-		if(Input.keyDown("right")) {
-			vx += speed;
-			scaleX = 1;
-		}
-		if(Input.keyDown("up")) {
-			vy -= speed;
-		}
-		if(Input.keyDown("down")) {
-			vy += speed;
-		}
-		if(Input.oldKeyDown("action")) {
-			jump();
-		}
-		if(Input.oldKeyDown("suicide")) {
-			die();
-		}
-		super.update();
-		var level = Game.CUR.level;
-		if(xx > level.posX + Level.RWID * 16 - 8 && prevRoomDir != LEFT) {
-			goToNextRoom(RIGHT);
-		}
-		if(xx < level.posX + 8 && prevRoomDir != RIGHT) {
-			goToNextRoom(LEFT);
-		}
-		if(yy > level.posY + Level.RHEI * 16 - 8 && prevRoomDir != UP) {
-			goToNextRoom(DOWN);
-		}
-		if(yy < level.posY + 8 && prevRoomDir != DOWN) {
-			goToNextRoom(UP);
-		}
-		hooverTimer++;
-		zz = 2 + Math.sin(hooverTimer * .2) * 2;
+		updateLight();
 	}
 	override public function die() {
 		if(dead) return;
@@ -113,5 +117,21 @@ class Hero extends Entity {
 	function goToNextRoom(dir:Const.DIR) {
 		prevRoomDir = dir;
 		Game.CUR.nextRoom(dir);
+	}
+	function updateLight() {
+		var level = Game.CUR.level;
+		var lx = level.light.x;
+		var ly = level.light.y;
+		var rlx = lx - Game.CUR.lm.getContainer().x;
+		var rly = ly - Game.CUR.lm.getContainer().y;
+		setLightPos(rlx + (xx - rlx) * .3, rly + (yy - rly) * .3);
+		level.light.scaleX = level.light.scaleY = 1. + .05 * Math.sin(hooverTimer * .1);
+		level.light2.scaleX = level.light2.scaleY = 1. + .05 * Math.sin(hooverTimer * .1 + .6);
+	}
+	public function setLightPos(lx:Float, ly:Float) {
+		var light = Game.CUR.level.light;
+		var light2 = Game.CUR.level.light2;
+		light.x = light2.x = lx + Game.CUR.lm.getContainer().x;
+		light.y = light2.y = ly + Game.CUR.lm.getContainer().y;
 	}
 }

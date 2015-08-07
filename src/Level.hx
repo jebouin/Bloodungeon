@@ -1,9 +1,12 @@
 package ;
 import com.xay.util.LayerManager;
 import flash.accessibility.Accessibility;
+import flash.display.BlendMode;
 import flash.display.DisplayObject;
+import flash.display.GradientType;
 import flash.display.Sprite;
 import flash.filters.ShaderFilter;
+import flash.geom.Matrix;
 import flash.net.drm.DRMVoucherDownloadContext;
 import flash.utils.ByteArray;
 import com.xay.util.SpriteLib;
@@ -23,6 +26,9 @@ class Level {
 	public static var HEI : Int;
 	public var posX : Float;
 	public var posY : Float;
+	public var dark : Sprite;
+	public var light : Shape;
+	public var light2 : Shape;
 	var roomIdX : Int;
 	var roomIdY : Int;
 	var nbRoomsX : Int;
@@ -49,6 +55,7 @@ class Level {
 		loadEntities(roomIdX, roomIdY);
 		Game.CUR.lm.getContainer().x = -posX;
 		Game.CUR.lm.getContainer().y = -posY;
+		renderLighting();
 	}
 	public function load() {
 		map = new TiledMap(new Floor0TMX().toString());
@@ -235,5 +242,29 @@ class Level {
 		if(getCollisionAt(x + e.cradius, y + e.cradius) != col) return false;
 		if(getCollisionAt(x - e.cradius, y + e.cradius) != col) return false;
 		return true;
+	}
+	public function renderLighting() {
+		dark = new Sprite();
+		dark.graphics.beginFill(0x0);
+		dark.graphics.drawRect(0, 0, Const.WID, Const.HEI);
+		dark.graphics.endFill();
+		dark.alpha = 1.;
+		dark.blendMode = BlendMode.LAYER;
+		Game.CUR.frontlm.addChild(dark, 0);
+		light = new Shape();
+		light2 = new Shape();
+		var g = light.graphics;
+		var g2 = light2.graphics;
+		g.beginFill(0xFFFFFF);
+		g2.beginFill(0xFFFFFF);
+		g.drawCircle(0, 0, 100);
+		g2.drawCircle(0, 0, 80);
+		g.endFill();
+		g2.endFill();
+		light.alpha = .4;
+		light2.alpha = .5;
+		light.blendMode = light2.blendMode = BlendMode.ERASE;
+		dark.addChild(light);
+		dark.addChild(light2);
 	}
 }
