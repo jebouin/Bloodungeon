@@ -62,6 +62,7 @@ class Main {
 		stage.addChild(stats);
 		initInput();
 		initGFX();
+		Audio.init();
 		SceneManager.init();
 		SceneManager.add(new Game());
 		stage.addEventListener(Event.ENTER_FRAME, update);

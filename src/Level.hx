@@ -262,7 +262,7 @@ class Level {
 		g.endFill();
 		g2.endFill();
 		light.alpha = .4;
-		light2.alpha = .5;
+		light2.alpha = .6;
 		light.blendMode = light2.blendMode = BlendMode.ERASE;
 		dark.addChild(light);
 		dark.addChild(light2);
