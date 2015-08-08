@@ -5,8 +5,8 @@ import haxe.Timer;
 import motion.Actuate;
 class Hero extends Entity {
 	public var hooverTimer : Int;
-	public var spawnX : Float;
-	public var spawnY : Float;
+	public static var spawnX : Float;
+	public static var spawnY : Float;
 	var prevRoomDir : Const.DIR;
 	public function new() {
 		super("heroIdle");
@@ -16,8 +16,6 @@ class Hero extends Entity {
 		Game.CUR.lm.addChild(this, Const.HERO_L);
 		maxSpeed = 2.3;
 		collides = true;
-		spawnX = 21 * 16 + 8;
-		spawnY = 34 * 16 + 8;
 		spawn();
 		hooverTimer = 0;
 		gravity = 0;
@@ -35,6 +33,7 @@ class Hero extends Entity {
 		parent.removeChild(this);
 		Game.CUR.lm.addChild(this, Const.HERO_L);
 		setLightPos(xx, yy);
+		update();
 		//set dir
 	}
 	override function delete() {
@@ -98,11 +97,11 @@ class Hero extends Entity {
 		var dy = horizontal?0:1;
 		var sx = tx, ex = tx;
 		var sy = ty, ey = ty;
-		while(Game.CUR.level.getCollision(sx, sy) == NONE) {
+		while(Game.CUR.level.getCollision(sx, sy) == NONE && tx - sx < 10 && ty - sy < 10) {
 			sx -= dx;
 			sy -= dy;
 		}
-		while(Game.CUR.level.getCollision(ex, ey) == NONE) {
+		while(Game.CUR.level.getCollision(ex, ey) == NONE && ex - tx < 10 && ey - ty < 10) {
 			ex += dx;
 			ey += dy;
 		}

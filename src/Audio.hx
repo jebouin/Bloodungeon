@@ -9,7 +9,7 @@ class Audio {
 	public static function init() {
 		var music = new Floor0Music();
 		mChan = music.play(0, 1<<30);
-		//mute();
+		mute();
 	}
 	public static function mute() {
 		mChan.soundTransform = new SoundTransform(0.);

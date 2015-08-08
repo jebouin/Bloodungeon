@@ -18,6 +18,7 @@ import flash.filters.GlowFilter;
 import flash.geom.Point;
 import Collision;
 @:file("res/floor0.tmx") class Floor0TMX extends ByteArray {}
+@:file("res/floor1.tmx") class Floor1TMX extends ByteArray {}
 class Level {
 	public static var ROOMID = 0;
 	public static var RWID : Int;
@@ -45,26 +46,39 @@ class Level {
 	public function new() {
 		RWID = Std.int(Const.WID / 16);
 		RHEI = Std.int(Const.HEI / 16);
-		load();
-		Game.CUR.lm.addChild(ground0Layer, Const.BACK_L);
-		Game.CUR.lm.addChild(ground1Layer, Const.BACK_L);
-		Game.CUR.lm.addChild(overLayer, Const.BACK_L);
-		Game.CUR.lm.addChild(wall0Layer, Const.BACK_L);
-		Game.CUR.lm.addChild(wall1Layer, Const.BACK_L);
-		setRoomId(1, 3);
+		renderLighting();
+		load(1);
 		loadEntities(roomIdX, roomIdY);
 		Game.CUR.lm.getContainer().x = -posX;
 		Game.CUR.lm.getContainer().y = -posY;
-		renderLighting();
 	}
-	public function load() {
-		map = new TiledMap(new Floor0TMX().toString());
+	public function load(floor:Int) {
+		if(map != null) {
+			ground0Layer.delete();
+			ground1Layer.delete();
+			overLayer.delete();
+			wall0Layer.delete();
+			wall1Layer.delete();
+		}
+		switch(floor) {
+			case 0:
+				map = new TiledMap(new Floor0TMX().toString());
+			case 1:
+				map = new TiledMap(new Floor1TMX().toString());
+			default:
+				return;
+		}
 		ground0Layer = map.getLayer("ground0");
 		ground1Layer = map.getLayer("ground1");
 		overLayer = map.getLayer("over");
 		wall0Layer = map.getLayer("wall0");
 		wall1Layer = map.getLayer("wall1");
 		activeGroup = map.getGroup("active");
+		Game.CUR.lm.addChild(ground0Layer, Const.BACK_L);
+		Game.CUR.lm.addChild(ground1Layer, Const.BACK_L);
+		Game.CUR.lm.addChild(overLayer, Const.BACK_L);
+		Game.CUR.lm.addChild(wall0Layer, Const.BACK_L);
+		Game.CUR.lm.addChild(wall1Layer, Const.BACK_L);
 		WID = map.wid;
 		HEI = map.hei;
 		nbRoomsX = Std.int(WID / (RWID - 1));
@@ -104,6 +118,18 @@ class Level {
 		bd.applyFilter(bd, bd.rect, new Point(0, 0), new DropShadowFilter(1., -90, 0xFF000000, 1., 1., 8., 1., 1, true));
 		bd.applyFilter(bd, bd.rect, new Point(0, 0), new DropShadowFilter(1., 45, 0xFF000000, .2, 1., 1., 1., 1, false));
 		bd.applyFilter(bd, bd.rect, new Point(0, 0), new DropShadowFilter(1., 135, 0xFF000000, .2, 1., 1., 1., 1, false));
+		switch(floor) {
+			case 0:
+				setRoomId(1, 3);
+				Hero.spawnX = 21 * 16 + 8;
+				Hero.spawnY = 34 * 16 + 8;
+				addLighting();
+			case 1:
+				setRoomId(2, 5);
+				Hero.spawnX = 35 * 16 + 8;
+				Hero.spawnY = 51 * 16 + 8;
+				removeLighting();
+		}
 	}
 	public function loadEntities(idx:Int, idy:Int) {
 		if(idx < 0 || idy < 0 || idx >= nbRoomsX || idy >= nbRoomsY) return false;
@@ -151,6 +177,9 @@ class Level {
 	public function reloadEntities() {
 		Game.CUR.clearEntities(true);
 		loadEntities(roomIdX, roomIdY);
+	}
+	public function nextFloor() {
+		
 	}
 	public function nextRoom(dir:Const.DIR) {
 		ROOMID++;
@@ -250,7 +279,6 @@ class Level {
 		dark.graphics.endFill();
 		dark.alpha = 1.;
 		dark.blendMode = BlendMode.LAYER;
-		Game.CUR.frontlm.addChild(dark, 0);
 		light = new Shape();
 		light2 = new Shape();
 		var g = light.graphics;
@@ -266,5 +294,13 @@ class Level {
 		light.blendMode = light2.blendMode = BlendMode.ERASE;
 		dark.addChild(light);
 		dark.addChild(light2);
+	}
+	public function addLighting() {
+		if(dark.parent != null) return;
+		Game.CUR.frontlm.addChild(dark, 0);
+	}
+	public function removeLighting() {
+		if(dark.parent == null) return;
+		dark.parent.removeChild(dark);
 	}
 }
