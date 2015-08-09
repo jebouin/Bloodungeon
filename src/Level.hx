@@ -30,6 +30,7 @@ class Level {
 	public var dark : Sprite;
 	public var light : Shape;
 	public var light2 : Shape;
+	var exitLight : Shape;
 	var roomIdX : Int;
 	var roomIdY : Int;
 	var nbRoomsX : Int;
@@ -44,11 +45,12 @@ class Level {
 	var wall1Layer : TiledLayer;
 	var activeGroup : TiledGroup;
 	var map : TiledMap;
+	var actionRects : Array<{x:Int, y:Int, wid:Int, hei:Int, f:String}>;
 	public function new() {
 		RWID = Std.int(Const.WID / 16);
 		RHEI = Std.int(Const.HEI / 16);
 		renderLighting();
-		load(1);
+		load(0);
 		loadEntities(roomIdX, roomIdY);
 		Game.CUR.lm.getContainer().x = -posX;
 		Game.CUR.lm.getContainer().y = -posY;
@@ -87,6 +89,7 @@ class Level {
 		tiles = [];
 		spikePos = [];
 		bowsPos = [];
+		actionRects = [];
 		for(j in 0...HEI) {
 			tiles[j] = [];
 			for(i in 0...WID) {
@@ -136,10 +139,11 @@ class Level {
 		bd.applyFilter(bd, bd.rect, new Point(0, 0), new DropShadowFilter(1., 135, 0xFF000000, .2, 1., 1., 1., 1, false));
 		switch(floor) {
 			case 0:
-				setRoomId(1, 3);
-				Hero.spawnX = 21 * 16 + 8;
+				setRoomId(2, 3);
+				Hero.spawnX = 31 * 16 + 8;
 				Hero.spawnY = 34 * 16 + 8;
 				addLighting();
+				addExitLight();
 			case 1:
 				/*setRoomId(2, 5);
 				Hero.spawnX = 35 * 16 + 8;
@@ -175,7 +179,7 @@ class Level {
 			var y = Std.parseFloat(o.properties.get("y"));
 			var wid = Std.parseFloat(o.properties.get("width"));
 			var hei = Std.parseFloat(o.properties.get("height"));
-			if(x > nextRoomX && y > nextRoomY && x < nextRoomX + Const.WID && y < nextRoomY + Const.HEI) {
+			if(x >= nextRoomX && y >= nextRoomY && x < nextRoomX + Const.WID && y < nextRoomY + Const.HEI) {
 				var tx = Std.int(x / 16);
 				var ty = Std.int(y / 16);
 				var e : Entity = null;
@@ -195,6 +199,9 @@ class Level {
 						var speed = Std.parseFloat(o.properties.get("speed"));
 						var initAngle = Std.parseFloat(o.properties.get("initAngle"));
 						e = new Spinner(x + 8., y + 8., initAngle, nbBranches, size, speed);
+					case "Action":
+						var f = o.properties.get("function");
+						actionRects.push({x:tx, y:ty, wid:Std.int(wid) >> 4, hei:Std.int(hei) >> 4, f:f});
 					default:
 						
 				}
@@ -307,6 +314,16 @@ class Level {
 	public function isInRoom(tx:Int, ty:Int, rx:Int, ry:Int) {
 		return (tx >= rx * (RWID - 1) && tx < (rx + 1) * (RWID - 1) && ty >= ry * (RHEI - 1) && ty < (ry + 1) * (RHEI - 1));
 	}
+	public function checkActions() {
+		var tx = Std.int(Game.CUR.hero.xx) >> 4;
+		var ty = Std.int(Game.CUR.hero.yy) >> 4;
+		for(r in actionRects) {
+			if(tx >= r.x && tx < r.x+r.wid && ty >= r.y && ty < r.y+r.hei) {
+				Action.closeExit();
+				actionRects.remove(r);
+			}
+		}
+	}
 	public function renderLighting() {
 		dark = new Sprite();
 		dark.graphics.beginFill(0x0);
@@ -329,6 +346,37 @@ class Level {
 		light.blendMode = light2.blendMode = BlendMode.ERASE;
 		dark.addChild(light);
 		dark.addChild(light2);
+		//exit light
+		exitLight = new Shape();
+		exitLight.blendMode = BlendMode.ERASE;
+		g = exitLight.graphics;
+		for(i in 0...10) {
+			var lwid = 24 + i * 10;
+			var lhei = 70 + i * 3;
+			g.beginFill(0xFFFFFF, .3);
+			g.drawRect(Const.WID - lwid, 5 * 16 - lhei * .5, lwid, lhei);
+			g.endFill();
+		}
+	}
+	public function replaceLittleLights() {
+		light.graphics.clear();
+		light2.graphics.clear();
+		light.graphics.beginFill(0xFFFFFF);
+		light2.graphics.beginFill(0xFFFFFF);
+		light.graphics.drawCircle(0, 0, 40);
+		light2.graphics.drawCircle(0, 0, 30);
+		light.graphics.endFill();
+		light2.graphics.endFill();
+		light.alpha = .2;
+		light2.alpha = .4;
+	}
+	public function addExitLight() {
+		if(exitLight.parent != null) return;
+		dark.addChild(exitLight);
+	}
+	public function removeExitLight() {
+		if(exitLight.parent == null) return;
+		dark.removeChild(exitLight);
 	}
 	public function addLighting() {
 		if(dark.parent != null) return;
