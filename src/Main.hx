@@ -47,6 +47,9 @@ class Main {
 		SpriteLib.addAnim("buttonOut", "button", "0", 1);
 		SpriteLib.addAnim("buttonPushed", "button", "1-3", 3);
 		SpriteLib.sliceBD("enemies", "door", 0, 107, 16, 27, 3, 1, 1);
+		SpriteLib.sliceBD("enemies", "spinnerBase", 0, 135, 20, 20, 1, 1, 1);
+		SpriteLib.addAnim("spinnerBase", "spinnerBase", "0", 1);
+		SpriteLib.sliceBD("enemies", "spinnerPart", 21, 135, 16, 16, 1, 1, 1);
 		font = new BitmapFont(new FontTinyBD(0, 0), 5, 5);
 	}
 	static function main() {

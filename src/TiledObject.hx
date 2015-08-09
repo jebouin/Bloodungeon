@@ -11,5 +11,14 @@ class TiledObject {
 				properties.set(p, xml.get(p));
 			}
 		}
+		for(c in xml.elements()) {
+			if(c.nodeName == "properties") {
+				for(e in c.elements()) {
+					if(e.nodeName == "property") {
+						properties.set(e.get("name"), e.get("value"));
+					}
+				}
+			}
+		}
 	}
 }

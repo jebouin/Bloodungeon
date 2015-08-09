@@ -47,7 +47,7 @@ class Level {
 		RWID = Std.int(Const.WID / 16);
 		RHEI = Std.int(Const.HEI / 16);
 		renderLighting();
-		load(1);
+		load(0);
 		loadEntities(roomIdX, roomIdY);
 		Game.CUR.lm.getContainer().x = -posX;
 		Game.CUR.lm.getContainer().y = -posY;
@@ -125,8 +125,11 @@ class Level {
 				Hero.spawnY = 34 * 16 + 8;
 				addLighting();
 			case 1:
-				setRoomId(2, 5);
+				/*setRoomId(2, 5);
 				Hero.spawnX = 35 * 16 + 8;
+				Hero.spawnY = 51 * 16 + 8;*/
+				setRoomId(0, 5);
+				Hero.spawnX = 11 * 16 + 8;
 				Hero.spawnY = 51 * 16 + 8;
 				removeLighting();
 		}
@@ -163,6 +166,12 @@ class Level {
 					case "Door":
 						var id = Std.parseInt(o.properties.get("id"));
 						e = new Door(this, tx, ty, Std.int(wid) >> 4, Std.int(hei) >> 4, id);
+					case "Spinner":
+						var nbBranches = Std.parseInt(o.properties.get("nb"));
+						var size = Std.parseInt(o.properties.get("size"));
+						var speed = Std.parseFloat(o.properties.get("speed"));
+						var initAngle = Std.parseFloat(o.properties.get("initAngle"));
+						e = new Spinner(x + 8., y + 8., initAngle, nbBranches, size, speed);
 					default:
 						
 				}
@@ -251,11 +260,11 @@ class Level {
 		var ty = Std.int(y) >> 4;
 		return getHeight(tx, ty);
 	}
-	public function tileCollides(x:Int, y:Int) {
-		return getCollision(x, y) == FULL;
+	public inline function tileCollides(x:Int, y:Int, ?holeCollides=false) {
+		return getCollision(x, y) == FULL || (holeCollides && getCollision(x, y) == HOLE);
 	}
-	public function pointCollides(x:Float, y:Float) {
-		return tileCollides(Std.int(x) >> 4, Std.int(y) >> 4);
+	public function pointCollides(x:Float, y:Float, ?holeCollides=false) {
+		return tileCollides(Std.int(x) >> 4, Std.int(y) >> 4, holeCollides);
 	}
 	public function entityCollides(e:Entity, x:Float, y:Float) {
 		//y -= 16 * getHeightAt(x, y);
