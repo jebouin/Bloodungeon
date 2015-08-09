@@ -36,6 +36,7 @@ class Level {
 	var nbRoomsY : Int;
 	var tiles : Array<Array<TILE_COLLISION_TYPE> >;
 	var spikePos : Array<{x:Int, y:Int}>;
+	var bowsPos : Array<{x:Int, y:Int, dir:Const.DIR}>;
 	var ground0Layer : TiledLayer;
 	var ground1Layer : TiledLayer;
 	var overLayer : TiledLayer;
@@ -47,7 +48,7 @@ class Level {
 		RWID = Std.int(Const.WID / 16);
 		RHEI = Std.int(Const.HEI / 16);
 		renderLighting();
-		load(0);
+		load(1);
 		loadEntities(roomIdX, roomIdY);
 		Game.CUR.lm.getContainer().x = -posX;
 		Game.CUR.lm.getContainer().y = -posY;
@@ -85,6 +86,7 @@ class Level {
 		nbRoomsY = Std.int(HEI / (RHEI - 1));
 		tiles = [];
 		spikePos = [];
+		bowsPos = [];
 		for(j in 0...HEI) {
 			tiles[j] = [];
 			for(i in 0...WID) {
@@ -107,9 +109,23 @@ class Level {
 					}
 				}
 				tiles[j][i] = col;
-				if(overTile == 16) {
-					overLayer.setTileAt(i, j, 0);
-					spikePos.push({x:i, y:j});
+				if(overTile & 15 == 0) {
+					if(overTile == 16) {
+						overLayer.setTileAt(i, j, 0);
+						spikePos.push({x:i, y:j});
+					} else if(overTile == 32) {
+						overLayer.setTileAt(i, j, 0);
+						bowsPos.push({x:i, y:j, dir:RIGHT});
+					}/* else if(overTile == 48) {
+						overLayer.setTileAt(i, j, 0);
+						bowsPos.push({x:i, y:j, dir:LEFT});
+					} else if(overTile == 64) {
+						overLayer.setTileAt(i, j, 0);
+						bowsPos.push({x:i, y:j, dir:DOWN});
+					} else if(overTile == 80) {
+						overLayer.setTileAt(i, j, 0);
+						bowsPos.push({x:i, y:j, dir:UP});
+					}*/
 				}
 			}
 		}
@@ -128,9 +144,9 @@ class Level {
 				/*setRoomId(2, 5);
 				Hero.spawnX = 35 * 16 + 8;
 				Hero.spawnY = 51 * 16 + 8;*/
-				setRoomId(0, 5);
-				Hero.spawnX = 11 * 16 + 8;
-				Hero.spawnY = 51 * 16 + 8;
+				setRoomId(0, 4);
+				Hero.spawnX = 12 * 16 + 8;
+				Hero.spawnY = 37 * 16 + 8;
 				removeLighting();
 		}
 	}
@@ -141,10 +157,17 @@ class Level {
 		for(pos in spikePos) {
 			var tx = pos.x;
 			var ty = pos.y;
-			if(tx >= idx * (RWID - 1) && tx < (idx + 1) * (RWID - 1) && ty >= idy * (RHEI - 1) && ty < (idy + 1) * (RHEI - 1)) {
+			if(isInRoom(tx, ty, idx, idy)) {
 				var s = new Spike(tx, ty);
 				s.roomId = ROOMID;
 				Game.CUR.addEntity(s);
+			}
+		}
+		for(pos in bowsPos) {
+			if(isInRoom(pos.x, pos.y, idx, idy)) {
+				var b = new Bow(pos.x, pos.y, pos.dir);
+				b.roomId = ROOMID;
+				Game.CUR.addEntity(b);
 			}
 		}
 		for(o in activeGroup.objects) {
@@ -280,6 +303,9 @@ class Level {
 		if(getCollisionAt(x + e.cradius, y + e.cradius) != col) return false;
 		if(getCollisionAt(x - e.cradius, y + e.cradius) != col) return false;
 		return true;
+	}
+	public function isInRoom(tx:Int, ty:Int, rx:Int, ry:Int) {
+		return (tx >= rx * (RWID - 1) && tx < (rx + 1) * (RWID - 1) && ty >= ry * (RHEI - 1) && ty < (ry + 1) * (RHEI - 1));
 	}
 	public function renderLighting() {
 		dark = new Sprite();

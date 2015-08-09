@@ -50,6 +50,14 @@ class Main {
 		SpriteLib.sliceBD("enemies", "spinnerBase", 0, 135, 20, 20, 1, 1, 1);
 		SpriteLib.addAnim("spinnerBase", "spinnerBase", "0", 1);
 		SpriteLib.sliceBD("enemies", "spinnerPart", 21, 135, 16, 16, 1, 1, 1);
+		SpriteLib.sliceBD("enemies", "bowSide", 15, 161, 13, 17, 1, 1, 1);
+		SpriteLib.addAnim("bowSideIdle", "bowSide", "0", 1);
+		/*SpriteLib.sliceBD("enemies", "bowFron", 15, 161, 13, 17, 1, 1, 1);
+		SpriteLib.addAnim("bowFrontIdle", "bowFront", "0", 1);*/
+		SpriteLib.sliceBD("enemies", "arrowSide", 0, 161, 14, 7, 1, 8, 1);
+		SpriteLib.addAnim("arrowSideFlying", "arrowSide", "0-3", 4);
+		SpriteLib.addAnim("arrowSideHit", "arrowSide", "3-7", 2);
+		SpriteLib.addAnim("arrowSideIdle", "arrowSide", "7", 1);
 		font = new BitmapFont(new FontTinyBD(0, 0), 5, 5);
 	}
 	static function main() {

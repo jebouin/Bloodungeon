@@ -47,6 +47,11 @@ class Entity extends XSprite {
 		}
 	}
 	override public function delete() {
+		if(shadow != null) {
+			if(shadow.parent != null) {
+				shadow.parent.removeChild(shadow);
+			}
+		}
 		super.delete();
 	}
 	public override function update() {
