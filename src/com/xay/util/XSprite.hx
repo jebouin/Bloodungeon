@@ -82,7 +82,7 @@ class XSprite extends Sprite {
 	public function setOrigin(xRatio:Float, yRatio:Float) {
 		originXRatio = xRatio;
 		originYRatio = yRatio;
-		bmp.x = -originXRatio*bmp.width;
-		bmp.y = -originYRatio*bmp.height;
+		bmp.x = -originXRatio * bmp.width;
+		bmp.y = -originYRatio * bmp.height;
 	}
 }

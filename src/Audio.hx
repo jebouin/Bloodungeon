@@ -24,6 +24,9 @@ class Music {
 	public function play(?pos=0) {
 		playing = true;
 		chan = sound.play(pos, 0);
+		if(Audio.muted) {
+			mute();
+		}
 	}
 	public function stop() {
 		if(!playing) return;
@@ -38,20 +41,23 @@ class Music {
 		}
 	}
 	public function mute() {
+		if(chan == null) return;
 		chan.soundTransform = new SoundTransform(0.);
 	}
 	public function unmute() {
+		if(chan == null) return;
 		chan.soundTransform = new SoundTransform(1.);
 	}
 }
 class Audio {
-	public static var musics : Array<Music>;
-	public static var playingMusic : Int;
+	public static var muted : Bool;
+	static var musics : Array<Music>;
+	static var playingMusic : Int;
 	public static function init() {
 		musics = [];
 		musics.push(new Music(new Floor0Music(), 22.80, 45.61));
 		musics.push(new Music(new Floor1Music(), 31.335, 93.91));
-		//mute();
+		mute();
 	}
 	public static function playMusic(id:Int) {
 		if(id >= 0 && id < 2) {
@@ -63,9 +69,15 @@ class Audio {
 		}
 	}
 	public static function mute() {
-		musics[playingMusic].mute();
+		muted = true;
+		for(m in musics) {
+			m.mute();
+		}
 	}
 	public static function unmute() {
-		musics[playingMusic].unmute();
+		muted = false;
+		for(m in musics) {
+			m.unmute();
+		}
 	}
 }

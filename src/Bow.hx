@@ -6,15 +6,17 @@ class Bow extends Enemy {
 	var vertical : Bool;
 	public function new(tx:Int, ty:Int, dir:Const.DIR) {
 		vertical = (dir == UP || dir == DOWN);
+		vertical = false;
 		super(vertical ? "bowFrontIdle" : "bowSideIdle", false);
 		this.xx = tx * 16 + 8;
 		this.yy = ty * 16 + 7;
 		this.dir = dir;
 		if(dir == LEFT) {
 			scaleX = -1;
+			yy += 1;
 		}
-		if(dir == UP) {
-			scaleY = -1;
+		if(dir == DOWN) {
+			xx -= 1;
 		}
 		ALL.push(this);
 	}

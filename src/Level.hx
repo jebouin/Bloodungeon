@@ -52,7 +52,7 @@ class Level {
 		RWID = Std.int(Const.WID / 16);
 		RHEI = Std.int(Const.HEI / 16);
 		renderLighting();
-		load(0);
+		load(1);
 		loadEntities(roomIdX, roomIdY);
 	}
 	public function update() {
@@ -127,16 +127,16 @@ class Level {
 					} else if(overTile == 32) {
 						overLayer.setTileAt(i, j, 0);
 						bowsPos.push({x:i, y:j, dir:RIGHT});
-					}/* else if(overTile == 48) {
+					} else if(overTile == 48) {
 						overLayer.setTileAt(i, j, 0);
 						bowsPos.push({x:i, y:j, dir:LEFT});
 					} else if(overTile == 64) {
 						overLayer.setTileAt(i, j, 0);
-						bowsPos.push({x:i, y:j, dir:DOWN});
+						bowsPos.push({x:i, y:j, dir:UP});
 					} else if(overTile == 80) {
 						overLayer.setTileAt(i, j, 0);
-						bowsPos.push({x:i, y:j, dir:UP});
-					}*/
+						bowsPos.push({x:i, y:j, dir:DOWN});
+					}
 				}
 				if(overTile == 88) {
 					overLayer.setTileAt(i, j, 0);
@@ -161,12 +161,12 @@ class Level {
 				addLighting();
 			case 1:
 				removeLighting();
-				setRoomId(2, 5);
+				/*setRoomId(2, 5);
 				Hero.spawnX = 35 * 16 + 8;
-				Hero.spawnY = 51 * 16 + 8;
-				/*setRoomId(0, 4);
+				Hero.spawnY = 51 * 16 + 8;*/
+				setRoomId(0, 4);
 				Hero.spawnX = 12 * 16 + 8;
-				Hero.spawnY = 37 * 16 + 8;*/
+				Hero.spawnY = 37 * 16 + 8;
 		}
 		Game.CUR.lm.getContainer().x = -posX;
 		Game.CUR.lm.getContainer().y = -posY;

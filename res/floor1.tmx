@@ -15,7 +15,7 @@
  </layer>
  <layer name="over" width="57" height="64" opacity="0.9">
   <data encoding="base64" compression="zlib">
-   eJzt1bkRwCAMBEBKcAnqv0qnDoVsPs/uDKl0FwCtAQAAAAAAAADQ60qenjm7mdUx3gZN7Ga8WB2AT8TqAFBQ/auq/9oKOtZy79ZXx390rJpxH58zM/NH7T/hzQEA4Bw3iP0HIQ==
+   eJzt1csNgCAQBUBKsARKsARLsP9qvHpzRflmJuFEsrx3AFICAAAAAAAAAFjbWWHmFlxv5oymVcf8NWjgbOrLvQPwi/ywv7cIMYijdwDCSv+q0n+tBx3Lco/WV8c1OpZqcR/vMyPza50/w5sDAMA8LuPeB+E=
   </data>
  </layer>
  <layer name="wall0" width="57" height="64">
