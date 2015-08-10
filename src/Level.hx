@@ -126,15 +126,19 @@ class Level {
 						spikePos.push({x:i, y:j});
 					} else if(overTile == 32) {
 						overLayer.setTileAt(i, j, 0);
+						setCollision(i, j, FULL);
 						bowsPos.push({x:i, y:j, dir:RIGHT});
 					} else if(overTile == 48) {
 						overLayer.setTileAt(i, j, 0);
+						setCollision(i, j, FULL);
 						bowsPos.push({x:i, y:j, dir:LEFT});
 					} else if(overTile == 64) {
 						overLayer.setTileAt(i, j, 0);
+						setCollision(i, j, FULL);
 						bowsPos.push({x:i, y:j, dir:UP});
 					} else if(overTile == 80) {
 						overLayer.setTileAt(i, j, 0);
+						setCollision(i, j, FULL);
 						bowsPos.push({x:i, y:j, dir:DOWN});
 					}
 				}

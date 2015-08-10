@@ -50,10 +50,12 @@ class Main {
 		SpriteLib.sliceBD("enemies", "spinnerBase", 0, 135, 20, 20, 1, 1, 1);
 		SpriteLib.addAnim("spinnerBase", "spinnerBase", "0", 1);
 		SpriteLib.sliceBD("enemies", "spinnerPart", 21, 135, 16, 16, 1, 1, 1);
-		SpriteLib.sliceBD("enemies", "bowSide", 15, 161, 13, 17, 1, 1, 1);
-		SpriteLib.addAnim("bowSideIdle", "bowSide", "0", 1);
-		/*SpriteLib.sliceBD("enemies", "bowFron", 15, 161, 13, 17, 1, 1, 1);
-		SpriteLib.addAnim("bowFrontIdle", "bowFront", "0", 1);*/
+		SpriteLib.sliceBD("enemies", "bowSide", 16, 161, 12, 17, 5, 1);
+		SpriteLib.sliceBD("enemies", "bowFront", 15, 183, 15, 14, 5, 1);
+		SpriteLib.sliceBD("enemies", "bowBack", 15, 197, 15, 12, 5, 1);
+		SpriteLib.addAnim("bowSideShoot", "bowSide", "0-4", 5);
+		SpriteLib.addAnim("bowFrontShoot", "bowFront", "0-4", 5);
+		SpriteLib.addAnim("bowBackShoot", "bowBack", "0-4", 5);
 		SpriteLib.sliceBD("enemies", "arrow", 0, 161, 14, 7, 1, 8, 1);
 		SpriteLib.addAnim("arrowFlying", "arrow", "0-3", 4);
 		SpriteLib.addAnim("arrowHit", "arrow", "3-7", 2);
