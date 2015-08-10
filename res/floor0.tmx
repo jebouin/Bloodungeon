@@ -10,25 +10,25 @@
  </layer>
  <layer name="ground1" width="43" height="56">
   <data encoding="base64" compression="zlib">
-   eJztl91ugzAMhf1qrB33sKn3lJV32VuvlrB65sWEglMyyZ8UlYZAThz/BKIgCIIgCIIgCIL/yXBv48J9694581wtjFS3zube+qNFrIR95Z1se/JaToXmtt7Lc75tmDfn93v4NPo7qi9uRCv7INqwpH22wnpY15X+aivpe56w7suG52RtjaMWC/QF1Kp9F/OBXGN+0PfbAlotP93ru8OKMWyjpf0479Tghewbx43sEe9FT/XUnlRco7aW1mvVuawEVr650HN2fUU9kBjRtdLSaq1tXDHmGVAPxjH3T7OuD1qOsTV1yqOWWXVHbOhJTXHJyP7o/C5nV93Yp1v1n5+b1LgSWGcv9PUe9PF4vTYZi+vwQMefpXWg37YbyT53Y4319MWOHvFHam6Me7SrrKfJ3Jd+DzBXpOyp59RaOuhL+fht/vU4u8hcOueLvb7oYVvrPHWldB6a4B0T7cfKdx1cp+wtdQF9AP1F54Aj85zUhdSavPyzJOgXNfOd+V8b+jvYswZ4gFp0DJb6ztoKxrnWKrm7FvCsovOz5K1aYJ2s6za33Jn+SHjfU7W3xtgSdO1lSpz1A19+AMuIXlg=
+   eJztl9tugzAMhv1qbB33sKn3lJV32VuvlrD6z4oD5EAzyZ+E2kJC/jg+lchxHMdxHMdxHOd/Mj2uOfLcenbZmNcKMx3T2T2u90parPXGxLlbZ1caXu8jsmbMdrk2tebzmm8J74/ZblyvVM1fxv2B6sWNtebeeXq/NX0r9b08j3XdAu84O25TYd3XhHmyt66gFgv0BdSqfRfzgXzH/KCf9xW0Wn6a67vTjjFso9h5XDI1lELOjeNGzojPQvJcC4TiGrX1tF9rTu7ei5VvrnTMrmf0URIjulZaWq29zTvGHAH1YBzz/WXV9UnxGNtTp0rUMqvuiA1L0lJcMnI+Or9L76ov9ule/eZ5ixpXA6sPQl8fQR+P13uTsbiPEuj4s7RO9Nd2M9l9N9bYkr440DP+SK2NcY92lf10G8/xfi6YK0L2DK2JYwe4F/Lx+/pZoneRtXTOF3t909O2Vj91o3AeWuAdC+Vj5bsBvofsLXUBfQD9ReeAV+Y5qQuhPaX06GeDftEyPxu/W0P/Dy5ZA0qAWnQM1vqflQrGudYqubsVsFfR+VnyViuwTtZ1X6+tnv6V8LmHam+LsSXo2svU6PWdsvwCQy5h0w==
   </data>
  </layer>
  <layer name="over" width="43" height="56">
   <data encoding="base64" compression="zlib">
-   eJzt10EKgCAQRmGvFtUJimgbUfc/QgkuJAq1zT/K+0DcPobByDm0blUHJHz1We+2LDU7Zvsf+4qasK+oCfsKvNvUAQCA5nTqgAL+O+h7j/v04pYcS7jncJ+qkAx+tuN9dnUIYJS1t3JQBxR4/sPEs7T+llvvi03qAAAAABS7ALY9Cc4=
+   eJzt10EKgCAQRmGvFtUJimgbUfc/QgouJAi1zT/K+0DcPobByDn0blcHZHz1We+2LDc7Zvsf+4qWsK9gB4D2HeoAAEB3BnVAhfAdDL2XP6O4pcQW7zXetyqkQJjt7M+pDgGMsvZWTuqACu9/mHSW1t9y632pRR0AAACAag8sjAnO
   </data>
  </layer>
  <layer name="wall0" width="43" height="56">
   <data encoding="base64" compression="zlib">
-   eJztmEFuAjEMRbPrBYb2AkAvMC3ddtdrVL3/HUqksWR9OY7HicMg5UsWIJL44XHshJTG6tJgo+XxO1lj/E7WGL+TNcbvZI3xO1lj/E7WGL+TNcbvkVgtnx/Jqp2jtfP2h8O881tYr77wpPM2/9M4/vduf9s8VO2Z92D1zCVWzhPNuiZ7TLl4XGusF/jsZfXoO9lYJY1mzTlLeS7FTdt3nHW522swK8V1T3wkVp5/X4Y1vL+Ns1rjiawen3n+CQz5F/je6rO036z+LLUea8Oa5F6APrnfJdVjTob+vLVUEu4tqS9pY7S4jGQl3/gsyIihtJ/oeUSxajFC5fGl/czzxtOjUFSziBHX/KnMp5hJ4/aeTyw6w3p7ap/2fHvmKem2vVLOaecKzMsSa45zBOte8fo2Oq4WIZ9WT3MOafX+ZTPPfULybzUpbu+V390Sb+leYBGxYg6XWGncI1lRrXHV6lBv1ht7/1bwh/M4X6kOUW3xSGLFniDFWGKx3r96x5Wrlg8W8f0QyZrXtvRAa69sYS2de7EW187jpRyW1mth9VrtbqKdVT3mlaWv0Jm5l0+v8Lys5f6ajsHK70jaPuX5MFrIWquvR2Kt6RlYqQ8+AyvpCKzaPZiE/6OMltYXSr3vKKwj+s8/Fc5d/w==
+   eJztmlFuwjAMhv22C7DtAtBdgA1eeeMa0144Qo8/ItWa+ec4jtu0ReovWVBI469uascConl1GOyzwvicuZV8dne7DWapH2xPy7L2zvHpepZmrdHGWtbG2kYbaxttrG20sbbRxtpGz876XjhekjXZqzBk38P3B2E1e3Tcq0fPl6axynnZT+3awfm+nOO/7/ZD+h77Q5m7g+OxrJFzz8NrYuYeZgpWq884kj+mUrLH4mcIWXnumzgeE9eILvR4/afhFVk1Re9jVGnN7u72Ro9r4ER/fW0vvpNjJCvPYUnOFdGF6uOjscr1V+rbkzzXpkn67MFu9BjfHGvEJ+b0ZMi/o/953eMT712tP09ex9xwJL2GoE/pF68Pa5c09DflM8jx0axzjLHiMicr+8Z7gbU492zvaNo8jKxWjFBpfO55Zs6aum+JcxYz4pzXwvkcM21c7f7Eoz3MV5P7rPvboq5xXeU1V7OvyLGmOM9dgzXJ/FYT12htrRXyWfk0rSEr378MFukBrLxeMi2mpT3a2NocEbOe4fMcK49bkhU1Nq5WHpqa9STeY6/O/vA8yZfLQ/ybSkQaK9YELcYaizdPTh1XKU8vVJJ8Hlqyprk9NdBbK8ew5va9mItL+/HcGtbmG8MatVJvYu1VIxaVp67wnnkqn1Hhftla+0daB6vskXKs8rfqNbBa+VX+B2ANrCU9AyvXwWdgZa2B1eqDWbIfXprVW/vWwjpH/fkFn+tsnw==
   </data>
  </layer>
  <layer name="wall1" width="43" height="56">
   <data encoding="base64" compression="zlib">
-   eJzt2NEKgCAMhWEvtCeo93/V8EIKTWZD2aL/g901OUVsYAgAAAAA/m5T9kVlf5QfWUL7ngCAS56l6VZaM3eB5/nuJZuXHD0r8s0+c9U3/EpOvLNbBxD08j39P2XuF6mqGNrdMFq59xAKAABLVndYtbKjpTxe8gIAWifQ6AG6
+   eJzt2E0KgCAQhmEX1QnqRtE9ovvfoVwMSD9MmjoG7wOzSu0rSi3n6hsi23dFUgAAAAAQsXt0IXv11P53Y4UG5XisLznXozalzXzU8uEcNflrWa1DJOD7ELDn59I+qFQ53+cc61AprWRrJceTEvlyj1nqHv4lJ+KM1gEUT/nunh+Z90V/qs5d14a35ftOSgEAYKmV/xCyRmt5WskLALjaAWODA+Q=
   </data>
  </layer>
- <objectgroup name="active" width="43" height="56">
+ <objectgroup name="active" width="43" height="56" visible="0">
   <object type="Button" x="272" y="800" width="16" height="32">
    <properties>
     <property name="id" value="0"/>

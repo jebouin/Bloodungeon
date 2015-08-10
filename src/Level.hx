@@ -151,12 +151,12 @@ class Level {
 		bd.applyFilter(bd, bd.rect, new Point(0, 0), new DropShadowFilter(1., 135, 0xFF000000, .2, 1., 1., 1., 1, false));
 		switch(floor) {
 			case 0:
-				setRoomId(2, 3);
+				/*setRoomId(2, 3);
 				Hero.spawnX = 31 * 16 + 8;
-				Hero.spawnY = 34 * 16 + 8;
-				/*setRoomId(1, 5);
+				Hero.spawnY = 34 * 16 + 8;*/
+				setRoomId(1, 5);
 				Hero.spawnX = 21 * 16 + 8;
-				Hero.spawnY = 52 * 16 + 8;*/
+				Hero.spawnY = 52 * 16 + 8;
 				addLighting();
 			case 1:
 				removeLighting();
