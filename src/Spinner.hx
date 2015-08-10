@@ -34,7 +34,6 @@ class Spinner extends Enemy {
 			partCont.addChild(p);
 		}
 		addChild(partCont);
-		updatePos();
 	}
 	function updatePos() {
 		for(b in 0...nbBranches) {

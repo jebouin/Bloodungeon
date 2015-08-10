@@ -61,6 +61,11 @@ class Anim {
 	public function getFrame() {
 		return Std.int(frame);
 	}
+	public function setFrame(n:Int) {
+		if(n >= 0 && n < frames.length) {
+			frame = n;
+		}
+	}
 	public function getSliceName() {
 		return sliceName;
 	}

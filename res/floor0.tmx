@@ -15,12 +15,12 @@
  </layer>
  <layer name="over" width="43" height="56">
   <data encoding="base64" compression="zlib">
-   eJzt1zEKgDAMQFGvJuoJFHcRvf8RtNBBnOyUIO9ByfrpkNKuAwAAIKMtOgCA3+mjAxqUd7D0HvcZglu+WOtc6jyjQj4odzvdZ48OgaSy7coxOqDB+w/zvMvsuzx739McHQAAQLML4gYGBg==
+   eJzt10EKgCAQRmGvFtUJimgbUfc/QgkuJAq1zT/K+0DcPobByDm0blUHJHz1We+2LDU7Zvsf+4qasK+oCfsKvNvUAQCA5nTqgAL+O+h7j/v04pYcS7jncJ+qkAx+tuN9dnUIYJS1t3JQBxR4/sPEs7T+llvvi03qAAAAABS7ALY9Cc4=
   </data>
  </layer>
  <layer name="wall0" width="43" height="56">
   <data encoding="base64" compression="zlib">
-   eJztmF9OBDEIxvvmBUa9wKoXGF1fffMaxvvfwW0yJOQLUIb+sU32S4hrLMNvGQqtKY3VS4WNViTuDKwWg3ddT63K2tOnhe6sfbRqva7E2tOnhe6sfbRqva7E2tOnhVZktc6ms51fI6zZ3gMW9a9hfY2lJ10O/w/n+p+b/R5+KI0Vf69hjfgSK/Ykrtase/LnlIvntcSK/TXKGtFX8rFKGs2aa5bqXMqbte8463azp86slNcz+ZFYef19Op4R/W6c1ZtPZI3EzP6PYMi/wd+9MbX95o3n6fXYG/YkzwKMyeNuqZxzMowX7aWScG9Jc8laY+VlJCvFxndBRgzafqL30YvVyhEqr9f2M6+byIxCUc8iRnzmd8GfciatO3s+8egCzzvT+6z327JOSdfjJ9Wcda7AutRYc557sJ4V72+j8+oR8ln9NNeQ1e8fDovcJ6T4XpPy9lb43jX5lu4FHhEr1rDGSuv+kxVVm1erD7VmvbLPz0o89ON8Wh+i3hKRxIozQcqxxOK9f7XOK1epHjzi+6Ena362ZwZ6Z2UNq3buxV5cOo9rNSw9r4Y1aqW7iXVWjVhUnrlCZ+ZWMaPC87JV+3uag5Xfkax9yuthtJC11F9nYi1pBVaagyuwkmZgte7BJPw/ymhZc0GbfbOwjpg/fxUwYlU=
+   eJztmEFuAjEMRbPrBYb2AkAvMC3ddtdrVL3/HUqksWR9OY7HicMg5UsWIJL44XHshJTG6tJgo+XxO1lj/E7WGL+TNcbvZI3xO1lj/E7WGL+TNcbvkVgtnx/Jqp2jtfP2h8O881tYr77wpPM2/9M4/vduf9s8VO2Z92D1zCVWzhPNuiZ7TLl4XGusF/jsZfXoO9lYJY1mzTlLeS7FTdt3nHW522swK8V1T3wkVp5/X4Y1vL+Ns1rjiawen3n+CQz5F/je6rO036z+LLUea8Oa5F6APrnfJdVjTob+vLVUEu4tqS9pY7S4jGQl3/gsyIihtJ/oeUSxajFC5fGl/czzxtOjUFSziBHX/KnMp5hJ4/aeTyw6w3p7ap/2fHvmKem2vVLOaecKzMsSa45zBOte8fo2Oq4WIZ9WT3MOafX+ZTPPfULybzUpbu+V390Sb+leYBGxYg6XWGncI1lRrXHV6lBv1ht7/1bwh/M4X6kOUW3xSGLFniDFWGKx3r96x5Wrlg8W8f0QyZrXtvRAa69sYS2de7EW187jpRyW1mth9VrtbqKdVT3mlaWv0Jm5l0+v8Lys5f6ajsHK70jaPuX5MFrIWquvR2Kt6RlYqQ8+AyvpCKzaPZiE/6OMltYXSr3vKKwj+s8/Fc5d/w==
   </data>
  </layer>
  <layer name="wall1" width="43" height="56">
@@ -49,9 +49,9 @@
     <property name="id" value="1"/>
    </properties>
   </object>
-  <object type="Door" x="544" y="320" width="48" height="16">
+  <object type="Action" x="608" y="480" width="16" height="80">
    <properties>
-    <property name="id" value="0"/>
+    <property name="function" value="blockExit"/>
    </properties>
   </object>
   <object type="Door" x="544" y="304" width="48" height="16">
@@ -59,9 +59,14 @@
     <property name="id" value="1"/>
    </properties>
   </object>
-  <object type="Action" x="608" y="480" width="16" height="80">
+  <object type="Door" x="544" y="320" width="48" height="16">
    <properties>
-    <property name="function" value="blockExit"/>
+    <property name="id" value="0"/>
+   </properties>
+  </object>
+  <object type="Action" x="560" y="80" width="16" height="16">
+   <properties>
+    <property name="function" value="exitFloor0"/>
    </properties>
   </object>
  </objectgroup>

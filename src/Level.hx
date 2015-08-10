@@ -25,6 +25,7 @@ class Level {
 	public static var RHEI : Int;
 	public static var WID : Int;
 	public static var HEI : Int;
+	public var floor : Int;
 	public var posX : Float;
 	public var posY : Float;
 	public var dark : Sprite;
@@ -38,6 +39,7 @@ class Level {
 	var tiles : Array<Array<TILE_COLLISION_TYPE> >;
 	var spikePos : Array<{x:Int, y:Int}>;
 	var bowsPos : Array<{x:Int, y:Int, dir:Const.DIR}>;
+	var torches : Array<Torch>;
 	var ground0Layer : TiledLayer;
 	var ground1Layer : TiledLayer;
 	var overLayer : TiledLayer;
@@ -52,10 +54,13 @@ class Level {
 		renderLighting();
 		load(0);
 		loadEntities(roomIdX, roomIdY);
-		Game.CUR.lm.getContainer().x = -posX;
-		Game.CUR.lm.getContainer().y = -posY;
+	}
+	public function update() {
+		Bow.updateAll();
+		Torch.updateAll();
 	}
 	public function load(floor:Int) {
+		this.floor = floor;
 		if(map != null) {
 			ground0Layer.delete();
 			ground1Layer.delete();
@@ -89,6 +94,7 @@ class Level {
 		tiles = [];
 		spikePos = [];
 		bowsPos = [];
+		torches = [];
 		actionRects = [];
 		for(j in 0...HEI) {
 			tiles[j] = [];
@@ -97,7 +103,8 @@ class Level {
 				var ground0TileCol = Collision.TILE_COLLISIONS[ground0Tile];
 				var overTile = overLayer.getTileAt(i, j);
 				var overTileCol = Collision.TILE_COLLISIONS[overTile];
-				var wall0TileCol = Collision.TILE_COLLISIONS[wall0Layer.getTileAt(i, j)];
+				var wall0Tile = wall0Layer.getTileAt(i, j);
+				var wall0TileCol = Collision.TILE_COLLISIONS[wall0Tile];
 				var wall1TileCol = Collision.TILE_COLLISIONS[wall1Layer.getTileAt(i, j)];
 				var col = NONE;
 				if(ground0Tile == 0) {
@@ -130,9 +137,14 @@ class Level {
 						bowsPos.push({x:i, y:j, dir:UP});
 					}*/
 				}
+				if(overTile == 88) {
+					overLayer.setTileAt(i, j, 0);
+					setCollision(i, j, FULL);
+					torches.push(new Torch(i, j));					
+				}
 			}
 		}
-		overLayer.render(); //cleans spikes on tiles
+		overLayer.render(); //cleans spikes and torches on tiles
 		var bd = wall0Layer.bmp.bitmapData;
 		bd.applyFilter(bd, bd.rect, new Point(0, 0), new DropShadowFilter(1., -90, 0xFF000000, 1., 1., 8., 1., 1, true));
 		bd.applyFilter(bd, bd.rect, new Point(0, 0), new DropShadowFilter(1., 45, 0xFF000000, .2, 1., 1., 1., 1, false));
@@ -142,17 +154,21 @@ class Level {
 				setRoomId(2, 3);
 				Hero.spawnX = 31 * 16 + 8;
 				Hero.spawnY = 34 * 16 + 8;
+				/*setRoomId(1, 5);
+				Hero.spawnX = 21 * 16 + 8;
+				Hero.spawnY = 52 * 16 + 8;*/
 				addLighting();
-				addExitLight();
 			case 1:
-				/*setRoomId(2, 5);
-				Hero.spawnX = 35 * 16 + 8;
-				Hero.spawnY = 51 * 16 + 8;*/
-				setRoomId(0, 4);
-				Hero.spawnX = 12 * 16 + 8;
-				Hero.spawnY = 37 * 16 + 8;
 				removeLighting();
+				setRoomId(2, 5);
+				Hero.spawnX = 35 * 16 + 8;
+				Hero.spawnY = 51 * 16 + 8;
+				/*setRoomId(0, 4);
+				Hero.spawnX = 12 * 16 + 8;
+				Hero.spawnY = 37 * 16 + 8;*/
 		}
+		Game.CUR.lm.getContainer().x = -posX;
+		Game.CUR.lm.getContainer().y = -posY;
 	}
 	public function loadEntities(idx:Int, idy:Int) {
 		if(idx < 0 || idy < 0 || idx >= nbRoomsX || idy >= nbRoomsY) return false;
@@ -208,6 +224,7 @@ class Level {
 				if(e != null) {
 					e.roomId = ROOMID;
 					Game.CUR.addEntity(e);
+					e.update();
 				}
 			}
 		}
@@ -218,7 +235,14 @@ class Level {
 		loadEntities(roomIdX, roomIdY);
 	}
 	public function nextFloor() {
-		
+		for(t in torches) {
+			t.delete();
+		}
+		torches = [];
+		Game.CUR.clearEntities(true);
+		load(floor + 1);
+		loadEntities(roomIdX, roomIdY);
+		Game.CUR.hero.spawn();
 	}
 	public function nextRoom(dir:Const.DIR) {
 		ROOMID++;
@@ -262,6 +286,9 @@ class Level {
 		roomIdY = idy;
 		posX = idx * (RWID - 1) * 16;
 		posY = idy * (RHEI - 1) * 16;
+		if(floor == 0 && idx == 2 && idy == 3) {
+			addExitLight();
+		}
 	}
 	public inline function isOnMap(x:Int, y:Int) {
 		return x >= 0 && y >= 0 && x < WID && y < HEI;
@@ -319,7 +346,14 @@ class Level {
 		var ty = Std.int(Game.CUR.hero.yy) >> 4;
 		for(r in actionRects) {
 			if(tx >= r.x && tx < r.x+r.wid && ty >= r.y && ty < r.y+r.hei) {
-				Action.closeExit();
+				switch(r.f) {
+					case "blockExit":
+						Action.closeExit();
+					case "exitFloor0":
+						Action.exitFloor0();
+					default:
+						trace("Unknown action");
+				}
 				actionRects.remove(r);
 			}
 		}
@@ -353,10 +387,11 @@ class Level {
 		for(i in 0...10) {
 			var lwid = 24 + i * 10;
 			var lhei = 70 + i * 3;
-			g.beginFill(0xFFFFFF, .3);
+			g.beginFill(0xFFFFFF, i == 0 ? .4 : .1);
 			g.drawRect(Const.WID - lwid, 5 * 16 - lhei * .5, lwid, lhei);
 			g.endFill();
 		}
+		Torch.dark = dark;
 	}
 	public function replaceLittleLights() {
 		light.graphics.clear();

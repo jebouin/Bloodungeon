@@ -16,7 +16,6 @@ class Thwomp extends Enemy {
 		friction = 0;
 		this.maxSpeed = 6.;
 		charging = false;
-		update();
 	}
 	override public function update() {
 		if(charging) {

@@ -30,14 +30,16 @@ class Button extends Entity {
 	override public function update() {
 		super.update();
 		var hero = Game.CUR.hero;
-		var htx = Std.int(hero.xx) >> 4;
-		var hty = Std.int(hero.yy) >> 4;
-		if(!pushed) {
-			if(hty == ty || hty == ty + 1) {
-				if(facesRight && hero.vx < 0 && htx == tx) {
-					push();
-				} else if(!facesRight && hero.vx > 0 && htx == tx - 1) {
-					push();
+		if(hero != null) {
+			var htx = Std.int(hero.xx) >> 4;
+			var hty = Std.int(hero.yy) >> 4;
+			if(!pushed) {
+				if(hty == ty || hty == ty + 1) {
+					if(facesRight && hero.vx < 0 && htx == tx) {
+						push();
+					} else if(!facesRight && hero.vx > 0 && htx == tx - 1) {
+						push();
+					}
 				}
 			}
 		}

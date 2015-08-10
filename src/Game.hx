@@ -36,7 +36,7 @@ class Game extends Scene {
 	}
 	override public function update() {
 		super.update();
-		Bow.updateAll();
+		level.update();
 		for(e in entities) {
 			e.update();
 			if(e.deleted) {

@@ -58,6 +58,8 @@ class Main {
 		SpriteLib.addAnim("arrowSideFlying", "arrowSide", "0-3", 4);
 		SpriteLib.addAnim("arrowSideHit", "arrowSide", "3-7", 2);
 		SpriteLib.addAnim("arrowSideIdle", "arrowSide", "7", 1);
+		SpriteLib.sliceBD("enemies", "fire", 0, 229, 14, 20, 5, 1);
+		SpriteLib.addAnim("fire", "fire", "0-4", 3);
 		font = new BitmapFont(new FontTinyBD(0, 0), 5, 5);
 	}
 	static function main() {
