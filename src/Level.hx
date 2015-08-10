@@ -60,6 +60,7 @@ class Level {
 		Torch.updateAll();
 	}
 	public function load(floor:Int) {
+		Audio.playMusic(floor);
 		this.floor = floor;
 		if(map != null) {
 			ground0Layer.delete();
