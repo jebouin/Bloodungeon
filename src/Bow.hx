@@ -23,6 +23,7 @@ class Bow extends Enemy {
 		}
 		anim.setFrame(4);
 		ALL.push(this);
+		update();
 	}
 	override public function delete() {
 		super.delete();

@@ -5,7 +5,7 @@
  </tileset>
  <layer name="ground0" width="57" height="64">
   <data encoding="base64" compression="zlib">
-   eJzt0TEOxCAMBVFa7n/htCgCAgpgfzOWptiQlfxITillIiIiIiKSbGasd8VIRCd7T+t5eabWjFHVepvReheca3xfY73rLqP1fr2dMY5by3Nr2987wahtHDVg9F05tWe1c7UwYlQJI0aVbjBSrEbGekei6KXN73sIoz/jzCgbb/iOJ/7jxdibSMaV99K6Iy9e6n9H651OGqN4Mdrvt8rY+h3FOONXr+aJZCwnqjFaD0x2dmk=
+   eJzt0UEOgCAQBEGu/P/DXolBhIAOs/QmfVA02dKcUspERERERGTZyKh3xUhEf3afp/vlmVsjRlfraUb1LjjX+N5GvetXRvV+rZ0x9lvLc7Vt9ptg9Db2GjDuXTm1e7VztzBidAkjRpdOMFKseka9I1H00sfP7xDG/Ywj42w84T/OvNMapWt2X3fjyu+yu5fa/1G905/GKF6M+v1WGZ+uoxhH/O7VPJGM5UQ1RusC3yh16w==
   </data>
  </layer>
  <layer name="ground1" width="57" height="64" visible="0">
@@ -48,10 +48,10 @@
     <property name="speed" value="2.4"/>
    </properties>
   </object>
-  <object type="Spinner" x="112" y="784" width="16" height="16">
+  <object type="Spinner" x="112" y="800" width="16" height="16">
    <properties>
-    <property name="initAngle" value="0"/>
-    <property name="nb" value="3"/>
+    <property name="initAngle" value="-90"/>
+    <property name="nb" value="1"/>
     <property name="size" value="5"/>
     <property name="speed" value=".6"/>
    </properties>

@@ -36,18 +36,22 @@ class Game extends Scene {
 	}
 	override public function update() {
 		super.update();
-		level.update();
-		var toDelete = [];
-		for(e in entities) {
-			e.update();
-			if(e.deleted) {
-				toDelete.push(e);
+		if(locked) {
+			hero.update();
+		} else {
+			level.update();
+			var toDelete = [];
+			for(e in entities) {
+				e.update();
+				if(e.deleted) {
+					toDelete.push(e);
+				}
 			}
+			for(e in toDelete) {
+				entities.remove(e);
+			}
+			level.checkActions();
 		}
-		for(e in toDelete) {
-			entities.remove(e);
-		}
-		level.checkActions();
 	}
 	public function addEntity(e:Entity) {
 		entities.push(e);
@@ -85,6 +89,7 @@ class Game extends Scene {
 		}
 	}
 	public function onRespawn() {
+		Enemy.fade = false;
 		level.reloadEntities();
 	}
 }

@@ -52,7 +52,7 @@ class Level {
 		RWID = Std.int(Const.WID / 16);
 		RHEI = Std.int(Const.HEI / 16);
 		renderLighting();
-		load(0);
+		load(1);
 		loadEntities(roomIdX, roomIdY);
 	}
 	public function update() {
@@ -165,12 +165,12 @@ class Level {
 				addLighting();
 			case 1:
 				removeLighting();
-				setRoomId(2, 5);
+				/*setRoomId(2, 5);
 				Hero.spawnX = 35 * 16 + 8;
-				Hero.spawnY = 51 * 16 + 8;
-				/*setRoomId(0, 1);
-				Hero.spawnX = 6 * 16 + 8;
-				Hero.spawnY = 18 * 16;*/
+				Hero.spawnY = 51 * 16 + 8;*/
+				setRoomId(1, 6);
+				Hero.spawnX = 16 * 16 + 8;
+				Hero.spawnY = 58 * 16;
 				/*setRoomId(1, 6);
 				Hero.spawnX = 27 * 16 + 8;
 				Hero.spawnY = 56 * 16 + 8;*/
@@ -255,6 +255,7 @@ class Level {
 	}
 	public function nextRoom(dir:Const.DIR) {
 		ROOMID++;
+		Enemy.fade = true;
 		var dx = (dir == RIGHT ? 1 : (dir == LEFT ? -1 : 0));
 		var dy = (dir == DOWN ? 1 : (dir == UP ? -1 : 0));
 		Game.CUR.hero.computeSpawnPos(dir == UP || dir == DOWN);

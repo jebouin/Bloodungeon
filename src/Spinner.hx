@@ -68,7 +68,7 @@ class Spinner extends Enemy {
 		if(hero == null) return false;
 		var dx = xx - hero.xx;
 		var dy = yy - hero.yy;
-		var r = 18 + size*16 + hero.cradius;
+		var r = 14 + size*16;
 		var distSq = dx*dx + dy*dy;
 		if(distSq > r * r) {
 			//trace(Std.random(100));
@@ -83,7 +83,7 @@ class Spinner extends Enemy {
 			var py = p.y + Math.sin(pa) * 16 + Math.cos(pa) * 8;
 			var dx = xx + px - hero.xx;
 			var dy = yy + py - hero.yy;
-			var r = hero.cradius + 4;
+			var r = 8;
 			/*var s = new Shape();
 			s.graphics.beginFill(0xFF0000);
 			s.graphics.drawCircle(0, 0, 2);
