@@ -52,7 +52,7 @@ class Level {
 		RWID = Std.int(Const.WID / 16);
 		RHEI = Std.int(Const.HEI / 16);
 		renderLighting();
-		load(1);
+		load(0);
 		loadEntities(roomIdX, roomIdY);
 	}
 	public function update() {
@@ -165,12 +165,12 @@ class Level {
 				addLighting();
 			case 1:
 				removeLighting();
-				/*setRoomId(2, 5);
+				setRoomId(2, 5);
 				Hero.spawnX = 35 * 16 + 8;
-				Hero.spawnY = 51 * 16 + 8;*/
-				setRoomId(0, 1);
+				Hero.spawnY = 51 * 16 + 8;
+				/*setRoomId(0, 1);
 				Hero.spawnX = 6 * 16 + 8;
-				Hero.spawnY = 18 * 16;
+				Hero.spawnY = 18 * 16;*/
 				/*setRoomId(1, 6);
 				Hero.spawnX = 27 * 16 + 8;
 				Hero.spawnY = 56 * 16 + 8;*/
@@ -264,13 +264,17 @@ class Level {
 		Game.CUR.lock();
 		Game.CUR.moveCameraTo(posX, posY, .5, function() {
 			Game.CUR.unlock();
+			var toDelete = [];
 			for(e in Game.CUR.entities) {
 				if(e != Game.CUR.hero && e.roomId != -1) {
 					if(e.roomId != ROOMID) {
-						e.delete();
-						Game.CUR.entities.remove(e);
+						toDelete.push(e);
 					}
 				}
+			}
+			for(e in toDelete) {
+				e.delete();
+				Game.CUR.entities.remove(e);
 			}
 		});
 		return true;
@@ -353,6 +357,7 @@ class Level {
 	public function checkActions() {
 		var tx = Std.int(Game.CUR.hero.xx) >> 4;
 		var ty = Std.int(Game.CUR.hero.yy) >> 4;
+		var toDelete = [];
 		for(r in actionRects) {
 			if(tx >= r.x && tx < r.x+r.wid && ty >= r.y && ty < r.y+r.hei) {
 				switch(r.f) {
@@ -363,8 +368,11 @@ class Level {
 					default:
 						trace("Unknown action");
 				}
-				actionRects.remove(r);
+				toDelete.push(r);
 			}
+		}
+		for(r in toDelete) {
+			actionRects.remove(r);
 		}
 	}
 	public function renderLighting() {

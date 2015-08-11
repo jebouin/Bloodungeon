@@ -15,12 +15,12 @@
  </layer>
  <layer name="over" width="57" height="64" opacity="0.48">
   <data encoding="base64" compression="zlib">
-   eJzt2M0NgCAMhmFGYISO4AiO4P7TeOHghQSa2B/6PkkPHMR+idiE1gAAADDzjJqtgUz6qJNVyIi47lGra8TBfIeFlRklBn1oidOzlsS7AQAuLu8GDGTMKN4NGBDvBgLK+K3uqpARqKgv1s4+0VTIGM1sZtztnHvG3bnI/Z2/Cme4QsaTaWeVdq55IKOu72h5yXhGRi2L8/jdc2X/v96f4Z8DAACAPF6uIA2x
+   eJzt2N0JhTAMhuGO4AgZwRE6gvtP440XB1FsAyc/zftAQUHbfGANtDUAAAB8Oa7xdg9ksF1jZRUyIod+u+6PTyEK+josjPQoMahDS5zetSTeBQBwsXsXYCBjRvEuwIB4FxBQxm91VoWMQEXb4JiZJ5oKGaN56xm9rXPeONsXOb/zV2EPV8i4Mm2v0vY1D2TU1R0tLxnXyKhlsR9/5xyZ/1/rZ/jnAAAAII8TdU8M8Q==
   </data>
  </layer>
  <layer name="wall0" width="57" height="64">
   <data encoding="base64" compression="zlib">
-   eJztlkEOwyAMBPlQ/v+93lGI7bED2QISh6oMnk0IcLXWrg06aUqckivllFwpp+RKOSVXyim5Uk7JlXJKrpTbpWefRz/GYkibsVYzfv08s7kK72jN2ZzS3kE5JVfKKblSTsmVcm/UtM6Q6noW5znvvOfr6nM+ewe4ez4zOdpORpudzXm+ldF4WlOFU3KlnKprdE+nNWdzhN0pY4T/yln+j3eAXfYcyim5Uk7JlXJKrpRTcqWckivllFwpF2VX3wGyd4cZraJexPtkfKdV3Dm9d9e7sVHXO976FlQzWjV6LjKHZ994+j+bMcvtkPFpDFmrHrbalXJvZKTdcqLrMDPH6veYzUg9T8Zn1nLyrOl+rqf5qOfqjDu8x1HGO4Z6UjZTz5tx9XvM1FNaq7N71nOle1X26mdUucYth5MxPi7iFXWx3KzfX8nY/66oNarn5U7GWE1vRrpWR/NG62Ua/R5H83jreOtXtFUZT2/tB79HwTA=
+   eJztlkEShCAMBPmQ///e3ikxSSeCs0AVB0ua9CgKV2vt2qCTpsQpuVJOyZVySq6UU3KlnJIr5ZRcKafkSrldetXz6MeOWNJmrNWMXz/PbK7CO1pzNqf076CckivllFwpp+RKuYqa1h7yhb0j6hgd94VOn89MjraT0WZnc55vZjSe1lThlFwpp+pK94BozdkcYXfKGOG/spf/4xlgl38O5ZRcKafkSjklV8opuVJOyZVySq6Ui7KrzwDZs8OMVlEv4n0yvtMqzpzes+vd2KjrHW99C6oZrRo9F5nD8994up/NmOV2yPg0hqxVD1vtSrk3MtJuOdF1mJlj9XvMZqSeJ+Mzazl51nQ/19N81HN1xh3e4yjjHUM9KZup5824+j1m6imt1dk967nSvSp79TOqXOOWw8kYHxfxirpYbtb1VzL21xW1RvW83MkYq+nNSNfqaN5ovUyj3+NoHm8db/2Ktirj6a39APuiweQ=
   </data>
  </layer>
  <layer name="wall1" width="57" height="64" visible="0">
@@ -44,7 +44,7 @@
    <properties>
     <property name="initAngle" value="0"/>
     <property name="nb" value="2"/>
-    <property name="size" value="5"/>
+    <property name="size" value="4"/>
     <property name="speed" value="2.4"/>
    </properties>
   </object>

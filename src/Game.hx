@@ -37,11 +37,15 @@ class Game extends Scene {
 	override public function update() {
 		super.update();
 		level.update();
+		var toDelete = [];
 		for(e in entities) {
 			e.update();
 			if(e.deleted) {
-				entities.remove(e);
+				toDelete.push(e);
 			}
+		}
+		for(e in toDelete) {
+			entities.remove(e);
 		}
 		level.checkActions();
 	}
