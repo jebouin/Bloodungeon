@@ -28,14 +28,14 @@ class Hero extends Entity {
 		prevRoomDir = Const.DIR.UP;
 		shadow.scaleX *= .8;
 		shadow.scaleY *= .5;
-		shadow.alpha *= .7;
+		shadow.alpha *= .4;
 		targetFrame = anim.getFrame();
 	}
 	public function spawn() {
 		xx = spawnX;
 		yy = spawnY;
 		vx = vy = 0;
-		visible = true;
+		visible = shadow.visible = true;
 		locked = false;
 		dead = false;
 		scaleX = scaleY = 1;
@@ -101,7 +101,7 @@ class Hero extends Entity {
 			}
 			hooverTimer++;
 			turnTimer++;
-			zz = 1 + Math.sin(hooverTimer * .2) * 1.5;
+			zz = Math.sin(hooverTimer * .2) * 1.5;
 			var frame = anim.getFrame();
 			if(frame != targetFrame && turnTimer > 4 && targetFrame != -1) {
 				turnTimer = 0;
@@ -122,6 +122,7 @@ class Hero extends Entity {
 				if(frame >= 8) frame -= 8;
 				anim.setFrame(frame);
 			}
+			shadow.rotation = frame * 45;
 		}
 		updateLight();
 	}

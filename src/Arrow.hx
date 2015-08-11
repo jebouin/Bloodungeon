@@ -95,4 +95,11 @@ class Arrow extends Enemy {
 			}
 		}
 	}
+	override function collidesHero() {
+		if(!flying) return false;
+		var hero = Game.CUR.hero;
+		var dx = hero.xx - xx;
+		var dy = hero.yy - yy;
+		return dx*dx + dy*dy < hero.cradius*hero.cradius;
+	}
 }
