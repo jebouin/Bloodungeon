@@ -10,6 +10,7 @@ class Hero extends Entity {
 	var prevRoomDir : Const.DIR;
 	public function new() {
 		super("heroIdle");
+		anim.playing = false;
 		/*graphics.beginFill(0xFF0000);
 		graphics.drawCircle(0, 0, 8);
 		graphics.endFill();*/
@@ -21,6 +22,9 @@ class Hero extends Entity {
 		gravity = 0;
 		setOrigin(.5, .8);
 		prevRoomDir = Const.DIR.UP;
+		shadow.scaleX *= .8;
+		shadow.scaleY *= .5;
+		shadow.alpha *= .7;
 	}
 	public function spawn() {
 		xx = spawnX;
@@ -43,17 +47,19 @@ class Hero extends Entity {
 		if(!locked) {
 			if(Input.keyDown("left")) {
 				vx -= speed;
-				scaleX = -1;
+				anim.setFrame(1);
 			}
 			if(Input.keyDown("right")) {
 				vx += speed;
-				scaleX = 1;
+				anim.setFrame(0);
 			}
 			if(Input.keyDown("up")) {
 				vy -= speed;
+				anim.setFrame(3);
 			}
 			if(Input.keyDown("down")) {
 				vy += speed;
+				anim.setFrame(2);
 			}
 			if(Input.oldKeyDown("action")) {
 				jump();
@@ -76,7 +82,7 @@ class Hero extends Entity {
 				goToNextRoom(UP);
 			}
 			hooverTimer++;
-			zz = 2 + Math.sin(hooverTimer * .2) * 2;
+			zz = 1 + Math.sin(hooverTimer * .2) * 1.5;
 		}
 		updateLight();
 	}

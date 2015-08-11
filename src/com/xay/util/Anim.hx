@@ -63,6 +63,9 @@ class Anim {
 	}
 	public function setFrame(n:Int) {
 		if(n >= 0 && n < frames.length) {
+			if(n != frame) {
+				frameChanged = true;
+			}
 			frame = n;
 		}
 	}
