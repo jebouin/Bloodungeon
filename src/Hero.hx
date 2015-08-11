@@ -26,12 +26,12 @@ class Hero extends Entity {
 		turnTimer = 1000;
 		gravity = 0;
 		setOrigin(.5, .8);
-		prevRoomDir = Const.DIR.UP;
+		prevRoomDir = null;
 		shadow.scaleX *= .8;
 		shadow.scaleY *= .5;
 		shadow.alpha *= .4;
 		targetFrame = anim.getFrame();
-		immune = true;
+		//immune = true;
 	}
 	public function spawn() {
 		xx = spawnX;

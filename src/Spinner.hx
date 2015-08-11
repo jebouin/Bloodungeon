@@ -86,7 +86,7 @@ class Spinner extends Enemy {
 			var py = p.y + Math.sin(pa) * 16 + Math.cos(pa) * 8;
 			var dx = xx + px - hero.xx;
 			var dy = yy + py - hero.yy;
-			var r = 8;
+			var r = 9;
 			/*var s = new Shape();
 			s.graphics.beginFill(0xFF0000);
 			s.graphics.drawCircle(0, 0, 2);

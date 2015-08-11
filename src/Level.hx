@@ -127,19 +127,19 @@ class Level {
 						spikePos.push({x:i, y:j});
 					} else if(overTile == 32) {
 						overLayer.setTileAt(i, j, 0);
-						setCollision(i, j, FULL);
+						setCollision(i, j, BOW);
 						bowsPos.push({x:i, y:j, dir:RIGHT});
 					} else if(overTile == 48) {
 						overLayer.setTileAt(i, j, 0);
-						setCollision(i, j, FULL);
+						setCollision(i, j, BOW);
 						bowsPos.push({x:i, y:j, dir:LEFT});
 					} else if(overTile == 64) {
 						overLayer.setTileAt(i, j, 0);
-						setCollision(i, j, FULL);
+						setCollision(i, j, BOW);
 						bowsPos.push({x:i, y:j, dir:UP});
 					} else if(overTile == 80) {
 						overLayer.setTileAt(i, j, 0);
-						setCollision(i, j, FULL);
+						setCollision(i, j, BOW);
 						bowsPos.push({x:i, y:j, dir:DOWN});
 					}
 				}
@@ -169,9 +169,9 @@ class Level {
 				/*setRoomId(2, 5);
 				Hero.spawnX = 35 * 16 + 8;
 				Hero.spawnY = 51 * 16 + 8;*/
-				setRoomId(1, 2);
-				Hero.spawnX = 15 * 16 + 8;
-				Hero.spawnY = 18 * 16 + 8;
+				setRoomId(1, 3);
+				Hero.spawnX = 25 * 16 + 8;
+				Hero.spawnY = 34 * 16 + 8;
 				/*setRoomId(1, 6);
 				Hero.spawnX = 27 * 16 + 8;
 				Hero.spawnY = 56 * 16 + 8;*/
@@ -332,11 +332,11 @@ class Level {
 		var ty = Std.int(y) >> 4;
 		return getHeight(tx, ty);
 	}
-	public inline function tileCollides(x:Int, y:Int, ?holeCollides=false) {
-		return getCollision(x, y) == FULL || (holeCollides && getCollision(x, y) == HOLE);
+	public inline function tileCollides(x:Int, y:Int, ?holeCollides=false, ?bowCollides=true) {
+		return getCollision(x, y) == FULL || (bowCollides && getCollision(x, y) == BOW) || (holeCollides && getCollision(x, y) == HOLE);
 	}
-	public function pointCollides(x:Float, y:Float, ?holeCollides=false) {
-		return tileCollides(Std.int(x) >> 4, Std.int(y) >> 4, holeCollides);
+	public function pointCollides(x:Float, y:Float, ?holeCollides=false, ?bowCollides=true) {
+		return tileCollides(Std.int(x) >> 4, Std.int(y) >> 4, holeCollides, bowCollides);
 	}
 	public function entityCollides(e:Entity, x:Float, y:Float) {
 		//y -= 16 * getHeightAt(x, y);

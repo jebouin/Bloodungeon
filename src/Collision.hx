@@ -4,6 +4,7 @@ enum TILE_COLLISION_TYPE {
 	NONE;
 	FULL;
 	HOLE;
+	BOW;
 }
 class Collision {
 	public static var TILE_COLLISIONS = [NONE,

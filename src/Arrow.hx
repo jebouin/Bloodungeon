@@ -75,7 +75,7 @@ class Arrow extends Enemy {
 				cy -= 1;
 			}
 			if(Math.abs(x - startX) > 8 || Math.abs(y - startY) > 8) {
-				if(Game.CUR.level.pointCollides(cx, cy)) {
+				if(Game.CUR.level.pointCollides(cx, cy, false, false)) {
 					onHit();
 				}
 			}
@@ -90,18 +90,18 @@ class Arrow extends Enemy {
 						var cay = Util.min(cy - cr.top, cr.bottom - cy);
 						if(cax > cay) {
 							if(cy > middleY) {
-								yy = cr.bottom - Util.SGN(vy) * 4;
+								yy = cr.bottom - Util.SGN(vy) * 4 - 3;
 								setDir(UP);
 							} else {
-								yy = cr.top - Util.SGN(vy) * 4;
+								yy = cr.top - Util.SGN(vy) * 4 + 3;
 								setDir(DOWN);
 							}
 						} else {
 							if(cx > middleX) {
-								xx = cr.right - Util.SGN(vx) * 4;
+								xx = cr.right - Util.SGN(vx) * 4 - 3;
 								setDir(LEFT);
 							} else {
-								xx = cr.left - Util.SGN(vx) * 4;
+								xx = cr.left - Util.SGN(vx) * 4 + 3;
 								setDir(RIGHT);
 							}
 						}
@@ -145,6 +145,7 @@ class Arrow extends Enemy {
 		var hero = Game.CUR.hero;
 		var dx = hero.xx - xx;
 		var dy = hero.yy - yy;
-		return dx*dx + dy*dy < hero.cradius*hero.cradius;
+		var r = hero.cradius + 1;
+		return dx*dx + dy*dy < r * r;
 	}
 }
