@@ -57,6 +57,7 @@ class Level {
 	}
 	public function update() {
 		Bow.updateAll();
+		Spinner.updateAll();
 		Torch.updateAll();
 	}
 	public function load(floor:Int) {

@@ -47,9 +47,9 @@ class Main {
 		SpriteLib.addAnim("buttonOut", "button", "0", 1);
 		SpriteLib.addAnim("buttonPushed", "button", "1-3", 3);
 		SpriteLib.sliceBD("enemies", "door", 0, 107, 16, 27, 3, 1, 1);
-		SpriteLib.sliceBD("enemies", "spinnerBase", 0, 135, 20, 20, 1, 1, 1);
+		SpriteLib.sliceBD("enemies", "spinnerBase", 0, 135, 19, 21, 1, 1, 1);
 		SpriteLib.addAnim("spinnerBase", "spinnerBase", "0", 1);
-		SpriteLib.sliceBD("enemies", "spinnerPart", 21, 135, 16, 16, 1, 1, 1);
+		SpriteLib.sliceBD("enemies", "spinnerPart", 21, 135, 16, 18, 8, 1, 1);
 		SpriteLib.sliceBD("enemies", "bowSide", 16, 161, 12, 17, 5, 1);
 		SpriteLib.sliceBD("enemies", "bowFront", 15, 183, 15, 14, 5, 1);
 		SpriteLib.sliceBD("enemies", "bowBack", 15, 197, 15, 12, 5, 1);

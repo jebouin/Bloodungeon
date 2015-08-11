@@ -14,6 +14,8 @@ class Spinner extends Enemy {
 	var rotSpeed : Float;
 	var angle : Float;
 	static var partBD : BitmapData;
+	static var revPartBD : BitmapData;
+	static var frame = 0;
 	var parts : Array<Bitmap>;
 	var partCont : Sprite;
 	public function new(x:Float, y:Float, initAngle:Float, nbBranches:Int, size:Int, speed:Float) {
@@ -25,13 +27,15 @@ class Spinner extends Enemy {
 		this.size = size;
 		this.rotSpeed = speed;
 		if(partBD == null) {
-			partBD = new BitmapData(16, 16, true, 0x0);
+			partBD = new BitmapData(16, 18, true, 0x0);
+			revPartBD = new BitmapData(16, 18, true, 0x0);
 			SpriteLib.copyFramePixelsFromSlice(partBD, "spinnerPart", 0, 0, 0);
+			SpriteLib.copyFramePixelsFromSlice(revPartBD, "spinnerPart", 7, 0, 0);
 		}
 		partCont = new Sprite();
 		parts = [];
 		for(i in 0...size*nbBranches) {
-			parts.push(new Bitmap(partBD));
+			parts.push(new Bitmap(speed > 0 ? partBD : revPartBD));
 		}
 		for(p in parts) {
 			partCont.addChild(p);
@@ -45,12 +49,12 @@ class Spinner extends Enemy {
 			for(i in 0...size) {
 				var p = parts[b * size + i];
 				var mat = p.transform.matrix;
-				var dist = i*16 + 18;
+				var dist = i*16 + 16;
 				/*p.x = Math.cos(a) * dist;
 				p.y = Math.sin(a) * dist;
 				p.rotation = a * 180. / Math.PI;*/
 				mat.identity();
-				mat.translate(-8, -8);
+				mat.translate(-8, -9);
 				mat.rotate(a);
 				mat.translate(Math.cos(a) * dist, Math.sin(a) * dist);
 				//mat.translate(Math.cos(a) * dist, Math.sin(a) * dist);
@@ -71,7 +75,6 @@ class Spinner extends Enemy {
 		var r = 14 + size*16;
 		var distSq = dx*dx + dy*dy;
 		if(distSq > r * r) {
-			//trace(Std.random(100));
 			return false; //too far
 		}
 		/*if(distSq < 16*16) {
@@ -99,5 +102,20 @@ class Spinner extends Enemy {
 			}
 		}
 		return false;
+	}
+	public static function updateAll() {
+		var frameChanged = false;
+		frame++;
+		if(frame % 5 == 0) {
+			frameChanged = true;
+		}
+		if(frame >= 40) {
+			frame = 0;
+			frameChanged = true;
+		}
+		if(frameChanged) {
+			SpriteLib.copyFramePixelsFromSlice(partBD, "spinnerPart", Std.int(frame / 5), 0, 0);
+			SpriteLib.copyFramePixelsFromSlice(revPartBD, "spinnerPart", 7 - Std.int(frame / 5), 0, 0);
+		}
 	}
 }

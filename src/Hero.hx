@@ -10,6 +10,7 @@ class Hero extends Entity {
 	var targetFrame : Int;
 	var turnTimer : Int;
 	var prevRoomDir : Const.DIR;
+	var immune : Bool;
 	public function new() {
 		super("heroIdle");
 		anim.playing = false;
@@ -30,6 +31,7 @@ class Hero extends Entity {
 		shadow.scaleY *= .5;
 		shadow.alpha *= .4;
 		targetFrame = anim.getFrame();
+		immune = true;
 	}
 	public function spawn() {
 		xx = spawnX;
@@ -127,7 +129,7 @@ class Hero extends Entity {
 		updateLight();
 	}
 	override public function die() {
-		if(dead) return;
+		if(dead || immune) return;
 		visible = shadow.visible = false;
 		dead = true;
 		locked = true;
