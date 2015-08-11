@@ -5,7 +5,7 @@
  </tileset>
  <layer name="ground0" width="57" height="64">
   <data encoding="base64" compression="zlib">
-   eJzt0TEKwCAMQFFX73/hToUOVZCKxvQF3tChkG9qKaUCAAAAAAAAAADAR/fs3kNjfqM3OPFmGuM1jszJjX+444p/ojT2JlPjzHdpvVGUXvp33L3TysYsvRr37zersfWdpXGk/3RvPZkan5O1MZsLxqR9TQ==
+   eJzt0TEOxCAMBVFa7n/htCgCAgpgfzOWptiQlfxITillIiIiIiKSbGasd8VIRCd7T+t5eabWjFHVepvReheca3xfY73rLqP1fr2dMY5by3Nr2987wahtHDVg9F05tWe1c7UwYlQJI0aVbjBSrEbGekei6KXN73sIoz/jzCgbb/iOJ/7jxdibSMaV99K6Iy9e6n9H651OGqN4Mdrvt8rY+h3FOONXr+aJZCwnqjFaD0x2dmk=
   </data>
  </layer>
  <layer name="ground1" width="57" height="64" visible="0">
@@ -13,14 +13,14 @@
    eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAL4MOQAAAQ==
   </data>
  </layer>
- <layer name="over" width="57" height="64" opacity="0.9">
+ <layer name="over" width="57" height="64" opacity="0.48">
   <data encoding="base64" compression="zlib">
-   eJzt1csNgCAQBUBKsARKsARLsP9qvHpzRflmJuFEsrx3AFICAAAAAAAAAFjbWWHmFlxv5oymVcf8NWjgbOrLvQPwi/ywv7cIMYijdwDCSv+q0n+tBx3Lco/WV8c1OpZqcR/vMyPza50/w5sDAMA8LuPeB+E=
+   eJzt2M0NgCAMhmFGYISO4AiO4P7TeOHghQSa2B/6PkkPHMR+idiE1gAAADDzjJqtgUz6qJNVyIi47lGra8TBfIeFlRklBn1oidOzlsS7AQAuLu8GDGTMKN4NGBDvBgLK+K3uqpARqKgv1s4+0VTIGM1sZtztnHvG3bnI/Z2/Cme4QsaTaWeVdq55IKOu72h5yXhGRi2L8/jdc2X/v96f4Z8DAACAPF6uIA2x
   </data>
  </layer>
  <layer name="wall0" width="57" height="64">
   <data encoding="base64" compression="zlib">
-   eJztlFEOwyAMxbhQ73+9fe2nKhBMVmYBEtKq4cSPZrtKKdcGmywTZ3KlnMmVciZXyplcKWdypZzJlXImV8rtsun9WDiTK+VMrpQzuVLO5Eo5kyvlTK6UM7lSbpdN78fCmVwpZ3KlnMmVciZXyplcKWdypZzJlXK7bHo/Fs7kSjmTK+VMrpQzuVLO5Eo5kyvlTK6U22m/tTJ6jTjvlLF3psW2ZuL++el7MmvROrW+0ZXx3/FmRupHVkbGp5qRectwjbpHz2VmbPm36pIVrU1mtcWu+j22zvwiI9k9JzqHMzWy3uG3FmFmMlLPk7HN9pwiM32v1apHPVdn3OE91jI+MdSTsjP9ohlXv8eZfqZZfXvPeq50z8qefUeZM95zOBnHz414jbr03HrP/5Lx/pzRq9Yvyp2MYz2jGems1uqO9ptZ9PdYqxPtE+2fsVZlPLuUD8ltwV0=
+   eJztlkEOwyAMBPlQ/v+93lGI7bED2QISh6oMnk0IcLXWrg06aUqckivllFwpp+RKOSVXyim5Uk7JlXJKrpTbpWefRz/GYkibsVYzfv08s7kK72jN2ZzS3kE5JVfKKblSTsmVcm/UtM6Q6noW5znvvOfr6nM+ewe4ez4zOdpORpudzXm+ldF4WlOFU3KlnKprdE+nNWdzhN0pY4T/yln+j3eAXfYcyim5Uk7JlXJKrpRTcqWckivllFwpF2VX3wGyd4cZraJexPtkfKdV3Dm9d9e7sVHXO976FlQzWjV6LjKHZ994+j+bMcvtkPFpDFmrHrbalXJvZKTdcqLrMDPH6veYzUg9T8Zn1nLyrOl+rqf5qOfqjDu8x1HGO4Z6UjZTz5tx9XvM1FNaq7N71nOle1X26mdUucYth5MxPi7iFXWx3KzfX8nY/66oNarn5U7GWE1vRrpWR/NG62Ua/R5H83jreOtXtFUZT2/tB79HwTA=
   </data>
  </layer>
  <layer name="wall1" width="57" height="64" visible="0">
@@ -57,7 +57,24 @@
    </properties>
   </object>
   <object type="Thwomp" x="240" y="736" width="32" height="32"/>
-  <object type="Thwomp" x="416" y="688" width="32" height="32"/>
-  <object type="Thwomp" x="240" y="592" width="32" height="32"/>
+  <object type="Thwomp" x="864" y="400" width="32" height="32"/>
+  <object type="Thwomp" x="688" y="304" width="32" height="32"/>
+  <object type="Spinner" x="64" y="208" width="16" height="16">
+   <properties>
+    <property name="initAngle" value="45"/>
+    <property name="nb" value="4"/>
+    <property name="size" value="3"/>
+    <property name="speed" value="1.5"/>
+   </properties>
+  </object>
+  <object type="Spinner" x="144" y="208" width="16" height="16">
+   <properties>
+    <property name="initAngle" value="135"/>
+    <property name="nb" value="4"/>
+    <property name="size" value="3"/>
+    <property name="speed" value="-1.5"/>
+   </properties>
+  </object>
+  <object type="Thwomp" x="192" y="224" width="32" height="32"/>
  </objectgroup>
 </map>

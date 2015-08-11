@@ -48,12 +48,14 @@ class Thwomp extends Enemy {
 			}
 		} else {
 			var hero = Game.CUR.hero;
-			if(!hero.dead) {
-				if(canHit(Std.int(hero.xx) >> 4, Std.int(hero.yy) >> 4)) {
-					if(hero.y > yy + 4 && hero.y < yy + 28) {
-						startCharge(hero.x < xx ? -1 : 1, 0);
-					} else if(hero.x > xx + 4 && hero.x < xx + 28) {
-						startCharge(0, hero.y < yy ? -1 : 1);
+			if(hero != null) {
+				if(!hero.dead) {
+					if(canHit(Std.int(hero.xx) >> 4, Std.int(hero.yy) >> 4)) {
+						if(hero.y > yy + 4 && hero.y < yy + 28) {
+							startCharge(hero.x < xx ? -1 : 1, 0);
+						} else if(hero.x > xx + 4 && hero.x < xx + 28) {
+							startCharge(0, hero.y < yy ? -1 : 1);
+						}
 					}
 				}
 			}
@@ -107,6 +109,7 @@ class Thwomp extends Enemy {
 	}
 	override function collidesHero() {
 		var hero = Game.CUR.hero;
+		if(hero == null) return false;
 		return Collision.circleToRect(hero.x, hero.y, hero.cradius, new Rectangle(xx + 4, yy + 3, 27, 27));
 	}
 }

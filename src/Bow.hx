@@ -64,6 +64,7 @@ class Bow extends Enemy {
 			Actuate.tween(arrow, 0., {alpha: 1.});
 		}
 		arrow.shoot();
+		arrow = null;
 		Timer.delay(function() {
 			reload();
 		}, 200);

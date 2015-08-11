@@ -69,10 +69,14 @@ class Spinner extends Enemy {
 		var dx = xx - hero.xx;
 		var dy = yy - hero.yy;
 		var r = 18 + size*16 + hero.cradius;
-		if(dx*dx + dy*dy > r * r) {
-			trace(Std.random(100));
+		var distSq = dx*dx + dy*dy;
+		if(distSq > r * r) {
+			//trace(Std.random(100));
 			return false; //too far
 		}
+		/*if(distSq < 16*16) {
+			return true;
+		}*/
 		for(p in parts) {
 			var pa = p.rotation * Math.PI / 180.;
 			var px = p.x + Math.cos(pa) * 16 - Math.sin(pa) * 8;
