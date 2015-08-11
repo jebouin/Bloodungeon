@@ -9,6 +9,7 @@ class Bow extends Enemy {
 	var arrow : Arrow;
 	public function new(tx:Int, ty:Int, dir:Const.DIR) {
 		super(dir == UP ? "bowBackShoot" : (dir == DOWN ? "bowFrontShoot" : "bowSideShoot"), false);
+		anim.playing = false;
 		this.xx = tx * 16 + 8;
 		this.yy = ty * 16 + 7;
 		this.dir = dir;

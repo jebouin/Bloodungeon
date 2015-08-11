@@ -7,6 +7,8 @@ class Hero extends Entity {
 	public var hooverTimer : Int;
 	public static var spawnX : Float;
 	public static var spawnY : Float;
+	var targetFrame : Int;
+	var turnTimer : Int;
 	var prevRoomDir : Const.DIR;
 	public function new() {
 		super("heroIdle");
@@ -17,14 +19,17 @@ class Hero extends Entity {
 		Game.CUR.lm.addChild(this, Const.HERO_L);
 		maxSpeed = 2.3;
 		collides = true;
+		cradius = 4;
 		spawn();
 		hooverTimer = 0;
+		turnTimer = 1000;
 		gravity = 0;
 		setOrigin(.5, .8);
 		prevRoomDir = Const.DIR.UP;
 		shadow.scaleX *= .8;
 		shadow.scaleY *= .5;
 		shadow.alpha *= .7;
+		targetFrame = anim.getFrame();
 	}
 	public function spawn() {
 		xx = spawnX;
@@ -47,23 +52,36 @@ class Hero extends Entity {
 		if(!locked) {
 			if(Input.keyDown("left")) {
 				vx -= speed;
-				anim.setFrame(1);
+				targetFrame = 4;
 			}
 			if(Input.keyDown("right")) {
 				vx += speed;
-				anim.setFrame(0);
+				targetFrame = 0;
 			}
 			if(Input.keyDown("up")) {
 				vy -= speed;
-				anim.setFrame(3);
+				targetFrame = 6;
+				if(Input.keyDown("left")) {
+					targetFrame--;
+				} else if(Input.keyDown("right")) {
+					targetFrame++;
+				}
 			}
 			if(Input.keyDown("down")) {
 				vy += speed;
-				anim.setFrame(2);
+				targetFrame = 2;
+				if(Input.keyDown("left")) {
+					targetFrame++;
+				} else if(Input.keyDown("right")) {
+					targetFrame--;
+				}
 			}
-			if(Input.oldKeyDown("action")) {
+			if(!Input.keyDown("left") && !Input.keyDown("right") && !Input.keyDown("down") && !Input.keyDown("up")) {
+				targetFrame = -1;
+			}
+			/*if(Input.oldKeyDown("action")) {
 				jump();
-			}
+			}*/
 			if(Input.oldKeyDown("suicide")) {
 				die();
 			}
@@ -82,7 +100,28 @@ class Hero extends Entity {
 				goToNextRoom(UP);
 			}
 			hooverTimer++;
+			turnTimer++;
 			zz = 1 + Math.sin(hooverTimer * .2) * 1.5;
+			var frame = anim.getFrame();
+			if(frame != targetFrame && turnTimer > 4 && targetFrame != -1) {
+				turnTimer = 0;
+				if(frame < targetFrame) {
+					if(frame + 8 - targetFrame < targetFrame - frame) {
+						frame--;
+					} else {
+						frame++;
+					}
+				} else {
+					if(frame - targetFrame < targetFrame + 8 - frame) {
+						frame--;
+					} else {
+						frame++;
+					}
+				}
+				if(frame < 0) frame += 8;
+				if(frame >= 8) frame -= 8;
+				anim.setFrame(frame);
+			}
 		}
 		updateLight();
 	}

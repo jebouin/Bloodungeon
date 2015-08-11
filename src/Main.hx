@@ -35,8 +35,8 @@ class Main {
 		SpriteLib.addBD("tileset", new TilesetBD(0, 0));
 		SpriteLib.sliceBD("tileset", "tileset", 0, 0, 16, 16);
 		SpriteLib.addBD("hero", new HeroBD(0, 0));
-		SpriteLib.sliceBD("hero", "hero", 0, 0, 15, 16, 4, 1, 1);
-		SpriteLib.addAnim("heroIdle", "hero", "0-3", 1);
+		SpriteLib.sliceBD("hero", "hero", 0, 0, 15, 16, 8, 1, 1);
+		SpriteLib.addAnim("heroIdle", "hero", "0-7", 3);
 		SpriteLib.addBD("enemies", new EnemiesBD(0, 0));
 		SpriteLib.sliceBD("enemies", "thwomp", 0, 0, 35, 32, 1, 1);
 		SpriteLib.sliceBD("enemies", "spike", 0, 33, 16, 26, 7, 1, 1);
