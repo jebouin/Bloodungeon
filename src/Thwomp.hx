@@ -110,6 +110,9 @@ class Thwomp extends Enemy {
 	override function collidesHero() {
 		var hero = Game.CUR.hero;
 		if(hero == null) return false;
-		return Collision.circleToRect(hero.x, hero.y, hero.cradius, new Rectangle(xx + 4, yy + 3, 27, 27));
+		return Collision.circleToRect(hero.x, hero.y, hero.cradius, getCollisionRect());
+	}
+	public function getCollisionRect() {
+		return new Rectangle(xx + 4, yy + 3, 27, 27);
 	}
 }

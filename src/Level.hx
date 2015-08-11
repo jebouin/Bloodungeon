@@ -169,9 +169,9 @@ class Level {
 				/*setRoomId(2, 5);
 				Hero.spawnX = 35 * 16 + 8;
 				Hero.spawnY = 51 * 16 + 8;*/
-				setRoomId(1, 6);
-				Hero.spawnX = 16 * 16 + 8;
-				Hero.spawnY = 58 * 16;
+				setRoomId(1, 2);
+				Hero.spawnX = 15 * 16 + 8;
+				Hero.spawnY = 18 * 16 + 8;
 				/*setRoomId(1, 6);
 				Hero.spawnX = 27 * 16 + 8;
 				Hero.spawnY = 56 * 16 + 8;*/

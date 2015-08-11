@@ -104,6 +104,7 @@ class Spinner extends Enemy {
 		return false;
 	}
 	public static function updateAll() {
+		if(partBD == null) return;
 		var frameChanged = false;
 		frame++;
 		if(frame % 5 == 0) {
