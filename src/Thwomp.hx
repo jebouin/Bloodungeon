@@ -18,9 +18,23 @@ class Thwomp extends Enemy {
 		charging = false;
 	}
 	override public function update() {
+		if(!charging) {
+			var hero = Game.CUR.hero;
+			if(hero != null) {
+				if(!hero.dead) {
+					if(canHit(Std.int(hero.xx) >> 4, Std.int(hero.yy) >> 4)) {
+						if(hero.y > yy && hero.y < yy + 32) {
+							startCharge(hero.x < xx ? -1 : 1, 0);
+						} else if(hero.x > xx && hero.x < xx + 32) {
+							startCharge(0, hero.y < yy ? -1 : 1);
+						}
+					}
+				}
+			}
+		}
 		if(charging) {
-			vx += chargeX * .1;
-			vy += chargeY * .1;
+			vx += chargeX * .075;
+			vy += chargeY * .075;
 			var level = Game.CUR.level;
 			if(chargeX > 0) {
 				if(level.pointCollides(xx + 1 + 32 + vx, yy + 8, true) || level.pointCollides(xx + 1 + 32 + vx, yy + 24, true)) {
@@ -45,19 +59,8 @@ class Thwomp extends Enemy {
 			}
 			if(!charging) {
 				chargeX = chargeY = vx = vy = 0;
-			}
-		} else {
-			var hero = Game.CUR.hero;
-			if(hero != null) {
-				if(!hero.dead) {
-					if(canHit(Std.int(hero.xx) >> 4, Std.int(hero.yy) >> 4)) {
-						if(hero.y > yy + 4 && hero.y < yy + 28) {
-							startCharge(hero.x < xx ? -1 : 1, 0);
-						} else if(hero.x > xx + 4 && hero.x < xx + 28) {
-							startCharge(0, hero.y < yy ? -1 : 1);
-						}
-					}
-				}
+				setAnim("thwompIdle", false);
+				anim.play();
 			}
 		}
 		super.update();
@@ -106,6 +109,8 @@ class Thwomp extends Enemy {
 		charging = true;
 		chargeX = cx;
 		chargeY = cy;
+		setAnim("thwompCharge");
+		anim.play();
 	}
 	override function collidesHero() {
 		var hero = Game.CUR.hero;
@@ -113,6 +118,6 @@ class Thwomp extends Enemy {
 		return Collision.circleToRect(hero.x, hero.y, hero.cradius, getCollisionRect());
 	}
 	public function getCollisionRect() {
-		return new Rectangle(xx + 4, yy + 3, 27, 27);
+		return new Rectangle(xx + 6, yy + 5, 23, 24);
 	}
 }

@@ -31,7 +31,7 @@ class Bow extends Enemy {
 	}
 	public static function updateAll() {
 		timer++;
-		if(timer > 70) {
+		if(timer > 50) {
 			shootAll();
 			timer = 0;
 		}

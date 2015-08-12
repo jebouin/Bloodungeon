@@ -5,7 +5,7 @@
  </tileset>
  <layer name="ground0" width="57" height="64">
   <data encoding="base64" compression="zlib">
-   eJzt0kEOwyAMBVG2uf+Fs0URWCAg3zZjaRYtTeSX9CmlPEREREREFLKZUe+KkYj+7Du97+sz6z5qz6rRcmD0Y1TvEtXp4RnOzMh11rlX4677ntgZ47i1Plf913Y9k1PG1r0wnrWunGPUGls79OZ248hEN3oOI8YoYcxhpFyNjHpHouyVw7/3EEZ/xpmJbLzhPa5cY43StbpvdOPO5+LdS/Z7VO/0pzGLF6N+v13G3ucsxhl/9FqeTMZ6shqz9QJI63QX
+   eJztkssOgCAMBLn6/z/sycQYJFTAbctsMgfDIzvFo5RyAAAAAABASCxRd8URVFxR98BRM5PnbGqJOluLY8sDRz+O6i5RPT3M0JKec611r46z7lX57eJo+ffUHVe/41fH2l04rnUdWcdR61jr8JbdHXsS3dEzOOIYBRxzOEIueqLuCJCdsni/B3D052hJZMcd3nHkTCtKr9G+0R1nzsW7L7TfUd3pT8csvjjq+81yfPvO4mjxj07NJ5PjPVkds3ECKEx0Fw==
   </data>
  </layer>
  <layer name="ground1" width="57" height="64" visible="0">
@@ -15,12 +15,12 @@
  </layer>
  <layer name="over" width="57" height="64" opacity="0.48">
   <data encoding="base64" compression="zlib">
-   eJzt2f0JwyAQh2FHyAiO0BEcIftPUwr5o4Rq9Lyeer4PCA206g8bLx8hAAAA4Ml5tdwxsILjap7tkBFrSLfP6ee3MItcXY/G8xghjp6AsaPQrMYuiR39lnJpZJTMTeO3HzUZNUTFvnp5vKapXb+X5aSU7ZDRo9x6nJl217ofjVj/3jFHZIwKfcwuGo/Hf1V/PAlqAODT0z1L7d5keY/aaoeMs8nVjBT8PG9srYu8lxtvh3N4h4yeSWvVqGfGEmSUzXu2vGT0kVHK4nz87rOm/3+Nv8KeAwAAgHW8AeCZE2E=
+   eJzt2dENhCAQRVFKoIQpYUugBPuvxh8/NkQUEZlhuCchWRMFXliZqCEAAADgzna00jFQKx5t1rGlwzy+tEJGzCFlv9PpWbCiVNdl8Dw0iPYEBosXzQJpuOYqU8zO0SIvr6/J6I3HbLXr9xs5qc5WyOhRaT22Qss93Y801v/tmBoZpUMf1sng8fiv9h+vBTUA8OnumaV2b7L8nLNCRmtKNSMFP+8bn9ZFvsvpW+EeXiGjZ621aqb3jmRsm7e1vGT0kbHViPvxv8+a/r8af4Y9BwAAAPPYAeJGE2E=
   </data>
  </layer>
  <layer name="wall0" width="57" height="64">
   <data encoding="base64" compression="zlib">
-   eJztllGOBCEIRL3Q3P96+29U4MFiEzExmcn4qCqb1vmNMX4PTDIqcZW8Uq6SV8pV8kq5Sl4pV8kr5Sp5pVwlr5R7ZUbtx7x2x5KR0asef3OdbC7Ct1Uzm6t0dlCuklfKVfJKuUpeKRehKd0hX7g7rB6t674w6f6sPlu4jNEZZZbUiX6vdnt9+wzI5ip5pVxVr/QOsGpmc4R9KaP1XPT+B6BchKZl3Lg7KNcZdZq01619SH32c9Rpdsa1Jjknqc/sfT3V64y+utFevjgzR4Qeef8zx2sZab9pz+TVWqvXFS+9C1UzShozZ6mhOTdOv3szerkXMp7WkF7VsNFeKfcfGemUPNE+9NS4/Ry9GanPznhmJU+anp5rnepRn7czvvAcdxlXDPVJWY+eNuPt5+jRq9Sr2dPr86b3qOzRexTZ45KHzmhfZ/Fl9SJ5k75/JeP8PUJrp6flOqNNU5uR9uqurlXPM+j7uKuj1dHqR4xbGXuO8QenuspU
+   eJztllsOwyAMBLlQ7n+9/laIhz12ICuwhKqojL0LDuQppTwHDBJKnJJWyilppZySVsopaaWcklbKKWmlnJJWyp0ystajnttjVwbxmFFzZexaV8pZ+qc3n9ZU4ZS0Uk5V6+xcU+1VwmZ5fP5+LWtL60U8zu656Lw37nLKeaJ3Zns4Ws/LXY+2mt7vpWg9L6d0rlJOSSvllLRSTkkr5ZS0Us57T2bexzu+HTxx2t1xPbZrkj6mOu8+2mpej+2a5IylOlev6yjf9RjLm63li2NlZNQj7//KOM0j7Tfrmdya69Xa4mfvgqrHWY2a8+SwnBuj/6Meo9wJHkdzSK9a2GytlHvDIx0zTbQPIzl272PUI9V5PY7ZmSZLT9e5Rvmozt0eT9jHnscWQ3VSNlLP6nH3PkbqKfXq6hHVuVN7lvfsNcrs8ZmG69E/z6PLo8Oibfb8BY/1c1atVn4Pdz3aa5Lered6n9/u1Toi72Mvl7WWVUM0dnq8o5QfzlPLNQ==
   </data>
  </layer>
  <layer name="wall1" width="57" height="64" visible="0">
@@ -32,7 +32,7 @@
   <object type="Thwomp" x="688" y="928" width="32" height="32"/>
   <object type="Thwomp" x="464" y="928" width="32" height="32"/>
   <object type="Thwomp" x="560" y="880" width="32" height="32"/>
-  <object type="Spinner" x="336" y="944" width="16" height="16">
+  <object type="Spinner" x="320" y="944" width="16" height="16">
    <properties>
     <property name="initAngle" value="0"/>
     <property name="nb" value="3"/>
@@ -57,8 +57,7 @@
    </properties>
   </object>
   <object type="Thwomp" x="240" y="736" width="32" height="32"/>
-  <object type="Thwomp" x="864" y="400" width="32" height="32"/>
-  <object type="Thwomp" x="688" y="304" width="32" height="32"/>
+  <object type="Thwomp" x="688" y="160" width="32" height="32"/>
   <object type="Spinner" x="64" y="208" width="16" height="16">
    <properties>
     <property name="initAngle" value="45"/>
@@ -88,5 +87,6 @@
   <object type="Thwomp" x="336" y="496" width="32" height="32"/>
   <object type="Thwomp" x="368" y="496" width="32" height="32"/>
   <object type="Thwomp" x="464" y="496" width="32" height="32"/>
+  <object type="Thwomp" x="864" y="256" width="32" height="32"/>
  </objectgroup>
 </map>

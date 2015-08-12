@@ -38,9 +38,10 @@ class Main {
 		SpriteLib.sliceBD("hero", "hero", 0, 0, 15, 16, 8, 1, 1);
 		SpriteLib.addAnim("heroIdle", "hero", "0-7", 3);
 		SpriteLib.addBD("enemies", new EnemiesBD(0, 0));
-		SpriteLib.sliceBD("enemies", "thwomp", 0, 0, 35, 32, 1, 1);
-		SpriteLib.sliceBD("enemies", "spike", 0, 33, 16, 26, 7, 1, 1);
+		SpriteLib.sliceBD("enemies", "thwomp", 0, 0, 35, 32, 5, 1);
 		SpriteLib.addAnim("thwompIdle", "thwomp", "0", 1);
+		SpriteLib.addAnim("thwompCharge", "thwomp", "1-4", 5);
+		SpriteLib.sliceBD("enemies", "spike", 0, 33, 16, 26, 7, 1, 1);
 		SpriteLib.addAnim("spikeIdle", "spike", "0", 1);
 		SpriteLib.addAnim("spikeOut", "spike", "1-6", 4);
 		SpriteLib.sliceBD("enemies", "button", 0, 60, 13, 46, 4, 1, 1);

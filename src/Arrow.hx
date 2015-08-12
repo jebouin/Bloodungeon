@@ -145,7 +145,7 @@ class Arrow extends Enemy {
 		var hero = Game.CUR.hero;
 		var dx = hero.xx - xx;
 		var dy = hero.yy - yy;
-		var r = hero.cradius + 1;
+		var r = hero.cradius + 2;
 		return dx*dx + dy*dy < r * r;
 	}
 }
