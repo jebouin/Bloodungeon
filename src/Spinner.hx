@@ -70,36 +70,26 @@ class Spinner extends Enemy {
 	override public function collidesHero() {
 		var hero = Game.CUR.hero;
 		if(hero == null) return false;
-		var dx = xx - hero.xx;
-		var dy = yy - hero.yy;
+		var dx = hero.xx - xx;
+		var dy = hero.yy - yy;
 		var r = 14 + size*16;
 		var distSq = dx*dx + dy*dy;
 		if(distSq > r * r) {
 			return false; //too far
 		}
-		/*if(distSq < 16*16) {
-			return true;
-		}*/
-		for(p in parts) {
-			var pa = p.rotation * Math.PI / 180.;
-			var px = p.x + Math.cos(pa) * 16 - Math.sin(pa) * 8;
-			var py = p.y + Math.sin(pa) * 16 + Math.cos(pa) * 8;
-			var dx = xx + px - hero.xx;
-			var dy = yy + py - hero.yy;
-			var r = 9;
-			/*var s = new Shape();
-			s.graphics.beginFill(0xFF0000);
-			s.graphics.drawCircle(0, 0, 2);
-			s.graphics.endFill();
-			s.x = xx + px;
-			s.y = yy + py;
-			Game.CUR.lm.addChild(s, Const.FRONT_L);
-			Timer.delay(function() {
-				s.parent.removeChild(s);
-			}, 300);*/
-			if(dx*dx + dy*dy < r*r) {
+		var dist = Math.sqrt(distSq);
+		var heroAngle = Math.atan2(dy, dx);
+		for(i in 0...nbBranches) {
+			var da = Math.PI * 2. / nbBranches * i;
+			var a = angle*Math.PI/180. + da;
+			var aa = a - heroAngle;
+			var distFromBranch = Math.tan(aa) * dist;
+			if(Math.abs(distFromBranch) > 6) continue;
+			var l = dist * Math.cos(aa);
+			if(l > 9 && l < (size + 1) * 16 - 8) {
 				return true;
 			}
+			//trace(distFromBranch, l);
 		}
 		return false;
 	}
