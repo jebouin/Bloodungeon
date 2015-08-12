@@ -5,7 +5,7 @@
  </tileset>
  <layer name="ground0" width="57" height="64">
   <data encoding="base64" compression="zlib">
-   eJztkssOgCAMBLn6/z/sycQYJFTAbctsMgfDIzvFo5RyAAAAAABASCxRd8URVFxR98BRM5PnbGqJOluLY8sDRz+O6i5RPT3M0JKec611r46z7lX57eJo+ffUHVe/41fH2l04rnUdWcdR61jr8JbdHXsS3dEzOOIYBRxzOEIueqLuCJCdsni/B3D052hJZMcd3nHkTCtKr9G+0R1nzsW7L7TfUd3pT8csvjjq+81yfPvO4mjxj07NJ5PjPVkds3ECKEx0Fw==
+   eJztkkEOxSAIBd32/hfu6ic/xiJWKYJDMotq0Te0VynlAgAAAACAkIyUd1YcwYtfeefA0Wcm9WxaFXW2I46SB466c3v39TJo7vSecW9mM1ktPSWH1n69bvGvSqXpk/bfONZ9Fo6rzm3tn+KoXbf8Z7+425peaR2lvnoNR1vX2X0cfd2kXNqMJzqO9kdw3BkccYwCjjkcIRea8s4IkJ1i/P4O4Lif40hFdjzhO870SOXpNZs3uuPKuezuC/J39M70pWMWXxz9861yfHrO4jjiH52WTybH/8rqmI0b2Ghxqg==
   </data>
  </layer>
  <layer name="ground1" width="57" height="64" visible="0">
@@ -15,12 +15,12 @@
  </layer>
  <layer name="over" width="57" height="64" opacity="0.48">
   <data encoding="base64" compression="zlib">
-   eJzt2dENhCAQRVFKoIQpYUugBPuvxh8/NkQUEZlhuCchWRMFXliZqCEAAADgzna00jFQKx5t1rGlwzy+tEJGzCFlv9PpWbCiVNdl8Dw0iPYEBosXzQJpuOYqU8zO0SIvr6/J6I3HbLXr9xs5qc5WyOhRaT22Qss93Y801v/tmBoZpUMf1sng8fiv9h+vBTUA8OnumaV2b7L8nLNCRmtKNSMFP+8bn9ZFvsvpW+EeXiGjZ621aqb3jmRsm7e1vGT0kbHViPvxv8+a/r8af4Y9BwAAAPPYAeJGE2E=
+   eJzt2dsNwyAMBVBGyAgeISMwQvafpqrUD4oa1TEGG/seKWorhYcLwSQpxdZl3D6AhqM5ouhjyhDjzg7BsZsMMYJvV/net/S/Abgs16iRts/PJ+l0ZZo2RhLWIS23g/P/Ke6QdQeEave9/jwLvLjL67S4H2+r97mkXB+H5V7e+/0DCcpw/kuNPcAIGiw/e754zI+e5qUW7vh5HA+uDDFGxB2Pu/3C0/XIYvxH27SIkRTq8I4Wt4e5qt+eBHIAQExa76283aO2MsTozV3OqCXO88aneRHv5exluIYzxBiZNFd5fmbcQ4yyfnuLFzHGiFFqxfXY1smpf1b7O6w5AAAAALCPF27dFvE=
   </data>
  </layer>
  <layer name="wall0" width="57" height="64">
   <data encoding="base64" compression="zlib">
-   eJztllsOwyAMBLlQ7n+9/laIhz12ICuwhKqojL0LDuQppTwHDBJKnJJWyilppZySVsopaaWcklbKKWmlnJJWyp0ystajnttjVwbxmFFzZexaV8pZ+qc3n9ZU4ZS0Uk5V6+xcU+1VwmZ5fP5+LWtL60U8zu656Lw37nLKeaJ3Zns4Ws/LXY+2mt7vpWg9L6d0rlJOSSvllLRSTkkr5ZS0Us57T2bexzu+HTxx2t1xPbZrkj6mOu8+2mpej+2a5IylOlev6yjf9RjLm63li2NlZNQj7//KOM0j7Tfrmdya69Xa4mfvgqrHWY2a8+SwnBuj/6Meo9wJHkdzSK9a2GytlHvDIx0zTbQPIzl272PUI9V5PY7ZmSZLT9e5Rvmozt0eT9jHnscWQ3VSNlLP6nH3PkbqKfXq6hHVuVN7lvfsNcrs8ZmG69E/z6PLo8Oibfb8BY/1c1atVn4Pdz3aa5Lered6n9/u1Toi72Mvl7WWVUM0dnq8o5QfzlPLNQ==
+   eJztVkuuxDAIy4V6/+vNqpsoH2wIlAlIkV71Ymw3LpmntfYErubIoymLHqc4yqOcE+kxy9AuX9EeGc6dh3/zOPNsMTeiPHrjMmllcZFZRebPCb6IdVKX1fvo966wXsV49OS0KG8+lhPJzwzDamVxDDbbXGUw2Txa+ERnMVMR5xiRgf5v5N2iXFqP7F0s3XfiLmdxSM1mtld53Os3ekQ4tXwoLsNc1eIyaWVxmbSyuGxa2fvDW6tVae5XaV+WS6NR+9sBqdvujvI45mRyzOqsc5RxlscxJzNjWZ1fuOfefuVR19dayxeXZ1nwMd+/Z93mkc2bdCaP9qJaR/jdt5DV446jxyE9JHNj9X+tRy3uBo+rPUxWJVhrrSzuhEd27TSxOdT0iD5HrUdWZ3lcY3eaJJnue636sTqjPd5wjjOPIwyrk8Vq+KQeo89Rw5cpq95LqzNSu5V363dkmfGdhvKI70N0ITok2nbPX/DYP1txjfojuPIo52Sy2+9Fn09ntS/N9zjrJeWSatBWpMdarf0AgtrUsw==
   </data>
  </layer>
  <layer name="wall1" width="57" height="64" visible="0">
@@ -83,10 +83,39 @@
     <property name="speed" value="-2."/>
    </properties>
   </object>
-  <object type="Thwomp" x="304" y="496" width="32" height="32"/>
-  <object type="Thwomp" x="336" y="496" width="32" height="32"/>
   <object type="Thwomp" x="368" y="496" width="32" height="32"/>
   <object type="Thwomp" x="464" y="496" width="32" height="32"/>
   <object type="Thwomp" x="864" y="256" width="32" height="32"/>
+  <object type="Thwomp" x="688" y="368" width="32" height="32"/>
+  <object type="Thwomp" x="688" y="368" width="32" height="32"/>
+  <object type="Thwomp" x="864" y="336" width="32" height="32"/>
+  <object type="Spinner" x="560" y="208" width="16" height="16">
+   <properties>
+    <property name="initAngle" value="0"/>
+    <property name="nb" value="4"/>
+    <property name="size" value="5"/>
+    <property name="speed" value="1.2"/>
+   </properties>
+  </object>
+  <object type="Thwomp" x="464" y="96" width="32" height="32"/>
+  <object type="Thwomp" x="464" y="16" width="32" height="32"/>
+  <object type="Door" x="240" y="48" width="32" height="16">
+   <properties>
+    <property name="id" value="0"/>
+   </properties>
+  </object>
+  <object type="Button" x="288" y="32" width="16" height="32">
+   <properties>
+    <property name="id" value="0"/>
+   </properties>
+  </object>
+  <object type="Spinner" x="352" y="80" width="16" height="16">
+   <properties>
+    <property name="initAngle" value="0"/>
+    <property name="nb" value="2"/>
+    <property name="size" value="5"/>
+    <property name="speed" value="2.75"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

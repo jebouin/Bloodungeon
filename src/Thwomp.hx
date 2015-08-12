@@ -33,8 +33,8 @@ class Thwomp extends Enemy {
 			}
 		}
 		if(charging) {
-			vx += chargeX * .075;
-			vy += chargeY * .075;
+			vx += chargeX * .08;
+			vy += chargeY * .08;
 			var level = Game.CUR.level;
 			if(chargeX > 0) {
 				if(level.pointCollides(xx + 1 + 32 + vx, yy + 8, true) || level.pointCollides(xx + 1 + 32 + vx, yy + 24, true)) {
