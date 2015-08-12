@@ -32,7 +32,7 @@ class FakeTile extends Enemy {
 		yy = ty * 16;
 		parent.removeChild(this);
 		Game.CUR.lm.addChild(this, Const.BACK_L);
-		rect = new Rectangle(xx, yy, xx + wid * 16, yy + hei * 16);
+		rect = new Rectangle(xx, yy, wid * 16, hei * 16);
 		update();
 	}
 	override public function update() {
