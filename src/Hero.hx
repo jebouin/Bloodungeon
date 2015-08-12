@@ -103,7 +103,7 @@ class Hero extends Entity {
 			}
 			hooverTimer++;
 			turnTimer++;
-			zz = Math.sin(hooverTimer * .2) * 1.5;
+			zz = .5 + Math.sin(hooverTimer * .2) * 1.5;
 			var frame = anim.getFrame();
 			if(frame != targetFrame && turnTimer > 4 && targetFrame != -1) {
 				turnTimer = 0;

@@ -1,4 +1,6 @@
 package com.xay.util;
+import flash.events.Event;
+import flash.events.FocusEvent;
 import haxe.ds.StringMap;
 #if openfl
 import openfl.events.KeyboardEvent;
@@ -20,6 +22,11 @@ class Input {
 		oldKeys = new StringMap<Bool>();
 		Lib.current.stage.addEventListener(KeyboardEvent.KEY_DOWN, keyEvent.bind(_, true));
 		Lib.current.stage.addEventListener(KeyboardEvent.KEY_UP, keyEvent.bind(_, false));
+		Lib.current.stage.addEventListener(FocusEvent.FOCUS_OUT, function(_) {
+			for(k in keys.keys()) {
+				keys.set(k, false);
+			}
+		});
 	}
 	static public function addKey(name:String, key:UInt) {
 		if(keyCorres.get(name)==null) {
