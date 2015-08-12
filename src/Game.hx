@@ -51,6 +51,7 @@ class Game extends Scene {
 				entities.remove(e);
 			}
 			level.checkActions();
+			cd.update();
 		}
 	}
 	public function addEntity(e:Entity) {
