@@ -75,6 +75,7 @@ class Main {
 		renderer = new Renderer(Const.WID, Const.HEI, Const.SCALE);
 		var stats = new Stats();
 		stats.x = stage.stageWidth - Stats.XPOS;
+		stats.y = stage.stageHeight - 100;
 		stage.addChild(stats);
 		initInput();
 		initGFX();

@@ -2,12 +2,14 @@ package ;
 import motion.Actuate;
 class Enemy extends Entity {
 	public static var fade = false;
+	var fadeThis : Bool;
 	public function new(?animName:String, ?hasShadow=true) {
 		super(animName, hasShadow);
+		fadeThis = true;
 		Game.CUR.lm.addChild(this, Const.ENEMY_L);
 	}
 	override public function delete() {
-		if(fade) {
+		if(fade && fadeThis) {
 			Actuate.tween(this, .8, {alpha: 0.}).onComplete(function() {
 				onFadeComplete();
 			});

@@ -16,4 +16,7 @@ class Const {
 	public static var ENEMY_L = CUR_L++;
 	public static var HERO_L = CUR_L++;
 	public static var FRONT_L = CUR_L++;
+	public static inline function stringToDir(s:String) {
+		return (s == "up" ? UP : (s == "down" ? DOWN : (s == "left" ? LEFT : (s == "right" ? RIGHT : null))));
+	}
 }

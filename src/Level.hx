@@ -40,6 +40,7 @@ class Level {
 	var spikePos : Array<{x:Int, y:Int}>;
 	var bowsPos : Array<{x:Int, y:Int, dir:Const.DIR}>;
 	var torches : Array<Torch>;
+	var fakeTileRemoved : Array<Bool>;
 	var ground0Layer : TiledLayer;
 	var ground1Layer : TiledLayer;
 	var overLayer : TiledLayer;
@@ -98,6 +99,10 @@ class Level {
 		bowsPos = [];
 		torches = [];
 		actionRects = [];
+		fakeTileRemoved = [];
+		for(i in 0...20) {
+			fakeTileRemoved[i] = false;
+		}
 		for(j in 0...HEI) {
 			tiles[j] = [];
 			for(i in 0...WID) {
@@ -169,12 +174,12 @@ class Level {
 				setRoomId(2, 5);
 				Hero.spawnX = 35 * 16 + 8;
 				Hero.spawnY = 51 * 16 + 8;
-				/*setRoomId(2, 0);
-				Hero.spawnX = 31 * 16 + 8;
-				Hero.spawnY = 4 * 16 + 8;*/
-				/*setRoomId(1, 6);
-				Hero.spawnX = 27 * 16 + 8;
-				Hero.spawnY = 56 * 16 + 8;*/
+				/*setRoomId(0, 0);
+				Hero.spawnX = 12 * 16 + 8;
+				Hero.spawnY = 6 * 16 + 8;*/
+				/*setRoomId(1, 2);
+				Hero.spawnX = 15 * 16 + 8;
+				Hero.spawnY = 19 * 16 + 8;*/
 		}
 		Game.CUR.lm.getContainer().x = -posX;
 		Game.CUR.lm.getContainer().y = -posY;
@@ -206,8 +211,10 @@ class Level {
 			var wid = Std.parseFloat(o.properties.get("width"));
 			var hei = Std.parseFloat(o.properties.get("height"));
 			if(x >= nextRoomX && y >= nextRoomY && x < nextRoomX + Const.WID && y < nextRoomY + Const.HEI) {
-				var tx = Std.int(x / 16);
-				var ty = Std.int(y / 16);
+				var tx = Std.int(x) >> 4;
+				var ty = Std.int(y) >> 4;
+				var twid = Std.int(wid) >> 4;
+				var thei = Std.int(hei) >> 4;
 				var e : Entity = null;
 				switch(o.type) {
 					case "Thwomp":
@@ -218,7 +225,7 @@ class Level {
 						e = new Button(tx + (facesRight?0:1), ty, facesRight, id);
 					case "Door":
 						var id = Std.parseInt(o.properties.get("id"));
-						e = new Door(this, tx, ty, Std.int(wid) >> 4, Std.int(hei) >> 4, id);
+						e = new Door(this, tx, ty, twid, thei, id);
 					case "Spinner":
 						var nbBranches = Std.parseInt(o.properties.get("nb"));
 						var size = Std.parseInt(o.properties.get("size"));
@@ -227,7 +234,15 @@ class Level {
 						e = new Spinner(x + 8., y + 8., initAngle, nbBranches, size, speed);
 					case "Action":
 						var f = o.properties.get("function");
-						actionRects.push({x:tx, y:ty, wid:Std.int(wid) >> 4, hei:Std.int(hei) >> 4, f:f});
+						actionRects.push({x:tx, y:ty, wid:twid, hei:thei, f:f});
+					case "FakeTile":
+						var secretId = Std.parseInt(o.properties.get("secretId"));
+						if(fakeTileRemoved[secretId]) {
+							continue;
+						}
+						var id = Std.parseInt(o.properties.get("id"));
+						var dir = Const.stringToDir(o.properties.get("dir"));
+						e = new FakeTile(tx, ty, twid, thei, id, secretId, dir);
 					default:
 						
 				}
@@ -367,6 +382,8 @@ class Level {
 						Action.closeExit();
 					case "exitFloor0":
 						Action.exitFloor0();
+					case "exitFloor1":
+						Action.exitFloor1();
 					default:
 						trace("Unknown action");
 				}
@@ -439,5 +456,8 @@ class Level {
 	public function removeLighting() {
 		if(dark.parent == null) return;
 		dark.parent.removeChild(dark);
+	}
+	public function fakeTileWasRemoved(id:Int) {
+		fakeTileRemoved[id] = true;
 	}
 }

@@ -7,4 +7,8 @@ class Action {
 	public static function exitFloor0() {
 		Game.CUR.level.nextFloor();
 	}
+	public static function exitFloor1() {
+		trace("floor 1 completed!");
+		//Game.CUR.level.nextFloor();
+	}
 }
