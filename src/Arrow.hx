@@ -121,7 +121,7 @@ class Arrow extends Enemy {
 		anim.play();
 		anim.onEnd = function() {
 			Timer.delay(function() {
-				Actuate.tween(this, .8, {alpha: 0.}).onComplete(function() {
+				Actuate.tween(this, .5, {alpha: 0.}).onComplete(function() {
 					die();
 				}).onUpdate(function() {
 					shadow.alpha = this.alpha - .7;

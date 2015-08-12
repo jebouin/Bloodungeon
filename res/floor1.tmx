@@ -5,7 +5,7 @@
  </tileset>
  <layer name="ground0" width="57" height="64">
   <data encoding="base64" compression="zlib">
-   eJztkkEOxSAIBd32/hfu6ic/xiJWKYJDMotq0Te0VynlAgAAAACAkIyUd1YcwYtfeefA0Wcm9WxaFXW2I46SB466c3v39TJo7vSecW9mM1ktPSWH1n69bvGvSqXpk/bfONZ9Fo6rzm3tn+KoXbf8Z7+425peaR2lvnoNR1vX2X0cfd2kXNqMJzqO9kdw3BkccYwCjjkcIRea8s4IkJ1i/P4O4Lif40hFdjzhO870SOXpNZs3uuPKuezuC/J39M70pWMWXxz9861yfHrO4jjiH52WTybH/8rqmI0b2Ghxqg==
+   eJztkkEOxSAIBd32/hfu6ieN8SNWKYJDMotq0Te0VynlAgAAAACAkIyUd1YcwYtfeefA0Wcm9WxaFXW2I46SB466c3v39TJo7vSecW9mM1ktPSWH1n69bvGvSqXpk/bfONZ9Fo6rzm3tn+KoXV+F5Gh999debxylvnoNR1vX2X0cfd2kXNqMJzqO9kdw3Bkc4/vhiCOAF5ryzgiQnWL8/g7guJ/jSEV2POE7zvRI5ek1mze648q57O4L8nf0zvSlYxZfHP3zrXL895zFccQ/Oi2fTI7PyuqYjRtMU3HX
   </data>
  </layer>
  <layer name="ground1" width="57" height="64" visible="0">
@@ -15,17 +15,17 @@
  </layer>
  <layer name="over" width="57" height="64" opacity="0.48">
   <data encoding="base64" compression="zlib">
-   eJzt2dsNwyAMBVBGyAgeISMwQvafpqrUD4oa1TEGG/seKWorhYcLwSQpxdZl3D6AhqM5ouhjyhDjzg7BsZsMMYJvV/net/S/Abgs16iRts/PJ+l0ZZo2RhLWIS23g/P/Ke6QdQeEave9/jwLvLjL67S4H2+r97mkXB+H5V7e+/0DCcpw/kuNPcAIGiw/e754zI+e5qUW7vh5HA+uDDFGxB2Pu/3C0/XIYvxH27SIkRTq8I4Wt4e5qt+eBHIAQExa76283aO2MsTozV3OqCXO88aneRHv5exluIYzxBiZNFd5fmbcQ4yyfnuLFzHGiFFqxfXY1smpf1b7O6w5AAAAALCPF27dFvE=
+   eJzt2W0OgyAMBmCO4BF6BI/AEbz/aZYl+8HI3LpS6AfvkxhdokAHUtRSbF3G9UtFbTfMcTRbFn1MO8QY2SHYoskUY+32EMNV3vN//xuAy3KOGqn7fO1JpynTtDGSsAzpdRGcv09xh6wbIFS74/rxLPDiLq/T4nY8rV7nknJ5HJZree/PDyS4hvNfaqwBRtDg9bPHi8f86GlcauH2n8f+4Nohxoy4/XG3Xvh3PrLo/9E6LWIkhTK8o8X1Yazq1yeBHACQk9Z3K2/PqK0dYvTkW76oJcf7RklOxHc5ezvcwzvEmJk0V3l+Z9xDjLJ2e4sXMeaIUWrF/diWySl/Vv0R5hwAAAAAiOMBoVMXwQ==
   </data>
  </layer>
  <layer name="wall0" width="57" height="64">
   <data encoding="base64" compression="zlib">
-   eJztVkuuxDAIy4V6/+vNqpsoH2wIlAlIkV71Ymw3LpmntfYErubIoymLHqc4yqOcE+kxy9AuX9EeGc6dh3/zOPNsMTeiPHrjMmllcZFZRebPCb6IdVKX1fvo966wXsV49OS0KG8+lhPJzwzDamVxDDbbXGUw2Txa+ERnMVMR5xiRgf5v5N2iXFqP7F0s3XfiLmdxSM1mtld53Os3ekQ4tXwoLsNc1eIyaWVxmbSyuGxa2fvDW6tVae5XaV+WS6NR+9sBqdvujvI45mRyzOqsc5RxlscxJzNjWZ1fuOfefuVR19dayxeXZ1nwMd+/Z93mkc2bdCaP9qJaR/jdt5DV446jxyE9JHNj9X+tRy3uBo+rPUxWJVhrrSzuhEd27TSxOdT0iD5HrUdWZ3lcY3eaJJnue636sTqjPd5wjjOPIwyrk8Vq+KQeo89Rw5cpq95LqzNSu5V363dkmfGdhvKI70N0ITok2nbPX/DYP1txjfojuPIo52Sy2+9Fn09ntS/N9zjrJeWSatBWpMdarf0AgtrUsw==
+   eJztWwF22zAI9UHc5gJxdoE4vUCT+x9n09v0xn4BASKR3Zn3eK1jRfANBiSRZZqmtZMX4JX81fg2/aZrQIaHL1M/nRm9PxLmRRkjMf5ImKNFIzCeyP8em82/+O0PP+DzO+F3+N4IjFHbVV1RLs6H13vDSN/bQp9wXajEIWrXETEnirHX/lvHOHfI2yLGE/ydicw3hmmMmZn7Pb5a+G5gTiZ+RsfWeVdBR6keKGSpCTz1idWO1VdaNUvVUdK5x3cidHbIQ71fITODXi0vKrPYHmuEyg8YV6nko16/ObWHsFQwRvyhJ+fsIT8uHfJGYVyao75S0ZXml+KLD7jmfHkvdU7NrRFds+xI87wll+OaokVSHe/5rhSnJPvfQd55+pvvVzJGy82WugPnobFKirPP8tVXrJE1+Rpl+eoIjNZ1eRbGUgM9pIFA0bzak4/3EFd7vndgfI7MA6NMdX8H9/K49Tbm471g5Miz/4HPR6NaF9BnU5+nJSdfmLki+xCe/Y8MO3p8fq/7cgfGr7pK/qjVylF8hx3tuv4PGD17dvQcw5PrRvtqBvXY6cDow0jX3t61fGWpVoj0H2SfBRTKsF3GHN5cdWD8l7IxWtYN3Nkd6s3N8y6MjeiH+4hU3p25j3k1EjcwV3Fnajdyz4OR7hPRnhwudkh9OhkYkTQco9fI0lnqd8IoEWdffP+k9xPfzRE1QAZGtA29lvw/kssj6/n6XLWYadGTO3OQ+gtfbUdJd9ShZUevzNEYV0aHLWLUcjnGBk5vS2/caIxansPYYPVVzCMjMNLcrvUMcfVICyP3/EZgjMrzYJyVMR6ZW8S4lffRs2aw7Mm0xvX2S2JPiCWf17ifwUtjPu45cHFb65eMPKPss5lWzd0Ttw+MMiFG7CXR3styn+6t4poXe6iuk+zLrb7XTIzWPv6t/A4hIvM7YtT2MOjcUp7Q+vtwDYy/jaDx85lxFekszB2JAZ4Y9MyYo8m1cBZGmjdbMr01i6eG8cq03rfyT+7xE3M=
   </data>
  </layer>
- <layer name="wall1" width="57" height="64" visible="0">
+ <layer name="wall1" width="57" height="64">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAL4MOQAAAQ==
+   eJzt2lsOQDAQhWELoFZg/9v0QjRNKdPTS/T/XlwiSMxML+qmfLO3747tKrjv3TNacOlL8FPhtw+PW8cmnllzl++KEbzNj1Q++PeZI8eWZyp8zWPFu1E7xmaJoWVqEzf0bWFBjfsPRR+5RR1R9V0AABiVap6sdJtMW47amEMGgItivK9YJxD+a0hdC4zuzJda+VBibpD/FnmohYipOdbJiUHGZP2q3b6gnC1y7mltD9CbWAxDT7nuPzWup+5A6e26fmu/05obxDkA6O3e4wOe
   </data>
  </layer>
  <objectgroup name="active" width="57" height="64">
@@ -109,7 +109,7 @@
     <property name="id" value="0"/>
    </properties>
   </object>
-  <object type="Spinner" x="352" y="80" width="16" height="16">
+  <object type="Spinner" x="352" y="64" width="16" height="16">
    <properties>
     <property name="initAngle" value="0"/>
     <property name="nb" value="2"/>
