@@ -62,8 +62,8 @@ class Arrow extends Enemy {
 		}
 	}
 	override public function update() {
-		if(!shot) return;
 		super.update();
+		if(!shot) return;
 		if(flying) {
 			var cx = Util.SGN(vx) * 4 + xx;
 			var cy = Util.SGN(vy) * 4 + yy;

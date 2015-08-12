@@ -118,6 +118,6 @@ class Thwomp extends Enemy {
 		return Collision.circleToRect(hero.x, hero.y, hero.cradius, getCollisionRect());
 	}
 	public function getCollisionRect() {
-		return new Rectangle(xx + 6, yy + 5, 23, 24);
+		return new Rectangle(xx + 5, yy + 5, 24, 24);
 	}
 }
