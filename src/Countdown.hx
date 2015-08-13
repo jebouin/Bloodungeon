@@ -27,7 +27,7 @@ class Countdown extends Sprite {
 		alpha = .8;
 		frameRate = Std.int(Lib.current.stage.frameRate);
 		reset();
-		//visible = false;
+		visible = false;
 	}
 	function createBDS() {
 		bds = [];
@@ -46,10 +46,12 @@ class Countdown extends Sprite {
 		}
 	}
 	function tick() {
-		updateBitmap();
-		alpha = 1.;
-		scaleX = scaleY = 4.;
-		Actuate.tween(this, .3, {alpha: .8, scaleX: 3., scaleY: 3.});
+		if(visible) {
+			updateBitmap();
+			alpha = 1.;
+			scaleX = scaleY = 4.;
+			Actuate.tween(this, .3, {alpha: .8, scaleX: 3., scaleY: 3.});
+		}
 	}
 	public function updateBitmap() {
 		text.bitmapData = bds[Std.int(timer / frameRate)];

@@ -38,6 +38,7 @@ class Game extends Scene {
 		super.update();
 		if(locked) {
 			hero.update();
+			Torch.updateAll();
 		} else {
 			level.update();
 			var toDelete = [];

@@ -9,7 +9,9 @@ import flash.display.StageAlign;
 import flash.display.StageQuality;
 import flash.display.StageScaleMode;
 import flash.events.Event;
+import flash.events.MouseEvent;
 import flash.Lib;
+import flash.ui.Mouse;
 import net.hires.debug.Stats;
 @:bitmap("res/tileset.png") class TilesetBD extends BitmapData {}
 @:bitmap("res/hero.png") class HeroBD extends BitmapData {}
@@ -30,6 +32,8 @@ class Main {
 		Input.addKey("down", 40);
 		Input.addKey("action", 32);
 		Input.addKey("suicide", 82);
+		//Mouse.hide();
+		Lib.current.stage.addEventListener(MouseEvent.RIGHT_CLICK, function(_) {});
 	}
 	static function initGFX() {
 		SpriteLib.addBD("tileset", new TilesetBD(0, 0));

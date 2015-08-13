@@ -56,7 +56,7 @@ class Audio {
 	public static function init() {
 		musics = [];
 		musics.push(new Music(new Floor0Music(), 22.80, 45.61));
-		musics.push(new Music(new Floor1Music(), 31.335, 93.91));
+		musics.push(new Music(new Floor1Music(), 41.77, 104.345));
 		mute();
 	}
 	public static function playMusic(id:Int) {
