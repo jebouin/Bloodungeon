@@ -27,6 +27,7 @@ class Entity extends XSprite {
 	public var cradius : Float;
 	public var dead : Bool;
 	public var moves : Bool;
+	public var onIce : Bool;
 	public function new(?animName:String, ?hasShadow=true) {
 		super(animName);
 		xx = Const.WID * .5;
@@ -40,7 +41,7 @@ class Entity extends XSprite {
 		gravity = .8;
 		speed = 2.;
 		cradius = 5;
-		onGround = collides = locked = dead = false;
+		onGround = collides = locked = dead = onIce = false;
 		moves = true;
 		if(hasShadow) {
 			shadow = new Shape();
@@ -59,9 +60,16 @@ class Entity extends XSprite {
 	public override function update() {
 		if(locked) return;
 		if(moves) {
+			onIce = false;
+			var col = Game.CUR.level.getCollisionAt(xx, yy);
+			var curFriction = friction;
+			if(col == ICE) {
+				onIce = true;
+				curFriction = 0;
+			}
 			vz -= gravity;
-			vx -= vx * friction;
-			vy -= vy * friction;
+			vx -= vx * curFriction;
+			vy -= vy * curFriction;
 			vz -= vz * frictionZ;
 			if(maxSpeed > 0) {
 				var s = vx*vx + vy*vy;
@@ -77,7 +85,7 @@ class Entity extends XSprite {
 		this.y = Std.int(yy - zz * .5);
 		if(shadow != null) {
 			shadow.x = Std.int(xx);
-			shadow.y = Std.int(yy + height * (1. - originYRatio));
+			shadow.y = Std.int(yy + height * (1. - originYRatio) - 3.);
 		}
 		super.update();
 		if(collides) {

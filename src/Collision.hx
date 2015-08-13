@@ -5,6 +5,7 @@ enum TILE_COLLISION_TYPE {
 	FULL;
 	HOLE;
 	BOW;
+	ICE;
 }
 class Collision {
 	public static var TILE_COLLISIONS = [NONE,
@@ -22,7 +23,7 @@ class Collision {
 										 NONE, NONE, NONE, FULL, FULL, FULL, FULL, NONE,   NONE, NONE, NONE, NONE, NONE, NONE, NONE, NONE,
 										 NONE, NONE, NONE, FULL, FULL, FULL, FULL, NONE,   NONE, NONE, NONE, NONE, NONE, NONE, NONE, NONE,
 										 NONE, NONE, NONE, FULL, FULL, FULL, FULL, NONE,   NONE, NONE, NONE, NONE, NONE, NONE, NONE, NONE,
-										 NONE, NONE, NONE, NONE, NONE, NONE, NONE, NONE,   NONE, NONE, NONE, NONE, NONE, NONE, NONE, NONE,
+										 NONE, NONE, NONE, NONE, ICE, NONE, NONE, NONE,   NONE, NONE, NONE, NONE, NONE, NONE, NONE, NONE,
 										 NONE, NONE, NONE, NONE, NONE, NONE, NONE, NONE,   NONE, NONE, NONE, NONE, NONE, NONE, NONE, NONE,
 										 NONE, NONE, NONE, NONE, NONE, NONE, NONE, NONE,   NONE, NONE, NONE, NONE, NONE, NONE, NONE, NONE];
 	public static function circleToCircle(x0:Float, y0:Float, r0:Float, x1:Float, y1:Float, r1:Float) {

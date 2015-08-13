@@ -103,26 +103,33 @@ class Hero extends Entity {
 			}
 			hooverTimer++;
 			turnTimer++;
-			zz = .5 + Math.sin(hooverTimer * .2) * 1.5;
+			zz = 4.5 + Math.sin(hooverTimer * .2) * 1.5;
+			if(onIce) {
+				zz = 0;
+			}
 			var frame = anim.getFrame();
-			if(frame != targetFrame && turnTimer > 4 && targetFrame != -1) {
-				turnTimer = 0;
-				if(frame < targetFrame) {
-					if(frame + 8 - targetFrame < targetFrame - frame) {
-						frame--;
+			if(onIce) {
+				anim.setFrame(0);
+			} else {
+				if(frame != targetFrame && turnTimer > 4 && targetFrame != -1) {
+					turnTimer = 0;
+					if(frame < targetFrame) {
+						if(frame + 8 - targetFrame < targetFrame - frame) {
+							frame--;
+						} else {
+							frame++;
+						}
 					} else {
-						frame++;
+						if(frame - targetFrame < targetFrame + 8 - frame) {
+							frame--;
+						} else {
+							frame++;
+						}
 					}
-				} else {
-					if(frame - targetFrame < targetFrame + 8 - frame) {
-						frame--;
-					} else {
-						frame++;
-					}
+					if(frame < 0) frame += 8;
+					if(frame >= 8) frame -= 8;
+					anim.setFrame(frame);
 				}
-				if(frame < 0) frame += 8;
-				if(frame >= 8) frame -= 8;
-				anim.setFrame(frame);
 			}
 			shadow.rotation = frame * 45;
 		}

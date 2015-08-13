@@ -112,6 +112,7 @@ class Level {
 				var ground0Tile = ground0Layer.getTileAt(i, j);
 				var ground0TileCol = Collision.TILE_COLLISIONS[ground0Tile];
 				var ground1Tile = ground1Layer.getTileAt(i, j);
+				var ground1TileCol = Collision.TILE_COLLISIONS[ground1Tile];
 				var overTile = overLayer.getTileAt(i, j);
 				var overTileCol = Collision.TILE_COLLISIONS[overTile];
 				var wall0Tile = wall0Layer.getTileAt(i, j);
@@ -120,15 +121,15 @@ class Level {
 				var col = NONE;
 				if(ground0Tile == 0) {
 					col = HOLE;
-				} else {
-					if(wall1TileCol != NONE) {
-						col = wall1TileCol;
-					} else if(wall0TileCol != NONE) {
-						col = wall0TileCol;
-					} else if(ground0TileCol != NONE) {
-						col = ground0TileCol;
-					}
-				}
+				} else if(wall1TileCol != NONE) {
+					col = wall1TileCol;
+				} else if(wall0TileCol != NONE) {
+					col = wall0TileCol;
+				} else if(ground1TileCol == ICE) {
+					col = ICE;
+				} else if(ground0TileCol != NONE) {
+					col = ground0TileCol;
+				} 
 				tiles[j][i] = col;
 				function addSpecial(layer:TiledLayer, tile:Int) {
 					if(tile == 16) {
@@ -217,8 +218,8 @@ class Level {
 				Hero.spawnY = 55 * 16 + 8;*/
 			case 2:
 				removeLighting();
-				setRoomId(2, 2);
-				Hero.spawnX = 33 * 16 + 8;
+				setRoomId(3, 2);
+				Hero.spawnX = 43 * 16 + 8;
 				Hero.spawnY = 22 * 16 + 8;
 		}
 		Game.CUR.lm.getContainer().x = -posX;
