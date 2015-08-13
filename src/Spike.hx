@@ -25,6 +25,9 @@ class Spike extends Enemy {
 		} else if(dir == UP_LEFT || dir == UP_RIGHT || dir == UP) {
 			setOriginInPixels(0, 16);
 		}
+		if(dir != null) {
+			Game.CUR.lm.addChild(this, Const.BACK_L);
+		}
 		this.tx = tx;
 		this.ty = ty;
 		out = false;

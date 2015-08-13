@@ -117,7 +117,8 @@ class Level {
 				var overTileCol = Collision.TILE_COLLISIONS[overTile];
 				var wall0Tile = wall0Layer.getTileAt(i, j);
 				var wall0TileCol = Collision.TILE_COLLISIONS[wall0Tile];
-				var wall1TileCol = Collision.TILE_COLLISIONS[wall1Layer.getTileAt(i, j)];
+				var wall1Tile = wall1Layer.getTileAt(i, j);
+				var wall1TileCol = Collision.TILE_COLLISIONS[wall1Tile];
 				var col = NONE;
 				if(ground0Tile == 0) {
 					col = HOLE;
@@ -180,8 +181,8 @@ class Level {
 				if(overTile & 15 == 0) {
 					addSpecial(overLayer, overTile);
 				}
-				if(ground1Tile & 15 == 0) {
-					addSpecial(ground1Layer, ground1Tile);
+				if(wall1Tile & 15 == 0) {
+					addSpecial(wall1Layer, wall1Tile);
 				}
 				if(overTile == 88) {
 					overLayer.setTileAt(i, j, 0);
@@ -191,7 +192,7 @@ class Level {
 			}
 		}
 		overLayer.render(); //cleans spikes and torches on tiles
-		ground1Layer.render();
+		wall1Layer.render();
 		var bd = wall0Layer.bmp.bitmapData;
 		bd.applyFilter(bd, bd.rect, new Point(0, 0), new DropShadowFilter(1., -90, 0xFF000000, 1., 1., 8., 1., 1, true));
 		bd.applyFilter(bd, bd.rect, new Point(0, 0), new DropShadowFilter(1., 45, 0xFF000000, .2, 1., 1., 1., 1, false));
@@ -218,9 +219,12 @@ class Level {
 				Hero.spawnY = 55 * 16 + 8;*/
 			case 2:
 				removeLighting();
-				setRoomId(3, 2);
-				Hero.spawnX = 43 * 16 + 8;
-				Hero.spawnY = 22 * 16 + 8;
+				/*setRoomId(2, 2);
+				Hero.spawnX = 34 * 16 + 8;
+				Hero.spawnY = 22 * 16 + 8;*/
+				setRoomId(2, 0);
+				Hero.spawnX = 40 * 16 + 8;
+				Hero.spawnY = 8 * 16 + 8;
 		}
 		Game.CUR.lm.getContainer().x = -posX;
 		Game.CUR.lm.getContainer().y = -posY;

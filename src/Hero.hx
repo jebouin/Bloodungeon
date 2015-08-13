@@ -52,16 +52,17 @@ class Hero extends Entity {
 	}
 	override function update() {
 		if(!locked) {
+			var curSpeed = onIce ? speed * .05 : speed;
 			if(Input.keyDown("left")) {
-				vx -= speed;
+				vx -= curSpeed;
 				targetFrame = 4;
 			}
 			if(Input.keyDown("right")) {
-				vx += speed;
+				vx += curSpeed;
 				targetFrame = 0;
 			}
 			if(Input.keyDown("up")) {
-				vy -= speed;
+				vy -= curSpeed;
 				targetFrame = 6;
 				if(Input.keyDown("left")) {
 					targetFrame--;
@@ -70,7 +71,7 @@ class Hero extends Entity {
 				}
 			}
 			if(Input.keyDown("down")) {
-				vy += speed;
+				vy += curSpeed;
 				targetFrame = 2;
 				if(Input.keyDown("left")) {
 					targetFrame++;
@@ -108,28 +109,24 @@ class Hero extends Entity {
 				zz = 0;
 			}
 			var frame = anim.getFrame();
-			if(onIce) {
-				anim.setFrame(0);
-			} else {
-				if(frame != targetFrame && turnTimer > 4 && targetFrame != -1) {
-					turnTimer = 0;
-					if(frame < targetFrame) {
-						if(frame + 8 - targetFrame < targetFrame - frame) {
-							frame--;
-						} else {
-							frame++;
-						}
+			if(frame != targetFrame && turnTimer > 4 && targetFrame != -1) {
+				turnTimer = 0;
+				if(frame < targetFrame) {
+					if(frame + 8 - targetFrame < targetFrame - frame) {
+						frame--;
 					} else {
-						if(frame - targetFrame < targetFrame + 8 - frame) {
-							frame--;
-						} else {
-							frame++;
-						}
+						frame++;
 					}
-					if(frame < 0) frame += 8;
-					if(frame >= 8) frame -= 8;
-					anim.setFrame(frame);
+				} else {
+					if(frame - targetFrame < targetFrame + 8 - frame) {
+						frame--;
+					} else {
+						frame++;
+					}
 				}
+				if(frame < 0) frame += 8;
+				if(frame >= 8) frame -= 8;
+				anim.setFrame(frame);
 			}
 			shadow.rotation = frame * 45;
 		}

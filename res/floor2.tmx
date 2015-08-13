@@ -10,27 +10,45 @@
  </layer>
  <layer name="ground1" width="99" height="46">
   <data encoding="base64" compression="zlib">
-   eJzt1cEJwlAQRdEp1RIsISVYgiVYgovo2oVagVpHxl2ECSLoj+g5cDdZDTz4iQAAAAAAAADgF62z7oUO7U77O8viW5/tivbZotll3B2zU9E5bPFO3agptmhjNWqKLb6HLeZR/bsv2bXoFrb4pG08vlvP2sxyJQAAAAAAAAAtDByJN9M=
+   eJzt1MENgCAUREH6788StA7jnQMo4CbMJP9O9iWUAnOcA49vtFjvqNyjtqcO47Xsp8UaWuRo2U2LNd5uqsV4WuxFixxazOWPyqFFDi1y2DmHFjl6/6frn2duQQsAAAAAAAAAAAAAyHcDcc/qEQ==
   </data>
  </layer>
  <layer name="over" width="99" height="46" opacity="0.53">
   <data encoding="base64" compression="zlib">
-   eJzt0UEJAAAIBMGLYP+0fi0gIszAJtgEAAAAAAAAAAB21YhbXgAAAAAAAAAA8FEDrasAYQ==
+   eJzt1cEJACAIBVBHaIT2n7J7EFGkl94Dbx6ErxgBAAAAENE2NfeQ5zaLXjfiN1b7vsqEPLdZ9NyxvnTyB9xFvd3/oI4sAAAAAAAAAAAAAADeGh3SA5E=
   </data>
  </layer>
  <layer name="wall0" width="99" height="46">
   <data encoding="base64" compression="zlib">
-   eJztlgEKgkAURPcy3Tg7QXaC6nwlJAjp7jp9dWeaD0MhPf9jx6g+pdQ7zQQZc/EckysjN3fGtdfQnebmudr7uIt4Dr2Pu4jn0HEXbXFMrgpcn3nfmqs6V+rC2SbIOSNjLp5jclXnmFzVOSZXdY7JVZ1jclXnmFzVOSZXdY4pDyBHO68NMhH9rzm/G7jv+oPn3txRO3Nne0/fnbiL7XbWnO3YyZAnuM9dlHeiz/nSnCaZjrso79yii+nrOO6ivLOmi/M73SeXwmf9vcB35roYO/Bv9z47h3QL+ef/tCxZ6i6Xo53XBhlz8RyTqzrH5KrOMbmqc0yu6hyTqzrH5KrOMbmqc05bQcZcPMfkqs4xuapzTK7qHJOrOsfkqs4xuapzTK7qnNNOXnlyc8M=
+   eJztV+1OwzAMzPv/ZjwBHS8A4gWA54KCIlWhiT9JbNeWTlq3nO+6m5tsK6VsCTPg1Gze7N4rvpfMQrdXyzv7jrHvcTUpvJ6udJZ7Pbk+NXjYPtbmgvvZaM3q+c0saDyunmZZy4LLg557HI0r7t3YZ/8MnzOy6Gms3rsp+/BVsrCK9h5mat4Prx++8dHBrbk+68W9Z2z9N48zFxr51Tpm8TbQfAausXWVLDh1h5f8VJtTlCywn0FzvZ2soxY2i7aiZIHlUbPg6tU94JPAi5YF9CzHPvcl5wDqXLyX39y482Q1C60eM7OQ1lWzoNZ+pr0N8Cjsv9eqLDRA7SepJ6D3cYak+4VHzLiH+rvXXqv9m5HwKl470PC88v64vFWao73xpcCZYHUyC1gTc06pmVDmptXJLGBNyZkxs9DVzCz+8ixncTzXU8/wmQVec5RFzWBDrh/pZBaw5o7e/1jOuVxy5ur5nM1L2AKnkqfP8+Q1Os+T1+g8T16j8zx5jc7z5DU6z5PX6DxPXqPzErbAqeTp8zx5jc7z5DU6z5PX6DxPXqPzPHmNzvPkNTrPk9fovIQdfAGWPu7g
   </data>
  </layer>
  <layer name="wall1" width="99" height="46">
   <data encoding="base64" compression="zlib">
-   eJzt0bEJADAMA7AcH3p3P+hQPIQg7QZjVwEAAAAAAABknM9cR1vs9NrWfvP4BAAAAAAAAAAAALIuyhUCmQ==
+   eJzt2EsOgjAQgOEedY7AEbowuvUIbtx7BI7gkYQFSdPQdsC+tP+XzIJScMJAHxqDkU2tE0iQ1glURC2gJa0T6ETsm4mdk4w55LzXL/u2FlOiTUOSPaB5pmdr4faVcLe/p31vz77f1EKvdC3mJe6JeDm/IQa9ukbO3bzjS8lEOvJYwkYC9WxjlD+++PbakFdoLM+xjsUxNWsRmyNwbI3T6rsYZe5eiXdsA4Gy3H2A2xYK9Cm116OOes/K140ktk7RzH/b3Gx34n06K4TEajKb8NgiRbOCFv/t9YNa9INa1GUjsZLK+YxIuzfw94MAAAAAAAAAAAAAAKCcD0jLShQ=
   </data>
  </layer>
  <objectgroup name="active" width="99" height="46">
   <object type="Laser" x="1456" y="80" width="16" height="16"/>
   <object type="Thwomp" x="1488" y="112" width="32" height="32"/>
-  <object type="Laser" x="816" y="368" width="16" height="16"/>
+  <object type="Laser" x="528" y="192" width="16" height="16"/>
+  <object type="Laser" x="480" y="96" width="16" height="16"/>
+  <object type="Spinner" x="1008" y="64" width="16" height="16">
+   <properties>
+    <property name="initAngle" value="10"/>
+    <property name="nb" value="3"/>
+    <property name="size" value="7"/>
+    <property name="speed" value="-.6"/>
+   </properties>
+  </object>
+  <object type="FakeTile" x="1344" y="240" width="16" height="32">
+   <properties>
+    <property name="dir" value="right"/>
+    <property name="id" value="166"/>
+    <property name="secretId" value="2"/>
+   </properties>
+  </object>
+  <object type="Laser" x="1328" y="272" width="16" height="16"/>
+  <object type="Laser" x="1184" y="160" width="16" height="16"/>
  </objectgroup>
 </map>

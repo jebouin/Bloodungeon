@@ -24,7 +24,6 @@ class Laser extends Enemy {
 	}
 	override public function update() {
 		updateBeam();
-		timer++;
 		super.update();
 		var hero = Game.CUR.hero;
 		if(hero != null) {
@@ -52,6 +51,10 @@ class Laser extends Enemy {
 			}
 			if(rotation < 90) rotation += 360;
 			if(rotation > 270) rotation -= 360;
+			if(timer <= 2) {
+				rotation = heroAngle * 180 / Math.PI + 90;
+			}
+			timer++;
 		}
 	}
 	function updateBeam() {
@@ -94,7 +97,7 @@ class Laser extends Enemy {
 		var distFromBeam = Math.tan(da) * dist;
 		if(Math.abs(distFromBeam) > 5) return false;
 		var l = dist * Math.cos(da);
-		if(l > 7 && l < length) {
+		if(l > 0 && l < length) {
 			return true;
 		}
 		return false;
