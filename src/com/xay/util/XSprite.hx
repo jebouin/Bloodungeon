@@ -85,4 +85,8 @@ class XSprite extends Sprite {
 		bmp.x = -originXRatio * bmp.width;
 		bmp.y = -originYRatio * bmp.height;
 	}
+	public function setOriginInPixels(ox:Float, oy:Float) {
+		bmp.x = -ox;
+		bmp.y = -oy;
+	}
 }

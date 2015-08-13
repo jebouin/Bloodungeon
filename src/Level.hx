@@ -217,9 +217,9 @@ class Level {
 				Hero.spawnY = 55 * 16 + 8;*/
 			case 2:
 				removeLighting();
-				setRoomId(2, 2);
-				Hero.spawnX = 33 * 16;
-				Hero.spawnY = 23 * 16;
+				setRoomId(3, 2);
+				Hero.spawnX = 43 * 16;
+				Hero.spawnY = 22 * 16;
 		}
 		Game.CUR.lm.getContainer().x = -posX;
 		Game.CUR.lm.getContainer().y = -posY;
@@ -284,6 +284,8 @@ class Level {
 						var id = Std.parseInt(o.properties.get("id"));
 						var dir = Const.stringToDir(o.properties.get("dir"));
 						e = new FakeTile(tx, ty, twid, thei, id, secretId, dir);
+					case "Laser":
+						e = new Laser(this, tx, ty);
 					default:
 						
 				}

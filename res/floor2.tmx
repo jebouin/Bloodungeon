@@ -20,7 +20,7 @@
  </layer>
  <layer name="wall0" width="99" height="46">
   <data encoding="base64" compression="zlib">
-   eJzt1sEJwzAUBFH134f7dAG+mI8s7wwr2FseGhAkudZaVxezyanb70itdkdqtTtSq92RWu2O1Gp3pFa7I7XaXZe1yanb70itdkdqtTtSq92RWu2O1Gp3pFa7I7XaXZe1yfnj/U93nnZ/vsWbz/Qtvr/zje9bnLlz6if3UVzfIsclv0W/o87c2d/up+t/2hzXZW1y6vY7UqvdkVrtjtRqd6RWuyO12h2p1e5IrXbXZW1y6vY7UqvdkVrtjtRqd6RWuyO12h2p1e5IrXbX5ewGM1tuvQ==
+   eJztlkEKhEAMBOf//5h/7gPEdQyjpooONHhIkcI+6BxjzKRNKhNuP0dytXMkVztHcrVzJFc7R3K1cyRXO0dytXNJr1Qm3H6O5GrnSK52juRq50iudo7kaudIrnaO5Grnkl6pzBf9v+35NvdlFys7Z/ur7uni+ubqe/zXxeq9yqSL/ffTxfXNdHHkOndR/XbPk+c7ky6OO+ni+ZtP/tOSu0j6pDLh9nMkVztHcrVzJFc7R3K1cyRXO0dytXMkVzuX9Eplwu3nSK52juRq50iudo7kaudIrnaO5GrnSK52LumTH8Fhc+U=
   </data>
  </layer>
  <layer name="wall1" width="99" height="46" visible="0">
@@ -28,5 +28,7 @@
    eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAODXAEcoAAE=
   </data>
  </layer>
- <objectgroup name="active" width="99" height="46"/>
+ <objectgroup name="active" width="99" height="46">
+  <object type="Laser" x="784" y="352" width="16" height="16"/>
+ </objectgroup>
 </map>

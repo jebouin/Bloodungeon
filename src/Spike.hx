@@ -27,6 +27,7 @@ class Spike extends Enemy {
 		this.ty = ty;
 		out = false;
 		moves = false;
+		anim.stop();
 		super.update();
 		ALL.push(this);
 	}

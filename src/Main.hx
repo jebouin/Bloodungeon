@@ -67,6 +67,8 @@ class Main {
 		SpriteLib.addAnim("arrowIdle", "arrow", "7", 1);
 		SpriteLib.sliceBD("enemies", "fire", 0, 229, 14, 20, 5, 1);
 		SpriteLib.addAnim("fire", "fire", "0-4", 3);
+		SpriteLib.sliceBD("enemies", "xana", 0, 380, 12, 19, 1, 1);
+		SpriteLib.addAnim("xana", "xana", "0", 1);
 		SpriteLib.sliceBD("enemies", "sideSpike", 0, 251, 16, 16, 5, 8);
 		
 		SpriteLib.addAnim("spikeRightIdle", "sideSpike", "4", 1);
