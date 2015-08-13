@@ -5,12 +5,12 @@
  </tileset>
  <layer name="ground0" width="99" height="46">
   <data encoding="base64" compression="zlib">
-   eJztw0ENAAAMA6GzXuezsQckrJqqqqqqqqqqqqqqqqqqqqqqqj59MYP3Qw==
+   eJzt0TEKACAQA8F8/R7l/2zFxupQcALTL6SSFAAAwGLf7Z6f+QAAAAA4GQ80AAAAAAAAAAAAAHSbwWD0cQ==
   </data>
  </layer>
  <layer name="ground1" width="99" height="46">
   <data encoding="base64" compression="zlib">
-   eJzt0sEJgDAMBdCM7AgdwREcwREcwZHUg1CFUjy0Ir4H/5JTyE8EAAAAAAAAAPDEtCfdsr61zM8NhXkKnfRW6uKUstBWrYsxC22VujhuP/dchFji+vs6AAAAAAAAAIDv2QD+Pg6h
+   eJztwzEJAAAIADCjG8HIvhYQETZYBAAAAAAAAAAA7MqRWzUCAAAAAAAAAMAXDQmWAzE=
   </data>
  </layer>
  <layer name="over" width="99" height="46" visible="0" opacity="0.53">
@@ -20,15 +20,16 @@
  </layer>
  <layer name="wall0" width="99" height="46">
   <data encoding="base64" compression="zlib">
-   eJztlkEKhEAMBOf//5h/7gPEdQyjpooONHhIkcI+6BxjzKRNKhNuP0dytXMkVztHcrVzJFc7R3K1cyRXO0dytXNJr1Qm3H6O5GrnSK52juRq50iudo7kaudIrnaO5Grnkl6pzBf9v+35NvdlFys7Z/ur7uni+ubqe/zXxeq9yqSL/ffTxfXNdHHkOndR/XbPk+c7ky6OO+ni+ZtP/tOSu0j6pDLh9nMkVztHcrVzJFc7R3K1cyRXO0dytXMkVzuX9Eplwu3nSK52juRq50iudo7kaudIrnaO5GrnSK52LumTH8Fhc+U=
+   eJztllEKwjAQRHP/b+sJrCdQz6cF+9U2acZtkxlnYUAKr/vYEXRMKY1ON0HGXDzH5MrIrd147zN0p7l1bu973EU8h77HXcRz6LiLvjgmVwVuzHzuzVWdK3XhHBPkzsiYi+eYXNU5Jld1jslVnWNyVeeYXNU5Jld1jslVnWPKE0hr59ogE9F/zf3u4L7bD55nc6125m77SMtO3MVxO/fcdu5kygvc5y7KO9Hvee24i/JOd7Hkeu7i8snwzRXc5y7KO3NdzB34t/ucnVOGjfzzf1qWbHWXS2vn2iBjLp5jclXnmFzVOSZXdY7JVZ1jclXnmFzVOSZXdc7pK8iYi+eYXNU5Jld1jslVnWNyVeeYXNU5Jld1jslVnXP6yRs/2nKb
   </data>
  </layer>
- <layer name="wall1" width="99" height="46" visible="0">
+ <layer name="wall1" width="99" height="46">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20ND6AAAAAAAAAAAAAAAAAAAAAAAODXAEcoAAE=
+   eJzt0cEJADAIBEGLl9SdDiQPUQgzFSx3EQAAAAAAAAA9znbAx6ptc6yCVz4BAAAAAAAAAACAXhfnCwIV
   </data>
  </layer>
  <objectgroup name="active" width="99" height="46">
-  <object type="Laser" x="784" y="352" width="16" height="16"/>
+  <object type="Laser" x="1456" y="80" width="16" height="16"/>
+  <object type="Thwomp" x="1488" y="112" width="32" height="32"/>
  </objectgroup>
 </map>
