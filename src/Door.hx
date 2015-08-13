@@ -23,6 +23,7 @@ class Door extends Entity {
 		this.wid = wid;
 		this.hei = hei;
 		this.level = level;
+		moves = false;
 		bmp.bitmapData = new BitmapData(16 * wid, 27, true, 0x0);
 		SpriteLib.copyFramePixelsFromSlice(bmp.bitmapData, "door", 0, 0, 0);
 		SpriteLib.copyFramePixelsFromSlice(bmp.bitmapData, "door", 2, wid * 16 - 16, 0);

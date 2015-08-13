@@ -67,6 +67,27 @@ class Main {
 		SpriteLib.addAnim("arrowIdle", "arrow", "7", 1);
 		SpriteLib.sliceBD("enemies", "fire", 0, 229, 14, 20, 5, 1);
 		SpriteLib.addAnim("fire", "fire", "0-4", 3);
+		SpriteLib.sliceBD("enemies", "sideSpike", 0, 251, 16, 16, 5, 8);
+		
+		SpriteLib.addAnim("spikeRightIdle", "sideSpike", "4", 1);
+		SpriteLib.addAnim("spikeLeftIdle", "sideSpike", "9", 1);
+		SpriteLib.addAnim("spikeUpIdle", "sideSpike", "14", 1);
+		SpriteLib.addAnim("spikeDownIdle", "sideSpike", "19", 1);
+		
+		SpriteLib.addAnim("spikeUpLeftIdle", "sideSpike", "24", 1);
+		SpriteLib.addAnim("spikeDownRightIdle", "sideSpike", "29", 1);
+		SpriteLib.addAnim("spikeDownLeftIdle", "sideSpike", "34", 1);
+		SpriteLib.addAnim("spikeUpRightIdle", "sideSpike", "39", 1);
+		
+		SpriteLib.addAnim("spikeRightOut", "sideSpike", "0-3", 6);
+		SpriteLib.addAnim("spikeLeftOut", "sideSpike", "5-8", 6);
+		SpriteLib.addAnim("spikeUpOut", "sideSpike", "10-13", 6);
+		SpriteLib.addAnim("spikeDownOut", "sideSpike", "15-18", 6);
+		
+		SpriteLib.addAnim("spikeUpLeftOut", "sideSpike", "20-23", 6);
+		SpriteLib.addAnim("spikeDownRightOut", "sideSpike", "25-28", 6);
+		SpriteLib.addAnim("spikeDownLeftOut", "sideSpike", "30-33", 6);
+		SpriteLib.addAnim("spikeUpRightOut", "sideSpike", "35-38", 6);
 		font = new BitmapFont(new FontTinyBD(0, 0), 5, 5);
 	}
 	static function main() {

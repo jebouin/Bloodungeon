@@ -21,6 +21,7 @@ class FakeTile extends Enemy {
 		this.wid = wid;
 		this.hei = hei;
 		fadeThis = false;
+		moves = false;
 		bmp.bitmapData = new BitmapData(wid << 4, hei << 4, true);
 		for(j in 0...hei) {
 			for(i in 0...wid) {

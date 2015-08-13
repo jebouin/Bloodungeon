@@ -17,6 +17,7 @@ class Button extends Entity {
 		this.ty = ty;
 		this.id = id;
 		pushed = false;
+		moves = false;
 		xx = tx * 16;
 		yy = ty * 16 + 16;
 		Game.CUR.lm.addChild(this, Const.FRONT_L);

@@ -19,6 +19,7 @@ import flash.geom.Point;
 import Collision;
 @:file("res/floor0.tmx") class Floor0TMX extends ByteArray {}
 @:file("res/floor1.tmx") class Floor1TMX extends ByteArray {}
+@:file("res/floor2.tmx") class Floor2TMX extends ByteArray {}
 class Level {
 	public static var ROOMID = 0;
 	public static var RWID : Int;
@@ -37,7 +38,7 @@ class Level {
 	var nbRoomsX : Int;
 	var nbRoomsY : Int;
 	var tiles : Array<Array<TILE_COLLISION_TYPE> >;
-	var spikePos : Array<{x:Int, y:Int}>;
+	var spikePos : Array<{x:Int, y:Int, dir:Const.DIR8}>;
 	var bowsPos : Array<{x:Int, y:Int, dir:Const.DIR}>;
 	var torches : Array<Torch>;
 	var fakeTileRemoved : Array<Bool>;
@@ -53,7 +54,7 @@ class Level {
 		RWID = Std.int(Const.WID / 16);
 		RHEI = Std.int(Const.HEI / 16);
 		renderLighting();
-		load(0);
+		load(2);
 		loadEntities(roomIdX, roomIdY);
 	}
 	public function update() {
@@ -76,6 +77,8 @@ class Level {
 				map = new TiledMap(new Floor0TMX().toString());
 			case 1:
 				map = new TiledMap(new Floor1TMX().toString());
+			case 2:
+				map = new TiledMap(new Floor2TMX().toString());
 			default:
 				return;
 		}
@@ -108,6 +111,7 @@ class Level {
 			for(i in 0...WID) {
 				var ground0Tile = ground0Layer.getTileAt(i, j);
 				var ground0TileCol = Collision.TILE_COLLISIONS[ground0Tile];
+				var ground1Tile = ground1Layer.getTileAt(i, j);
 				var overTile = overLayer.getTileAt(i, j);
 				var overTileCol = Collision.TILE_COLLISIONS[overTile];
 				var wall0Tile = wall0Layer.getTileAt(i, j);
@@ -126,27 +130,57 @@ class Level {
 					}
 				}
 				tiles[j][i] = col;
-				if(overTile & 15 == 0) {
-					if(overTile == 16) {
-						overLayer.setTileAt(i, j, 0);
-						spikePos.push({x:i, y:j});
-					} else if(overTile == 32) {
-						overLayer.setTileAt(i, j, 0);
+				function addSpecial(layer:TiledLayer, tile:Int) {
+					if(tile == 16) {
+						layer.setTileAt(i, j, 0);
+						spikePos.push({x:i, y:j, dir:null});
+					} else if(tile == 32) {
+						layer.setTileAt(i, j, 0);
 						setCollision(i, j, BOW);
 						bowsPos.push({x:i, y:j, dir:RIGHT});
-					} else if(overTile == 48) {
-						overLayer.setTileAt(i, j, 0);
+					} else if(tile == 48) {
+						layer.setTileAt(i, j, 0);
 						setCollision(i, j, BOW);
 						bowsPos.push({x:i, y:j, dir:LEFT});
-					} else if(overTile == 64) {
-						overLayer.setTileAt(i, j, 0);
+					} else if(tile == 64) {
+						layer.setTileAt(i, j, 0);
 						setCollision(i, j, BOW);
 						bowsPos.push({x:i, y:j, dir:UP});
-					} else if(overTile == 80) {
-						overLayer.setTileAt(i, j, 0);
+					} else if(tile == 80) {
+						layer.setTileAt(i, j, 0);
 						setCollision(i, j, BOW);
 						bowsPos.push({x:i, y:j, dir:DOWN});
+					} else if(tile == 96) {
+						layer.setTileAt(i, j, 0);
+						spikePos.push({x:i, y:j, dir:RIGHT});
+					} else if(tile == 112) {
+						layer.setTileAt(i, j, 0);
+						spikePos.push({x:i, y:j, dir:LEFT});
+					} else if(tile == 128) {
+						layer.setTileAt(i, j, 0);
+						spikePos.push({x:i, y:j, dir:UP});
+					} else if(tile == 144) {
+						layer.setTileAt(i, j, 0);
+						spikePos.push({x:i, y:j, dir:DOWN});
+					} else if(tile == 160) {
+						layer.setTileAt(i, j, 0);
+						spikePos.push({x:i, y:j, dir:UP_LEFT});
+					} else if(tile == 176) {
+						layer.setTileAt(i, j, 0);
+						spikePos.push({x:i, y:j, dir:DOWN_RIGHT});
+					} else if(tile == 192) {
+						layer.setTileAt(i, j, 0);
+						spikePos.push({x:i, y:j, dir:DOWN_LEFT});
+					} else if(tile == 208) {
+						layer.setTileAt(i, j, 0);
+						spikePos.push({x:i, y:j, dir:UP_RIGHT});
 					}
+				}
+				if(overTile & 15 == 0) {
+					addSpecial(overLayer, overTile);
+				}
+				if(ground1Tile & 15 == 0) {
+					addSpecial(ground1Layer, ground1Tile);
 				}
 				if(overTile == 88) {
 					overLayer.setTileAt(i, j, 0);
@@ -156,18 +190,19 @@ class Level {
 			}
 		}
 		overLayer.render(); //cleans spikes and torches on tiles
+		ground1Layer.render();
 		var bd = wall0Layer.bmp.bitmapData;
 		bd.applyFilter(bd, bd.rect, new Point(0, 0), new DropShadowFilter(1., -90, 0xFF000000, 1., 1., 8., 1., 1, true));
 		bd.applyFilter(bd, bd.rect, new Point(0, 0), new DropShadowFilter(1., 45, 0xFF000000, .2, 1., 1., 1., 1, false));
 		bd.applyFilter(bd, bd.rect, new Point(0, 0), new DropShadowFilter(1., 135, 0xFF000000, .2, 1., 1., 1., 1, false));
 		switch(floor) {
 			case 0:
-				setRoomId(2, 3);
+				/*setRoomId(2, 3);
 				Hero.spawnX = 31 * 16 + 8;
-				Hero.spawnY = 34 * 16 + 8;
-				/*setRoomId(1, 5);
+				Hero.spawnY = 34 * 16 + 8;*/
+				setRoomId(1, 5);
 				Hero.spawnX = 21 * 16 + 8;
-				Hero.spawnY = 52 * 16 + 8;*/
+				Hero.spawnY = 52 * 16 + 8;
 				addLighting();
 			case 1:
 				removeLighting();
@@ -180,6 +215,11 @@ class Level {
 				/*setRoomId(1, 6);
 				Hero.spawnX = 26 * 16 + 8;
 				Hero.spawnY = 55 * 16 + 8;*/
+			case 2:
+				removeLighting();
+				setRoomId(2, 2);
+				Hero.spawnX = 33 * 16;
+				Hero.spawnY = 23 * 16;
 		}
 		Game.CUR.lm.getContainer().x = -posX;
 		Game.CUR.lm.getContainer().y = -posY;
@@ -191,8 +231,9 @@ class Level {
 		for(pos in spikePos) {
 			var tx = pos.x;
 			var ty = pos.y;
+			var dir = pos.dir;
 			if(isInRoom(tx, ty, idx, idy)) {
-				var s = new Spike(tx, ty);
+				var s = new Spike(tx, ty, dir);
 				s.roomId = ROOMID;
 				Game.CUR.addEntity(s);
 			}

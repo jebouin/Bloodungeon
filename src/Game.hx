@@ -59,6 +59,12 @@ class Game extends Scene {
 		entities.push(e);
 	}
 	public function clearEntities(keepHero:Bool = false) {
+		for(s in Spike.ALL) {
+			if(s.timer != null) {
+				s.timer.stop();
+				s.timer = null;
+			}
+		}
 		for(e in entities) {
 			if(!keepHero || e != hero) {
 				e.delete();

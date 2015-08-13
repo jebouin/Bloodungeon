@@ -86,7 +86,7 @@ class Spinner extends Enemy {
 			var distFromBranch = Math.tan(aa) * dist;
 			if(Math.abs(distFromBranch) > 6) continue;
 			var l = dist * Math.cos(aa);
-			if(l > 9 && l < (size + 1) * 16 - 8) {
+			if(l > 10 && l < (size + 1) * 16 - 8) {
 				return true;
 			}
 			//trace(distFromBranch, l);

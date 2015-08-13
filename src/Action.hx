@@ -8,7 +8,6 @@ class Action {
 		Game.CUR.level.nextFloor();
 	}
 	public static function exitFloor1() {
-		trace("floor 1 completed!");
-		//Game.CUR.level.nextFloor();
+		Game.CUR.level.nextFloor();
 	}
 }
