@@ -22,12 +22,14 @@ class Spike extends Enemy {
 		yy = ty * 16;
 		if(dir == null) {
 			yy -= 10;
+		} else if(dir == UP_LEFT || dir == UP_RIGHT || dir == UP) {
+			setOriginInPixels(0, 16);
 		}
 		this.tx = tx;
 		this.ty = ty;
 		out = false;
 		moves = false;
-		anim.stop();
+		anim.setFrame((tx + ty & 1) * 2);
 		super.update();
 		ALL.push(this);
 	}
@@ -90,7 +92,7 @@ class Spike extends Enemy {
 					}
 				}
 			}
-		}, 40);
+		}, 50);
 	}
 	function isSameTile(otx:Int, oty:Int) {
 		return otx == tx && oty == ty;
@@ -104,6 +106,7 @@ class Spike extends Enemy {
 			|| (isSameTile(Std.int(e.xx - e.cradius) >> 4, Std.int(e.yy + e.cradius) >> 4));
 	}
 	function hits(e:Entity) {
+		if(e.dead) return false;
 		var sameTile = isSameTile(Std.int(e.xx) >> 4, Std.int(e.yy) >> 4);
 		if(!sameTile) {
 			return false;

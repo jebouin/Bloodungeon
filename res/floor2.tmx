@@ -10,26 +10,27 @@
  </layer>
  <layer name="ground1" width="99" height="46">
   <data encoding="base64" compression="zlib">
-   eJzt0bENgCAARFFGdwSHUicQJ1DnkJICWiDyXvL7Sy4EAAAAAAAAAKC1LbUXOnqOmtSZioWunqN+aMmq8UUba1aNL8bhi3HcqafQ23MUAAAAAAAAAEzkA2ebJiM=
+   eJzt1cEJwlAQRdEp1RIsISVYgiVYgovo2oVagVpHxl2ECSLoj+g5cDdZDTz4iQAAAAAAAADgF62z7oUO7U77O8viW5/tivbZotll3B2zU9E5bPFO3agptmhjNWqKLb6HLeZR/bsv2bXoFrb4pG08vlvP2sxyJQAAAAAAAAAtDByJN9M=
   </data>
  </layer>
- <layer name="over" width="99" height="46" visible="0" opacity="0.53">
+ <layer name="over" width="99" height="46" opacity="0.53">
   <data encoding="base64" compression="zlib">
    eJzt0UEJAAAIBMGLYP+0fi0gIszAJtgEAAAAAAAAAAB21YhbXgAAAAAAAAAA8FEDrasAYQ==
   </data>
  </layer>
  <layer name="wall0" width="99" height="46">
   <data encoding="base64" compression="zlib">
-   eJztllEKwjAQRHP/b+sJrCdQz6cF+9U2acZtkxlnYUAKr/vYEXRMKY1ON0HGXDzH5MrIrd147zN0p7l1bu973EU8h77HXcRz6LiLvjgmVwVuzHzuzVWdK3XhHBPkzsiYi+eYXNU5Jld1jslVnWNyVeeYXNU5Jld1jslVnWPKE0hr59ogE9F/zf3u4L7bD55nc6125m77SMtO3MVxO/fcdu5kygvc5y7KO9Hvee24i/JOd7Hkeu7i8snwzRXc5y7KO3NdzB34t/ucnVOGjfzzf1qWbHWXS2vn2iBjLp5jclXnmFzVOSZXdY7JVZ1jclXnmFzVOSZXdc7pK8iYi+eYXNU5Jld1jslVnWNyVeeYXNU5Jld1jslVnXP6yRs/2nKb
+   eJztlgEKgkAURPcy3Tg7QXaC6nwlJAjp7jp9dWeaD0MhPf9jx6g+pdQ7zQQZc/EckysjN3fGtdfQnebmudr7uIt4Dr2Pu4jn0HEXbXFMrgpcn3nfmqs6V+rC2SbIOSNjLp5jclXnmFzVOSZXdY7JVZ1jclXnmFzVOSZXdY4pDyBHO68NMhH9rzm/G7jv+oPn3txRO3Nne0/fnbiL7XbWnO3YyZAnuM9dlHeiz/nSnCaZjrso79yii+nrOO6ivLOmi/M73SeXwmf9vcB35roYO/Bv9z47h3QL+ef/tCxZ6i6Xo53XBhlz8RyTqzrH5KrOMbmqc0yu6hyTqzrH5KrOMbmqc05bQcZcPMfkqs4xuapzTK7qHJOrOsfkqs4xuapzTK7qnNNOXnlyc8M=
   </data>
  </layer>
  <layer name="wall1" width="99" height="46">
   <data encoding="base64" compression="zlib">
-   eJzt0cEJADAIBEGLl9SdDiQPUQgzFSx3EQAAAAAAAAA9znbAx6ptc6yCVz4BAAAAAAAAAACAXhfnCwIV
+   eJzt0bEJADAMA7AcH3p3P+hQPIQg7QZjVwEAAAAAAABknM9cR1vs9NrWfvP4BAAAAAAAAAAAALIuyhUCmQ==
   </data>
  </layer>
  <objectgroup name="active" width="99" height="46">
   <object type="Laser" x="1456" y="80" width="16" height="16"/>
   <object type="Thwomp" x="1488" y="112" width="32" height="32"/>
+  <object type="Laser" x="816" y="368" width="16" height="16"/>
  </objectgroup>
 </map>
