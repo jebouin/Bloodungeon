@@ -21,11 +21,11 @@ class Game extends Scene {
 		frontlm = new LayerManager();
 		Main.renderer.addChild(lm.getContainer());
 		Main.renderer.addChild(frontlm.getContainer());
+		cd = new Countdown();
 		entities = [];
 		level = new Level();
 		hero = new Hero();
 		entities.push(hero);
-		cd = new Countdown();
 		locked = false;
 	}
 	override public function delete() {

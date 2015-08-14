@@ -3,6 +3,7 @@ import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.display.BlendMode;
 import flash.display.Sprite;
+import flash.filters.GlowFilter;
 import flash.Lib;
 import haxe.Timer;
 import motion.Actuate;
@@ -11,6 +12,7 @@ class Countdown extends Sprite {
 	var text : Bitmap;
 	var timer : Int;
 	var frameRate : Int;
+	var activated : Bool;
 	public function new() {
 		super();
 		this.mouseChildren = this.mouseEnabled = false;
@@ -27,6 +29,7 @@ class Countdown extends Sprite {
 		alpha = .8;
 		frameRate = Std.int(Lib.current.stage.frameRate);
 		reset();
+		activated = false;
 		visible = false;
 	}
 	function createBDS() {
@@ -40,9 +43,14 @@ class Countdown extends Sprite {
 		updateBitmap();
 	}
 	public function update() {
+		if(!activated) return;
+		if(timer == 0) return;
 		timer--;
 		if(timer % frameRate == 0) {
-			tick();
+			tick();	
+		}
+		if(timer == 0) {
+			Game.CUR.hero.die();
 		}
 	}
 	function tick() {
@@ -63,5 +71,16 @@ class Countdown extends Sprite {
 	}
 	public function unlock() {
 		//visible = true;
+	}
+	public function activate() {
+		if(activated) return;
+		reset();
+		activated = true;
+		visible = true;
+	}
+	public function deactivate() {
+		if(!activated) return;
+		activated = false;
+		visible = false;
 	}
 }

@@ -45,6 +45,7 @@ class Hero extends Entity {
 		Game.CUR.lm.addChild(this, Const.HERO_L);
 		setLightPos(xx, yy);
 		update();
+		Game.CUR.cd.reset();
 		//set dir
 	}
 	override function delete() {
