@@ -22,6 +22,7 @@ class Cannon extends Enemy {
 		ALL.push(this);
 	}
 	override public function delete() {
+		super.delete();
 		ALL.remove(this);
 	}
 	override public function update() {

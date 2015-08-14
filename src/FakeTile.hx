@@ -65,7 +65,12 @@ class FakeTile extends Enemy {
 	function disappear() {
 		for(j in ty...ty+hei) {
 			for(i in tx...tx+wid) {
-				Game.CUR.level.setCollision(i, j, NONE);
+				var rcol = Game.CUR.level.getCollision(i+1, j);
+				if(rcol == ICE) {
+					Game.CUR.level.setCollision(i, j, ICE);
+				} else {
+					Game.CUR.level.setCollision(i, j, NONE);
+				}
 			}
 		}
 		//BOOM!

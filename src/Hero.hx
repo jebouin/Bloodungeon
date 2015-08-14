@@ -149,11 +149,11 @@ class Hero extends Entity {
 		var dy = horizontal?0:1;
 		var sx = tx, ex = tx;
 		var sy = ty, ey = ty;
-		while(Game.CUR.level.getCollision(sx, sy) == NONE && tx - sx < 10 && ty - sy < 10) {
+		while(Game.CUR.level.getCollision(sx, sy) != FULL && tx - sx < 10 && ty - sy < 10) {
 			sx -= dx;
 			sy -= dy;
 		}
-		while(Game.CUR.level.getCollision(ex, ey) == NONE && ex - tx < 10 && ey - ty < 10) {
+		while(Game.CUR.level.getCollision(ex, ey) != FULL && ex - tx < 10 && ey - ty < 10) {
 			ex += dx;
 			ey += dy;
 		}
@@ -162,11 +162,12 @@ class Hero extends Entity {
 		spawnX = stx * 16 + 8;
 		spawnY = sty * 16 + 8;
 		if(prevRoomDir == Const.DIR.DOWN) {
-			spawnY += 12;
+			spawnY += 8;
 		}
 	}
 	function goToNextRoom(dir:Const.DIR) {
 		prevRoomDir = dir;
+		vx = vy = 0;
 		Game.CUR.nextRoom(dir);
 	}
 	function updateLight() {

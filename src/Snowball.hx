@@ -20,6 +20,12 @@ class Snowball extends Enemy {
 		shadow.scaleX *= .8;
 		shadow.scaleY *= .8;
 	}
+	override public function delete() {
+		if(splash != null) {
+			splash.delete();
+		}
+		super.delete();
+	}
 	override public function update() {
 		super.update();
 		if(!splashed) {
@@ -43,7 +49,6 @@ class Snowball extends Enemy {
 			}
 		} else {
 			if(!splash.anim.playing) {
-				splash.delete();
 				die();
 				return;
 			}
