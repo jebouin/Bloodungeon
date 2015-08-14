@@ -8,6 +8,7 @@ import flash.media.SoundTransform;
 //music should be 160 kbps
 @:sound("res/floor0.mp3") class Floor0Music extends Sound {}
 @:sound("res/floor1.mp3") class Floor1Music extends Sound {}
+@:sound("res/floor2.mp3") class Floor2Music extends Sound {}
 class Music {
 	public var sound : Sound;
 	public var chan : SoundChannel;
@@ -57,15 +58,16 @@ class Audio {
 		musics = [];
 		musics.push(new Music(new Floor0Music(), 22.80, 45.61));
 		musics.push(new Music(new Floor1Music(), 41.77, 104.345));
-		mute();
+		musics.push(new Music(new Floor2Music(), 29.56, 88.605));
+		//mute();
 	}
 	public static function playMusic(id:Int) {
-		if(id >= 0 && id < 2) {
+		if(id >= 0 && id < 3) {
 			playingMusic = id;
 			for(m in musics) {
 				m.stop();
 			}
-			musics[id].play(0);
+			musics[id].play(80 * 1000);
 		}
 	}
 	public static function mute() {
