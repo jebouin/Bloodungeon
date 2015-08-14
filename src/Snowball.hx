@@ -36,7 +36,7 @@ class Snowball extends Enemy {
 			if(vy < 0) {
 				cy += 3;
 			}
-			if(Math.abs(x - startX) > 8 || Math.abs(y - startY) > 8) {
+			if(Math.abs(x - startX) > 7 || Math.abs(y - startY) > 7) {
 				if(Game.CUR.level.pointCollides(cx, cy, false, false)) {
 					if(!Game.CUR.level.pointCollides(cx, cy - svy, false, false)) {
 						vx = 0;
