@@ -61,6 +61,7 @@ class Level {
 		Bow.updateAll();
 		Spinner.updateAll();
 		Torch.updateAll();
+		Cannon.updateAll();
 	}
 	public function load(floor:Int) {
 		Audio.playMusic(floor);
@@ -222,9 +223,9 @@ class Level {
 				/*setRoomId(2, 2);
 				Hero.spawnX = 34 * 16 + 8;
 				Hero.spawnY = 22 * 16 + 8;*/
-				setRoomId(5, 1);
-				Hero.spawnX = 72 * 16 + 8;
-				Hero.spawnY = 16 * 16 + 8;
+				setRoomId(6, 2);
+				Hero.spawnX = 86 * 16 + 8;
+				Hero.spawnY = 20 * 16 + 8;
 		}
 		Game.CUR.lm.getContainer().x = -posX;
 		Game.CUR.lm.getContainer().y = -posY;
@@ -243,7 +244,7 @@ class Level {
 				Game.CUR.addEntity(s);
 			}
 		}
-		Bow.timer = 1000;
+		Bow.timer = Cannon.timer = 1000;
 		for(pos in bowsPos) {
 			if(isInRoom(pos.x, pos.y, idx, idy)) {
 				var b = new Bow(pos.x, pos.y, pos.dir);
@@ -291,6 +292,9 @@ class Level {
 						e = new FakeTile(tx, ty, twid, thei, id, secretId, dir);
 					case "Laser":
 						e = new Laser(this, tx, ty);
+					case "Cannon":
+						e = new Cannon(this, tx, ty);
+						setCollision(tx, ty, FULL);
 					default:
 						
 				}

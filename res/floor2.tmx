@@ -52,5 +52,6 @@
   <object type="Thwomp" x="1312" y="16" width="32" height="32"/>
   <object type="Thwomp" x="1152" y="48" width="32" height="32"/>
   <object type="Laser" x="1456" y="128" width="16" height="16"/>
+  <object type="Cannon" x="1472" y="352" width="16" height="16"/>
  </objectgroup>
 </map>

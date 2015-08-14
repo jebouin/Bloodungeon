@@ -71,6 +71,13 @@ class Main {
 		SpriteLib.addAnim("xana", "xana", "0", 1);
 		SpriteLib.sliceBD("enemies", "sideSpike", 0, 251, 16, 16, 5, 5);
 		SpriteLib.sliceBD("enemies", "frontSpike", 0, 331, 16, 28, 5, 3);
+		SpriteLib.sliceBD("enemies", "cannon", 0, 443, 18, 18, 4, 1);
+		SpriteLib.addAnim("cannonFront", "cannon", "0,3", 30);
+		SpriteLib.addAnim("cannonDiag", "cannon", "2,1", 30);
+		SpriteLib.sliceBD("enemies", "snowball", 0, 462, 12, 12, 4, 1);
+		SpriteLib.addAnim("snowball", "snowball", "0-3", 3);
+		SpriteLib.sliceBD("enemies", "snowsplash", 0, 475, 5, 16, 3, 1);
+		SpriteLib.addAnim("snowsplash", "snowsplash", "0-2", 3);
 		
 		SpriteLib.addAnim("spikeRightIdle", "sideSpike", "2,3,4,3", 10);
 		SpriteLib.addAnim("spikeLeftIdle", "sideSpike", "7,8,9,8", 10);
