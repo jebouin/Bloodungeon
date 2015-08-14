@@ -59,7 +59,7 @@ class Audio {
 		musics.push(new Music(new Floor0Music(), 22.80, 45.61));
 		musics.push(new Music(new Floor1Music(), 41.77, 104.345));
 		musics.push(new Music(new Floor2Music(), 29.56, 88.605));
-		//mute();
+		mute();
 	}
 	public static function playMusic(id:Int) {
 		if(id >= 0 && id < 3) {
@@ -67,7 +67,7 @@ class Audio {
 			for(m in musics) {
 				m.stop();
 			}
-			musics[id].play(80 * 1000);
+			musics[id].play(0);
 		}
 	}
 	public static function mute() {

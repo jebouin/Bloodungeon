@@ -208,23 +208,23 @@ class Level {
 				addLighting();
 			case 1:
 				removeLighting();
-				setRoomId(2, 5);
+				/*setRoomId(2, 5);
 				Hero.spawnX = 35 * 16 + 8;
-				Hero.spawnY = 51 * 16 + 8;
-				/*setRoomId(0, 0);
+				Hero.spawnY = 51 * 16 + 8;*/
+				setRoomId(0, 0);
 				Hero.spawnX = 12 * 16 + 8;
-				Hero.spawnY = 6 * 16 + 8;*/
+				Hero.spawnY = 6 * 16 + 8;
 				/*setRoomId(1, 6);
 				Hero.spawnX = 26 * 16 + 8;
 				Hero.spawnY = 55 * 16 + 8;*/
 			case 2:
 				removeLighting();
-				setRoomId(2, 2);
+				/*setRoomId(2, 2);
 				Hero.spawnX = 34 * 16 + 8;
-				Hero.spawnY = 22 * 16 + 8;
-				/*setRoomId(2, 0);
-				Hero.spawnX = 40 * 16 + 8;
-				Hero.spawnY = 8 * 16 + 8;*/
+				Hero.spawnY = 22 * 16 + 8;*/
+				setRoomId(5, 1);
+				Hero.spawnX = 72 * 16 + 8;
+				Hero.spawnY = 10 * 16 + 8;
 		}
 		Game.CUR.lm.getContainer().x = -posX;
 		Game.CUR.lm.getContainer().y = -posY;

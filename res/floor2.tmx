@@ -5,7 +5,7 @@
  </tileset>
  <layer name="ground0" width="99" height="46">
   <data encoding="base64" compression="zlib">
-   eJzt0TEKACAQA8F8/R7l/2zFxupQcALTL6SSFAAAwGLf7Z6f+QAAAAA4GQ80AAAAAAAAAAAAAHSbwWD0cQ==
+   eJzt0bENgDAMBECvnqHYj9YFBCgio/heus7Fyz8iYsCmct7eVnfe1df/2mLtFlfb5FR37Ogu1b26maW6Wzd+Xi+nukt3tgAAAACeHD/oAAAAAAAAAAAAALDaCXP65lU=
   </data>
  </layer>
  <layer name="ground1" width="99" height="46">
@@ -15,22 +15,20 @@
  </layer>
  <layer name="over" width="99" height="46" opacity="0.53">
   <data encoding="base64" compression="zlib">
-   eJzt1cEJACAIBVBHaIT2n7J7EFGkl94Dbx6ErxgBAAAAENE2NfeQ5zaLXjfiN1b7vsqEPLdZ9NyxvnTyB9xFvd3/oI4sAAAAAAAAAAAAAADeGh3SA5E=
+   eJzt1UEKwCAMBECf0Cfk/6/srYeCSMVEijOQm4eFjaQ1AP4odgfgEbsDAAAscg3m/YY8s11EXcRj9Pa91wl5ZruI3FhH+nIH/It6o/tBHV0AAAAAAAAAAAAAAKx1A0dCA9E=
   </data>
  </layer>
  <layer name="wall0" width="99" height="46">
   <data encoding="base64" compression="zlib">
-   eJztV+1OwzAMzPv/ZjwBHS8A4gWA54KCIlWhiT9JbNeWTlq3nO+6m5tsK6VsCTPg1Gze7N4rvpfMQrdXyzv7jrHvcTUpvJ6udJZ7Pbk+NXjYPtbmgvvZaM3q+c0saDyunmZZy4LLg557HI0r7t3YZ/8MnzOy6Gms3rsp+/BVsrCK9h5mat4Prx++8dHBrbk+68W9Z2z9N48zFxr51Tpm8TbQfAausXWVLDh1h5f8VJtTlCywn0FzvZ2soxY2i7aiZIHlUbPg6tU94JPAi5YF9CzHPvcl5wDqXLyX39y482Q1C60eM7OQ1lWzoNZ+pr0N8Cjsv9eqLDRA7SepJ6D3cYak+4VHzLiH+rvXXqv9m5HwKl470PC88v64vFWao73xpcCZYHUyC1gTc06pmVDmptXJLGBNyZkxs9DVzCz+8ixncTzXU8/wmQVec5RFzWBDrh/pZBaw5o7e/1jOuVxy5ur5nM1L2AKnkqfP8+Q1Os+T1+g8T16j8zx5jc7z5DU6z5PX6DxPXqPzErbAqeTp8zx5jc7z5DU6z5PX6DxPXqPzPHmNzvPkNTrPk9fovIQdfAGWPu7g
+   eJztWG1uwzAIzf1/r90FuvYC+7jAPq61RRoSQ4CBpI5hRkLqFr/wzDO2ydOyLE+d/eVOvue7o1y9GJqbiEVx1yDOYrcd33VZYly9HJ6XqUXLVi1eO3HAekRsC+7jxz+ZZw+/zzg/od8cdjUuD49BnlFd34K4VfuR6kKbvyU33JhoTvesMc5o/kbTQltTvbVYc8PV4Pvyt16lGm3Z6FpopuUU8sPt7x4t8H4W1RD2Wa9GI2gh7ef0/z32mpvw+17xsB2hxYo7IZfqhM7pSC3WtX4yeqvupbUHWhzd63H3JjqnizBOumvB31R7ax6xFheGs9Tb4Xhn9A7QU+Izcn8RqQs6BtaatQfG5w1+l+dOEa3fkbWg87fMkWKivbM1HhezihZfyjNp/z4zY2FPhrqI3Dt7n92jaaEZ3b+BO/e+GxoXjYfPJ4+W1bSg/RTtHehZKo0FzWjtWO5FXg2Bc1T7UbVomXXtgRY05votznOO97D/qoXXWnXEnVleO+o7rfW+b9k/tDxpZ4rHWn2Y1Jd47Ig+bw/Hc5f2G4rZor2Fk2es5hHbggPXelmrFpLhtRzl2Rt3VEwtn7DWpxZ9Ylryqe0/rTN0amGPueU8lc7SqzAmYlMLm0n1QvvBqYUtpkWL1ncnzaYW9piaFvhbf7SOphb2mNqdv3WH9/YEUZ69cdPH8ohN3P64TFyr4zJxrY7LxLU6LhPX6rhMXKvjMnGtjsvEtTpu+lgesYnbH5eJa3VcJq7VcZm4Vsdl4lodl4lrdVwmrtVxmbhWx00fx78BWycAvQ==
   </data>
  </layer>
  <layer name="wall1" width="99" height="46">
   <data encoding="base64" compression="zlib">
-   eJzt2EsOgjAQgOEedY7AEbowuvUIbtx7BI7gkYQFSdPQdsC+tP+XzIJScMJAHxqDkU2tE0iQ1glURC2gJa0T6ETsm4mdk4w55LzXL/u2FlOiTUOSPaB5pmdr4faVcLe/p31vz77f1EKvdC3mJe6JeDm/IQa9ukbO3bzjS8lEOvJYwkYC9WxjlD+++PbakFdoLM+xjsUxNWsRmyNwbI3T6rsYZe5eiXdsA4Gy3H2A2xYK9Cm116OOes/K140ktk7RzH/b3Gx34n06K4TEajKb8NgiRbOCFv/t9YNa9INa1GUjsZLK+YxIuzfw94MAAAAAAAAAAAAAAKCcD0jLShQ=
+   eJzt2cltwzAQQFGWyhJcgg5Gck0JvuSeElxCSkp0ICAQo+FwzM3QfwAB2+Jmj7jJIYz10bHuz4Z13YOvr7V9uDvaaOk2uf2SeHj9+E+bMf0KdVnyz4zHO8QijYmavkZHWzPjoY177VrL+ackDi4njacVaPehdi027INW15eQvNL30dqb6dVY3AqfWezlpDEahc889eflzupdmeU7e2NxzBvPs4lr8LEOz95La280633lub+t5Y55Y3ZNmpek9FPZv7ztFfSOxTPYf8fSuGgh7483hq+yjuF8j2cpl++1Wu0Ta/Z3s89uozyCfnaS9DznX1mao0p7ylf2mbA5m8u1vRPjog9PLLyIoS7FwvI7zXrmdZW1exez99tJQl/SXlw7M2BN1rMzcSz7rsyf5u3aclekrb+W9S+tzZuQVv0/4J1pMXmG87kldu0VjrQYjXi2BxtisQ5iMdampF0c3J8r6v3/GgAAAAAAAAAAAAAAqPcHTXl2eA==
   </data>
  </layer>
- <objectgroup name="active" width="99" height="46">
-  <object type="Laser" x="1456" y="80" width="16" height="16"/>
-  <object type="Thwomp" x="1488" y="112" width="32" height="32"/>
+ <objectgroup name="active" width="99" height="46" visible="0">
   <object type="Laser" x="528" y="192" width="16" height="16"/>
   <object type="Laser" x="480" y="96" width="16" height="16"/>
   <object type="Spinner" x="1008" y="64" width="16" height="16">
@@ -50,5 +48,9 @@
   </object>
   <object type="Laser" x="1328" y="272" width="16" height="16"/>
   <object type="Laser" x="1184" y="160" width="16" height="16"/>
+  <object type="Thwomp" x="1312" y="96" width="32" height="32"/>
+  <object type="Thwomp" x="1312" y="16" width="32" height="32"/>
+  <object type="Thwomp" x="1152" y="48" width="32" height="32"/>
+  <object type="Laser" x="1456" y="128" width="16" height="16"/>
  </objectgroup>
 </map>
