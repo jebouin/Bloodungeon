@@ -22,6 +22,7 @@ class Bow extends Enemy {
 			xx -= 1;
 		}
 		anim.setFrame(4);
+		moves = false;
 		ALL.push(this);
 		update();
 	}

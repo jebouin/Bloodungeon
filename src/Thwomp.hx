@@ -63,7 +63,9 @@ class Thwomp extends Enemy {
 				anim.play();
 			}
 		}
-		super.update();
+		if(Game.CUR.level != null) {
+			super.update();
+		}
 	}
 	function canHit(ttx:Int, tty:Int) {
 		var tx = Std.int(xx + 8.) >> 4;

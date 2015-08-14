@@ -25,7 +25,6 @@ class Laser extends Enemy {
 		update();
 	}
 	override public function update() {
-		updateBeam();
 		super.update();
 		var hero = Game.CUR.hero;
 		if(hero != null) {
@@ -58,23 +57,39 @@ class Laser extends Enemy {
 			}
 			timer++;
 		}
+		updateBeam();
 	}
 	function updateBeam() {
 		length = getBeamLength();
 		renderBeam();
 	}
 	function getBeamLength() {
+		var thwomps = [];
+		for(e in Game.CUR.entities) {
+			if(Type.getClass(e) == Thwomp) {
+				var t = cast(e, Thwomp);
+				thwomps.push(t.getCollisionRect());
+			}
+		}
 		var angle = (rotation - 90) * Math.PI / 180.;
 		var l = 0.;
-		var dx = Math.cos(angle) * 2.;
-		var dy = Math.sin(angle) * 2.;
+		var dx = Math.cos(angle);
+		var dy = Math.sin(angle);
 		while(l < Const.WID) {
-			l++;
-			var tx = Std.int(xx + dx * l * .5) >> 4;
-			var ty = Std.int(yy + dy * l * .5) >> 4;
-			if(level.getCollision(tx, ty) == FULL) {
+			l += 2;
+			var lx = xx + dx * l;
+			var ly = yy + dy * l;
+			if(level.getCollision(Std.int(lx) >> 4, Std.int(ly) >> 4) == FULL) {
 				break;
 			}
+			var hit = false;
+			for(r in thwomps) {
+				if(r.contains(lx, ly)) {
+					hit = true;
+					break;
+				}
+			}
+			if(hit) break;
 		}
 		return l - 1;
 	}

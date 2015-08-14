@@ -86,7 +86,10 @@ class Hero extends Entity {
 				jump();
 			}*/
 			if(Input.oldKeyDown("suicide")) {
+				var prevImmune = immune;
+				immune = false;
 				die();
+				immune = prevImmune;
 			}
 			super.update();
 			var level = Game.CUR.level;

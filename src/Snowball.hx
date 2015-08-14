@@ -54,6 +54,8 @@ class Snowball extends Enemy {
 			}
 			splash.update();
 		}
+		var lx = Game.CUR.level.posX;
+		var ly = Game.CUR.level.posY;
 	}
 	function onHit(cx:Float, cy:Float) {
 		visible = false;

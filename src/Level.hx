@@ -54,7 +54,7 @@ class Level {
 		RWID = Std.int(Const.WID / 16);
 		RHEI = Std.int(Const.HEI / 16);
 		renderLighting();
-		load(1);
+		load(2);
 		loadEntities(roomIdX, roomIdY);
 	}
 	public function update() {
@@ -212,23 +212,23 @@ class Level {
 				addLighting();
 			case 1:
 				removeLighting();
-				/*setRoomId(2, 5);
+				setRoomId(2, 5);
 				Hero.spawnX = 35 * 16 + 8;
-				Hero.spawnY = 51 * 16 + 8;*/
+				Hero.spawnY = 51 * 16 + 8;
 				/*setRoomId(0, 0);
 				Hero.spawnX = 12 * 16 + 8;
 				Hero.spawnY = 6 * 16 + 8;*/
-				setRoomId(3, 5);
+				/*setRoomId(3, 5);
 				Hero.spawnX = 44 * 16 + 8;
-				Hero.spawnY = 47 * 16 + 8;
+				Hero.spawnY = 47 * 16 + 8;*/
 			case 2:
 				removeLighting();
 				setRoomId(2, 2);
 				Hero.spawnX = 34 * 16 + 8;
 				Hero.spawnY = 22 * 16 + 8;
-				/*setRoomId(6, 2);
-				Hero.spawnX = 86 * 16 + 8;
-				Hero.spawnY = 20 * 16 + 8;*/
+				/*setRoomId(0, 1);
+				Hero.spawnX = 13 * 16 + 8;
+				Hero.spawnY = 18 * 16 + 8;*/
 		}
 		Game.CUR.lm.getContainer().x = -posX;
 		Game.CUR.lm.getContainer().y = -posY;
