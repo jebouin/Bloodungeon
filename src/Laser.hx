@@ -1,4 +1,5 @@
 package ;
+import flash.display.BlendMode;
 import flash.display.Shape;
 class Laser extends Enemy {
 	var tx : Int;
@@ -16,9 +17,10 @@ class Laser extends Enemy {
 		this.level = level;
 		xx = tx * 16 + 8;
 		yy = ty * 16 + 8;
-		setOriginInPixels(6, 10);
+		setOriginInPixels(7, 11);
 		timer = 0;
 		beam = new Shape();
+		beam.blendMode = BlendMode.ADD;
 		addChild(beam);
 		update();
 	}
@@ -79,11 +81,17 @@ class Laser extends Enemy {
 	function renderBeam() {
 		var g = beam.graphics;
 		g.clear();
-		//g.beginFill(0xFF00FF);
-		g.lineStyle(1., 0xFF00FF);
-		g.moveTo(0, 0);
-		g.lineTo(0, -length);
-		//g.endFill();
+		var loff = 10;
+		var thick = (timer >> 1) & 1 == 0 ? 1. : 3.;
+		if((timer >> 1) & 1 == 0) {
+			g.lineStyle(2, 0xAA0000, .5);
+			g.moveTo(0, -loff);
+			g.lineTo(0, -length);
+		} else {
+			g.lineStyle(3, 0xFF0000, .7);
+			g.moveTo(0, -loff);
+			g.lineTo(0, -length);
+		}
 	}
 	override public function collidesHero() {
 		var hero = Game.CUR.hero;

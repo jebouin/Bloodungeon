@@ -5,7 +5,7 @@
  </tileset>
  <layer name="ground0" width="99" height="46">
   <data encoding="base64" compression="zlib">
-   eJzt0bENgDAMBECvnqHYj9YFBCgio/heus7Fyz8iYsCmct7eVnfe1df/2mLtFlfb5FR37Ogu1b26maW6Wzd+Xi+nukt3tgAAAACeHD/oAAAAAAAAAAAAALDaCXP65lU=
+   eJzt0bkNwDAMA0Ct7qGyX1oVeQtHgXUErlNBiCMiBiwq5+ltdedVvf2vLeZucbRNTnXHjs5S3aubq1R3g6/lVHfpzhYAAADAne0HHQAAAAAAAAAAAABm2wH0QObW
   </data>
  </layer>
  <layer name="ground1" width="99" height="46">
@@ -15,20 +15,20 @@
  </layer>
  <layer name="over" width="99" height="46" opacity="0.53">
   <data encoding="base64" compression="zlib">
-   eJzt1UEKwCAMBECf0Cfk/6/srYeCSMVEijOQm4eFjaQ1AP4odgfgEbsDAAAscg3m/YY8s11EXcRj9Pa91wl5ZruI3FhH+nIH/It6o/tBHV0AAAAAAAAAAAAAAKx1A0dCA9E=
+   eJzt1cEJgEAMBEBLsISUYCn2X40fEVGOQ9EEZQbyO8jCHmQYAPiiqA7AJqoDAAA8ZOzM8Q3vudtF5EW8ZF7ni1r/vdVJlSjcneVuF/FurJPsfRWu3AH3Il/vfpDnD11M1QEAAAAAAAAAAAAAAHYWPGwE4Q==
   </data>
  </layer>
  <layer name="wall0" width="99" height="46">
   <data encoding="base64" compression="zlib">
-   eJztWG1uwzAIzf1/r90FuvYC+7jAPq61RRoSQ4CBpI5hRkLqFr/wzDO2ydOyLE+d/eVOvue7o1y9GJqbiEVx1yDOYrcd33VZYly9HJ6XqUXLVi1eO3HAekRsC+7jxz+ZZw+/zzg/od8cdjUuD49BnlFd34K4VfuR6kKbvyU33JhoTvesMc5o/kbTQltTvbVYc8PV4Pvyt16lGm3Z6FpopuUU8sPt7x4t8H4W1RD2Wa9GI2gh7ef0/z32mpvw+17xsB2hxYo7IZfqhM7pSC3WtX4yeqvupbUHWhzd63H3JjqnizBOumvB31R7ax6xFheGs9Tb4Xhn9A7QU+Izcn8RqQs6BtaatQfG5w1+l+dOEa3fkbWg87fMkWKivbM1HhezihZfyjNp/z4zY2FPhrqI3Dt7n92jaaEZ3b+BO/e+GxoXjYfPJ4+W1bSg/RTtHehZKo0FzWjtWO5FXg2Bc1T7UbVomXXtgRY05votznOO97D/qoXXWnXEnVleO+o7rfW+b9k/tDxpZ4rHWn2Y1Jd47Ig+bw/Hc5f2G4rZor2Fk2es5hHbggPXelmrFpLhtRzl2Rt3VEwtn7DWpxZ9Ylryqe0/rTN0amGPueU8lc7SqzAmYlMLm0n1QvvBqYUtpkWL1ncnzaYW9piaFvhbf7SOphb2mNqdv3WH9/YEUZ69cdPH8ohN3P64TFyr4zJxrY7LxLU6LhPX6rhMXKvjMnGtjsvEtTpu+lgesYnbH5eJa3VcJq7VcZm4Vsdl4lodl4lrdVwmrtVxmbhWx00fx78BWycAvQ==
+   eJztmGtuBCEIx73/5+72Avu4wLa9QLu9VmtSE0oAEWdGNJCQ7GP+I/LzhdeU0vVgf9vJt3y3NdZWDc6Nxay6m1GnsfuG77okW6ytMTxSsKhZZvF+UAyQh8V6dF+//iT+e/n7j/IT+Exps1F5eDXGaeX6YdRl9p7mhdR/TW6oZ6w53XKOUYbHiDcW0pg6mkXODTUHP9P/+crN0ZrhvnpjIZmU05Ifan1vYQHHqpUhXGdbOHlgwa3n+Pcj1po783mv9qCNYJF1J+DcPMF9Gskij/WT0mvznht7hcXoWo86N+E+XZjnuLNW+Y7Za/MIWVyImLnaDrZ3Bu8oPLl4PNcXlnmBnyljTVsDw/0GvqvlTAHH9435HY9J77Ue7r+GBXU22eOsUGuTYvtIPHfIyWJ7sPgW/uPW7zPxbFmTSx8t584j926PLCTD6ze1DuBne+YF3J9aWK7GAtdTuHbAeyn3bOkjnjuac1ErwxJzueOpnSsgX88saqYde6WPuE28dtf28S1M2v9H3Q16YNFqtXlE7VnZWu4lPdR6Foe5lfIk7SktVqvDpLpE26cRdd4WDvvOrTdY08NeExM1Tiy1tMV6dMWlWlbLgrNRdwq9ebFqe9qU8lnGerDQa3va1ORTWn9qe2iw0LfZs59yee5dq4NFu3HzhbvjCRZymxoWtXsnyYKFvk2JBbzrt86jYKFvM3vreX7rmsAji3A/brER/I+O82hdsPCjCxZ+dMHCjy5Y+NEFCz+6YOFHFyz86MJ9ucVCt71uplhX180U6+q6mWJdXTdTrKvrZop1dd1Msa6umynW1XXhfvwHrUvotw==
   </data>
  </layer>
  <layer name="wall1" width="99" height="46">
   <data encoding="base64" compression="zlib">
-   eJzt2cltwzAQQFGWyhJcgg5Gck0JvuSeElxCSkp0ICAQo+FwzM3QfwAB2+Jmj7jJIYz10bHuz4Z13YOvr7V9uDvaaOk2uf2SeHj9+E+bMf0KdVnyz4zHO8QijYmavkZHWzPjoY177VrL+ackDi4njacVaPehdi027INW15eQvNL30dqb6dVY3AqfWezlpDEahc889eflzupdmeU7e2NxzBvPs4lr8LEOz95La280633lub+t5Y55Y3ZNmpek9FPZv7ztFfSOxTPYf8fSuGgh7483hq+yjuF8j2cpl++1Wu0Ta/Z3s89uozyCfnaS9DznX1mao0p7ylf2mbA5m8u1vRPjog9PLLyIoS7FwvI7zXrmdZW1exez99tJQl/SXlw7M2BN1rMzcSz7rsyf5u3aclekrb+W9S+tzZuQVv0/4J1pMXmG87kldu0VjrQYjXi2BxtisQ5iMdampF0c3J8r6v3/GgAAAAAAAAAAAAAAqPcHTXl2eA==
+   eJzt2UFuxCAMBVCOyhHmCFmM2m2PkE33PcIcoUdqZ4GEkDHGgHGU/ySkdhLAEwcCmRBsfSxs+3NiW8+gi7U3hqeij5kem/tvidnf5385hOWXaEty/s58XCEXaUz0xBoVfe3MBzfuuWMz55+WaFyPGk8ecPchdyxOjIFr64soWun7cP3tNJqLR+MziXc9aoxG4jNN+2W9WrueSb6zNhf5ubF+GvkMztvQrL24/qxJ7yvN/S2tl58bi2PUvESVn874yr49WJ2LV5Bfx9a4mKGMR5vDUdIxXK7xJPXKtdasdWLP+m733s3KGfi9E2XlPn9EHtcV85fmqNaacmSdOcpr7merzeXc2uku18aaJhdayCEv5UJynXa986q9q7F8h2MlFv8fleJB+dw6Qz3Gqz2/qbU4t2fwII3PY2cQzkj3zp7y6NV35/lpzPfWuyPu+SuZO/OxXxavvwdcGZeTV6jPLXFpVJDjcmTxbg9kkAs/kAtbB1PeonE8d7T69zUAAAAAAAAAAAAAAAAAAADo9wdw/Hy2
   </data>
  </layer>
- <objectgroup name="active" width="99" height="46" visible="0">
+ <objectgroup name="active" width="99" height="46">
   <object type="Laser" x="528" y="192" width="16" height="16"/>
   <object type="Laser" x="480" y="96" width="16" height="16"/>
   <object type="Spinner" x="1008" y="64" width="16" height="16">
