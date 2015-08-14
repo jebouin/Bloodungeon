@@ -25,7 +25,7 @@ class Hero extends Entity {
 		hooverTimer = 0;
 		turnTimer = 1000;
 		gravity = 0;
-		setOrigin(.5, .8);
+		setOrigin(.5, .6);
 		prevRoomDir = null;
 		shadow.scaleX *= .8;
 		shadow.scaleY *= .5;

@@ -222,9 +222,9 @@ class Level {
 				/*setRoomId(2, 2);
 				Hero.spawnX = 34 * 16 + 8;
 				Hero.spawnY = 22 * 16 + 8;*/
-				setRoomId(5, 1);
-				Hero.spawnX = 72 * 16 + 8;
-				Hero.spawnY = 10 * 16 + 8;
+				setRoomId(2, 1);
+				Hero.spawnX = 40 * 16 + 8;
+				Hero.spawnY = 15 * 16 + 8;
 		}
 		Game.CUR.lm.getContainer().x = -posX;
 		Game.CUR.lm.getContainer().y = -posY;
