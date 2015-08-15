@@ -20,6 +20,7 @@ import Collision;
 @:file("res/floor0.tmx") class Floor0TMX extends ByteArray {}
 @:file("res/floor1.tmx") class Floor1TMX extends ByteArray {}
 @:file("res/floor2.tmx") class Floor2TMX extends ByteArray {}
+@:file("res/floor3.tmx") class Floor3TMX extends ByteArray {}
 class Level {
 	public static var ROOMID = 0;
 	public static var RWID : Int;
@@ -54,7 +55,7 @@ class Level {
 		RWID = Std.int(Const.WID / 16);
 		RHEI = Std.int(Const.HEI / 16);
 		renderLighting();
-		load(2);
+		load(3);
 		loadEntities(roomIdX, roomIdY);
 	}
 	public function update() {
@@ -80,6 +81,8 @@ class Level {
 				map = new TiledMap(new Floor1TMX().toString());
 			case 2:
 				map = new TiledMap(new Floor2TMX().toString());
+			case 3:
+				map = new TiledMap(new Floor3TMX().toString());
 			default:
 				return;
 		}
@@ -231,6 +234,12 @@ class Level {
 				/*setRoomId(0, 1);
 				Hero.spawnX = 13 * 16 + 8;
 				Hero.spawnY = 18 * 16 + 8;*/
+			case 3:
+				Game.CUR.cd.activate();
+				removeLighting();
+				setRoomId(1, 4);
+				Hero.spawnX = 24 * 16;
+				Hero.spawnY = 41 * 16;
 		}
 		Game.CUR.lm.getContainer().x = -posX;
 		Game.CUR.lm.getContainer().y = -posY;
