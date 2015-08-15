@@ -5,7 +5,7 @@
  </tileset>
  <layer name="ground0" width="85" height="55">
   <data encoding="base64" compression="zlib">
-   eJztw0ENAAAMA6GzX9eTsQ8krJqqqqqqqqqqqqqqqqqqqqqqqurTAx3bxmM=
+   eJztzrENADAIBLFfn61ZAKWhoIhPcn+VpAAAAAAAAAAAAAAAAAAAAAB4mrp+4l9T108AGw1/fMEJ
   </data>
  </layer>
  <layer name="ground1" width="85" height="55">
@@ -15,12 +15,12 @@
  </layer>
  <layer name="over" width="85" height="55" opacity="0.32">
   <data encoding="base64" compression="zlib">
-   eJzt18EJACAMBMH034l2oNXZgo9DRWYgf1kIwSoAAAAAAAAAAAAAAADgtL4xwH/sPgCva+U+pY3bD/iQpnma5mmap2neLP9T3rIAWCwY7Q==
+   eJzt1dENgjAUBdCOwCiO4prqBOoE6lL6Y9JgqdUg8OScpD/ktbze0JISAAAAAAAAAAAAAAAA37g+xv6DcZunzVDWlOm7vY61tzVlOhWZjm9NmTr7cckU4tultvN7qKyx/XGPc+myUcpp6E47FuZ3lbqn0jtquUeU59Hff01rbb+uNG9orU17O4uy5EyjmjrTU3o9+5fCs8j3wdSZttZE/nZlOr4809K5HPr/12rzcW7oobRWyzz+3x02goa+
   </data>
  </layer>
  <layer name="wall0" width="85" height="55">
   <data encoding="base64" compression="zlib">
-   eJzt1kEKwlAQA9De/y69oyuXv7RjfuFJBrJ8NUYUz+M4ziaeyUmum+ZdN827bpp33TTvumneddO866Z51/xHJle3dlJXxUldFSd1VZzUVXFSV8VJXRUndVVcsyeTq1s7qavipK6Kk7oqTuqqOKmr4qSuipO6Kq7Zk8nVrZ3UVXFSV8VJXRUndVWc1FVxUlfFSV0V1+xJ6na+nuS6ad49fa9XG109q5veNxM3Ocl107xLbHpn52763O7+nyG5bpp30z1+2bRZbzo5yaW2eqOr4rpp3nXTvEtvuuNz+D5XcW9smrhu2k3f+j3td795Ox8f9JiY
+   eJztlkEOwyAQA/P/v+SPvUciYY2BDrKlvWWyZtpI3Nd13Rn7KCFxcern4tTPxamfi1M/F6d+Lk79XJz6ucwZoyRcmyN1pXCkrhSO1JXCkbpSOFJXCkfqSuFIXSlcZs4oCdfmSF0pHKkrhSN1pXCkrhSO1JXCkbpSOFJXCpeZM0rCtTlSVwpH6krhSF0pHKkrhSN1pXCkrhSO1JXC7bwP776XrzjjaGbuI3Fx6ueqZ+39lt84tSuFczrt5ZSQuDj1cw6nPZ7jtM7OvmeQuB1Oq+5pv8XoOVc6PXWe56zk7Z3/+D91uarubPX+8qbuqobstOf9o/uUxOn3LqWnyrmdVrg41Z2O7H8+p5xPyelO1ZzitHffilCdZnzzA7Fd1BA=
   </data>
  </layer>
  <layer name="wall1" width="85" height="55">
@@ -49,6 +49,72 @@
    <properties>
     <property name="dir" value="right"/>
     <property name="offset" value=".1"/>
+   </properties>
+  </object>
+  <object type="Blade" x="368" y="848" width="16" height="16">
+   <properties>
+    <property name="dir" value="right"/>
+    <property name="offset" value="0."/>
+   </properties>
+  </object>
+  <object type="Blade" x="256" y="800" width="16" height="16">
+   <properties>
+    <property name="dir" value="up"/>
+    <property name="offset" value="0."/>
+   </properties>
+  </object>
+  <object type="Blade" x="560" y="848" width="16" height="16">
+   <properties>
+    <property name="dir" value="right"/>
+    <property name="offset" value="0."/>
+   </properties>
+  </object>
+  <object type="Blade" x="560" y="784" width="16" height="16">
+   <properties>
+    <property name="dir" value="up"/>
+    <property name="offset" value="0."/>
+   </properties>
+  </object>
+  <object type="Blade" x="464" y="688" width="16" height="16">
+   <properties>
+    <property name="dir" value="right"/>
+    <property name="offset" value="0."/>
+   </properties>
+  </object>
+  <object type="Blade" x="496" y="656" width="16" height="16">
+   <properties>
+    <property name="dir" value="right"/>
+    <property name="offset" value="0."/>
+   </properties>
+  </object>
+  <object type="Blade" x="528" y="624" width="16" height="16">
+   <properties>
+    <property name="dir" value="right"/>
+    <property name="offset" value="0."/>
+   </properties>
+  </object>
+  <object type="Blade" x="560" y="592" width="16" height="16">
+   <properties>
+    <property name="dir" value="right"/>
+    <property name="offset" value="0."/>
+   </properties>
+  </object>
+  <object type="Blade" x="656" y="672" width="16" height="16">
+   <properties>
+    <property name="dir" value="left"/>
+    <property name="offset" value="0."/>
+   </properties>
+  </object>
+  <object type="Blade" x="624" y="640" width="16" height="16">
+   <properties>
+    <property name="dir" value="left"/>
+    <property name="offset" value="0."/>
+   </properties>
+  </object>
+  <object type="Blade" x="592" y="608" width="16" height="16">
+   <properties>
+    <property name="dir" value="left"/>
+    <property name="offset" value="0."/>
    </properties>
   </object>
  </objectgroup>

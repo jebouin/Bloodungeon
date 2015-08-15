@@ -1,4 +1,5 @@
 package ;
+import flash.geom.Rectangle;
 class Blade extends Enemy {
 	var level : Level;
 	var tx : Int;
@@ -67,5 +68,16 @@ class Blade extends Enemy {
 			setPos();
 			super.update();
 		}
+	}
+	override function collidesHero() {
+		var hero = Game.CUR.hero;
+		if(hero == null) return false;
+		if(hero.dead) return false;
+		if(lastDir == UP || lastDir == DOWN) {
+			return Collision.circleToRect(hero.xx, hero.yy, hero.cradius, new Rectangle(xx - 10 + 8, yy - 8 + 2, 3, 14));
+		} else {
+			return Collision.circleToRect(hero.xx, hero.yy, hero.cradius, new Rectangle(xx - 10 + 2, yy - 8 + 3, 16, 6));
+		}
+		return false;
 	}
 }

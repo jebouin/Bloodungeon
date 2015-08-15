@@ -200,17 +200,14 @@ class Level {
 					torches.push(new Torch(i, j));					
 				}
 				if(hasRails) {
-					var railKinds : Array< Array<RAIL_KIND> > = [[DR, H, DL], [V, UR, UL], [X, NONE, NONE]];
+					var railKinds : Array< Array<RAIL_KIND> > = [[DR, H, DL], [V, UR, UL], [X, H, H], [NONE, V, V]];
 					var stx = ((overTile - 1) & 15) - 8;
 					var sty = ((overTile - 1) >> 4) - 10;
 					var railKind : RAIL_KIND = NONE;
-					if(stx >= 0 && sty >= 0 && stx < 3 && sty < 3) {
+					if(stx >= 0 && sty >= 0 && stx < 3 && sty < 4) {
 						railKind = railKinds[sty][stx];
 					}
 					rails[j][i] = railKind;
-					/*if(railKind != NONE) {
-						trace(i, j, railKind);
-					}*/
 				}
 			}
 		}
