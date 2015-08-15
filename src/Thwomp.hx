@@ -73,7 +73,7 @@ class Thwomp extends Enemy {
 		var level = Game.CUR.level;
 		if(tty == ty || tty == ty + 1) {
 			if(ttx > tx + 1) {
-				for(i in tx+2...ttx+1) {
+				for(i in tx+1...ttx+1) {
 					if(level.getCollision(i, ty) == FULL || level.getCollision(i, ty+1) == FULL) {
 						return false;
 					}

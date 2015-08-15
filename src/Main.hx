@@ -83,7 +83,7 @@ class Main {
 		SpriteLib.addAnim("bladeRight", "blade", "0", 60);
 		SpriteLib.addAnim("bladeDown", "blade", "1", 60);
 		SpriteLib.addAnim("bladeUp", "blade", "1", 60);
-		SpriteLib.sliceBD("enemies", "tesla", 184, 29, 10, 16, 2, 1);
+		SpriteLib.sliceBD("enemies", "tesla", 184, 29, 10, 10, 2, 1);
 		SpriteLib.addAnim("teslaIdle", "tesla", "0", 10);
 		SpriteLib.addAnim("teslaCharge", "tesla", "1", 10);
 		

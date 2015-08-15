@@ -5,27 +5,27 @@
  </tileset>
  <layer name="ground0" width="85" height="55">
   <data encoding="base64" compression="zlib">
-   eJztzrENADAIBLFfn61ZAKWhoIhPcn+VpAAAAAAAAAAAAAAAAAAAAAB4mrp+4l9T108AGw1/fMEJ
+   eJzt0CEOADAIBEG+z6+r6nAISDubjL9cRkQCLbfpHS/xqU8BAAAAAAAAAAAAAAAAAGCbqulN/KtqehNAxwG5ZL3T
   </data>
  </layer>
  <layer name="ground1" width="85" height="55">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20MH6AAAAAAAAAAAAAAAAAAAAAAAAB+BkkMAAE=
+   eJzt1TEOgzAQBED//30hL4h5AUkdI1FQoBNYp6DAjLSNq9MW61IAAADguqbg/fPLQ2DDo2VoeZ59yJ9b9/dqqS3jSbdcxXof5718F5vZY1gSmXfABuxXl0T88cfs6ZRjakeI6TSfTvPpNJ9O8+k0X0+neo3pEwAAAAAAAAAA4N6+3glzdw==
   </data>
  </layer>
  <layer name="over" width="85" height="55" opacity="0.32">
   <data encoding="base64" compression="zlib">
-   eJzt1dENgjAUBdCOwCiO4prqBOoE6lL6Y9JgqdUg8OScpD/ktbze0JISAAAAAAAAAAAAAAAA37g+xv6DcZunzVDWlOm7vY61tzVlOhWZjm9NmTr7cckU4tultvN7qKyx/XGPc+myUcpp6E47FuZ3lbqn0jtquUeU59Hff01rbb+uNG9orU17O4uy5EyjmjrTU3o9+5fCs8j3wdSZttZE/nZlOr4809K5HPr/12rzcW7oobRWyzz+3x02goa+
+   eJztmsttwzAQRFWCSkkJLiElqISUoBJSQq6JK1B88dXJJWenmYgICdD0rvgxJZKrecBABMGVVwPzI2i7DkjibdbI6EePedYCt7ww/Wer/WpJMayYTw18zfrQ+g6MeZ911G3OUw41foiMqR3bQ1ehnk5ailiPJHi65GEpTxVjREztlP6fnrvbtVUiKevpI54Cms9ZJ91emsvufg8AaJ9rQsxT9izq4upcY5n8Q+6Q7unkXFPjQ+i1JKLeKc256eJclY5MHHXegqf/TESb6ou9VygSvYWn+VFndTOHTwt9Ifw+kMdBCwCDvS9R4vYlA94r77HnNqWY+W6D7x7rMJROQCBD6QQah/ruNGydhDDgaX6476OjJZDGoXQCAAAARLFGLQoAAAAAQMwZA+eMMPbkqe9Zcz3bnjzdCnianz15irnfLvAUgPbx1QWF1AdJrVXpLVE+cWuaqYfsHXHjDNRv+OqyWsP2Y40aU3ccFcfdq9Ua/5o9bZWtPaVqCS9EX8vrwdaeho5p+b8LT/Nje7pU4+vu/756YKOQumDqXqn1xEAWf66f8+0=
   </data>
  </layer>
  <layer name="wall0" width="85" height="55">
   <data encoding="base64" compression="zlib">
-   eJztllEKhTAQA73/Xbzj+30I1W6aVqcksH+Om44KnsdxnBn7KCFxcern4tTPxamfi1M/F6d+Lk79XJz6ucweoyRcmyN1pXCkrhSO1JXCkbpSOFJXCkfqSuFIXSlcZs4oCdfmSF0pHKkrhSN1pXCkrhSO1JXCkbpSOFJXCpeZM0pmfxvXa2jv6Rd3xmm4f47UlcKRulI4UlcKR+pK4UhdKdyb/8Nv/5evOONoZu4jcXHq56pn7f2W7zi1K4VzOu3llJC4OPVzDqc9nuO0zs7+zyBxbzituqc9i9FzrnS661zPWcndPb/4nrpcVXe2ej95U3dVQ3bac//RfUri9HmX0lPl3E4rXJzqTkf2X69Tzqdkd6dqdnHau29FqE4zvvkBb8/WxA==
+   eJztlmsOwzAIg3f/u/SO+xtFDWBDkpJgCa3aYh5f6bbn9/s9FUsClcWD1ngG14h2c4xiKuW6mak0+9tno5klpqP78ObNzhTp03JWmk/KmZmpp8/R56NrqbY1J6Ld++nZU+v1rUw1xhrT/qw0nza/ll/TbnZWtixTZn4mj5bzS7GjzyxsRn232j3fWz+Mdvg8TL01JI/lPTbXbJ/E9O1V8yE1JE/vP4HpDF/rtT4D2Zkyu4fOW0x1H8MUUTG1eREVU7vX+l/qBKZIMJ5bAhHii6jX5sri8zC1crqRKbLHxVT3FdN4XxRTqYcbmSI52vPF9N23gmmEsjFFn3HLdwXzHaH1msU3g2mFjakkNPdKfXlPkTzFFGfav4cwRTl778tOpp6alj321szI1LOnaM32FfWx9Vb6JG6j/F6mzO9mNqara57um7HjnrNSjiy+HbG7/soZvZpZL5OvmMb70Fmtz7LkY3vN4otkavUxyuQrpvG+CKYWzsUU987+n5HJt4Mpyj7bvfDOuZLpqdHPiUjK+cU9jWKF1hz1rXFja6HKzNSS31uPUTHVazF9sr5opoivmPJMPfX7c8x8jE5nyuoUptZ6K5SVaUVc/AEON9ZF
   </data>
  </layer>
  <layer name="wall1" width="85" height="55">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20MH6AAAAAAAAAAAAAAAAAAAAAAAAB+BkkMAAE=
+   eJzt1MEJgDAQBMArNSVYQkqwZPEhhBgEURMMM3CP+y372AgAAABmsIwO8DP54g46vWdtXG3vNHXMNKO6Q50+p9N35DjvaPmnjllm0drVcl/TmFgAAAAAAAAAAAAAAADwiQ0uaxJx
   </data>
  </layer>
  <objectgroup name="active" width="85" height="55">
@@ -117,47 +117,304 @@
     <property name="offset" value="0."/>
    </properties>
   </object>
-  <object type="Tesla" x="496" y="464" width="16" height="16">
+  <object type="Tesla" x="464" y="512" width="16" height="16">
    <properties>
     <property name="id" value="0"/>
-    <property name="offset" value="0"/>
-    <property name="time" value="60"/>
+    <property name="links" value="1"/>
+    <property name="offset" value="45"/>
+    <property name="time" value="55"/>
    </properties>
   </object>
-  <object type="Tesla" x="512" y="464" width="16" height="16">
+  <object type="Tesla" x="656" y="464" width="16" height="16">
    <properties>
     <property name="id" value="1"/>
-    <property name="offset" value="10"/>
-    <property name="time" value="60"/>
+    <property name="links" value=""/>
+    <property name="offset" value="0"/>
+    <property name="time" value="-1"/>
    </properties>
   </object>
-  <object type="Tesla" x="528" y="464" width="16" height="16">
+  <object type="Tesla" x="384" y="496" width="16" height="16">
+   <properties>
+    <property name="id" value="0"/>
+    <property name="links" value="10"/>
+    <property name="offset" value="30"/>
+    <property name="time" value="42"/>
+   </properties>
+  </object>
+  <object type="Tesla" x="384" y="560" width="16" height="16">
+   <properties>
+    <property name="id" value="10"/>
+    <property name="links" value=""/>
+    <property name="offset" value="0"/>
+    <property name="time" value="-1"/>
+   </properties>
+  </object>
+  <object type="Tesla" x="368" y="560" width="16" height="16">
+   <properties>
+    <property name="id" value="11"/>
+    <property name="links" value=""/>
+    <property name="offset" value="0"/>
+    <property name="time" value="-1"/>
+   </properties>
+  </object>
+  <object type="Tesla" x="352" y="560" width="16" height="16">
+   <properties>
+    <property name="id" value="12"/>
+    <property name="links" value=""/>
+    <property name="offset" value="0"/>
+    <property name="time" value="-1"/>
+   </properties>
+  </object>
+  <object type="Tesla" x="336" y="560" width="16" height="16">
+   <properties>
+    <property name="id" value="13"/>
+    <property name="links" value=""/>
+    <property name="offset" value="0"/>
+    <property name="time" value="-1"/>
+   </properties>
+  </object>
+  <object type="Tesla" x="320" y="560" width="16" height="16">
+   <properties>
+    <property name="id" value="14"/>
+    <property name="links" value=""/>
+    <property name="offset" value="0"/>
+    <property name="time" value="-1"/>
+   </properties>
+  </object>
+  <object type="Tesla" x="304" y="560" width="16" height="16">
+   <properties>
+    <property name="id" value="15"/>
+    <property name="links" value=""/>
+    <property name="offset" value="0"/>
+    <property name="time" value="-1"/>
+   </properties>
+  </object>
+  <object type="Tesla" x="288" y="560" width="16" height="16">
+   <properties>
+    <property name="id" value="16"/>
+    <property name="links" value=""/>
+    <property name="offset" value="0"/>
+    <property name="time" value="-1"/>
+   </properties>
+  </object>
+  <object type="Tesla" x="368" y="496" width="16" height="16">
+   <properties>
+    <property name="id" value="1"/>
+    <property name="links" value="11"/>
+    <property name="offset" value="18"/>
+    <property name="time" value="42"/>
+   </properties>
+  </object>
+  <object type="Tesla" x="352" y="496" width="16" height="16">
    <properties>
     <property name="id" value="2"/>
-    <property name="offset" value="20"/>
-    <property name="time" value="60"/>
+    <property name="links" value="12"/>
+    <property name="offset" value="6"/>
+    <property name="time" value="42"/>
    </properties>
   </object>
-  <object type="Tesla" x="544" y="464" width="16" height="16">
+  <object type="Tesla" x="336" y="496" width="16" height="16">
    <properties>
     <property name="id" value="3"/>
+    <property name="links" value="13"/>
+    <property name="offset" value="36"/>
+    <property name="time" value="42"/>
+   </properties>
+  </object>
+  <object type="Tesla" x="320" y="496" width="16" height="16">
+   <properties>
+    <property name="id" value="4"/>
+    <property name="links" value="14"/>
+    <property name="offset" value="24"/>
+    <property name="time" value="42"/>
+   </properties>
+  </object>
+  <object type="Tesla" x="304" y="496" width="16" height="16">
+   <properties>
+    <property name="id" value="5"/>
+    <property name="links" value="15"/>
+    <property name="offset" value="12"/>
+    <property name="time" value="42"/>
+   </properties>
+  </object>
+  <object type="Tesla" x="288" y="496" width="16" height="16">
+   <properties>
+    <property name="id" value="6"/>
+    <property name="links" value="16"/>
+    <property name="offset" value="0"/>
+    <property name="time" value="42"/>
+   </properties>
+  </object>
+  <object type="Tesla" x="208" y="560" width="16" height="16">
+   <properties>
+    <property name="id" value="1"/>
+    <property name="links" value=""/>
+    <property name="offset" value="0"/>
+    <property name="time" value="-1"/>
+   </properties>
+  </object>
+  <object type="Tesla" x="16" y="560" width="16" height="16">
+   <properties>
+    <property name="id" value="0"/>
+    <property name="links" value="1"/>
+    <property name="offset" value="0"/>
+    <property name="time" value="50"/>
+   </properties>
+  </object>
+  <object type="Tesla" x="208" y="544" width="16" height="16">
+   <properties>
+    <property name="id" value="3"/>
+    <property name="links" value=""/>
+    <property name="offset" value="0"/>
+    <property name="time" value="-1"/>
+   </properties>
+  </object>
+  <object type="Tesla" x="16" y="544" width="16" height="16">
+   <properties>
+    <property name="id" value="2"/>
+    <property name="links" value="3"/>
+    <property name="offset" value="0"/>
+    <property name="time" value="50"/>
+   </properties>
+  </object>
+  <object type="Blade" x="32" y="496" width="16" height="16">
+   <properties>
+    <property name="dir" value="right"/>
+   </properties>
+  </object>
+  <object type="Blade" x="128" y="496" width="16" height="16">
+   <properties>
+    <property name="dir" value="right"/>
+   </properties>
+  </object>
+  <object type="Blade" x="192" y="496" width="16" height="16">
+   <properties>
+    <property name="dir" value="left"/>
+   </properties>
+  </object>
+  <object type="Blade" x="112" y="496" width="16" height="16">
+   <properties>
+    <property name="dir" value="left"/>
+   </properties>
+  </object>
+  <object type="Tesla" x="16" y="384" width="16" height="16">
+   <properties>
+    <property name="id" value="0"/>
+    <property name="links" value=""/>
+    <property name="offset" value="0"/>
+    <property name="time" value="-1"/>
+   </properties>
+  </object>
+  <object type="Tesla" x="16" y="400" width="16" height="16">
+   <properties>
+    <property name="id" value="2"/>
+    <property name="links" value=""/>
+    <property name="offset" value="0"/>
+    <property name="time" value="-1"/>
+   </properties>
+  </object>
+  <object type="Tesla" x="208" y="384" width="16" height="16">
+   <properties>
+    <property name="id" value="1"/>
+    <property name="links" value="0"/>
     <property name="offset" value="30"/>
     <property name="time" value="60"/>
    </properties>
   </object>
-  <object type="Tesla" x="560" y="464" width="16" height="16">
+  <object type="Tesla" x="208" y="400" width="16" height="16">
    <properties>
-    <property name="id" value="4"/>
-    <property name="offset" value="40"/>
+    <property name="id" value="3"/>
+    <property name="links" value="2"/>
+    <property name="offset" value="0"/>
     <property name="time" value="60"/>
    </properties>
   </object>
-  <object type="Tesla" x="576" y="464" width="16" height="16">
+  <object type="Blade" x="16" y="304" width="16" height="16">
    <properties>
-    <property name="id" value="5"/>
-    <property name="offset" value="50"/>
-    <property name="time" value="60"/>
+    <property name="dir" value="right"/>
    </properties>
   </object>
+  <object type="Blade" x="112" y="304" width="16" height="16">
+   <properties>
+    <property name="dir" value="right"/>
+   </properties>
+  </object>
+  <object type="Blade" x="96" y="320" width="16" height="16">
+   <properties>
+    <property name="dir" value="left"/>
+   </properties>
+  </object>
+  <object type="Laser" x="128" y="208" width="16" height="16"/>
+  <object type="Blade" x="144" y="192" width="16" height="16">
+   <properties>
+    <property name="dir" value="down"/>
+   </properties>
+  </object>
+  <object type="Blade" x="144" y="208" width="16" height="16">
+   <properties>
+    <property name="dir" value="down"/>
+   </properties>
+  </object>
+  <object type="Blade" x="112" y="192" width="16" height="16">
+   <properties>
+    <property name="dir" value="down"/>
+   </properties>
+  </object>
+  <object type="Blade" x="112" y="208" width="16" height="16">
+   <properties>
+    <property name="dir" value="down"/>
+   </properties>
+  </object>
+  <object type="Blade" x="192" y="112" width="16" height="16">
+   <properties>
+    <property name="dir" value="left"/>
+   </properties>
+  </object>
+  <object type="Blade" x="192" y="96" width="16" height="16">
+   <properties>
+    <property name="dir" value="left"/>
+   </properties>
+  </object>
+  <object type="Blade" x="192" y="80" width="16" height="16">
+   <properties>
+    <property name="dir" value="left"/>
+   </properties>
+  </object>
+  <object type="Blade" x="192" y="64" width="16" height="16">
+   <properties>
+    <property name="dir" value="left"/>
+   </properties>
+  </object>
+  <object type="Blade" x="192" y="48" width="16" height="16">
+   <properties>
+    <property name="dir" value="left"/>
+   </properties>
+  </object>
+  <object type="Thwomp" x="96" y="16" width="32" height="32"/>
+  <object type="Thwomp" x="256" y="112" width="32" height="32"/>
+  <object type="Thwomp" x="304" y="48" width="32" height="32"/>
+  <object type="Blade" x="352" y="80" width="16" height="16">
+   <properties>
+    <property name="dir" value="down"/>
+   </properties>
+  </object>
+  <object type="Thwomp" x="400" y="80" width="32" height="32"/>
+  <object type="Thwomp" x="512" y="80" width="32" height="32"/>
+  <object type="Thwomp" x="640" y="128" width="32" height="32"/>
+  <object type="Thwomp" x="464" y="240" width="32" height="32"/>
+  <object type="Cannon" x="352" y="224" width="16" height="16"/>
+  <object type="Blade" x="368" y="256" width="16" height="16">
+   <properties>
+    <property name="dir" value="up"/>
+   </properties>
+  </object>
+  <object type="Blade" x="304" y="224" width="16" height="16">
+   <properties>
+    <property name="dir" value="right"/>
+   </properties>
+  </object>
+  <object type="Thwomp" x="288" y="320" width="32" height="32"/>
+  <object type="Thwomp" x="368" y="352" width="32" height="32"/>
+  <object type="Thwomp" x="304" y="384" width="32" height="32"/>
  </objectgroup>
 </map>
