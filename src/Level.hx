@@ -256,9 +256,9 @@ class Level {
 				/*setRoomId(1, 4);
 				Hero.spawnX = 24 * 16;
 				Hero.spawnY = 41 * 16;*/
-				setRoomId(0, 4);
-				Hero.spawnX = 12 * 16 + 8;
-				Hero.spawnY = 37 * 16 + 8;
+				setRoomId(2, 3);
+				Hero.spawnX = 30 * 16 + 8;
+				Hero.spawnY = 33 * 16 + 8;
 		}
 		Game.CUR.lm.getContainer().x = -posX;
 		Game.CUR.lm.getContainer().y = -posY;
@@ -332,6 +332,12 @@ class Level {
 						var dir = Const.stringToDir(o.properties.get("dir"));
 						var off = Std.parseFloat(o.properties.get("offset"));
 						e = new Blade(this, tx, ty, dir, off);
+					case "Tesla":
+						var time = Std.parseInt(o.properties.get("time"));
+						var off = Std.parseInt(o.properties.get("offset"));
+						var id = Std.parseInt(o.properties.get("id"));
+						e = new Tesla(tx, ty, id, [], time, off);
+						setCollision(tx, ty, FULL);
 					default:
 						
 				}

@@ -20,7 +20,7 @@
  </layer>
  <layer name="wall0" width="85" height="55">
   <data encoding="base64" compression="zlib">
-   eJztlkEOwyAQA/P/v+SPvUciYY2BDrKlvWWyZtpI3Nd13Rn7KCFxcern4tTPxamfi1M/F6d+Lk79XJz6ucwZoyRcmyN1pXCkrhSO1JXCkbpSOFJXCkfqSuFIXSlcZs4oCdfmSF0pHKkrhSN1pXCkrhSO1JXCkbpSOFJXCpeZM0rCtTlSVwpH6krhSF0pHKkrhSN1pXCkrhSO1JXC7bwP776XrzjjaGbuI3Fx6ueqZ+39lt84tSuFczrt5ZSQuDj1cw6nPZ7jtM7OvmeQuB1Oq+5pv8XoOVc6PXWe56zk7Z3/+D91uarubPX+8qbuqobstOf9o/uUxOn3LqWnyrmdVrg41Z2O7H8+p5xPyelO1ZzitHffilCdZnzzA7Fd1BA=
+   eJztllEKhTAQA73/Xbzj+30I1W6aVqcksH+Om44KnsdxnBn7KCFxcern4tTPxamfi1M/F6d+Lk79XJz6ucweoyRcmyN1pXCkrhSO1JXCkbpSOFJXCkfqSuFIXSlcZs4oCdfmSF0pHKkrhSN1pXCkrhSO1JXCkbpSOFJXCpeZM0pmfxvXa2jv6Rd3xmm4f47UlcKRulI4UlcKR+pK4UhdKdyb/8Nv/5evOONoZu4jcXHq56pn7f2W7zi1K4VzOu3llJC4OPVzDqc9nuO0zs7+zyBxbzituqc9i9FzrnS661zPWcndPb/4nrpcVXe2ej95U3dVQ3bac//RfUri9HmX0lPl3E4rXJzqTkf2X69Tzqdkd6dqdnHau29FqE4zvvkBb8/WxA==
   </data>
  </layer>
  <layer name="wall1" width="85" height="55">
@@ -115,6 +115,48 @@
    <properties>
     <property name="dir" value="left"/>
     <property name="offset" value="0."/>
+   </properties>
+  </object>
+  <object type="Tesla" x="496" y="464" width="16" height="16">
+   <properties>
+    <property name="id" value="0"/>
+    <property name="offset" value="0"/>
+    <property name="time" value="60"/>
+   </properties>
+  </object>
+  <object type="Tesla" x="512" y="464" width="16" height="16">
+   <properties>
+    <property name="id" value="1"/>
+    <property name="offset" value="10"/>
+    <property name="time" value="60"/>
+   </properties>
+  </object>
+  <object type="Tesla" x="528" y="464" width="16" height="16">
+   <properties>
+    <property name="id" value="2"/>
+    <property name="offset" value="20"/>
+    <property name="time" value="60"/>
+   </properties>
+  </object>
+  <object type="Tesla" x="544" y="464" width="16" height="16">
+   <properties>
+    <property name="id" value="3"/>
+    <property name="offset" value="30"/>
+    <property name="time" value="60"/>
+   </properties>
+  </object>
+  <object type="Tesla" x="560" y="464" width="16" height="16">
+   <properties>
+    <property name="id" value="4"/>
+    <property name="offset" value="40"/>
+    <property name="time" value="60"/>
+   </properties>
+  </object>
+  <object type="Tesla" x="576" y="464" width="16" height="16">
+   <properties>
+    <property name="id" value="5"/>
+    <property name="offset" value="50"/>
+    <property name="time" value="60"/>
    </properties>
   </object>
  </objectgroup>
