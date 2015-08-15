@@ -78,8 +78,11 @@ class Main {
 		SpriteLib.addAnim("snowball", "snowball", "0-3", 3);
 		SpriteLib.sliceBD("enemies", "snowsplash", 0, 475, 5, 16, 3, 1);
 		SpriteLib.addAnim("snowsplash", "snowsplash", "0-2", 3);
-		SpriteLib.sliceBD("enemies", "blade", 186, 12, 18, 9, 1, 1);
-		SpriteLib.addAnim("blade", "blade", "0", 60);
+		SpriteLib.sliceBD("enemies", "blade", 188, 5, 20, 16, 2, 4, 1);
+		SpriteLib.addAnim("bladeLeft", "blade", "0", 60);
+		SpriteLib.addAnim("bladeRight", "blade", "0", 60);
+		SpriteLib.addAnim("bladeDown", "blade", "1", 60);
+		SpriteLib.addAnim("bladeUp", "blade", "1", 60);
 		
 		SpriteLib.addAnim("spikeRightIdle", "sideSpike", "2,3,4,3", 10);
 		SpriteLib.addAnim("spikeLeftIdle", "sideSpike", "7,8,9,8", 10);

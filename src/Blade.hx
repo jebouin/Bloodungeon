@@ -4,21 +4,25 @@ class Blade extends Enemy {
 	var tx : Int;
 	var ty : Int;
 	var lastDir : Const.DIR;
-	var timer = 0;
-	public function new(level:Level, tx:Int, ty:Int, dir:Const.DIR) {
-		super("blade", false);
-		setOrigin(.5, 1);
+	var t : Float;
+	public function new(level:Level, tx:Int, ty:Int, dir:Const.DIR, off:Float) {
+		super("bladeRight", false);
 		this.tx = tx;
 		this.ty = ty;
 		lastDir = dir;
-		setPos();
 		this.level = level;
-		anim.stop();
+		if(Math.isNaN(off)) {
+			off = 0;
+		}
+		t = off * 16.;
+		setPos();
+		setAnimDir(dir);
+		anim.play();
 		update();
 	}
 	function setPos() {
-		xx = tx * 16 + 8;
-		yy = ty * 16 + 8;
+		xx = tx * 16 + 10 + Const.getDirX(lastDir) * (t - 16);
+		yy = ty * 16 + 7 + Const.getDirY(lastDir) * (t - 16);
 	}
 	function moveToNextRail() {
 		var dir = null;
@@ -41,18 +45,26 @@ class Blade extends Enemy {
 		} else if(dir == null) {
 			dir = od;
 		}
+		if(dir != lastDir && dir != null) {
+			setAnimDir(dir);
+			anim.play();
+		}
 		lastDir = dir;
 		tx += Const.getDirX(dir);
 		ty += Const.getDirY(dir);
-		setPos();
+	}
+	function setAnimDir(dir:Const.DIR) {
+		setAnim(["bladeLeft", "bladeRight", "bladeUp", "bladeDown"][dir.getIndex()], true);
 	}
 	override public function update() {
 		if(Game.CUR.level != null) {
-			timer++;
-			if(timer >= 10) {
-				timer = 0;
+			var spd = 2.7;
+			t += spd;
+			if(t > 16) {
+				t = 0;
 				moveToNextRail();
 			}
+			setPos();
 			super.update();
 		}
 	}

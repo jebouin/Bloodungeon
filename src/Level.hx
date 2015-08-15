@@ -208,9 +208,9 @@ class Level {
 						railKind = railKinds[sty][stx];
 					}
 					rails[j][i] = railKind;
-					if(railKind != NONE) {
+					/*if(railKind != NONE) {
 						trace(i, j, railKind);
-					}
+					}*/
 				}
 			}
 		}
@@ -333,7 +333,8 @@ class Level {
 						setCollision(tx, ty, FULL);
 					case "Blade":
 						var dir = Const.stringToDir(o.properties.get("dir"));
-						e = new Blade(this, tx, ty, dir);
+						var off = Std.parseFloat(o.properties.get("offset"));
+						e = new Blade(this, tx, ty, dir, off);
 					default:
 						
 				}
