@@ -39,6 +39,7 @@ class Level {
 	var nbRoomsX : Int;
 	var nbRoomsY : Int;
 	var tiles : Array<Array<TILE_COLLISION_TYPE> >;
+	var rails : Array<Array<RAIL_KIND> >;
 	var spikePos : Array<{x:Int, y:Int, dir:Const.DIR8}>;
 	var bowsPos : Array<{x:Int, y:Int, dir:Const.DIR}>;
 	var torches : Array<Torch>;
@@ -102,6 +103,8 @@ class Level {
 		nbRoomsX = Std.int(WID / (RWID - 1));
 		nbRoomsY = Std.int(HEI / (RHEI - 1));
 		tiles = [];
+		var hasRails = floor == 3;
+		rails = hasRails ? [] : null;
 		spikePos = [];
 		bowsPos = [];
 		torches = [];
@@ -112,6 +115,9 @@ class Level {
 		}
 		for(j in 0...HEI) {
 			tiles[j] = [];
+			if(rails != null) {
+				rails[j] = [];
+			}
 			for(i in 0...WID) {
 				var ground0Tile = ground0Layer.getTileAt(i, j);
 				var ground0TileCol = Collision.TILE_COLLISIONS[ground0Tile];
@@ -193,6 +199,19 @@ class Level {
 					setCollision(i, j, FULL);
 					torches.push(new Torch(i, j));					
 				}
+				if(hasRails) {
+					var railKinds : Array< Array<RAIL_KIND> > = [[DR, H, DL], [V, UR, UL], [X, NONE, NONE]];
+					var stx = ((overTile - 1) & 15) - 8;
+					var sty = ((overTile - 1) >> 4) - 10;
+					var railKind : RAIL_KIND = NONE;
+					if(stx >= 0 && sty >= 0 && stx < 3 && sty < 3) {
+						railKind = railKinds[sty][stx];
+					}
+					rails[j][i] = railKind;
+					if(railKind != NONE) {
+						trace(i, j, railKind);
+					}
+				}
 			}
 		}
 		overLayer.render(); //cleans spikes and torches on tiles
@@ -237,9 +256,12 @@ class Level {
 			case 3:
 				Game.CUR.cd.activate();
 				removeLighting();
-				setRoomId(1, 4);
+				/*setRoomId(1, 4);
 				Hero.spawnX = 24 * 16;
-				Hero.spawnY = 41 * 16;
+				Hero.spawnY = 41 * 16;*/
+				setRoomId(0, 4);
+				Hero.spawnX = 12 * 16 + 8;
+				Hero.spawnY = 37 * 16 + 8;
 		}
 		Game.CUR.lm.getContainer().x = -posX;
 		Game.CUR.lm.getContainer().y = -posY;
@@ -309,6 +331,9 @@ class Level {
 					case "Cannon":
 						e = new Cannon(this, tx, ty);
 						setCollision(tx, ty, FULL);
+					case "Blade":
+						var dir = Const.stringToDir(o.properties.get("dir"));
+						e = new Blade(this, tx, ty, dir);
 					default:
 						
 				}
@@ -395,6 +420,40 @@ class Level {
 			return NONE;
 		}
 		return tiles[y][x];
+	}
+	public function getRail(x:Int, y:Int) : RAIL_KIND {
+		if(!isOnMap(x, y) || rails == null) {
+			return NONE;
+		}
+		return rails[y][x];
+	}
+	public function areRailsConnected(x0:Int, y0:Int, dir:Const.DIR) {
+		var k0 = getRail(x0, y0);
+		var k1 = getRail(x0 + Const.getDirX(dir), y0 + Const.getDirY(dir));
+		if(k0 == NONE || k1 == NONE) {
+			return false;
+		}
+		if(dir == DOWN) {
+			var kk = k0;
+			k0 = k1;
+			k1 = kk;
+			dir = UP;
+		}
+		if(dir == RIGHT) {
+			var kk = k0;
+			k0 = k1;
+			k1 = kk;
+			dir = LEFT;
+		}
+		switch(dir) {
+			case UP:
+				return (k0 == V || k0 == UL || k0 == UR || k0 == X) && (k1 == V || k1 == DL || k1 == DR || k1 == X);
+			case LEFT:
+				return (k0 == H || k0 == UL || k0 == DL || k0 == X) && (k1 == H || k1 == UR || k1 == DR || k1 == X);
+			default:
+				
+		}
+		return false;
 	}
 	public function setCollision(x:Int, y:Int, type:TILE_COLLISION_TYPE) {
 		if(!isOnMap(x, y)) return;

@@ -15,12 +15,12 @@
  </layer>
  <layer name="over" width="85" height="55" opacity="0.61">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T20MH6AAAAAAAAAAAAAAAAAAAAAAAAB+BkkMAAE=
+   eJzt08EJgDAQAMHrvxO1ArUCu1IRQQNBkWBQZuAeyetYkggAAAAAAAAAAAAAAAC41izTHqaru87nrQ2nODfdz9o+12fO6T33aVpe2m6I7e+PFXb5C++xPE0BAAB42wxSGhGC
   </data>
  </layer>
  <layer name="wall0" width="85" height="55">
   <data encoding="base64" compression="zlib">
-   eJzt08EJwDAQA0H330t6TAX+HGuSTfZAz8FC4GutdRU8kzO5NuVdm/KuTXnXprxrU961Ke/alHflG5lcbu9MXS3O1NXiTF0tztTV4kxdLc7U1eJMXS2unMnkcntn6mpxpq4WZ+pqcaauFmfqanGmrhZn6mpx5Uwml9s7U1eLM3W1OFNXizN1tThTV4szdbU4U1eLK2cyuSfes7g25V2b8m5qp2+Ztpm6NuVdf593bcq7NuVdOZPJ/cG1Ke/alHdtyrs25V2b8q5NedemvCvvyQ1i3349
+   eJzt1tEJw0AQA9Hrvxf3mArO2Js5yIRZ0OeLZYEh11rrKngmZ3Jtyrs25V2b8q5NedemvGtT3rUp78p/ZHK5vTN1tThTV4szdbU4U1eLM3W1OFNXizN1tbhyJpPL7Z2pq8WZulqcqavFmbpanKmrxZm6Wpypq8WVM5lcbu9MXS3O1NXiTF0tztTV4kxdLc7U1eJMXS2unAl1J59ncm3Ku7fverfR3W+16XMzcZMzuTblHbHpk53b9L09/T/D5NqUd9M9vtm07DednMn1LfKuTXnXprxrU961Ke/alHdtyrvyO/kAbS2IYA==
   </data>
  </layer>
  <layer name="wall1" width="85" height="55">
@@ -28,5 +28,11 @@
    eJztwTEBAAAAwqD1T20MH6AAAAAAAAAAAAAAAAAAAAAAAAB+BkkMAAE=
   </data>
  </layer>
- <objectgroup name="active" width="85" height="55"/>
+ <objectgroup name="active" width="85" height="55">
+  <object type="Blade" x="96" y="624" width="16" height="16">
+   <properties>
+    <property name="dir" value="right"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

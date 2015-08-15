@@ -53,6 +53,9 @@ class Const {
 			   (d == UP_RIGHT && dd == DOWN_LEFT) ||
 			   (d == DOWN_LEFT && dd == UP_RIGHT));
 	}
+	public static inline function getOpposite(d:DIR) : DIR {
+		return (d == UP ? DOWN : (d == DOWN ? UP : (d == LEFT ? RIGHT : (d == RIGHT ? LEFT : null))));
+	}
 	public static inline function getDirX(d:DIR) {
 		return (d == RIGHT ? 1 : (d == LEFT ? -1 : 0));
 	}

@@ -7,8 +7,18 @@ enum TILE_COLLISION_TYPE {
 	BOW;
 	ICE;
 }
+enum RAIL_KIND {
+	NONE;
+	V;
+	H;
+	X;
+	UL;
+	UR;
+	DL;
+	DR;
+}
 class Collision {
-	public static var TILE_COLLISIONS = [NONE,
+	public static var TILE_COLLISIONS : Array<TILE_COLLISION_TYPE> = [NONE,
 										 NONE, NONE, NONE, FULL, FULL, FULL, FULL, NONE,   NONE, NONE, NONE, FULL, FULL, FULL, FULL, NONE,
 										 NONE, NONE, NONE, FULL, FULL, FULL, FULL, NONE,   NONE, NONE, NONE, FULL, FULL, FULL, FULL, NONE,
 										 HOLE, NONE, NONE, FULL, FULL, FULL, FULL, NONE,   NONE, NONE, NONE, FULL, FULL, FULL, FULL, NONE,
