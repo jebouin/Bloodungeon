@@ -1,5 +1,6 @@
 package ;
 import com.xay.util.LayerManager;
+import com.xay.util.Util;
 import flash.accessibility.Accessibility;
 import flash.display.BlendMode;
 import flash.display.DisplayObject;
@@ -253,18 +254,42 @@ class Level {
 			case 3:
 				Game.CUR.cd.activate();
 				removeLighting();
-				/*setRoomId(1, 4);
+				setRoomId(1, 4);
 				Hero.spawnX = 24 * 16;
-				Hero.spawnY = 41 * 16;*/
+				Hero.spawnY = 41 * 16;
 				/*setRoomId(2, 3);
 				Hero.spawnX = 30 * 16 + 8;
 				Hero.spawnY = 34 * 16 + 8;*/
 				/*setRoomId(0, 0);
 				Hero.spawnX = 11 * 16 + 8;
 				Hero.spawnY = 8 * 16 + 8;*/
-				setRoomId(1, 1);
+				/*setRoomId(1, 1);
 				Hero.spawnX = 15 * 16 + 8;
-				Hero.spawnY = 17 * 16 + 8;
+				Hero.spawnY = 17 * 16 + 8;*/
+		}
+		var bd = ground0Layer.bmp.bitmapData;
+		for(j in 0...HEI) {
+			for(i in 0...WID) {
+				var tile = ground0Layer.getTileAt(i, j);
+				if(tile == 137 || tile == 138 || tile == 153 || tile == 154) {
+					var m = Util.randFloat(.85, .95);
+					var rm = m;
+					var gm = m;
+					var bm = m;
+					for(jj in j << 4...(j << 4) + 16) {
+						for(ii in i << 4...(i << 4) + 16) {
+							var c = bd.getPixel(ii, jj);
+							var b = c & 0xFF;
+							var g = (c >> 8) & 0xFF;
+							var r = (c >> 16) & 0xFF;
+							r = Std.int(b * rm);
+							g = Std.int(b * gm);
+							b = Std.int(b * bm);
+							bd.setPixel32(ii, jj, 0xFF000000 + (r << 16) + (g << 8) + b);
+						}
+					}
+				}
+			}
 		}
 		Game.CUR.lm.getContainer().x = -posX;
 		Game.CUR.lm.getContainer().y = -posY;
