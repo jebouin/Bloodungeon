@@ -26,6 +26,7 @@ class Spinner extends Enemy {
 		this.angle = initAngle;
 		this.size = size;
 		this.rotSpeed = speed;
+		moves = false;
 		if(partBD == null) {
 			partBD = new BitmapData(16, 18, true, 0x0);
 			revPartBD = new BitmapData(16, 18, true, 0x0);
