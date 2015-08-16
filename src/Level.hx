@@ -224,7 +224,7 @@ class Level {
 		bd.applyFilter(bd, bd.rect, p, new DropShadowFilter(1., 45, 0xFF000000, .2, 1., 1., 1., 1, false));
 		bd.applyFilter(bd, bd.rect, p, new DropShadowFilter(1., 135, 0xFF000000, .2, 1., 1., 1., 1, false));
 		bd = ground0Layer.bmp.bitmapData;
-		bd.applyFilter(bd, bd.rect, p, new GlowFilter(0xFFFFFFFF, .5, 2., 2., 2., 1, true));
+		bd.applyFilter(bd, bd.rect, p, new GlowFilter(0xFFFFFFFF, .6, 2., 2., 2., 1, true));
 		switch(floor) {
 			case 0:
 				/*setRoomId(2, 3);
