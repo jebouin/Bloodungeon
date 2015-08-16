@@ -46,8 +46,8 @@ class Door extends Entity {
 		setCollision(FULL);
 		Game.CUR.lm.addChild(this, Const.BACK_L);
 		ALL.push(this);
-		filters = [new DropShadowFilter(1., 45, 0xFF000000, .5, 8., 8., 1., 1, false), 
-				   new DropShadowFilter(1., 135, 0xFF000000, .5, 8., 8., 1., 1, false)];
+		filters = [new DropShadowFilter(1., 45, 0xFF000000, .5, 3., 3., 1., 1, false), 
+				   new DropShadowFilter(1., 135, 0xFF000000, .5, 3., 3., 1., 1, false)];
 	}
 	override public function delete() {
 		super.delete();

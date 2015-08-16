@@ -15,17 +15,17 @@
  </layer>
  <layer name="over" width="85" height="55" opacity="0.32">
   <data encoding="base64" compression="zlib">
-   eJztms1xwyAQRinBJbiElOASUoJKSAkqISXkmrgCxRdfnVxydpqJmMDMer38SUgC/L2ZHTEyyPgNSMisUqAl3sboHfFj6jybALe8OM6fSfmVhKZbsD8l8DXGh4nvyDbvYxxN2eXUha7fJbYpHeqQR6zTwYQm1VELTn0Ot3Kq6RPalM7W4/Ssbu+tLTLlfjrHKZD5HONkyr65zJ/3AID6uU5o85S9F2VxZcdUhnCVO1p3OrDj1PYx7Ey0iH6ntOumCzvqODraSestOP1nEMrSudRrxdKiWzjNj16r2zl88pyL4XdGPw4mALDQ55IUrueSBe+V99C5LUXKfKdg32MZuq07EGCn6nsudlt3QIDu63BK8yvtO3VrdyIC+t8uB06nUbtTTU+iBGpyajls3YEAdA+CU6pT0D58vSSVMT7T4N64U5DOXvmduj6byxK5KCWRMj4xdsOE5j7upenAaX64M59T+I2Detor97jFmAWUlDVGreuMtXkkp6Hfmuu3PZLTtYDT/DySU8z9eoFTAOonlBcUkx/Uaq4KfdeVPLnuaXb/MfS+zPcppe8I5WXVBvWxRI4prye1c12r1hz/kp3WytpOpVzCi3Cu5vvB2k5j69Q8duE0P9SpL8eXP/9D+cA2YvKCpWtNzScGbfEHv5EAiw==
+   eJztmsttAyEURSnBJbiElOASUsKUkBKmhJSQbeIKJt5462STtdNMBgWk5+fHd36A75GuBmEY4yu+5ikFWuJtVO/QjynzbARueXHkn0n6lUjTLdieEvga9WH0HVnnfdTRpF2eutDlu8Q6pUM95Ir1dDDSpHrUgqc+D7fyVNMn1CmdrfvpWd3OrS2SM59O8RTIfI46mbRvLPP1HgBQP9eMOk+zt6IsruyZyhAuckfrng7smVs/hp1Ri+gzpd03XdhT6+ioJ+234Ok/g5CW8lLfFUuL3sLT+dF7dTuGT568GH4ntONgBICFrkuSXOuSBefKe+jYlpQy3im491iGbusGBNip+tbFbusGCNB7HU5p/kr3Tt3ajYiA/rfLgad51O6ppicqgZo8tRy2bkAAegfBKdVT0D58vySl0T/T4L5xT0E6e+X31PXZVJaIRSmJlP6JvhsmNPYxl6bjG9fwNA+fZ749AXBDfdor91yAPgsoKXuMWvcZa/NInoZ+61y/7ZE8XQt4Oj+P5CnGfr3AUwDqJxQXFBMf1GqsCj3rSj655jR7/xg6L/N7Suk7QnFZtUH9WCLGlJeT6rneVWuMf8me1srankqxhBchr+b5YG1PY8vU3Hfh6fxQT30xvnz9D8UDW8XEBUvvyo0nBm3xB9koAEs=
   </data>
  </layer>
  <layer name="wall0" width="85" height="55">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer name="wall1" width="85" height="55">
   <data encoding="base64" compression="zlib">
-   eJztm4ttwyAQhhmVEToCA1htR/AIHaEjZIC0E0SdoYpS1NPlzoYDHwbuk6yEmEf8B+6BHeeeeSU+2+Mtoc6SOQbsc2FrGaZNOabhY01+K4yjMUYrJLazhOvGOZvTBsfIa/AstNa49fgazHCNteF8VIq/gHp/MXW4zymi/9L2m2ch9bqXjLqwzUtmmx6IOsT8sGacEzaOyIiaHsk7cWDumnpQ3oprDRqo4dU9a2rwcLYVa2iaygju2Y7Cslf8LqNA2VVoX32br9Uds+UQKdd7j6mwD+baUfFXiv+G/Zm/p8Harm47RqWOGShZw6PH8y3sW66mXjgOlUuMioamkja1wHl9an1oI3PnutY8vQjbzYBXbjcDXrldKXHdpsaBcY85NUal2MqfqOMjo2+IF7bTYG9PmbKtUPMa+/ap9t7QYXWPvOGCys7NmVvUAMYZAZ3zB40pWZs5z+jVuO9S0scnKuNcILh/rXvME6j4VoM4Vz0qb9UtgfLZcO5J95fOworK4eDxpD5ZOs9+/l5z7vuXEucddz/RkOHB+7217XfOH4V0P6uFzeDyhsCUfeF4UZtcGwC1iX1w9qCGjrcKfRgGhJrz9gy0YRgGTbSPsz0D0QpK555y2d7oKVcoRXKtkmfKuT5Gi7W0/5Mw638gzsZo83gP80l9MuJvhG3giNdoGIZRSm68H22pVq7fm+3+BUe0h4I=
+   eJztm4ttxCAMQBmVETpCBoh6HaEjdJQOcO0EbWeoosqSxdnUNgQI+EmRLgnm44A/CRfCI8/Etf+4CcrsyjZwnTtbynHdlOM6/FuTnw3aadFGLyy2s4R75p7PaYdj5jU4Cr113Lv9FqwwxtpwPkriL7C+P5gy3HUK8F+t/eYoSMe9K8pimSelzBUAPUB+WDPO2TIHMKNOz+SFOFIOnUZ0notrHRqsw3t41KnDw9nWVIeuUxtbeLSj+Dw27MssUHYV29fYp1uXY7UcQjLeI6ZKfTAnR8VfklgV1yf199CWpH5JzDz6O7K0f68hH6NSxwqUrOEz4vmR8tke9k2r0xhsOqNyiVmx6FQLyPSwi2leLy2P+6qd6y10evBulFuBKChDxQcSuVWJjeVKgXUrjQPhHbM0RqXI5U/U8aaoGxONci3QxMfUM6oR53xn7uV8QSp3Y34f+PtE52p8Fcpb1qZmj16NGNE6xhXWMxXfnsmP4h7Y1xq5M+Wz8dyjxr/C87di9cnWeQZzQ/Pd3xkX6fyJZ3Yig/V9ltVmSNvT1L8x51FRBwX0VWsDcN+hDs4e1LC9h9/XfiNI+2PZZ+TMCzWfRv++4ziO0wuwj6vtgegFpWePTc6jda7QE8tYLXvKuTq0/x+Q0PM5tN7DMdKekZVZLWdwn3RNZnxGqQ2ccYyO4zilWGPpVrn+1Wz3L0BSjVI=
   </data>
  </layer>
  <objectgroup name="active" width="85" height="55">
@@ -490,6 +490,23 @@
     <property name="nb" value="2"/>
     <property name="size" value="2"/>
     <property name="speed" value="-2.5"/>
+   </properties>
+  </object>
+  <object type="FakeTile" x="672" y="448" width="16" height="16">
+   <properties>
+    <property name="dir" value="right"/>
+    <property name="id" value="174"/>
+    <property name="secretId" value="0"/>
+   </properties>
+  </object>
+  <object type="Door" x="800" y="480" width="32" height="16">
+   <properties>
+    <property name="id" value="0"/>
+   </properties>
+  </object>
+  <object type="Button" x="880" y="448" width="16" height="32">
+   <properties>
+    <property name="id" value="0"/>
    </properties>
   </object>
  </objectgroup>

@@ -261,18 +261,18 @@ class Level {
 				/*setRoomId(1, 4);
 				Hero.spawnX = 24 * 16;
 				Hero.spawnY = 41 * 16;*/
-				/*setRoomId(2, 3);
+				setRoomId(2, 3);
 				Hero.spawnX = 30 * 16 + 8;
-				Hero.spawnY = 34 * 16 + 8;*/
+				Hero.spawnY = 34 * 16 + 8;
 				/*setRoomId(0, 0);
 				Hero.spawnX = 11 * 16 + 8;
 				Hero.spawnY = 8 * 16 + 8;*/
 				/*setRoomId(1, 1);
 				Hero.spawnX = 15 * 16 + 8;
 				Hero.spawnY = 17 * 16 + 8;*/
-				setRoomId(3, 2);
+				/*setRoomId(3, 2);
 				Hero.spawnX = 43 * 16 + 8;
-				Hero.spawnY = 20 * 16 + 8;
+				Hero.spawnY = 20 * 16 + 8;*/
 		}
 		var bd = ground0Layer.bmp.bitmapData;
 		for(j in 0...HEI) {
@@ -283,6 +283,12 @@ class Level {
 					var rm = m;
 					var gm = m;
 					var bm = m;
+					if(j >= 36) {
+						var dm = Util.randFloat(.8, .9);
+						gm *= dm;
+						bm *= dm;
+						rm *= 1.2;
+					}
 					for(jj in j << 4...(j << 4) + 16) {
 						for(ii in i << 4...(i << 4) + 16) {
 							var c = bd.getPixel(ii, jj);
