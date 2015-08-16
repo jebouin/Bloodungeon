@@ -83,9 +83,14 @@ class Main {
 		SpriteLib.addAnim("bladeRight", "blade", "0,1", 2);
 		SpriteLib.addAnim("bladeDown", "blade", "2,3", 2);
 		SpriteLib.addAnim("bladeUp", "blade", "2,3", 2);
-		SpriteLib.sliceBD("enemies", "tesla", 184, 29, 10, 10, 2, 1);
-		SpriteLib.addAnim("teslaIdle", "tesla", "0", 10);
-		SpriteLib.addAnim("teslaCharge", "tesla", "1", 10);
+		SpriteLib.sliceBD("enemies", "tesla", 184, 29, 10, 10, 6, 1);
+		SpriteLib.addAnim("teslaIdle", "tesla", "0-5", 2);
+		SpriteLib.addAnim("teslaCharge", "tesla", "0-5", 2);
+		SpriteLib.sliceBD("enemies", "launcher", 85, 242, 32, 36, 4, 1);
+		SpriteLib.addAnim("launcherIdle", "launcher", "3", 30);
+		SpriteLib.addAnim("launcherShoot", "launcher", "0-3", 5);
+		SpriteLib.sliceBD("enemies", "rocket", 227, 252, 19, 16, 1, 1);
+		SpriteLib.addAnim("rocket", "rocket", "0", 60);
 		
 		SpriteLib.addAnim("spikeRightIdle", "sideSpike", "2,3,4,3", 10);
 		SpriteLib.addAnim("spikeLeftIdle", "sideSpike", "7,8,9,8", 10);

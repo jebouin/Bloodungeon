@@ -65,6 +65,7 @@ class Level {
 		Spinner.updateAll();
 		Torch.updateAll();
 		Cannon.updateAll();
+		Launcher.updateAll();
 	}
 	public function load(floor:Int) {
 		Audio.playMusic(floor);
@@ -261,9 +262,9 @@ class Level {
 				/*setRoomId(1, 4);
 				Hero.spawnX = 24 * 16;
 				Hero.spawnY = 41 * 16;*/
-				setRoomId(2, 3);
+				/*setRoomId(2, 3);
 				Hero.spawnX = 30 * 16 + 8;
-				Hero.spawnY = 34 * 16 + 8;
+				Hero.spawnY = 34 * 16 + 8;*/
 				/*setRoomId(0, 0);
 				Hero.spawnX = 11 * 16 + 8;
 				Hero.spawnY = 8 * 16 + 8;*/
@@ -273,6 +274,9 @@ class Level {
 				/*setRoomId(3, 2);
 				Hero.spawnX = 43 * 16 + 8;
 				Hero.spawnY = 20 * 16 + 8;*/
+				setRoomId(3, 3);
+				Hero.spawnX = 48 * 16 + 8;
+				Hero.spawnY = 35 * 16 + 8;
 		}
 		var bd = ground0Layer.bmp.bitmapData;
 		for(j in 0...HEI) {
@@ -322,6 +326,7 @@ class Level {
 			}
 		}
 		Bow.timer = Cannon.timer = 1000;
+		Launcher.timer = 40;
 		for(pos in bowsPos) {
 			if(isInRoom(pos.x, pos.y, idx, idy)) {
 				var b = new Bow(pos.x, pos.y, pos.dir);
@@ -386,6 +391,11 @@ class Level {
 							links.push(Std.parseInt(l));
 						}
 						e = new Tesla(tx, ty, id, links, time, off);
+					case "Launcher":
+						var facesRight = getCollision(tx+1, ty) == TILE_COLLISION_TYPE.NONE;
+						setCollision(tx, ty, FULL);
+						setCollision(tx, ty+1, FULL);
+						e = new Launcher(tx, ty, facesRight);
 					default:
 						
 				}

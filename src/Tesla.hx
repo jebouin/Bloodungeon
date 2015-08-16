@@ -78,6 +78,8 @@ class Tesla extends Enemy {
 	var timer : Int;
 	public function new(tx:Int, ty:Int, id:Int, links:Array<Int>, time:Int, off:Int) {
 		super("teslaIdle", true);
+		anim.loop = true;
+		anim.setFrame(Std.random(6));
 		this.links = links.copy();
 		this.id = id;
 		this.tx = tx;
@@ -93,6 +95,8 @@ class Tesla extends Enemy {
 		ALL.push(this);
 		bolts = [];
 		update();
+		shadow.scaleX *= .8;
+		shadow.scaleY *= .8;
 	}
 	public static function init() {
 		
@@ -128,17 +132,17 @@ class Tesla extends Enemy {
 		super.update();
 	}
 	public function charge() {
-		setAnim("teslaCharge", false);
+		/*setAnim("teslaCharge", true);
 		anim.play();
 		for(l in links) {
 			for(t in ALL) {
 				if(t.id == l) {
-					t.setAnim("teslaCharge", false);
+					t.setAnim("teslaCharge", true);
 					t.anim.play();
 					break;
 				}
 			}
-		}
+		}*/
 	}
 	public function shoot() {
 		for(l in links) {
@@ -149,13 +153,13 @@ class Tesla extends Enemy {
 				}
 			}
 		}
-		setAnim("teslaIdle", false);
+		setAnim("teslaIdle", true);
 		anim.play();
 	}
 	function boltTo(t:Tesla) {
 		var b = new Bolt(xx, yy, t.xx, t.yy);
 		bolts.push(b);
-		t.setAnim("teslaIdle", false);
+		t.setAnim("teslaIdle", true);
 		t.anim.play();
 	}
 	override function collidesHero() {

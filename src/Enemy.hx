@@ -9,8 +9,8 @@ class Enemy extends Entity {
 		Game.CUR.lm.addChild(this, Const.ENEMY_L);
 	}
 	override public function delete() {
-		if(fade && fadeThis) {
-			Actuate.tween(this, .8, {alpha: 0.}).onComplete(function() {
+		if(fade && fadeThis && roomId != Level.ROOMID) {
+			Actuate.tween(this, .5, {alpha: 0.}).onComplete(function() {
 				onFadeComplete();
 			});
 		} else {
