@@ -216,7 +216,11 @@ class Level {
 		wall1Layer.render();
 		var p = new Point(0, 0);
 		var bd = wall0Layer.bmp.bitmapData;
-		bd.applyFilter(bd, bd.rect, p, new DropShadowFilter(1., -90, 0xFF000000, 1., 1., 8., 1., 1, true));
+		var shadowAlpha = 1.;
+		if(floor == 3) {
+			shadowAlpha *= .6;
+		}
+		bd.applyFilter(bd, bd.rect, p, new DropShadowFilter(shadowAlpha, -90, 0xFF000000, 1., 1., 8., 1., 1, true));
 		bd.applyFilter(bd, bd.rect, p, new DropShadowFilter(1., 45, 0xFF000000, .2, 1., 1., 1., 1, false));
 		bd.applyFilter(bd, bd.rect, p, new DropShadowFilter(1., 135, 0xFF000000, .2, 1., 1., 1., 1, false));
 		bd = ground0Layer.bmp.bitmapData;
