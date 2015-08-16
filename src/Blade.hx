@@ -22,8 +22,8 @@ class Blade extends Enemy {
 		update();
 	}
 	function setPos() {
-		xx = tx * 16 + 10 + Const.getDirX(lastDir) * (t - 16);
-		yy = ty * 16 + 7 + Const.getDirY(lastDir) * (t - 16);
+		xx = tx * 16 + 8 + Const.getDirX(lastDir) * (t - 16);
+		yy = ty * 16 + 9 + Const.getDirY(lastDir) * (t - 16);
 	}
 	function moveToNextRail() {
 		var dir = null;
@@ -56,6 +56,11 @@ class Blade extends Enemy {
 	}
 	function setAnimDir(dir:Const.DIR) {
 		setAnim(["bladeLeft", "bladeRight", "bladeUp", "bladeDown"][dir.getIndex()], true);
+		if(dir == LEFT) {
+			scaleX = -1;
+		} else {
+			scaleX = 1;
+		}
 	}
 	override public function update() {
 		if(Game.CUR.level != null) {

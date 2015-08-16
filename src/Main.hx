@@ -78,11 +78,11 @@ class Main {
 		SpriteLib.addAnim("snowball", "snowball", "0-3", 3);
 		SpriteLib.sliceBD("enemies", "snowsplash", 0, 475, 5, 16, 3, 1);
 		SpriteLib.addAnim("snowsplash", "snowsplash", "0-2", 3);
-		SpriteLib.sliceBD("enemies", "blade", 188, 5, 20, 16, 2, 4, 1);
-		SpriteLib.addAnim("bladeLeft", "blade", "0", 60);
-		SpriteLib.addAnim("bladeRight", "blade", "0", 60);
-		SpriteLib.addAnim("bladeDown", "blade", "1", 60);
-		SpriteLib.addAnim("bladeUp", "blade", "1", 60);
+		SpriteLib.sliceBD("enemies", "blade", 188, 4, 21, 22, 4, 1, 1);
+		SpriteLib.addAnim("bladeLeft", "blade", "0,1", 2);
+		SpriteLib.addAnim("bladeRight", "blade", "0,1", 2);
+		SpriteLib.addAnim("bladeDown", "blade", "2,3", 2);
+		SpriteLib.addAnim("bladeUp", "blade", "2,3", 2);
 		SpriteLib.sliceBD("enemies", "tesla", 184, 29, 10, 10, 2, 1);
 		SpriteLib.addAnim("teslaIdle", "tesla", "0", 10);
 		SpriteLib.addAnim("teslaCharge", "tesla", "1", 10);
