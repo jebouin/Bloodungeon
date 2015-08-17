@@ -10,4 +10,10 @@ class Action {
 	public static function exitFloor1() {
 		Game.CUR.level.nextFloor();
 	}
+	public static function exitFloor2() {
+		Game.CUR.level.nextFloor();
+	}
+	public static function lastRush() {
+		Audio.playMusic(4);
+	}
 }
