@@ -15,7 +15,7 @@
  </layer>
  <layer name="over" width="85" height="55">
   <data encoding="base64" compression="zlib">
-   eJztmt1xgzAMxxkhIzBCR2CEjsAIHSEjdIS+tpmA5iWvaV/6nCxTfGfuFCHZMhj8Ef3udPgMNuJ/thFYTaPUxMdoR8b+7DWv1pRH3pj6Cyi/AzP0G/qTAz+jfVn7Fbb5HO1ky5ymHOb6PrBN7kANsUk1HawZQjWqQVOXhqk0NRwD2uRO6nF6aR7X1hpZsp6u0VSh+R7tbMuuuYzf94qilM9tQZsX4XUm/qXeoSdXowy4oWMog/+SGVJNub6X3HNPBnRc2l7CwdravnPUFM6pKzq65hYVb8XWtAXlEE1bom5PBqJM1YX2JcWlbSvoWzWdI10DSpr7Jlaf5vDZUSfhvsKPzhoH9AlaiH9KWXCxnjTm0+/KOdw8WjufdN9jG/rUDng4NOGxcWr61A4QwH0dTG76UvtO/d5OCID/djGq6TJK19RwBJYDJWk60aV2wAPcg8DkqqlSPzheoso6PsPAumFNlXDaxq0pd24tW+Si5ETI+KTOmT2dDtV1RN2z4Jv7krFpNMX/Lp75f4ZrXuv7aRkuzVwxgcIDdWobfi3QMatAQmKMnOKMm6CcilI15faPXXu1vmeN9WzPpOleqKbxKVXTu6CM0blfLqqpopSPLy9Ikh+0578d7O+WuerwW5fSiVvTpjjC972M4w3qHnvk4mM/toyDoB5b5JhKnoXrS5rjH8uPWOSsaUxq1pTKJbwSdbHXg5o1lV4T+5lV03o0deX44ve/Lx94MkleMNVX7Px8fA/N/y+Df/y4LpM=
+   eJztmt1xgzAMxxkhIzBCR2CEjsAIHSEjdIS+tpmA5iWvaV/6nCxTfGfuFCHZMhj8Ef3udPgMNuJ/thFYTaPUxMdoR8b+7DWv1pRH3pj6Cyi/AzP0G/qTAz+jfVn7Fbb5HO1ky5ymHOb6PrBN7kANsUk1HawZQjWqQVOXhqk0NRwD2uRO6nF6aR7X1hpZsp6u0VSh+R7tbMuuuYzf94qilM9tQZsX4XUm/qXeoSdXowy4oWMog/+SGVJNub6X3HNPBnRc2l7CwdravnPUFM6pKzq65hYVb8XWtAXlEE1bom5PBqJM1YX2JcWlbSvoWzWdI10DSpr7Jlaf5vDZUSfhvsKPzhoH9AlaiH9KWXCxnjTm0+/KOdw8WjufdN9jG/rUDng4NOGxcWr61A4QwH0dTG76UvtO/d5OCID/djGq6TJK19RwBJYDJWk60aV2wAPcg8DkqqlSPwfGqHOKDJ+mSjhtIx+nMcfrFrkoOREyPqlzZk+nQ3UdUfcsSNdTF0ZT/O/imf9nuOa1vp+W4dKMG7eKG6hT2/BrgY5ZBRISY+QUZ9wE5VSUqim3f+zaq/U9a6xneyZN90I1jU+pmt4FZYzO/XJRTRWlfHx5QZL8oD3/7WB/t8xVh9+6lE7cmjbFEb7vZRxvUPfYIxcf+7FlHAT12CLHVPIsXF/SHP9YfsQiZ01jUrOmVC7hlaiLvR7UrKn0mtjPrJrWo6krxxe//335wJNJ8oKpvmLn5+N7aP5/GfwDK6Uuow==
   </data>
  </layer>
  <layer name="wall0" width="85" height="55">
@@ -556,7 +556,6 @@
   <object type="Launcher" x="1152" y="320" width="16" height="32"/>
   <object type="Launcher" x="1152" y="368" width="16" height="32"/>
   <object type="Cannon" x="1312" y="176" width="16" height="16"/>
-  <object type="Cannon" x="1312" y="256" width="16" height="16"/>
   <object type="Cannon" x="1200" y="208" width="16" height="16"/>
   <object type="Launcher" x="1328" y="208" width="16" height="32"/>
   <object type="Launcher" x="1104" y="224" width="16" height="32"/>
