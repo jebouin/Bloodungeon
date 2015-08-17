@@ -134,5 +134,10 @@
     <property name="speed" value="1.5"/>
    </properties>
   </object>
+  <object type="Action" x="320" y="512" width="48" height="48">
+   <properties>
+    <property name="function" value="exitFloor2"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

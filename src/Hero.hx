@@ -1,12 +1,22 @@
 package ;
 import com.xay.util.Input;
 import com.xay.util.Util;
+import flash.display.Bitmap;
+import flash.display.BlendMode;
+import flash.filters.DropShadowFilter;
+import flash.geom.Point;
+import flash.text.TextField;
 import haxe.Timer;
 import motion.Actuate;
+import motion.easing.Bounce;
+import motion.easing.Cubic;
+import motion.easing.Elastic;
 class Hero extends Entity {
 	public var hooverTimer : Int;
 	public static var spawnX : Float;
 	public static var spawnY : Float;
+	var nbDeaths : Int;
+	var deathCounter : Bitmap;
 	var targetFrame : Int;
 	var turnTimer : Int;
 	public var prevRoomDir : Const.DIR;
@@ -14,9 +24,6 @@ class Hero extends Entity {
 	public function new() {
 		super("heroIdle");
 		anim.playing = false;
-		/*graphics.beginFill(0xFF0000);
-		graphics.drawCircle(0, 0, 8);
-		graphics.endFill();*/
 		Game.CUR.lm.addChild(this, Const.HERO_L);
 		maxSpeed = 2.3;
 		collides = true;
@@ -31,6 +38,10 @@ class Hero extends Entity {
 		shadow.scaleY *= .5;
 		shadow.alpha *= .4;
 		targetFrame = anim.getFrame();
+		nbDeaths = 0;
+		deathCounter = new Bitmap();
+		Game.CUR.frontlm.addChild(deathCounter, 0);
+		deathCounter.visible = false;
 		//immune = true;
 	}
 	public function spawn() {
@@ -86,7 +97,7 @@ class Hero extends Entity {
 			/*if(Input.oldKeyDown("action")) {
 				jump();
 			}*/
-			if(Input.oldKeyDown("suicide")) {
+			if(Input.keyDown("suicide") && !Input.oldKeyDown("suicide")) {
 				var prevImmune = immune;
 				immune = false;
 				die();
@@ -141,10 +152,31 @@ class Hero extends Entity {
 		visible = shadow.visible = false;
 		dead = true;
 		locked = true;
+		nbDeaths++;
+		showDeaths();
 		Timer.delay(function() {
 			Game.CUR.onRespawn();
 			spawn();
 		}, 500);
+	}
+	function showDeaths() {
+		if(deathCounter.bitmapData != null) {
+			deathCounter.bitmapData.dispose();
+		}
+		deathCounter.bitmapData = Main.font.getText(Std.string(nbDeaths) + " death" + (nbDeaths==1 ? "" : "s"), -1, false, false, 1);
+		var bd = deathCounter.bitmapData;
+		bd.applyFilter(bd, bd.rect, new Point(0, 0), new DropShadowFilter(1., 0, 0, 1., 0., 0.));
+		bd.applyFilter(bd, bd.rect, new Point(0, 0), new DropShadowFilter(1., 90, 0, 1., 0., 0.));
+		bd.applyFilter(bd, bd.rect, new Point(0, 0), new DropShadowFilter(1., 180, 0, 1., 0., 0.));
+		bd.applyFilter(bd, bd.rect, new Point(0, 0), new DropShadowFilter(1., 270, 0, 1., 0., 0.));
+		deathCounter.x = Const.WID + 4/* deathCounter.width * 1.5*/;
+		deathCounter.y = 8;
+		deathCounter.visible = true;
+		deathCounter.alpha = 1.;
+		Actuate.tween(deathCounter, .4, {x:Const.WID - deathCounter.width - 11}).ease(Elastic.easeOut);
+		Actuate.tween(deathCounter, 1., {alpha:0}).ease(Cubic.easeIn).onComplete(function() {
+			deathCounter.visible = false;
+		});
 	}
 	public function computeSpawnPos(horizontal:Bool) {
 		var tx = Std.int(xx / 16);

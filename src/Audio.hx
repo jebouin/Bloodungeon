@@ -63,7 +63,7 @@ class Audio {
 		musics.push(new Music(new Floor2Music(), 29.56, 88.605));
 		musics.push(new Music(new Floor3Music(), 0, 80));
 		musics.push(new Music(new RushMusic(), 1.437, 76.251));
-		//mute();
+		mute();
 	}
 	public static function playMusic(id:Int) {
 		if(id >= 0 && id < 5) {

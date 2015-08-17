@@ -22,7 +22,7 @@ class BitmapFont {
 	public function delete() {
 		bd.dispose();
 	}
-	public function getText(text:String, maxWidChars:Int=-1, wordwrap=false, centered=false) {
+	public function getText(text:String, maxWidChars:Int=-1, wordwrap=false, centered=false, margin=0) {
 		text = text.toUpperCase();
 		if(wordwrap&&maxWidChars>0) {
 			text = wordWrap(text, maxWidChars);
@@ -38,7 +38,7 @@ class BitmapFont {
 		}
 		var destx = 0;
 		var desty = 0;
-		var bd = new BitmapData(wid, hei, true, 0x0);
+		var bd = new BitmapData(wid + margin*2, hei + margin*2, true, 0x0);
 		var n = 0;
 		for(i in 0...tl) {
 			if(n==nbWidChars) {
@@ -52,7 +52,7 @@ class BitmapFont {
 			var frame = chars.indexOf(text.charAt(i));
 			var sx = (frame&7)*(charWid+1);
 			var sy = (frame>>3)*(charHei+1);
-			bd.copyPixels(this.bd, new Rectangle(sx, sy, charWid, charHei), new Point(destx, desty));
+			bd.copyPixels(this.bd, new Rectangle(sx, sy, charWid, charHei), new Point(destx + margin, desty + margin));
 			destx += charWid+1;
 			n++;
 		}

@@ -34,12 +34,12 @@ class FakeTile extends Enemy {
 		parent.removeChild(this);
 		Game.CUR.lm.addChild(this, Const.BACK_L);
 		rect = new Rectangle(xx, yy, wid * 16, hei * 16);
-		for(j in ty...ty+hei) {
+		/*for(j in ty...ty+hei) {
 			for(i in tx...tx+wid) {
 				var rcol = level.getCollision(i+1, j);
 				level.setCollision(i, j, FULL);
 			}
-		}
+		}*/
 		update();
 	}
 	override public function update() {
