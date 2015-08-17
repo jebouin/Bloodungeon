@@ -116,8 +116,6 @@ class Main {
 		stage.scaleMode = StageScaleMode.NO_SCALE;
 		stage.quality = StageQuality.BEST;
 		stage.align = StageAlign.TOP_LEFT;
-		Const.WID = Std.int(stage.stageWidth / Const.SCALE);
-		Const.HEI = Std.int(stage.stageHeight / Const.SCALE);
 		renderer = new Renderer(Const.WID, Const.HEI, Const.SCALE);
 		var stats = new Stats();
 		stats.x = stage.stageWidth - Stats.XPOS;

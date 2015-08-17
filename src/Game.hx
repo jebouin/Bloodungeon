@@ -33,6 +33,7 @@ class Game extends Scene {
 		lm.delete();
 		frontlm.delete();
 		clearEntities();
+		CUR = null;
 	}
 	override public function update() {
 		super.update();
@@ -54,6 +55,8 @@ class Game extends Scene {
 			level.checkActions();
 			cd.update();
 		}
+		Fx.test();
+		Fx.update();
 	}
 	public function addEntity(e:Entity) {
 		entities.push(e);

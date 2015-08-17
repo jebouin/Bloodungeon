@@ -16,16 +16,15 @@ enum DIR8 {
 	DOWN_RIGHT;
 }
 class Const {
-	public static var WID : Int;
-	public static var HEI : Int;
-	public static var SCALE = 4;
-	static var CUR_L = 0;
-	public static var VOID_L = CUR_L++;
-	public static var BACK_L = CUR_L++;
-	public static var SHADOW_L = CUR_L++;
-	public static var ENEMY_L = CUR_L++;
-	public static var HERO_L = CUR_L++;
-	public static var FRONT_L = CUR_L++;
+	public static inline var WID = 240;
+	public static inline var HEI = 160;
+	public static inline var SCALE = 4;
+	public static inline var VOID_L = 0;
+	public static inline var BACK_L = 1;
+	public static inline var SHADOW_L = 2;
+	public static inline var ENEMY_L = 3;
+	public static inline var HERO_L = 4;
+	public static inline var FRONT_L = 5;
 	public static var DIRS : Array<DIR> = [LEFT, RIGHT, UP, DOWN];
 	public static var DIRS8 : Array<DIR8> = [LEFT, RIGHT, UP, DOWN, UP_LEFT, UP_RIGHT, DOWN_LEFT, DOWN_RIGHT];
 	public static inline function stringToDir(s:String) : DIR {
