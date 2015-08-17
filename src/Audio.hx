@@ -62,7 +62,7 @@ class Audio {
 		musics.push(new Music(new Floor1Music(), 41.77, 104.345));
 		musics.push(new Music(new Floor2Music(), 29.56, 88.605));
 		musics.push(new Music(new Floor3Music(), 0, 80));
-		musics.push(new Music(new RushMusic(), 0, 200.));
+		musics.push(new Music(new RushMusic(), 1.437, 76.251));
 		//mute();
 	}
 	public static function playMusic(id:Int) {

@@ -259,12 +259,12 @@ class Level {
 			case 3:
 				Game.CUR.cd.activate();
 				removeLighting();
-				setRoomId(1, 4);
+				/*setRoomId(1, 4);
 				Hero.spawnX = 24 * 16;
-				Hero.spawnY = 41 * 16;
-				/*setRoomId(2, 3);
+				Hero.spawnY = 41 * 16;*/
+				setRoomId(2, 3);
 				Hero.spawnX = 30 * 16 + 8;
-				Hero.spawnY = 34 * 16 + 8;*/
+				Hero.spawnY = 34 * 16 + 8;
 				/*setRoomId(0, 0);
 				Hero.spawnX = 11 * 16 + 8;
 				Hero.spawnY = 8 * 16 + 8;*/
@@ -371,7 +371,7 @@ class Level {
 						}
 						var id = Std.parseInt(o.properties.get("id"));
 						var dir = Const.stringToDir(o.properties.get("dir"));
-						e = new FakeTile(tx, ty, twid, thei, id, secretId, dir);
+						e = new FakeTile(this, tx, ty, twid, thei, id, secretId, dir);
 					case "Laser":
 						e = new Laser(this, tx, ty);
 					case "Cannon":

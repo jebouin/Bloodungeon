@@ -12,7 +12,7 @@ class FakeTile extends Enemy {
 	var wid : Int;
 	var hei : Int;
 	var secretId : Int;
-	public function new(tx:Int, ty:Int, wid:Int, hei:Int, tileId:Int, secretId:Int, dir:Const.DIR) {
+	public function new(level:Level, tx:Int, ty:Int, wid:Int, hei:Int, tileId:Int, secretId:Int, dir:Const.DIR) {
 		super(null, false);
 		this.dir = dir;
 		this.secretId = secretId;
@@ -34,6 +34,12 @@ class FakeTile extends Enemy {
 		parent.removeChild(this);
 		Game.CUR.lm.addChild(this, Const.BACK_L);
 		rect = new Rectangle(xx, yy, wid * 16, hei * 16);
+		for(j in ty...ty+hei) {
+			for(i in tx...tx+wid) {
+				var rcol = level.getCollision(i+1, j);
+				level.setCollision(i, j, FULL);
+			}
+		}
 		update();
 	}
 	override public function update() {
@@ -63,7 +69,11 @@ class FakeTile extends Enemy {
 		return false;
 	}
 	function disappear() {
-		for(j in ty...ty+hei) {
+		var th = ty + hei;
+		if(Game.CUR.level.floor == 3) {
+			th = ty + 1;
+		}
+		for(j in ty...th) {
 			for(i in tx...tx+wid) {
 				var rcol = Game.CUR.level.getCollision(i+1, j);
 				if(rcol == ICE) {
