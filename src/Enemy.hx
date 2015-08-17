@@ -2,6 +2,7 @@ package ;
 import motion.Actuate;
 class Enemy extends Entity {
 	public static var fade = false;
+	var onHeroKilled : Dynamic;
 	var fadeThis : Bool;
 	public function new(?animName:String, ?hasShadow=true) {
 		super(animName, hasShadow);
@@ -23,6 +24,9 @@ class Enemy extends Entity {
 	override public function update() {
 		super.update();
 		if(collidesHero()) {
+			if(onHeroKilled != null) {
+				onHeroKilled();
+			}
 			Game.CUR.hero.die();
 		}
 	}

@@ -274,8 +274,8 @@ class Level {
 				/*setRoomId(3, 2);
 				Hero.spawnX = 43 * 16 + 8;
 				Hero.spawnY = 20 * 16 + 8;*/
-				setRoomId(3, 3);
-				Hero.spawnX = 48 * 16 + 8;
+				setRoomId(5, 3);
+				Hero.spawnX = 82 * 16 + 8;
 				Hero.spawnY = 35 * 16 + 8;
 		}
 		var bd = ground0Layer.bmp.bitmapData;
@@ -287,7 +287,7 @@ class Level {
 					var rm = m;
 					var gm = m;
 					var bm = m;
-					if(j >= 36) {
+					if((i >= 43 && (j <= 18 || j >= 36)) || i >= 70) {
 						var dm = Util.randFloat(.8, .9);
 						gm *= dm;
 						bm *= dm;
@@ -326,7 +326,7 @@ class Level {
 			}
 		}
 		Bow.timer = Cannon.timer = 1000;
-		Launcher.timer = 40;
+		Launcher.timer = 60;
 		for(pos in bowsPos) {
 			if(isInRoom(pos.x, pos.y, idx, idy)) {
 				var b = new Bow(pos.x, pos.y, pos.dir);
@@ -392,7 +392,7 @@ class Level {
 						}
 						e = new Tesla(tx, ty, id, links, time, off);
 					case "Launcher":
-						var facesRight = getCollision(tx+1, ty) == TILE_COLLISION_TYPE.NONE;
+						var facesRight = getCollision(tx+1, ty) != TILE_COLLISION_TYPE.FULL;
 						setCollision(tx, ty, FULL);
 						setCollision(tx, ty+1, FULL);
 						e = new Launcher(tx, ty, facesRight);

@@ -9,6 +9,9 @@ class Rocket extends Enemy {
 		shadow.scaleX *= .8;
 		shadow.scaleY *= .8;
 		this.rotation = rot;
+		onHeroKilled = function() {
+			die();
+		};
 		update();
 	}
 	override public function update() {
@@ -50,14 +53,14 @@ class Rocket extends Enemy {
 		}
 		
 		var a = rotation / 180 * Math.PI;
-		var spd = 5;
+		var spd = 3;
 		var dx = Math.cos(a), dy = Math.sin(a);
 		var cx = xx + dx * 7;
 		var cy = yy + dy * 7;
 		dx *= spd;
 		dy *= spd;
 		var level = Game.CUR.level;
-		if(level.pointCollides(cx, cy)) {
+		if(level.pointCollides(cx, cy, false, false)) {
 			die();
 			return;
 		}
