@@ -57,7 +57,7 @@ class Level {
 		RWID = Std.int(Const.WID / 16);
 		RHEI = Std.int(Const.HEI / 16);
 		renderLighting();
-		load(3);
+		load(2);
 		loadEntities(roomIdX, roomIdY);
 	}
 	public function update() {
@@ -253,9 +253,9 @@ class Level {
 				setRoomId(2, 2);
 				Hero.spawnX = 34 * 16 + 8;
 				Hero.spawnY = 22 * 16 + 8;
-				/*setRoomId(0, 1);
-				Hero.spawnX = 13 * 16 + 8;
-				Hero.spawnY = 18 * 16 + 8;*/
+				/*setRoomId(5, 0);
+				Hero.spawnX = 72 * 16 + 8;
+				Hero.spawnY = 8 * 16 + 8;*/
 			case 3:
 				Game.CUR.cd.activate();
 				removeLighting();
