@@ -66,7 +66,7 @@ class Thwomp extends Enemy {
 				chargeX = chargeY = vx = vy = 0;
 				setAnim("thwompIdle", false);
 				anim.play();
-			} else if(crushedHero && crushedTimer < 30) {
+			} else if(crushedHero && crushedTimer < 30 && !Main.secondUpdate) {
 				if(crushedTimer >= 10.) {
 					var t = (crushedTimer - 10.) / 20.;
 					if(vx != 0) {

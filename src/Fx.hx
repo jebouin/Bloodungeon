@@ -128,15 +128,6 @@ class Fx {
 							p.vx *= 1.3;
 							p.vy *= 1.3;
 							p.friction = .03;
-							/*p.onUpdate = function(p:Particle) {
-								particleCollision(p, 3);
-								if(p.timer < 200) {
-									var blood = bloodParticle(false, 2.5, 1.5, 1);
-									if(blood == null) return;
-									blood.xx = p.xx + Util.randFloat(-3, 3);
-									blood.yy = p.yy + Util.randFloat(-3, 3);
-								}
-							};*/
 						}
 					} else {
 						p.rotVel *= -.94;
@@ -161,7 +152,7 @@ class Fx {
 			};
 			p.onUpdate = function(p:Particle) {
 				particleCollision(p, 3);
-				if(p.timer < 50) {
+				if(p.timer < 50 && !Main.secondUpdate) {
 					for(i in 0...3) {
 						var blood = bloodParticle(false);
 						if(blood == null) return;

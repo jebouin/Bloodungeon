@@ -24,6 +24,8 @@ import net.hires.debug.Stats;
 class Main {
 	public static var renderer : Renderer;
 	public static var font : BitmapFont;
+	public static var is60FPS : Bool;
+	public static var secondUpdate : Bool;
 	static function initInput() {
 		Input.init();
 		Input.addKey("left", 65);
@@ -35,7 +37,7 @@ class Main {
 		Input.addKey("down", 83);
 		Input.addKey("down", 40);
 		Input.addKey("mute", 77);
-		Input.addKey("particle", 80);
+		Input.addKey("fps", 70);
 		Input.addKey("suicide", 82);
 		//Mouse.hide();
 		Lib.current.stage.addEventListener(MouseEvent.RIGHT_CLICK, function(_) {});
@@ -122,6 +124,7 @@ class Main {
 		stage.scaleMode = StageScaleMode.NO_SCALE;
 		stage.quality = StageQuality.BEST;
 		stage.align = StageAlign.TOP_LEFT;
+		is60FPS = true;
 		renderer = new Renderer(Const.WID, Const.HEI, Const.SCALE);
 		var stats = new Stats();
 		stats.x = stage.stageWidth - Stats.XPOS;
@@ -135,9 +138,17 @@ class Main {
 		stage.addEventListener(Event.ENTER_FRAME, update);
 	}
 	static function update(_) {
+		secondUpdate = false;
 		SceneManager.update();
+		if(!is60FPS) {
+			secondUpdate = true;
+			SceneManager.update();
+		}
 		if(Input.keyDown("mute") && !Input.oldKeyDown("mute")) {
 			Audio.mute();
+		}
+		if(Input.keyDown("fps") && !Input.oldKeyDown("fps")) {
+			changeFPS();
 		}
 		renderer.update();
 		Input.update();
@@ -152,5 +163,16 @@ class Main {
 		Actuate.tween(text, 1., {alpha: 0.}).onComplete(function() {
 			text.parent.removeChild(text);
 		}).ease(Cubic.easeIn);
+	}
+	public static function changeFPS() {
+		if(is60FPS) {
+			is60FPS = false;
+			announce("30 fps");
+			Lib.current.stage.frameRate = 30;
+		} else {
+			is60FPS = true;
+			announce("60 fps");
+			Lib.current.stage.frameRate = 60;
+		}
 	}
 }
