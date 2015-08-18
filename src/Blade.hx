@@ -85,4 +85,16 @@ class Blade extends Enemy {
 		}
 		return false;
 	}
+	override function killHero(h:Hero) {
+		var ndx = h.xx - xx;
+		var ndy = h.yy - yy;
+		var dist = Math.sqrt(ndx * ndx + ndy * ndy);
+		ndx /= dist;
+		ndy /= dist;
+		var nvx = Const.getDirX(lastDir);
+		var nvy = Const.getDirY(lastDir);
+		var dx = (ndx + nvx) * .5;
+		var dy = (ndy + nvy) * .5;
+		h.die(-dx, -dy);
+	}
 }

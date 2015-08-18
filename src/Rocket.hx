@@ -76,4 +76,17 @@ class Rocket extends Enemy {
 		var r = hero.cradius + 6;
 		return dx*dx + dy*dy < r * r;
 	}
+	override function killHero(h:Hero) {
+		var ndx = h.xx - xx;
+		var ndy = h.yy - yy;
+		var dist = Math.sqrt(ndx * ndx + ndy * ndy);
+		ndx /= dist;
+		ndy /= dist;
+		var angle = rotation * Math.PI / 180.;
+		var nvx = Math.cos(angle);
+		var nvy = Math.sin(angle);
+		var dx = (ndx + nvx) * .5;
+		var dy = (ndy + nvy) * .5;
+		h.die(-dx, -dy);
+	}
 }

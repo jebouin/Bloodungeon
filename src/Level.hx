@@ -57,7 +57,7 @@ class Level {
 		RWID = Std.int(Const.WID / 16);
 		RHEI = Std.int(Const.HEI / 16);
 		renderLighting();
-		load(2);
+		load(3);
 		loadEntities(roomIdX, roomIdY);
 	}
 	public function update() {
@@ -259,9 +259,9 @@ class Level {
 			case 3:
 				Game.CUR.cd.activate();
 				removeLighting();
-				setRoomId(1, 4);
+				/*setRoomId(1, 4);
 				Hero.spawnX = 24 * 16;
-				Hero.spawnY = 41 * 16;
+				Hero.spawnY = 41 * 16;*/
 				/*setRoomId(2, 3);
 				Hero.spawnX = 30 * 16 + 8;
 				Hero.spawnY = 34 * 16 + 8;*/
@@ -274,9 +274,9 @@ class Level {
 				/*setRoomId(3, 2);
 				Hero.spawnX = 43 * 16 + 8;
 				Hero.spawnY = 20 * 16 + 8;*/
-				/*setRoomId(5, 3);
+				setRoomId(5, 3);
 				Hero.spawnX = 82 * 16 + 8;
-				Hero.spawnY = 35 * 16 + 8;*/
+				Hero.spawnY = 35 * 16 + 8;
 		}
 		var bd = ground0Layer.bmp.bitmapData;
 		for(j in 0...HEI) {

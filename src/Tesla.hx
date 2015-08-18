@@ -33,7 +33,7 @@ class Bolt extends Shape {
 	public function update() {
 		if(timer < 3) {
 			if(heroCollides()) {
-				Game.CUR.hero.die();
+				Game.CUR.hero.die(Game.CUR.hero.vx, Game.CUR.hero.vy);
 			}
 		}
 		timer++;
