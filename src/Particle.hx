@@ -1,5 +1,7 @@
 package ;
+import flash.display.BitmapCompressColorSpace;
 import flash.display.BitmapData;
+import flash.display.BlendMode;
 import flash.display.Shape;
 import flash.geom.ColorTransform;
 import flash.geom.Matrix;
@@ -53,6 +55,7 @@ class Particle extends Shape {
 	function reset() {
 		Actuate.stop(this);
 		xx = yy = zz = vx = vy = vz = rotVel = friction = frictionZ = gravity = bounciness = 0.;
+		blendMode = BlendMode.NORMAL;
 		timer = 0;
 		scaleX = scaleY = 1.;
 		alpha = 1.;
@@ -106,6 +109,14 @@ class Particle extends Shape {
 		}
 		graphics.beginFill(col);
 		graphics.drawRect(-wid*.5, -hei*.5, wid, hei);
+		graphics.endFill();
+	}
+	public function drawCircle(r:Float, col:Int, ?clear=false) {
+		if(clear) {
+			graphics.clear();
+		}
+		graphics.beginFill(col);
+		graphics.drawCircle(0, 0, r);
 		graphics.endFill();
 	}
 	public function drawToBD(bd:BitmapData, ?useAlpha=true) {

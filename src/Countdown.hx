@@ -39,15 +39,15 @@ class Countdown extends Sprite {
 		}
 	}
 	public function reset() {
-		timer = Std.int(10 * frameRate);
+		timer = Std.int(10 * 60);
 		updateBitmap();
 	}
 	public function update() {
 		if(!activated) return;
 		if(timer == 0) return;
 		timer--;
-		if(timer % frameRate == 0) {
-			tick();	
+		if(timer % 60 == 0) {
+			tick();
 		}
 		if(timer == 0) {
 			Game.CUR.hero.die();
@@ -62,7 +62,7 @@ class Countdown extends Sprite {
 		}
 	}
 	public function updateBitmap() {
-		text.bitmapData = bds[Std.int(timer / frameRate)];
+		text.bitmapData = bds[Std.int(timer / 60)];
 		text.x = -text.width * .5;
 		text.y = -text.height * .5;
 	}

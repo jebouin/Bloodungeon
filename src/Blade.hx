@@ -71,6 +71,7 @@ class Blade extends Enemy {
 				moveToNextRail();
 			}
 			setPos();
+			//Fx.spark(xx + (lastDir == RIGHT ? -4 : (lastDir == LEFT ? 4 : 0)), yy + (lastDir == DOWN ? -4 : (lastDir == UP ? 4 : 0)), lastDir);
 			super.update();
 		}
 	}

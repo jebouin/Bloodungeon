@@ -97,9 +97,6 @@ class Hero extends Entity {
 			if(!Input.keyDown("left") && !Input.keyDown("right") && !Input.keyDown("down") && !Input.keyDown("up")) {
 				targetFrame = -1;
 			}
-			/*if(Input.oldKeyDown("action")) {
-				jump();
-			}*/
 			if(Input.keyDown("suicide") && !Input.oldKeyDown("suicide")) {
 				var prevImmune = immune;
 				immune = false;
@@ -163,7 +160,7 @@ class Hero extends Entity {
 		Timer.delay(function() {
 			Game.CUR.onRespawn();
 			spawn();
-		}, 500);
+		}, 1000);
 	}
 	function showDeaths() {
 		if(deathCounter.bitmapData != null) {

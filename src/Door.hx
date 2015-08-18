@@ -67,6 +67,7 @@ class Door extends Entity {
 		top.parent.removeChild(top);
 		top.bitmapData.dispose();
 		top = null;
+		Fx.doorOpened(tx, ty, wid, hei);
 	}
 	function setCollision(type:Collision.TILE_COLLISION_TYPE) {
 		if(horizontal) {

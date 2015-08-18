@@ -30,7 +30,6 @@ class Main {
 		Input.addKey("up", 38);
 		Input.addKey("down", 83);
 		Input.addKey("down", 40);
-		Input.addKey("action", 32);
 		Input.addKey("suicide", 82);
 		//Mouse.hide();
 		Lib.current.stage.addEventListener(MouseEvent.RIGHT_CLICK, function(_) {});
@@ -130,6 +129,7 @@ class Main {
 		stage.addEventListener(Event.ENTER_FRAME, update);
 	}
 	static function update(_) {
+		SceneManager.update();
 		SceneManager.update();
 		renderer.update();
 		Input.update();

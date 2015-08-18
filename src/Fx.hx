@@ -5,9 +5,11 @@ import flash.display.BlendMode;
 import flash.filters.BlurFilter;
 import flash.filters.GlowFilter;
 import flash.geom.Rectangle;
+import flash.Lib;
 import haxe.Timer;
 import motion.Actuate;
 import motion.easing.Elastic;
+import motion.easing.Linear;
 class Fx {
 	public static var sx = 0.;
 	public static var sy = 0.;
@@ -202,5 +204,36 @@ class Fx {
 		p.gravity = .8;
 		p.friction = .12;
 		return p;
+	}
+	/*public static function spark(x:Float, y:Float, dir:Const.DIR) {
+		var s = Particle.create();
+		s.drawRect(1, 1, 0xFFFF00);
+		s.xx = x;
+		s.yy = y;
+		s.lifeTime = 20;
+		s.gravity = .7;
+		s.vz = Util.randFloat(6., 8.);
+		s.vx = Util.randFloat(1., 2.);
+		if(dir == RIGHT) s.vx *= -1;
+		if(dir == UP || dir == DOWN) s.vx = 0.;
+		Game.CUR.lm.addChild(s, Const.BACK_L);
+	}*/
+	public static function doorOpened(tx:Int, ty:Int, wid:Int, hei:Int) {
+		for(j in ty...ty+hei) {
+			for(i in tx...tx+wid) {
+				for(k in 0...4) {
+					var s = Particle.create();
+					s.drawCircle(7, 0xFFFFFF);
+					s.blendMode = BlendMode.ADD;
+					s.xx = i * 16 + Math.random() * 16;
+					s.yy = j * 16 + 5 + Math.random() * 8;
+					s.lifeTime = 30 + Std.random(30);
+					s.vz = Util.randFloat(.4, 1.1);
+					s.alpha = .5 + Math.random() * .2;
+					Actuate.tween(s, s.lifeTime * Lib.current.stage.frameRate / 60. / 60., {scaleX: 0., scaleY: 0., alpha: 0.}).ease(Linear.easeNone);
+					Game.CUR.lm.addChild(s, Const.BACK_L);
+				}
+			}
+		}
 	}
 }
