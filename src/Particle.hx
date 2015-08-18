@@ -26,6 +26,7 @@ class Particle extends Shape {
 	public var onDie : Void->Void;
 	public var lifeTime : Int;
 	public var timer : Int;
+	public var ct : ColorTransform;
 	public static function create() {
 		for(p in ALL) {
 			if(p.deleted) {
@@ -50,11 +51,13 @@ class Particle extends Shape {
 	public function new() {
 		super();
 		deleted = false;
+		ct = new ColorTransform();
 		reset();
 	}
 	function reset() {
 		Actuate.stop(this);
 		xx = yy = zz = vx = vy = vz = rotVel = friction = frictionZ = gravity = bounciness = 0.;
+		transformColor(1., 1., 1., 1.);
 		blendMode = BlendMode.NORMAL;
 		timer = 0;
 		scaleX = scaleY = 1.;
@@ -125,7 +128,14 @@ class Particle extends Shape {
 		if(useAlpha) {
 			bd.draw(this, mat, new ColorTransform(1., 1., 1., alpha));
 		} else {
-			bd.draw(this, mat);
+			bd.draw(this, mat, ct);
 		}
+	}
+	public function transformColor(r:Float, g:Float, b:Float, a:Float) {
+		ct.redMultiplier = r;
+		ct.greenMultiplier = g;
+		ct.blueMultiplier = b;
+		ct.alphaMultiplier = a;
+		transform.colorTransform = ct;
 	}
 }

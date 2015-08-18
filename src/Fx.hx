@@ -2,8 +2,10 @@ package ;
 import com.xay.util.SpriteLib;
 import com.xay.util.Util;
 import flash.display.BlendMode;
+import flash.display.ColorCorrection;
 import flash.filters.BlurFilter;
 import flash.filters.GlowFilter;
+import flash.geom.ColorTransform;
 import flash.geom.Rectangle;
 import flash.Lib;
 import haxe.Timer;
@@ -233,6 +235,25 @@ class Fx {
 					Actuate.tween(s, s.lifeTime * Lib.current.stage.frameRate / 60. / 60., {scaleX: 0., scaleY: 0., alpha: 0.}).ease(Linear.easeNone);
 					Game.CUR.lm.addChild(s, Const.BACK_L);
 				}
+			}
+		}
+	}
+	public static function rocketSmoke(x:Float, y:Float) {
+		var p = Particle.create();
+		p.xx = x + Util.randFloat(-2, 2);
+		p.yy = y + Util.randFloat(-2, 2);
+		p.drawCircle(4., 0xFFFFFF);
+		p.lifeTime = 20 + Std.random(20);
+		Game.CUR.lm.addChild(p, Const.BACK_L);
+		p.onUpdate = function(p:Particle) {
+			var t = 1. - p.timer / p.lifeTime;
+			p.scaleX = p.scaleY = t;
+			if(t > .7) {
+				t -= .7;
+				t /= .3;
+				p.transformColor(.5 + t * .5, .5 + t * .2, .5, .5 + t * .5);
+			} else {
+				p.transformColor(t * .5, t * .5, t * .5, t);
 			}
 		}
 	}

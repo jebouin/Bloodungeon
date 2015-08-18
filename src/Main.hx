@@ -4,14 +4,18 @@ import com.xay.util.Input;
 import com.xay.util.Renderer;
 import com.xay.util.SceneManager;
 import com.xay.util.SpriteLib;
+import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.display.StageAlign;
 import flash.display.StageQuality;
 import flash.display.StageScaleMode;
 import flash.events.Event;
 import flash.events.MouseEvent;
+import flash.filters.DropShadowFilter;
 import flash.Lib;
 import flash.ui.Mouse;
+import motion.Actuate;
+import motion.easing.Cubic;
 import net.hires.debug.Stats;
 @:bitmap("res/tileset.png") class TilesetBD extends BitmapData {}
 @:bitmap("res/hero.png") class HeroBD extends BitmapData {}
@@ -30,6 +34,8 @@ class Main {
 		Input.addKey("up", 38);
 		Input.addKey("down", 83);
 		Input.addKey("down", 40);
+		Input.addKey("mute", 77);
+		Input.addKey("particle", 80);
 		Input.addKey("suicide", 82);
 		//Mouse.hide();
 		Lib.current.stage.addEventListener(MouseEvent.RIGHT_CLICK, function(_) {});
@@ -130,8 +136,21 @@ class Main {
 	}
 	static function update(_) {
 		SceneManager.update();
-		SceneManager.update();
+		if(Input.keyDown("mute") && !Input.oldKeyDown("mute")) {
+			Audio.mute();
+		}
 		renderer.update();
 		Input.update();
+	}
+	public static function announce(str:String) {
+		var text = new Bitmap(font.getText(str));
+		text.scaleX = text.scaleY = 2.;
+		text.x = Std.int(Const.WID * .5 - text.width * .5);
+		text.y = Std.int(Const.HEI - text.height - 10);
+		renderer.addChild(text);
+		text.filters = [new DropShadowFilter(0, 0, 0x0, .4, 50., 10., 10., 3)];
+		Actuate.tween(text, 1., {alpha: 0.}).onComplete(function() {
+			text.parent.removeChild(text);
+		}).ease(Cubic.easeIn);
 	}
 }

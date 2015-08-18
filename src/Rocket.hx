@@ -67,6 +67,7 @@ class Rocket extends Enemy {
 		xx += dx;
 		yy += dy;
 		super.update();
+		Fx.rocketSmoke(xx, yy);
 	}
 	override function collidesHero() {
 		var hero = Game.CUR.hero;

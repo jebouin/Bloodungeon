@@ -27,7 +27,7 @@ class Music {
 	public function play(?pos=0) {
 		playing = true;
 		chan = sound.play(pos, 0);
-		if(Audio.muted) {
+		if(Audio.musicMuted) {
 			mute();
 		}
 	}
@@ -53,7 +53,8 @@ class Music {
 	}
 }
 class Audio {
-	public static var muted : Bool;
+	static var muteState : Int;
+	public static var musicMuted : Bool;
 	static var musics : Array<Music>;
 	static var playingMusic : Int;
 	public static function init() {
@@ -63,7 +64,8 @@ class Audio {
 		musics.push(new Music(new Floor2Music(), 29.56, 88.605));
 		musics.push(new Music(new Floor3Music(), 0, 80));
 		musics.push(new Music(new RushMusic(), 1.437, 76.251));
-		mute();
+		muteState = 3;
+		//mute();
 	}
 	public static function playMusic(id:Int) {
 		if(id >= 0 && id < 5) {
@@ -75,15 +77,39 @@ class Audio {
 		}
 	}
 	public static function mute() {
-		muted = true;
+		muteState++;
+		if(muteState == 4) {
+			muteState = 0;
+		}
+		switch(muteState) {
+			case 0:
+				muteMusic();
+			case 1:
+				muteSounds();
+			case 2:
+				unmuteMusic();
+			case 3:
+				unmuteSounds();
+		}
+	}
+	static function muteMusic() {
+		musicMuted = true;
 		for(m in musics) {
 			m.mute();
 		}
+		Main.announce("muted musics");
 	}
-	public static function unmute() {
-		muted = false;
+	static function unmuteMusic() {
+		musicMuted = false;
 		for(m in musics) {
 			m.unmute();
 		}
+		Main.announce("unmuted musics");
+	}
+	static function muteSounds() {
+		Main.announce("muted sounds");
+	}
+	static function unmuteSounds() {
+		Main.announce("unmuted sounds");
 	}
 }
