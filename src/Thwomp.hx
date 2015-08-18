@@ -7,15 +7,19 @@ class Thwomp extends Enemy {
 	public var charging : Bool;
 	public var chargeX : Float;
 	public var chargeY : Float;
+	var crushedHero : Bool;
+	var crushedTimer : Int;
 	public function new(tx:Int, ty:Int) {
 		super("thwompIdle", false);
 		setOrigin(0, 0);
 		chargeX = chargeY = 0;
+		crushedTimer = 0;
 		xx = tx * 16 - 1;
 		yy = ty * 16;
 		friction = 0;
 		this.maxSpeed = 6.;
 		charging = false;
+		crushedHero = false;
 	}
 	override public function update() {
 		if(!charging) {
@@ -58,9 +62,32 @@ class Thwomp extends Enemy {
 				}
 			}
 			if(!charging) {
+				crushedHero = false;
 				chargeX = chargeY = vx = vy = 0;
 				setAnim("thwompIdle", false);
 				anim.play();
+			} else if(crushedHero && crushedTimer < 30) {
+				if(crushedTimer >= 10.) {
+					var t = (crushedTimer - 10.) / 20.;
+					if(vx != 0) {
+						for(i in 0...3) {
+							var p = Fx.bloodParticle(true, vx + 2., 1, 2);
+							p.xx = xx + width * .5;
+							p.yy = yy + height * .5 + (i - 1) * 6 + Util.randFloat(-1, 1);
+							Game.CUR.lm.addChild(p, Const.BACK_L);
+							p.alpha = 1. - t;
+						}
+					} else {
+						for(i in 0...3) {
+							var p = Fx.bloodParticle(true, 1, vy + 2., 2);
+							p.xx = xx + width * .5 + (i - 1) * 6 + Util.randFloat(-1, 1);
+							p.yy = yy + height * .5;
+							Game.CUR.lm.addChild(p, Const.BACK_L);
+							p.alpha = 1. - t;
+						}
+					}
+				}
+				crushedTimer++;
 			}
 		}
 		if(Game.CUR.level != null) {
@@ -131,18 +158,19 @@ class Thwomp extends Enemy {
 		var dx = 0;
 		var dy = 0;
 		if(cax > cay) {
-			if(yy > my) {
+			if(h.yy > my) {
 				dy = 1;
 			} else {
 				dy = -1;
 			}
 		} else {
-			if(xx > mx) {
+			if(h.xx > mx) {
 				dx = 1;
 			} else {
 				dx = -1;
 			}
 		}
-		h.die(dx, dy);
+		h.die(-dx, -dy);
+		crushedHero = true;
 	}
 }

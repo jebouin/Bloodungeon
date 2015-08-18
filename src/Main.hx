@@ -41,6 +41,7 @@ class Main {
 		SpriteLib.addBD("hero", new HeroBD(0, 0));
 		SpriteLib.sliceBD("hero", "hero", 0, 0, 15, 16, 8, 1, 1);
 		SpriteLib.addAnim("heroIdle", "hero", "0-7", 3);
+		SpriteLib.sliceBD("hero", "heroHead", 0, 19, 9, 8, 1, 1);
 		SpriteLib.addBD("enemies", new EnemiesBD(0, 0));
 		SpriteLib.sliceBD("enemies", "thwomp", 0, 0, 35, 32, 5, 1);
 		SpriteLib.addAnim("thwompIdle", "thwomp", "0", 1);

@@ -154,7 +154,9 @@ class Hero extends Entity {
 		locked = true;
 		nbDeaths++;
 		showDeaths();
-		Fx.heroDeath(dx, dy);
+		if(zz >= 0) {
+			Fx.heroDeath(xx, yy, dx, dy);
+		}
 		Timer.delay(function() {
 			Game.CUR.onRespawn();
 			spawn();
@@ -170,7 +172,7 @@ class Hero extends Entity {
 		bd.applyFilter(bd, bd.rect, new Point(0, 0), new DropShadowFilter(1., 90, 0, 1., 0., 0.));
 		bd.applyFilter(bd, bd.rect, new Point(0, 0), new DropShadowFilter(1., 180, 0, 1., 0., 0.));
 		bd.applyFilter(bd, bd.rect, new Point(0, 0), new DropShadowFilter(1., 270, 0, 1., 0., 0.));
-		deathCounter.x = Const.WID + 4/* deathCounter.width * 1.5*/;
+		deathCounter.x = Const.WID + 4;
 		deathCounter.y = 8;
 		deathCounter.visible = true;
 		deathCounter.alpha = 1.;

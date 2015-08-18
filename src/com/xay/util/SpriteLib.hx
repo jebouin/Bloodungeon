@@ -1,4 +1,7 @@
 package com.xay.util;
+import flash.display.Graphics;
+import flash.display.Shape;
+import flash.geom.Matrix;
 import haxe.ds.StringMap;
 #if openfl
 import openfl.display.BitmapData;
@@ -93,6 +96,21 @@ class SpriteLib {
 		var frameRect = anim.getFrameRect();
 		if(frameRect==null) return;
 		destBD.copyPixels(bds.get(slices.get(anim.getSliceName()).bdName), frameRect, new Point(destx, desty));
+	}
+	public static function copyFramePixelsFromSliceToGraphics(g:Graphics, sliceName:String, frame=0, center=true, ?destx=0., ?desty=0.) {
+		var frameRect = getSliceFrameRect(sliceName, frame);
+		if(frameRect==null) return;
+		var slice = slices.get(sliceName);
+		var bd = bds.get(slice.bdName);
+		if(center == true) {
+			destx = -frameRect.width * .5;
+			desty = -frameRect.height * .5;
+		}
+		var mat = new Matrix();
+		mat.translate(-frameRect.left + destx, -frameRect.top + desty);
+		g.beginBitmapFill(bd, mat);
+		g.drawRect(destx, desty, frameRect.width, frameRect.height);
+		g.endFill();
 	}
 	public static function addAnim(animName:String, sliceName:String, content:String, fps=60.) {
 		content = StringTools.replace(content, " ", "");

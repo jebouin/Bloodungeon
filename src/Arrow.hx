@@ -149,6 +149,6 @@ class Arrow extends Enemy {
 		return dx*dx + dy*dy < r * r;
 	}
 	override function killHero(h:Hero) {
-		h.die(vx, vy);
+		h.die(-vx, -vy);
 	}
 }

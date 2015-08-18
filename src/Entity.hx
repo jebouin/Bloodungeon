@@ -96,7 +96,7 @@ class Entity extends XSprite {
 	}
 	function tryMove(dx:Float, dy:Float, dz:Float) {
 		if(collides) {
-			if(Game.CUR.level.entityCollides(this, xx+dx, yy)) {
+			if(Game.CUR.level.entityCollides(xx+dx, yy, cradius)) {
 				if(dx > 0) {
 					xx = Std.int(xx / 16 + 1.) * 16 - cradius - .2;
 				} else if(dx < 0) {
@@ -106,7 +106,7 @@ class Entity extends XSprite {
 			} else {
 				xx += dx;
 			}
-			if(Game.CUR.level.entityCollides(this, xx, yy+dy)) {
+			if(Game.CUR.level.entityCollides(xx, yy+dy, cradius)) {
 				if(dy > 0) {
 					yy = Std.int(yy / 16 + 1.) * 16 - cradius - .2;
 				} else if(dy < 0) {
@@ -144,9 +144,11 @@ class Entity extends XSprite {
 		delete();
 	}
 	public function canFall() {
-		return Game.CUR.level.entityCollidesFully(this, xx, yy, HOLE);
+		return Game.CUR.level.entityCollidesFully(xx, yy, cradius, HOLE);
 	}
 	public function fall() {
+		if(zz < 0) return;
+		zz = -.01;
 		locked = true;
 		if(shadow != null) {
 			shadow.visible = false;

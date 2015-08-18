@@ -45,11 +45,11 @@ class Level {
 	var bowsPos : Array<{x:Int, y:Int, dir:Const.DIR}>;
 	var torches : Array<Torch>;
 	var fakeTileRemoved : Array<Bool>;
-	var ground0Layer : TiledLayer;
-	var ground1Layer : TiledLayer;
-	var overLayer : TiledLayer;
-	var wall0Layer : TiledLayer;
-	var wall1Layer : TiledLayer;
+	public var ground0Layer : TiledLayer;
+	public var ground1Layer : TiledLayer;
+	public var overLayer : TiledLayer;
+	public var wall0Layer : TiledLayer;
+	public var wall1Layer : TiledLayer;
 	var activeGroup : TiledGroup;
 	var map : TiledMap;
 	var actionRects : Array<{x:Int, y:Int, wid:Int, hei:Int, f:String}>;
@@ -57,7 +57,7 @@ class Level {
 		RWID = Std.int(Const.WID / 16);
 		RHEI = Std.int(Const.HEI / 16);
 		renderLighting();
-		load(3);
+		load(1);
 		loadEntities(roomIdX, roomIdY);
 	}
 	public function update() {
@@ -98,8 +98,8 @@ class Level {
 		Game.CUR.lm.addChild(ground0Layer, Const.BACK_L);
 		Game.CUR.lm.addChild(ground1Layer, Const.BACK_L);
 		Game.CUR.lm.addChild(overLayer, Const.BACK_L);
-		Game.CUR.lm.addChild(wall0Layer, Const.BACK_L);
-		Game.CUR.lm.addChild(wall1Layer, Const.BACK_L);
+		Game.CUR.lm.addChild(wall0Layer, Const.BACKWALL_L);
+		Game.CUR.lm.addChild(wall1Layer, Const.BACKWALL_L);
 		WID = map.wid;
 		HEI = map.hei;
 		nbRoomsX = Std.int(WID / (RWID - 1));
@@ -241,27 +241,27 @@ class Level {
 				/*setRoomId(2, 5);
 				Hero.spawnX = 35 * 16 + 8;
 				Hero.spawnY = 51 * 16 + 8;*/
-				setRoomId(1, 1);
+				/*setRoomId(1, 1);
 				Hero.spawnX = 15 * 16 + 8;
-				Hero.spawnY = 11 * 16 + 8;
-				/*setRoomId(3, 5);
-				Hero.spawnX = 44 * 16 + 8;
-				Hero.spawnY = 47 * 16 + 8;*/
+				Hero.spawnY = 11 * 16 + 8;*/
+				setRoomId(3, 6);
+				Hero.spawnX = 49 * 16 + 8;
+				Hero.spawnY = 54 * 16 + 8;
 			case 2:
 				Game.CUR.cd.activate();
 				removeLighting();
-				/*setRoomId(2, 2);
+				setRoomId(2, 2);
 				Hero.spawnX = 34 * 16 + 8;
-				Hero.spawnY = 22 * 16 + 8;*/
-				setRoomId(6, 2);
+				Hero.spawnY = 22 * 16 + 8;
+				/*setRoomId(6, 2);
 				Hero.spawnX = 85 * 16 + 8;
-				Hero.spawnY = 24 * 16 + 8;
+				Hero.spawnY = 24 * 16 + 8;*/
 			case 3:
 				Game.CUR.cd.activate();
 				removeLighting();
-				/*setRoomId(1, 4);
+				setRoomId(1, 4);
 				Hero.spawnX = 24 * 16;
-				Hero.spawnY = 41 * 16;*/
+				Hero.spawnY = 41 * 16;
 				/*setRoomId(2, 3);
 				Hero.spawnX = 30 * 16 + 8;
 				Hero.spawnY = 34 * 16 + 8;*/
@@ -274,9 +274,9 @@ class Level {
 				/*setRoomId(3, 2);
 				Hero.spawnX = 43 * 16 + 8;
 				Hero.spawnY = 20 * 16 + 8;*/
-				setRoomId(5, 3);
+				/*setRoomId(5, 3);
 				Hero.spawnX = 82 * 16 + 8;
-				Hero.spawnY = 35 * 16 + 8;
+				Hero.spawnY = 35 * 16 + 8;*/
 		}
 		var bd = ground0Layer.bmp.bitmapData;
 		for(j in 0...HEI) {
@@ -540,19 +540,19 @@ class Level {
 	public function pointCollides(x:Float, y:Float, ?holeCollides=false, ?bowCollides=true) {
 		return tileCollides(Std.int(x) >> 4, Std.int(y) >> 4, holeCollides, bowCollides);
 	}
-	public function entityCollides(e:Entity, x:Float, y:Float) {
+	public function entityCollides(x:Float, y:Float, cradius:Float) {
 		//y -= 16 * getHeightAt(x, y);
-		if(tileCollides(Std.int(x - e.cradius) >> 4, Std.int(y - e.cradius) >> 4)) return true;
-		if(tileCollides(Std.int(x + e.cradius) >> 4, Std.int(y - e.cradius) >> 4)) return true;
-		if(tileCollides(Std.int(x + e.cradius) >> 4, Std.int(y + e.cradius) >> 4)) return true;
-		if(tileCollides(Std.int(x - e.cradius) >> 4, Std.int(y + e.cradius) >> 4)) return true;
+		if(tileCollides(Std.int(x - cradius) >> 4, Std.int(y - cradius) >> 4)) return true;
+		if(tileCollides(Std.int(x + cradius) >> 4, Std.int(y - cradius) >> 4)) return true;
+		if(tileCollides(Std.int(x + cradius) >> 4, Std.int(y + cradius) >> 4)) return true;
+		if(tileCollides(Std.int(x - cradius) >> 4, Std.int(y + cradius) >> 4)) return true;
 		return false;
 	}
-	public function entityCollidesFully(e:Entity, x:Float, y:Float, col:Collision.TILE_COLLISION_TYPE) {
-		if(getCollisionAt(x - e.cradius, y - e.cradius) != col) return false;
-		if(getCollisionAt(x + e.cradius, y - e.cradius) != col) return false;
-		if(getCollisionAt(x + e.cradius, y + e.cradius) != col) return false;
-		if(getCollisionAt(x - e.cradius, y + e.cradius) != col) return false;
+	public function entityCollidesFully(x:Float, y:Float, cradius:Float, col:Collision.TILE_COLLISION_TYPE) {
+		if(getCollisionAt(x - cradius, y - cradius) != col) return false;
+		if(getCollisionAt(x + cradius, y - cradius) != col) return false;
+		if(getCollisionAt(x + cradius, y + cradius) != col) return false;
+		if(getCollisionAt(x - cradius, y + cradius) != col) return false;
 		return true;
 	}
 	public function isInRoom(tx:Int, ty:Int, rx:Int, ry:Int) {

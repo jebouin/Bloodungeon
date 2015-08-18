@@ -50,6 +50,7 @@ class Button extends Entity {
 		pushed = true;
 		setAnim("buttonPushed", false);
 		anim.play();
+		Fx.screenShake(scaleX * 5., 0, .5);
 		if(onEnd != null) {
 			anim.onEnd = onEnd;
 		}
