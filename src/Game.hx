@@ -13,6 +13,8 @@ class Game extends Scene {
 	public var level : Level;
 	public var hero : Hero;
 	public var cd : Countdown;
+	public var camX : Float;
+	public var camY : Float;
 	var locked : Bool;
 	public function new() {
 		super();
@@ -21,6 +23,7 @@ class Game extends Scene {
 		frontlm = new LayerManager();
 		Main.renderer.addChild(lm.getContainer());
 		Main.renderer.addChild(frontlm.getContainer());
+		camX = camY = 0;
 		cd = new Countdown();
 		entities = [];
 		level = new Level();
@@ -55,7 +58,7 @@ class Game extends Scene {
 			level.checkActions();
 			cd.update();
 		}
-		Fx.test();
+		//Fx.test();
 		Fx.update();
 	}
 	public function addEntity(e:Entity) {
@@ -79,7 +82,19 @@ class Game extends Scene {
 		}
 	}
 	public function moveCameraTo(x:Float, y:Float, t=.5, onEnd:Dynamic=null) {
-		Actuate.tween(lm.getContainer(), t, {x:-x, y:-y}).onComplete(onEnd).ease(Quad.easeOut);
+		Fx.stopScreenShake();
+		var c = lm.getContainer();
+		Actuate.tween(this, t, {camX:x, camY:y}).onUpdate(function() {
+			c.x = -camX;
+			c.y = -camY;
+		}).onComplete(onEnd).ease(Quad.easeOut);
+		//Actuate.tween(lm.getContainer(), t, {x:-x, y:-y}).onComplete(onEnd).ease(Quad.easeOut);
+	}
+	public function setCamPos(cx:Float, cy:Float) {
+		camX = cx;
+		camY = cy;
+		lm.getContainer().x = -camX;
+		lm.getContainer().y = -camY;
 	}
 	public function nextRoom(dir:Const.DIR) {
 		level.nextRoom(dir);

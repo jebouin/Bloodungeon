@@ -116,10 +116,33 @@ class Thwomp extends Enemy {
 	}
 	override function collidesHero() {
 		var hero = Game.CUR.hero;
-		if(hero == null) return false;
+		if(hero == null || hero.dead) return false;
 		return Collision.circleToRect(hero.x, hero.y, hero.cradius, getCollisionRect());
 	}
 	public function getCollisionRect() {
 		return new Rectangle(xx + 5, yy + 5, 24, 24);
+	}
+	override function killHero(h:Hero) {
+		var r = getCollisionRect();
+		var mx = (r.left + r.right) * .5;
+		var my = (r.top + r.bottom) * .5;
+		var cax = Util.min(h.xx - r.left, r.right - h.xx);
+		var cay = Util.min(h.yy - r.top, r.bottom - h.yy);
+		var dx = 0;
+		var dy = 0;
+		if(cax > cay) {
+			if(yy > my) {
+				dy = 1;
+			} else {
+				dy = -1;
+			}
+		} else {
+			if(xx > mx) {
+				dx = 1;
+			} else {
+				dx = -1;
+			}
+		}
+		h.die(dx, dy);
 	}
 }

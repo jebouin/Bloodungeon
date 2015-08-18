@@ -18,6 +18,7 @@ class Spinner extends Enemy {
 	static var frame = 0;
 	var parts : Array<Bitmap>;
 	var partCont : Sprite;
+	var branchHit : Int;
 	public function new(x:Float, y:Float, initAngle:Float, nbBranches:Int, size:Int, speed:Float) {
 		super("spinnerBase", false);
 		this.xx = x;
@@ -41,6 +42,7 @@ class Spinner extends Enemy {
 		for(p in parts) {
 			partCont.addChild(p);
 		}
+		branchHit = -1;
 		addChild(partCont);
 	}
 	function updatePos() {
@@ -88,9 +90,9 @@ class Spinner extends Enemy {
 			if(Math.abs(distFromBranch) > 6) continue;
 			var l = dist * Math.cos(aa);
 			if(l > 10 && l < (size + 1) * 16 - 8) {
+				branchHit = i;
 				return true;
 			}
-			//trace(distFromBranch, l);
 		}
 		return false;
 	}
@@ -109,5 +111,24 @@ class Spinner extends Enemy {
 			SpriteLib.copyFramePixelsFromSlice(partBD, "spinnerPart", Std.int(frame / 5), 0, 0);
 			SpriteLib.copyFramePixelsFromSlice(revPartBD, "spinnerPart", 7 - Std.int(frame / 5), 0, 0);
 		}
+	}
+	override function killHero(h:Hero) {
+		var dx = 0;
+		var dy = 0;
+		if(branchHit >= 0) {
+			var hdx = h.xx - xx;
+			var hdy = h.yy - yy;
+			var dist = Math.sqrt(hdx * hdx + hdy * hdy);
+			var heroAngle = Math.atan2(hdy, hdx);
+			var da = Math.PI * 2. / nbBranches * branchHit;
+			var a = angle*Math.PI/180. + da;
+			var aa = a - heroAngle;
+			var l = dist * Math.cos(aa);
+			var hitX = xx + Math.cos(a) * l;
+			var hitY = yy + Math.sin(a) * l;
+			var hitAngle = Math.atan2(hitY - h.yy, hitX - h.xx);
+			h.die(Math.cos(hitAngle), Math.sin(hitAngle));
+		}
+		h.die(dx, dy);
 	}
 }

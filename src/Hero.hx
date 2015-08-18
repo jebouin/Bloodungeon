@@ -147,13 +147,14 @@ class Hero extends Entity {
 		}
 		updateLight();
 	}
-	override public function die() {
+	override public function die(?dx=0., ?dy=0.) {
 		if(dead || immune) return;
 		visible = shadow.visible = false;
 		dead = true;
 		locked = true;
 		nbDeaths++;
 		showDeaths();
+		Fx.heroDeath(dx, dy);
 		Timer.delay(function() {
 			Game.CUR.onRespawn();
 			spawn();

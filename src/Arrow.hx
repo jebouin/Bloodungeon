@@ -148,4 +148,7 @@ class Arrow extends Enemy {
 		var r = hero.cradius + 2;
 		return dx*dx + dy*dy < r * r;
 	}
+	override function killHero(h:Hero) {
+		h.die(vx, vy);
+	}
 }

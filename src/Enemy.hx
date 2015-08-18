@@ -27,10 +27,13 @@ class Enemy extends Entity {
 			if(onHeroKilled != null) {
 				onHeroKilled();
 			}
-			Game.CUR.hero.die();
+			killHero(Game.CUR.hero);
 		}
 	}
 	public function collidesHero() {
 		return false;
+	}
+	function killHero(h:Hero) {
+		h.die();
 	}
 }
