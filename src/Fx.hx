@@ -85,8 +85,9 @@ class Fx {
 			dx /= d;
 			dy /= d;
 			screenShake(dx * 12., dy * 12., .6);
+			
 		}
-		var angle = Math.atan2(-dy, -dx);
+		var angle = (d < .1 ? 0 : Math.atan2(-dy, -dx));
 		//head
 		for(i in 0...1) {
 			var p = Particle.create();
@@ -95,7 +96,7 @@ class Fx {
 			p.xx = x;
 			p.yy = y;
 			p.zz = 8;
-			var spd = Util.randFloat(6., 8.5);
+			var spd = d < .1 ? 0 : Util.randFloat(6., 8.5);
 			var pa = angle + Util.randFloat(-.5, .5);
 			p.vx = Math.cos(pa) * spd;
 			p.vy = Math.sin(pa) * spd;
@@ -105,7 +106,38 @@ class Fx {
 			p.friction = .06;
 			p.rotVel = Util.randFloat(20., 30.) * Util.randSign();
 			p.onBounce = function(p:Particle) {
-				p.rotVel *= -.94;
+				var col = Game.CUR.level.getCollisionAt(p.xx, p.yy);
+				if(Game.CUR.level.entityCollidesFully(p.xx, p.yy, 4, HOLE)) {
+					p.onUpdate = null;
+					p.onDie = null;
+					p.bounciness = -1;
+					p.gravity = 0;
+					p.vz = 0;
+					Actuate.tween(p, .8, {scaleX: 0., scaleY: 0.}).onComplete(function() {
+						p.delete();
+					});
+				} else {
+					if(col == ICE) {
+						p.rotVel = 0;
+						if(p.bounciness > 0.) {
+							p.bounciness = 0;
+							p.vx *= 1.3;
+							p.vy *= 1.3;
+							p.friction = .03;
+							/*p.onUpdate = function(p:Particle) {
+								particleCollision(p, 3);
+								if(p.timer < 200) {
+									var blood = bloodParticle(false, 2.5, 1.5, 1);
+									if(blood == null) return;
+									blood.xx = p.xx + Util.randFloat(-3, 3);
+									blood.yy = p.yy + Util.randFloat(-3, 3);
+								}
+							};*/
+						}
+					} else {
+						p.rotVel *= -.94;
+					}
+				}
 				/*if(p.vz > 2.) {
 					var bd = Game.CUR.level.ground0Layer.bmp.bitmapData;
 					var bx = Std.int(p.xx);
@@ -124,7 +156,7 @@ class Fx {
 				}*/
 			};
 			p.onUpdate = function(p:Particle) {
-				particleCollision(p, 4);
+				particleCollision(p, 3);
 				if(p.timer < 50) {
 					for(i in 0...3) {
 						var blood = bloodParticle(false);
@@ -139,7 +171,14 @@ class Fx {
 						blood.zz = p.zz + az * 8.;
 						blood.vx = ax * speed;
 						blood.vz = az * speed * 2.;
+						blood.vy = Math.sin(p.timer / 10.);
 						Game.CUR.lm.addChild(blood, Const.BACK_L);
+						blood.onUpdate = function(p:Particle) {
+							if(Game.CUR.level.getCollisionAt(blood.xx, blood.yy) == HOLE) {
+								blood.onDie = null;
+								blood.delete();
+							}
+						};
 					}
 				}
 			}
@@ -151,14 +190,14 @@ class Fx {
 			Game.CUR.lm.addChild(p, Const.BACKWALL_L);
 		}
 	}
-	public static function bloodParticle(isDark:Bool, ?wid=3., ?hei=2., ?lifeTime=60) {
+	public static function bloodParticle(isDark:Bool, ?wid=2.5, ?hei=1.5, ?lifeTime=30) {
 		var p = Particle.create();
 		if(p == null) return null;
-		var col = (isDark ? 100 + Std.random(50) : 170 + Std.random(50)) << 16;
+		var col = (isDark ? 100 + Std.random(40) : 155 + Std.random(50)) << 16;
 		p.drawRect(wid, hei, col);
 		p.lifeTime = lifeTime;
 		p.onDie = function() {
-			p.drawToBD(Game.CUR.level.ground0Layer.bmp.bitmapData);
+			p.drawToBD(Game.CUR.level.ground1Layer.bmp.bitmapData);
 		}
 		p.gravity = .8;
 		p.friction = .12;

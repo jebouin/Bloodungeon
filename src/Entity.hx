@@ -148,7 +148,6 @@ class Entity extends XSprite {
 	}
 	public function fall() {
 		if(zz < 0) return;
-		zz = -.01;
 		locked = true;
 		if(shadow != null) {
 			shadow.visible = false;
@@ -158,6 +157,7 @@ class Entity extends XSprite {
 		var tt = .5;
 		Actuate.tween(this, tt, {x: x + vx*tt*20}).ease(Cubic.easeOut);
 		Actuate.tween(this, tt, {y: y+20, scaleX: 0., scaleY: 0.}).onComplete(function() {
+			zz = -10;
 			die();
 		}).ease(Linear.easeNone);
 	}

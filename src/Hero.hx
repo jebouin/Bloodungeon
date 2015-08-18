@@ -21,6 +21,7 @@ class Hero extends Entity {
 	var turnTimer : Int;
 	public var prevRoomDir : Const.DIR;
 	var immune : Bool;
+	var fell : Bool;
 	public function new() {
 		super("heroIdle");
 		anim.playing = false;
@@ -51,6 +52,7 @@ class Hero extends Entity {
 		visible = shadow.visible = true;
 		locked = false;
 		dead = false;
+		fell = false;
 		scaleX = scaleY = 1;
 		parent.removeChild(this);
 		Game.CUR.lm.addChild(this, Const.HERO_L);
@@ -63,6 +65,7 @@ class Hero extends Entity {
 		super.delete();
 	}
 	override function update() {
+		if(fell) return;
 		if(!locked) {
 			var curSpeed = onIce ? speed * .05 : speed;
 			if(Input.keyDown("left")) {
@@ -224,5 +227,10 @@ class Hero extends Entity {
 		var light2 = Game.CUR.level.light2;
 		light.x = light2.x = lx + Game.CUR.lm.getContainer().x;
 		light.y = light2.y = ly + Game.CUR.lm.getContainer().y;
+	}
+	override public function fall() {
+		locked = true;
+		fell = true;
+		super.fall();
 	}
 }

@@ -26,7 +26,7 @@ class Spike extends Enemy {
 			setOriginInPixels(0, 16);
 		}
 		if(dir != null) {
-			Game.CUR.lm.addChild(this, Const.BACK_L);
+			Game.CUR.lm.addChild(this, Const.BACKWALL_L);
 		}
 		this.tx = tx;
 		this.ty = ty;

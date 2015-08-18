@@ -3,6 +3,7 @@ import flash.display.BitmapData;
 import flash.display.Shape;
 import flash.geom.ColorTransform;
 import flash.geom.Matrix;
+import motion.Actuate;
 class Particle extends Shape {
 	public static var ALL : Array<Particle> = [];
 	public inline static var MAX_NB = 500;
@@ -50,13 +51,16 @@ class Particle extends Shape {
 		reset();
 	}
 	function reset() {
-		xx = yy = zz = vx = vy = vz = rotVel = friction = frictionZ = gravity = bounciness = timer = 0;
+		Actuate.stop(this);
+		xx = yy = zz = vx = vy = vz = rotVel = friction = frictionZ = gravity = bounciness = 0.;
+		timer = 0;
+		scaleX = scaleY = 1.;
+		alpha = 1.;
+		visible = true;
 		onUpdate = null;
 		onBounce = null;
 		onDie = null;
 		lifeTime = -1;
-		alpha = 1.;
-		visible = true;
 		graphics.clear();
 		if(parent != null) {
 			parent.removeChild(this);
@@ -82,7 +86,7 @@ class Particle extends Shape {
 		yy += vy;
 		zz += vz;
 		rotation += rotVel;
-		if(zz < 0) {
+		if(zz < 0 && bounciness >= 0) {
 			zz = 0;
 			vz *= -bounciness;
 			if(onBounce != null) {
