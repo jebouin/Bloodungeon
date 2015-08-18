@@ -54,7 +54,7 @@ class Spike extends Enemy {
 							setAnim("spikeIdle", false);
 						}
 						if(hits(hero)) {
-							hero.die();
+							killHero(hero);
 						}
 					}, 300);
 				}
@@ -63,7 +63,7 @@ class Spike extends Enemy {
 			if(!out) {
 				if(hits(hero)) {
 					goOut(null);
-					hero.die();
+					killHero(hero);
 				}
 			}
 		}
@@ -152,5 +152,14 @@ class Spike extends Enemy {
 				return (e.xx + e.cradius > xx + 15);
 			default:
 		}
+	}
+	override function killHero(h:Hero) {
+		var dx = 0;
+		var dy = 0;
+		if(dir != null) {
+			dx = Const.getDir8X(dir);
+			dy = Const.getDir8Y(dir);
+		}
+		h.die(dx, dy);
 	}
 }

@@ -44,6 +44,7 @@ class Fx {
 		}
 	}
 	public static function heroDeath(dx:Float, dy:Float) {
+		trace(dx, dy);
 		var d = Math.sqrt(dx*dx + dy*dy);
 		if(d < .1) {
 			screenShake(0, 8, .5, true);

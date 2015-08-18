@@ -125,4 +125,19 @@ class Laser extends Enemy {
 		}
 		return false;
 	}
+	override function killHero(h:Hero) {
+		var dx = 0;
+		var dy = 0;
+		var hdx = h.xx - xx;
+		var hdy = h.yy - yy;
+		var dist = Math.sqrt(hdx * hdx + hdy * hdy);
+		var heroAngle = Math.atan2(hdy, hdx);
+		var a = (rotation - 90) * Math.PI / 180.;
+		var aa = a - heroAngle;
+		var l = dist * Math.cos(aa);
+		var hitX = xx + Math.cos(a) * l;
+		var hitY = yy + Math.sin(a) * l;
+		var hitAngle = Math.atan2(hitY - h.yy, hitX - h.xx);
+		h.die(Math.cos(hitAngle), Math.sin(hitAngle));
+	}
 }

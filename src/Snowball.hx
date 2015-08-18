@@ -73,9 +73,15 @@ class Snowball extends Enemy {
 	override function collidesHero() {
 		if(splashed) return false;
 		var hero = Game.CUR.hero;
+		if(hero == null || hero.dead) return false;
 		var dx = hero.xx - xx;
 		var dy = hero.yy - yy;
 		var r = hero.cradius + 4;
 		return dx*dx + dy*dy < r * r;
+	}
+	override function killHero(h:Hero) {
+		var dx = (-h.vx * .5 + vx) * .5;
+		var dy = (-h.vy * .5 + vy) * .5;
+		h.die(-dx, -dy);
 	}
 }

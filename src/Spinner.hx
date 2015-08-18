@@ -128,7 +128,8 @@ class Spinner extends Enemy {
 			var hitY = yy + Math.sin(a) * l;
 			var hitAngle = Math.atan2(hitY - h.yy, hitX - h.xx);
 			h.die(Math.cos(hitAngle), Math.sin(hitAngle));
+		} else {
+			h.die(dx, dy);
 		}
-		h.die(dx, dy);
 	}
 }
