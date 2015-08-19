@@ -11,6 +11,7 @@ import flash.media.SoundTransform;
 @:sound("res/floor2.mp3") class Floor2Music extends Sound {}
 @:sound("res/floor3.mp3") class Floor3Music extends Sound {}
 @:sound("res/rush.mp3") class RushMusic extends Sound {}
+@:sound("res/title.mp3") class TitleMusic extends Sound {}
 class Music {
 	public var sound : Sound;
 	public var chan : SoundChannel;
@@ -64,11 +65,12 @@ class Audio {
 		musics.push(new Music(new Floor2Music(), 29.56, 88.605));
 		musics.push(new Music(new Floor3Music(), 0, 80));
 		musics.push(new Music(new RushMusic(), 1.437, 76.251));
+		musics.push(new Music(new TitleMusic(), 18.02, 66));
 		muteState = 3;
-		mute(false);
+		//mute(false);
 	}
 	public static function playMusic(id:Int) {
-		if(id >= 0 && id < 5) {
+		if(id >= 0 && id < musics.length) {
 			playingMusic = id;
 			for(m in musics) {
 				m.stop();

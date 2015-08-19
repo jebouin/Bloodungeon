@@ -59,7 +59,7 @@ class JungleBack extends Sprite {
 	public function update() {
 		timer++;
 		for(i in 0...stars.length) {
-			stars[i].alpha = (Math.cos(timer * .1 + i / 5. * Const.DP) + 1.) * .7 + .3;
+			stars[i].alpha = (Math.cos(timer * .2 + i / 3. * Math.PI * 2.) + 1.) * .7 + .3;
 		}
 		sky.rotation += .1;
 	}

@@ -20,6 +20,7 @@ class Menu extends Scene {
 	public function new() {
 		CUR = this;
 		super();
+		Audio.playMusic(5);
 		lm = new LayerManager();
 		Main.renderer.addChild(lm.getContainer());
 		back = new JungleBack();
