@@ -71,7 +71,7 @@ class Thwomp extends Enemy {
 					var t = (crushedTimer - 10.) / 20.;
 					if(vx != 0) {
 						for(i in 0...3) {
-							var p = Fx.bloodParticle(true, vx + 2., 1, 2);
+							var p = Fx.bloodParticle(true, Math.abs(vx) + 2., 1, 2);
 							p.xx = xx + width * .5;
 							p.yy = yy + height * .5 + (i - 1) * 6 + Util.randFloat(-1, 1);
 							Game.CUR.lm.addChild(p, Const.BACK_L);
@@ -79,7 +79,7 @@ class Thwomp extends Enemy {
 						}
 					} else {
 						for(i in 0...3) {
-							var p = Fx.bloodParticle(true, 1, vy + 2., 2);
+							var p = Fx.bloodParticle(true, 1, Math.abs(vy) + 2., 2);
 							p.xx = xx + width * .5 + (i - 1) * 6 + Util.randFloat(-1, 1);
 							p.yy = yy + height * .5;
 							Game.CUR.lm.addChild(p, Const.BACK_L);

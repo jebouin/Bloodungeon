@@ -26,6 +26,7 @@ class Const {
 	public static inline var ENEMY_L = 4;
 	public static inline var HERO_L = 5;
 	public static inline var FRONT_L = 6;
+	public static inline var DP = 2. * 3.1415926;
 	public static var DIRS : Array<DIR> = [LEFT, RIGHT, UP, DOWN];
 	public static var DIRS8 : Array<DIR8> = [LEFT, RIGHT, UP, DOWN, UP_LEFT, UP_RIGHT, DOWN_LEFT, DOWN_RIGHT];
 	public static inline function stringToDir(s:String) : DIR {

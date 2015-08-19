@@ -36,6 +36,8 @@ class Main {
 		Input.addKey("up", 38);
 		Input.addKey("down", 83);
 		Input.addKey("down", 40);
+		Input.addKey("start", 13);
+		Input.addKey("start", 32);
 		Input.addKey("mute", 77);
 		Input.addKey("fps", 70);
 		Input.addKey("suicide", 82);
@@ -134,7 +136,8 @@ class Main {
 		initGFX();
 		Audio.init();
 		SceneManager.init();
-		SceneManager.add(new Game());
+		//new Game();
+		new Menu();
 		stage.addEventListener(Event.ENTER_FRAME, update);
 	}
 	static function update(_) {

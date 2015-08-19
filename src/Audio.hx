@@ -65,7 +65,7 @@ class Audio {
 		musics.push(new Music(new Floor3Music(), 0, 80));
 		musics.push(new Music(new RushMusic(), 1.437, 76.251));
 		muteState = 3;
-		mute();
+		mute(false);
 	}
 	public static function playMusic(id:Int) {
 		if(id >= 0 && id < 5) {
@@ -76,40 +76,48 @@ class Audio {
 			musics[id].play(0);
 		}
 	}
-	public static function mute() {
+	public static function mute(?announce=true) {
 		muteState++;
 		if(muteState == 4) {
 			muteState = 0;
 		}
 		switch(muteState) {
 			case 0:
-				muteMusic();
+				muteMusic(announce);
 			case 1:
-				muteSounds();
+				muteSounds(announce);
 			case 2:
-				unmuteMusic();
+				unmuteMusic(announce);
 			case 3:
-				unmuteSounds();
+				unmuteSounds(announce);
 		}
 	}
-	static function muteMusic() {
+	static function muteMusic(announce:Bool) {
 		musicMuted = true;
 		for(m in musics) {
 			m.mute();
 		}
-		Main.announce("muted musics");
+		if(announce) {
+			Main.announce("muted musics");
+		}
 	}
-	static function unmuteMusic() {
+	static function unmuteMusic(announce:Bool) {
 		musicMuted = false;
 		for(m in musics) {
 			m.unmute();
 		}
-		Main.announce("unmuted musics");
+		if(announce) {
+			Main.announce("unmuted musics");
+		}
 	}
-	static function muteSounds() {
-		Main.announce("muted sounds");
+	static function muteSounds(announce:Bool) {
+		if(announce) {
+			Main.announce("muted sounds");
+		}
 	}
-	static function unmuteSounds() {
-		Main.announce("unmuted sounds");
+	static function unmuteSounds(announce:Bool) {
+		if(announce) {
+			Main.announce("unmuted sounds");
+		}
 	}
 }

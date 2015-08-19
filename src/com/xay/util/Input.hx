@@ -46,6 +46,9 @@ class Input {
 	static public function oldKeyDown(keyType:String) {
 		return oldKeys.get(keyType);
 	}
+	static public function newKeyPress(keyType:String) {
+		return keys.get(keyType) && !oldKeys.get(keyType);
+	}
 	static public function anyNewKeyPress() {
 		//return true;
 		for(k in keyCorres.keys()) {
