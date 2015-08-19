@@ -2,11 +2,15 @@ package com.xay.util;
 class Scene {
 	public var onFocusGain : Void->Void;
 	public var onFocusLoss : Void->Void;
+	public var onDelete : Void->Void;
 	public function new() {
 		SceneManager.add(this);
 	}
 	public function delete() {
 		SceneManager.remove(this);
+		if(onDelete != null) {
+			onDelete();
+		}
 	}
 	public function update() {
 		

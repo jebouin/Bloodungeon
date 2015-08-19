@@ -40,6 +40,7 @@ class Main {
 		Input.addKey("start", 32);
 		Input.addKey("mute", 77);
 		Input.addKey("fps", 70);
+		Input.addKey("escape", 27);
 		Input.addKey("suicide", 82);
 		//Mouse.hide();
 		Lib.current.stage.addEventListener(MouseEvent.RIGHT_CLICK, function(_) {});
@@ -135,6 +136,7 @@ class Main {
 		initInput();
 		initGFX();
 		Audio.init();
+		Achievements.init();
 		SceneManager.init();
 		//new Game();
 		new Menu();

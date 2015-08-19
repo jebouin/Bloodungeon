@@ -3,19 +3,28 @@ import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.display.Shape;
 import flash.display.Sprite;
+import haxe.Template;
+import haxe.Timer;
+import motion.Actuate;
+import motion.easing.Linear;
+import motion.easing.Quad;
 @:bitmap("res/jungle0.png") class JungleBD0 extends BitmapData {}
 @:bitmap("res/jungle1.png") class JungleBD1 extends BitmapData {}
 @:bitmap("res/jungle2.png") class JungleBD2 extends BitmapData {}
+@:bitmap("res/entrance.png") class EntranceBD extends BitmapData {}
 class JungleBack extends Sprite {
 	var sky : Sprite;
 	var stars : Array<Shape>;
 	var jungle0 : Bitmap;
 	var jungle1 : Bitmap;
 	var jungle2 : Bitmap;
+	var entrance : Bitmap;
 	var ground : Shape;
 	var timer : Int;
 	var eyeY : Float;
 	var eyeX : Float;
+	var down : Bool;
+	var started : Bool;
 	public function new() {
 		super();
 		mouseEnabled = mouseChildren = false;
@@ -26,11 +35,11 @@ class JungleBack extends Sprite {
 		sky.graphics.endFill();
 		addChild(sky);
 		sky.x = Const.WID * .5;
-		sky.y = Const.HEI * .5;
+		sky.y = Const.HEI * .8;
 		stars = [];
 		for(i in 0...3) {
 			var s = new Shape();
-			s.graphics.beginFill(0xA2C8C9, Math.random());
+			s.graphics.beginFill(0xA2C8C9);
 			for(j in 0...1000) {
 				var int = Math.random() * Math.random() * Math.random() * .9;
 				var sx = (Math.random() * Const.WID - Const.WID * .5) * 1.5;
@@ -50,18 +59,42 @@ class JungleBack extends Sprite {
 		addChild(jungle2);
 		ground = new Shape();
 		ground.graphics.beginFill(0x001331);
-		ground.graphics.drawRect(0, 0, Const.WID, Const.HEI);
+		ground.graphics.drawRect(0, 0, Const.WID, 100);
 		ground.graphics.endFill();
+		entrance = new Bitmap(new EntranceBD(0, 0));
+		addChild(entrance);
 		addChild(ground);
 		timer = 0;
 		setEye(0, 0);
+		down = false;
+		started = true;
+	}
+	public function startTransition() {
+		started = false;
+		for(s in stars) {
+			s.alpha = 0.;
+			Actuate.tween(s, 3., {alpha: 1.}).ease(Linear.easeNone);
+		}
+		jungle0.y = Const.HEI + 1;
+		jungle1.y = Const.HEI + 50;
+		jungle2.y = Const.HEI + 100;
+		Timer.delay(function() {
+			Actuate.tween(jungle0, 3., {y:0}).ease(Quad.easeOut);
+			Actuate.tween(jungle1, 3., {y:0}).ease(Quad.easeOut);
+			Actuate.tween(jungle2, 3., {y:0}).ease(Quad.easeOut);
+		}, 3000);
+		Timer.delay(function() {
+			started = true;
+		}, 6000);
 	}
 	public function update() {
 		timer++;
-		for(i in 0...stars.length) {
-			stars[i].alpha = (Math.cos(timer * .2 + i / 3. * Math.PI * 2.) + 1.) * .7 + .3;
+		if(started) {
+			for(i in 0...stars.length) {
+				stars[i].alpha = (Math.cos(timer * .1 + i / 3. * Math.PI * 2.) + 1.) * .5;
+			}
 		}
-		sky.rotation += .1;
+		sky.rotation += .06;
 	}
 	function setEye(x:Float, y:Float) {
 		eyeY = y;
@@ -74,5 +107,20 @@ class JungleBack extends Sprite {
 		jungle2.x = -x;
 		ground.y = Const.HEI - y - 1.;
 		ground.x = -x;
+		entrance.y = Const.HEI + 80 - y;
+	}
+	public function goDown() {
+		Actuate.tween(this, 2, {eyeY:Const.HEI * 1.754}).onUpdate(function() {
+			setEye(0, eyeY);
+		}).onComplete(function() {
+			down = true;
+		}).ease(Quad.easeIn);
+	}
+	public function goUp() {
+		Actuate.tween(this, 2, {eyeY:0}).onUpdate(function() {
+			setEye(0, eyeY);
+		}).onComplete(function() {
+			down = false;
+		}).ease(Quad.easeIn);
 	}
 }

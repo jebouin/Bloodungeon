@@ -64,7 +64,7 @@ class Audio {
 		musics.push(new Music(new Floor1Music(), 41.77, 104.345));
 		musics.push(new Music(new Floor2Music(), 29.56, 88.605));
 		musics.push(new Music(new Floor3Music(), 0, 80));
-		musics.push(new Music(new RushMusic(), 1.437, 76.251));
+		musics.push(new Music(new RushMusic(), 5.672, 80.47));
 		musics.push(new Music(new TitleMusic(), 18.02, 66));
 		muteState = 3;
 		//mute(false);
