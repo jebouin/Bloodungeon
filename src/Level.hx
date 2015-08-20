@@ -18,6 +18,7 @@ import flash.filters.DropShadowFilter;
 import flash.filters.GlowFilter;
 import flash.geom.Point;
 import Collision;
+import motion.Actuate;
 @:file("res/floor0.tmx") class Floor0TMX extends ByteArray {}
 @:file("res/floor1.tmx") class Floor1TMX extends ByteArray {}
 @:file("res/floor2.tmx") class Floor2TMX extends ByteArray {}
@@ -619,6 +620,9 @@ class Level {
 			g.endFill();
 		}
 		Torch.dark = dark;
+		light.scaleX = light.scaleY = light2.scaleX = light2.scaleY = 0.;
+		Actuate.tween(light, 2., {scaleX:1., scaleY:1.});
+		Actuate.tween(light2, 2., {scaleX:1., scaleY:1.});
 	}
 	public function replaceLittleLights() {
 		light.graphics.clear();

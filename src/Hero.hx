@@ -45,6 +45,9 @@ class Hero extends Entity {
 		Game.CUR.frontlm.addChild(deathCounter, 0);
 		deathCounter.visible = false;
 		//immune = true;
+		Timer.delay(function() {
+			say("LOL", 600);
+		}, 200);
 	}
 	public function spawn() {
 		xx = spawnX;
@@ -217,8 +220,10 @@ class Hero extends Entity {
 		var rlx = lx - Game.CUR.lm.getContainer().x;
 		var rly = ly - Game.CUR.lm.getContainer().y;
 		setLightPos(rlx + (xx - rlx) * .3, rly + (yy - rly) * .3);
-		level.light.scaleX = level.light.scaleY = 1. + .05 * Math.sin(hooverTimer * .1);
-		level.light2.scaleX = level.light2.scaleY = 1. + .05 * Math.sin(hooverTimer * .1 + .6);
+		if(!Actuate.isActive()) {
+			level.light.scaleX = level.light.scaleY = 1. + .05 * Math.sin(hooverTimer * .1 + .4);
+			level.light2.scaleX = level.light2.scaleY = 1. + .05 * Math.sin(hooverTimer * .1 + .6 + .4);
+		}
 	}
 	public function setLightPos(lx:Float, ly:Float) {
 		var light = Game.CUR.level.light;

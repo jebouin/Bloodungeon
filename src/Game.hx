@@ -62,7 +62,7 @@ class Game extends Scene {
 			level.checkActions();
 			cd.update();
 		}
-		//Fx.test();
+		Dialog.updateAll();
 		Fx.update();
 		if(Input.newKeyPress("escape")) {
 			pause();

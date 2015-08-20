@@ -161,4 +161,8 @@ class Entity extends XSprite {
 			die();
 		}).ease(Linear.easeNone);
 	}
+	public function say(str:String, t:Int) {
+		var d = Dialog.create();
+		d.init(this, str, t);
+	}
 }

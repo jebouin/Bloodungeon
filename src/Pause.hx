@@ -6,6 +6,7 @@ import flash.display.Bitmap;
 import flash.display.Shape;
 import flash.display.Sprite;
 import flash.filters.BlurFilter;
+import haxe.Timer;
 import motion.Actuate;
 import motion.easing.Linear;
 class Pause extends Scene {
@@ -23,7 +24,7 @@ class Pause extends Scene {
 		lm = new LayerManager();
 		Main.renderer.addChild(lm.getContainer());
 		back = new Shape();
-		back.graphics.beginFill(0x0, .5);
+		back.graphics.beginFill(0x0, .8);
 		back.graphics.drawRect(0, 0, Const.WID, Const.HEI);
 		back.graphics.endFill();
 		lm.addChild(back, 0);
@@ -43,11 +44,11 @@ class Pause extends Scene {
 		filter = new BlurFilter(0., 0., 1);
 		c = Game.CUR.lm.getContainer();
 		cc = Game.CUR.frontlm.getContainer();
-		Actuate.tween(filter, .8, {blurX:2., blurY:2.}).onUpdate(function() {
+		/*Actuate.tween(filter, .8, {blurX:2., blurY:2.}).onUpdate(function() {
 			c.filters = [filter];
 			cc.filters = [filter];
 			Main.renderer.update();
-		});
+		});*/
 		select(0);
 	}
 	override public function delete() {
@@ -66,18 +67,18 @@ class Pause extends Scene {
 		}
 	}
 	function exit(?onEnd:Void->Void) {
-		Actuate.tween(filter, .05, {blurX:0., blurY:0.}).onUpdate(function() {
+		/*Actuate.tween(filter, .05, {blurX:0., blurY:0.}).onUpdate(function() {
 			c.filters = [filter];
 			cc.filters = [filter];
 			Main.renderer.update();
 		}).onComplete(function() {
 			c.filters = [];
 			cc.filters = [];
-			delete();
+			*/delete();
 			if(onEnd != null) {
 				onEnd();
-			}
-		}).ease(Linear.easeNone);
+			}/*
+		}).ease(Linear.easeNone);*/
 	}
 	function select(id:Int) {
 		selected = id;
@@ -93,9 +94,11 @@ class Pause extends Scene {
 		if(selected == 0) {
 			exit();
 		} else {
-			exit(function() {
-				Game.CUR.delete();
-			});
+			Timer.delay(function() {
+				exit(function() {
+					Game.CUR.delete();
+				});
+			}, 500);
 		}
 	}
 }

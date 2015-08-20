@@ -144,9 +144,8 @@ class Main {
 		Audio.init();
 		Achievements.init();
 		SceneManager.init();
-		Game.skipStory = true;
-		//new Game();
-		new Menu();
+		new Game();
+		//new Menu();
 		stage.addEventListener(Event.ENTER_FRAME, update);
 	}
 	static function update(_) {

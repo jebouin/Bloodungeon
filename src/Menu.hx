@@ -56,7 +56,7 @@ class Menu extends Scene {
 			textContainer.addChild(bmp);
 			texts.push(bmp);
 		}
-		normalMode = new Bitmap(Main.font.getText("story mode"));
+		normalMode = new Bitmap(Main.font.getText("normal mode"));
 		normalMode.x = Const.WID * 9. / 12. - normalMode.width *.5;
 		normalMode.y = Const.HEI * .5 - 10;
 		yoloMode = new Bitmap(Main.font.getText("yolo mode"));
