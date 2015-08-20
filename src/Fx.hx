@@ -165,7 +165,9 @@ class Fx {
 				p.drawToBD(Game.CUR.level.ground1Layer.bmp.bitmapData);
 			};
 			Timer.delay(function() {
-				p.delete();
+				if(Game.CUR != null) {
+					p.delete();
+				}
 			}, 5000);
 			Game.CUR.lm.addChild(p, Const.BACKWALL_L);
 		}

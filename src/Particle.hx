@@ -48,6 +48,12 @@ class Particle extends Shape {
 			ALL[i].update();
 		}
 	}
+	public static function deleteAll() {
+		for(p in ALL) {
+			p.onDie = null;
+			p.delete();
+		}
+	}
 	public function new() {
 		super();
 		deleted = false;

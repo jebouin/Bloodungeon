@@ -131,7 +131,8 @@ class JungleBack extends Sprite {
 		var t = 1.;
 		Actuate.tween(entrance, t, {x:Const.WID * .5 - 57 * 8., y:Const.HEI * .5 - 157 * 8., scaleX:8., scaleY:8.}).ease(Quad.easeOut);
 	}
-	public function goOutDungeon() {
-		
+	public function leaveDungeon() {
+		setEye(0, 0);
+		entrance.scaleX = entrance.scaleY = 1.;
 	}
 }

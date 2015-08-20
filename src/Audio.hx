@@ -39,6 +39,9 @@ class Music {
 	}
 	public function resume() {
 		chan = sound.play(pausePos);
+		if(Audio.musicMuted) {
+			mute();
+		}
 	}
 	public function stop() {
 		if(!playing) return;
@@ -75,7 +78,7 @@ class Audio {
 		musics.push(new Music(new RushMusic(), 5.672, 80.47));
 		musics.push(new Music(new TitleMusic(), 18.02, 66));
 		muteState = 3;
-		//mute(false);
+		mute(false);
 	}
 	public static function playMusic(id:Int) {
 		if(id >= 0 && id < musics.length) {

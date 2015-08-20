@@ -144,6 +144,7 @@ class Main {
 		Audio.init();
 		Achievements.init();
 		SceneManager.init();
+		Game.skipStory = true;
 		//new Game();
 		new Menu();
 		stage.addEventListener(Event.ENTER_FRAME, update);
@@ -192,10 +193,17 @@ class Main {
 		if(!hasFocus) return;
 		hasFocus = false;
 		Audio.onFocusOut();
+		if(Game.CUR != null) {
+			Game.CUR.onFocusOut();
+		}
+		renderer.update();
 	}
 	static function onFocusIn(_) {
 		if(hasFocus) return;
 		hasFocus = true;
 		Audio.onFocusIn();
+		if(Game.CUR != null) {
+			Game.CUR.onFocusIn();
+		}
 	}
 }

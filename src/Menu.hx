@@ -81,9 +81,8 @@ class Menu extends Scene {
 		skippedText.visible = false;
 		lm.addChild(skipText, 1);
 		lm.addChild(skippedText, 1);
-		onFocusGain = show;
-		onFocusLoss = hide;
 		selectedOption = 0;
+		//onFocusLoss = quit;
 		updateOptions();
 		isDown = false;
 		isInDungeon = false;
@@ -134,6 +133,9 @@ class Menu extends Scene {
 					selectMode(selectedMode-1);
 				}
 				if(Input.newKeyPress("start")) {
+					startPressed();
+				} else if(Input.newKeyPress("escape")) {
+					selectMode(2);
 					startPressed();
 				}
 			} else {
@@ -247,16 +249,12 @@ class Menu extends Scene {
 			c.filters = [];
 		});
 	}
-	function show() {
-		
-	}
 	function quit() {
-		lm.getContainer().alpha = 1.;
 		lm.getContainer().visible = false;
 	}
 	function resume() {
+		leaveDungeon();
 		lm.getContainer().visible = true;
-		lm.getContainer().alpha = 1.;
 	}
 	function goInDungeon(?yolo:Bool=false) {
 		if(!isDown) return;
@@ -266,7 +264,9 @@ class Menu extends Scene {
 		back.goInDungeon();
 		Actuate.tween(normalMode, .3, {x:Const.WID+10});
 		Actuate.tween(yoloMode, .3, {x:Const.WID+10});
-		Actuate.tween(backMode, .3, {x:Const.WID+10});
+		Actuate.tween(backMode, .3, {x:Const.WID+10}).onComplete(function() {
+			normalMode.visible = yoloMode.visible = backMode.visible = false;
+		});
 		Timer.delay(function() {
 			transition = false;
 			if(yolo) {
@@ -275,6 +275,7 @@ class Menu extends Scene {
 			} else {
 				Game.skipStory = Game.yoloMode = false;
 				skipText.visible = true;
+				skipText.alpha = 1.;
 				Timer.delay(function() {
 					Actuate.tween(skipText, 2., {alpha: 0}).ease(Linear.easeNone);
 				}, 1500);
@@ -283,6 +284,19 @@ class Menu extends Scene {
 				}, 3500);
 			}
 		}, yolo ? 400 : 1300);
+	}
+	function leaveDungeon() {
+		if(!isInDungeon || transition) return;
+		isInDungeon = false;
+		isDown = false;
+		skippedText.visible = normalMode.visible = yoloMode.visible = backMode.visible = false;
+		normalMode.x = Const.WID * 9. / 12. - normalMode.width * .5;
+		yoloMode.x = Const.WID * 9. / 12. - yoloMode.width * .5;
+		backMode.x = Const.WID * 9. / 12. - backMode.width * .5;
+		textContainer.visible = true;
+		textContainer.y = 0;
+		selectMode(0);
+		back.leaveDungeon();
 	}
 	function startGame() {
 		if(startTimer != null) {

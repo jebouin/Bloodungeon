@@ -1,4 +1,5 @@
 package ;
+import com.xay.util.Input;
 import com.xay.util.LayerManager;
 import com.xay.util.SceneManager;
 import motion.Actuate;
@@ -63,6 +64,9 @@ class Game extends Scene {
 		}
 		//Fx.test();
 		Fx.update();
+		if(Input.newKeyPress("escape")) {
+			pause();
+		}
 	}
 	public function addEntity(e:Entity) {
 		entities.push(e);
@@ -124,5 +128,14 @@ class Game extends Scene {
 	public function nextFloor() {
 		level.nextFloor();
 		hero.nbDeathBeforFloor = hero.nbDeaths;
+	}
+	public function onFocusOut() {
+		pause();
+	}
+	public function onFocusIn() {
+		
+	}
+	function pause() {
+		var p = new Pause();
 	}
 }
