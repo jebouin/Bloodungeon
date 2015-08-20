@@ -45,6 +45,7 @@ class AchievementMenu extends Scene {
 					break;
 				}
 			}
+			var hidden = a.secret && !a.unlocked;
 			var b = new Sprite();
 			var backCol = 0x0;
 			var borderCOl = 0xAAAAAA;
@@ -69,8 +70,11 @@ class AchievementMenu extends Scene {
 			title.y = -BOXHEI * .5 + 10;
 			title.transform.colorTransform = new ColorTransform(rm, gm, bm);
 			b.addChild(title);
-			var desc = new Bitmap(Main.font.getText(a.description, 25, true));
-			desc.x = -BOXWID * .5 + 10;
+			b.graphics.lineStyle(1., a.unlocked ? 0xFFFFFF : 0x808080);
+			b.graphics.moveTo(title.x, title.y + title.height + 1);
+			b.graphics.lineTo(title.x + title.width, title.y + title.height + 1);
+			var desc = new Bitmap(Main.font.getText(hidden ? "???" : a.description, 25, true));
+			desc.x = hidden ? -desc.width * .5 : -BOXWID * .5 + 10;
 			desc.y = -BOXHEI * .5 + 26;
 			if(a.unlocked) {
 				desc.transform.colorTransform = new ColorTransform(.3, .6, .75);

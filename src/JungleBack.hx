@@ -6,6 +6,7 @@ import flash.display.Sprite;
 import haxe.Template;
 import haxe.Timer;
 import motion.Actuate;
+import motion.easing.Cubic;
 import motion.easing.Linear;
 import motion.easing.Quad;
 @:bitmap("res/jungle0.png") class JungleBD0 extends BitmapData {}
@@ -59,7 +60,7 @@ class JungleBack extends Sprite {
 		addChild(jungle2);
 		ground = new Shape();
 		ground.graphics.beginFill(0x001331);
-		ground.graphics.drawRect(0, 0, Const.WID, 100);
+		ground.graphics.drawRect(0, 0, Const.WID, 84);
 		ground.graphics.endFill();
 		entrance = new Bitmap(new EntranceBD(0, 0));
 		addChild(entrance);
@@ -108,9 +109,10 @@ class JungleBack extends Sprite {
 		ground.y = Const.HEI - y - 1.;
 		ground.x = -x;
 		entrance.y = Const.HEI + 80 - y;
+		entrance.x = -x;
 	}
 	public function goDown() {
-		Actuate.tween(this, 2, {eyeY:Const.HEI * 1.754}).onUpdate(function() {
+		Actuate.tween(this, 2., {eyeY:Const.HEI * 1.754}).onUpdate(function() {
 			setEye(0, eyeY);
 		}).onComplete(function() {
 			down = true;
@@ -122,5 +124,14 @@ class JungleBack extends Sprite {
 		}).onComplete(function() {
 			down = false;
 		}).ease(Quad.easeIn);
+	}
+	public function goInDungeon() {
+		var ty = 320;
+		var tx = -60;
+		var t = 1.;
+		Actuate.tween(entrance, t, {x:Const.WID * .5 - 57 * 8., y:Const.HEI * .5 - 157 * 8., scaleX:8., scaleY:8.}).ease(Quad.easeOut);
+	}
+	public function goOutDungeon() {
+		
 	}
 }

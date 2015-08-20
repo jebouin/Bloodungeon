@@ -124,6 +124,7 @@ class Particle extends Shape {
 	}
 	public function drawToBD(bd:BitmapData, ?useAlpha=true) {
 		var mat = new Matrix();
+		mat.rotate(rotation * Math.PI / 180.);
 		mat.translate(xx, yy);
 		if(useAlpha) {
 			bd.draw(this, mat, new ColorTransform(1., 1., 1., alpha));

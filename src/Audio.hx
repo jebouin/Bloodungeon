@@ -16,6 +16,7 @@ class Music {
 	public var sound : Sound;
 	public var chan : SoundChannel;
 	public var length : Float;
+	public var pausePos : Float;
 	public var introLength : Float;
 	public var playing : Bool;
 	public function new(snd:Sound, introLength:Float, length:Float) {
@@ -31,6 +32,13 @@ class Music {
 		if(Audio.musicMuted) {
 			mute();
 		}
+	}
+	public function pause() {
+		pausePos = chan.position;
+		chan.stop();
+	}
+	public function resume() {
+		chan = sound.play(pausePos);
 	}
 	public function stop() {
 		if(!playing) return;
@@ -121,5 +129,11 @@ class Audio {
 		if(announce) {
 			Main.announce("unmuted sounds");
 		}
+	}
+	public static function onFocusOut() {
+		musics[playingMusic].pause();
+	}
+	public static function onFocusIn() {
+		musics[playingMusic].resume();
 	}
 }

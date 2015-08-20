@@ -133,22 +133,6 @@ class Fx {
 						p.rotVel *= -.94;
 					}
 				}
-				/*if(p.vz > 2.) {
-					var bd = Game.CUR.level.ground0Layer.bmp.bitmapData;
-					var bx = Std.int(p.xx);
-					var by = Std.int(p.yy);
-					bd.lock();
-					for(j in -3...4) {
-						for(i in -3...4) {
-							var dist = i*i + j*j;
-							if(dist > 16) continue;
-							var col = 0xFF000000;
-							var r = 200 + Std.random(55);
-							bd.setPixel32(bx + i, by + j, col + (r << 16));
-						}
-					}
-					bd.unlock(new Rectangle(bx - 5, by - 5, 10, 10));
-				}*/
 			};
 			p.onUpdate = function(p:Particle) {
 				particleCollision(p, 3);
@@ -177,10 +161,11 @@ class Fx {
 					}
 				}
 			}
+			p.onDie = function() {
+				p.drawToBD(Game.CUR.level.ground1Layer.bmp.bitmapData);
+			};
 			Timer.delay(function() {
-				Actuate.tween(p, 1., {alpha: 0.}).onComplete(function() {
-					p.delete();
-				});
+				p.delete();
 			}, 5000);
 			Game.CUR.lm.addChild(p, Const.BACKWALL_L);
 		}

@@ -5,13 +5,21 @@ class Action {
 		Game.CUR.level.removeExitLight();
 	}
 	public static function exitFloor0() {
-		Game.CUR.level.nextFloor();
+		Game.CUR.nextFloor();
 	}
 	public static function exitFloor1() {
-		Game.CUR.level.nextFloor();
+		var h = Game.CUR.hero;
+		if(h.nbDeaths == h.nbDeathBeforFloor) {
+			Achievements.unlock("Phrygian warrior");
+		}
+		Game.CUR.nextFloor();
 	}
 	public static function exitFloor2() {
-		Game.CUR.level.nextFloor();
+		var h = Game.CUR.hero;
+		if(h.nbDeaths == h.nbDeathBeforFloor) {
+			Achievements.unlock("Icy hell");
+		}
+		Game.CUR.nextFloor();
 	}
 	public static function lastRush() {
 		Audio.playMusic(4);

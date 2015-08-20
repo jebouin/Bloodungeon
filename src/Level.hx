@@ -57,7 +57,7 @@ class Level {
 		RWID = Std.int(Const.WID / 16);
 		RHEI = Std.int(Const.HEI / 16);
 		renderLighting();
-		load(0);
+		load(Game.skipStory ? 1 : 0);
 		loadEntities(roomIdX, roomIdY);
 	}
 	public function update() {

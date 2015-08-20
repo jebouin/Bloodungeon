@@ -5,6 +5,7 @@ import flash.display.BitmapData;
 import flash.geom.Rectangle;
 import motion.Actuate;
 class FakeTile extends Enemy {
+	public static var nbBroken = 0;
 	var dir : Const.DIR;
 	var rect : Rectangle;
 	var tx : Int;
@@ -34,12 +35,12 @@ class FakeTile extends Enemy {
 		parent.removeChild(this);
 		Game.CUR.lm.addChild(this, Const.BACK_L);
 		rect = new Rectangle(xx, yy, wid * 16, hei * 16);
-		/*for(j in ty...ty+hei) {
+		for(j in ty...ty+hei) {
 			for(i in tx...tx+wid) {
 				var rcol = level.getCollision(i+1, j);
 				level.setCollision(i, j, FULL);
 			}
-		}*/
+		}
 		update();
 	}
 	override public function update() {
@@ -86,5 +87,12 @@ class FakeTile extends Enemy {
 		//BOOM!
 		die();
 		Game.CUR.level.fakeTileWasRemoved(secretId);
+		if(nbBroken == 0) {
+			Achievements.unlock("Secret...");
+		}
+		nbBroken++;
+		if(nbBroken == 6) {
+			Achievements.unlock("Cheater");
+		}
 	}
 }

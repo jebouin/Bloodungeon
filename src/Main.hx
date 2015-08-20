@@ -6,10 +6,12 @@ import com.xay.util.SceneManager;
 import com.xay.util.SpriteLib;
 import flash.display.Bitmap;
 import flash.display.BitmapData;
+import flash.display.Sprite;
 import flash.display.StageAlign;
 import flash.display.StageQuality;
 import flash.display.StageScaleMode;
 import flash.events.Event;
+import flash.events.FocusEvent;
 import flash.events.MouseEvent;
 import flash.filters.DropShadowFilter;
 import flash.Lib;
@@ -26,6 +28,7 @@ class Main {
 	public static var font : BitmapFont;
 	public static var is60FPS : Bool;
 	public static var secondUpdate : Bool;
+	public static var hasFocus = true;
 	static function initInput() {
 		Input.init();
 		Input.addKey("left", 65);
@@ -42,8 +45,11 @@ class Main {
 		Input.addKey("fps", 70);
 		Input.addKey("escape", 27);
 		Input.addKey("suicide", 82);
+		Input.addKey("skip", 83);
 		//Mouse.hide();
 		Lib.current.stage.addEventListener(MouseEvent.RIGHT_CLICK, function(_) {});
+		Lib.current.addEventListener(Event.DEACTIVATE, onFocusOut);
+		Lib.current.addEventListener(Event.ACTIVATE, onFocusIn);
 	}
 	static function initGFX() {
 		SpriteLib.addBD("tileset", new TilesetBD(0, 0));
@@ -133,8 +139,8 @@ class Main {
 		stats.x = stage.stageWidth - Stats.XPOS;
 		stats.y = stage.stageHeight - 100;
 		stage.addChild(stats);
-		initInput();
 		initGFX();
+		initInput();
 		Audio.init();
 		Achievements.init();
 		SceneManager.init();
@@ -143,20 +149,22 @@ class Main {
 		stage.addEventListener(Event.ENTER_FRAME, update);
 	}
 	static function update(_) {
-		secondUpdate = false;
-		SceneManager.update();
-		if(!is60FPS) {
-			secondUpdate = true;
+		if(hasFocus) {
+			secondUpdate = false;
 			SceneManager.update();
+			if(!is60FPS) {
+				secondUpdate = true;
+				SceneManager.update();
+			}
+			if(Input.keyDown("mute") && !Input.oldKeyDown("mute")) {
+				Audio.mute();
+			}
+			if(Input.keyDown("fps") && !Input.oldKeyDown("fps")) {
+				changeFPS();
+			}
+			renderer.update();
+			Input.update();
 		}
-		if(Input.keyDown("mute") && !Input.oldKeyDown("mute")) {
-			Audio.mute();
-		}
-		if(Input.keyDown("fps") && !Input.oldKeyDown("fps")) {
-			changeFPS();
-		}
-		renderer.update();
-		Input.update();
 	}
 	public static function announce(str:String) {
 		var text = new Bitmap(font.getText(str));
@@ -179,5 +187,15 @@ class Main {
 			announce("60 fps");
 			Lib.current.stage.frameRate = 60;
 		}
+	}
+	static function onFocusOut(_) {
+		if(!hasFocus) return;
+		hasFocus = false;
+		Audio.onFocusOut();
+	}
+	static function onFocusIn(_) {
+		if(hasFocus) return;
+		hasFocus = true;
+		Audio.onFocusIn();
 	}
 }

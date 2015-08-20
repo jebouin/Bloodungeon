@@ -7,6 +7,8 @@ import motion.easing.Quad;
 import motion.easing.Sine;
 class Game extends Scene {
 	public static var CUR : Game;
+	public static var skipStory : Bool;
+	public static var yoloMode : Bool;
 	public var lm : LayerManager;
 	public var frontlm : LayerManager;
 	public var entities : Array<Entity>;
@@ -26,6 +28,7 @@ class Game extends Scene {
 		camX = camY = 0;
 		cd = new Countdown();
 		entities = [];
+		FakeTile.nbBroken = 0;
 		level = new Level();
 		hero = new Hero();
 		entities.push(hero);
@@ -117,5 +120,9 @@ class Game extends Scene {
 	public function onRespawn() {
 		Enemy.fade = false;
 		level.reloadEntities();
+	}
+	public function nextFloor() {
+		level.nextFloor();
+		hero.nbDeathBeforFloor = hero.nbDeaths;
 	}
 }

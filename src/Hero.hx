@@ -15,7 +15,8 @@ class Hero extends Entity {
 	public var hooverTimer : Int;
 	public static var spawnX : Float;
 	public static var spawnY : Float;
-	var nbDeaths : Int;
+	public var nbDeaths : Int;
+	public var nbDeathBeforFloor : Int;
 	var deathCounter : Bitmap;
 	var targetFrame : Int;
 	var turnTimer : Int;
@@ -39,7 +40,7 @@ class Hero extends Entity {
 		shadow.scaleY *= .5;
 		shadow.alpha *= .4;
 		targetFrame = anim.getFrame();
-		nbDeaths = 0;
+		nbDeaths = nbDeathBeforFloor = 0;
 		deathCounter = new Bitmap();
 		Game.CUR.frontlm.addChild(deathCounter, 0);
 		deathCounter.visible = false;
