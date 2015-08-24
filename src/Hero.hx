@@ -41,6 +41,9 @@ class Hero extends Entity {
 		shadow.alpha *= .4;
 		targetFrame = anim.getFrame();
 		nbDeaths = nbDeathBeforeFloor = nbDeathsBeforeRoom = 0;
+		if(Game.continueGame) {
+			nbDeaths = Save.so.data.deaths;
+		}
 		deathCounter = new Bitmap();
 		Game.CUR.frontlm.addChild(deathCounter, 0);
 		deathCounter.visible = false;
@@ -215,7 +218,9 @@ class Hero extends Entity {
 		vx = vy = 0;
 		nbDeathsBeforeRoom = nbDeaths;
 		Game.CUR.nextRoom(dir);
-		Save.onNextRoom(Game.CUR.level.floor, Game.CUR.level.roomIdX, Game.CUR.level.roomIdY, spawnX, spawnY, dir);
+		if(Game.CUR.level.floor > 0) {
+			Save.onNextRoom(Game.CUR.level.floor, Game.CUR.level.roomIdX, Game.CUR.level.roomIdY, spawnX, spawnY, dir);
+		}
 	}
 	function updateLight() {
 		var level = Game.CUR.level;

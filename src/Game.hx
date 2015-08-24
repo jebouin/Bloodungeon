@@ -43,7 +43,11 @@ class Game extends Scene {
 		level = new Level(floorId);
 		if(continueGame) {
 			Save.continueGame();
+			if(Hero.prevRoomDir != null) {
+				level.closeRoom(level.roomIdX + Const.getDirX(Const.getOpposite(Hero.prevRoomDir)), level.roomIdY + Const.getDirY(Const.getOpposite(Hero.prevRoomDir)), Hero.prevRoomDir);
+			}
 		}
+		level.loadEntities();
 		setCamPos(level.posX, level.posY);
 		hero = new Hero();
 		entities.push(hero);

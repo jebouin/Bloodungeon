@@ -40,20 +40,20 @@ class Achievements {
 		}
 		return null;
 	}
-	public static function unlock(name:String) {
+	public static function unlock(name:String, ?isGameLoading=false) {
 		var a = get(name);
 		if(a == null || a.unlocked) {
 			return;
 		}
 		a.unlocked = true;
 		nbUnlocked++;
-		trace(name + " unlocked!");
-	}
-	public static function unlockId(id:Int) {
-		for(a in achievements) {
-			if(a.id == id) {
-				unlock(a.title);
-			}
+		if(!isGameLoading) {
+			trace(name + " unlocked!");
+			Save.onAchievementUnlocked();
 		}
+	}
+	public static function unlockId(id:Int, ?isGameLoading=false) {
+		if(id < 0 || id >= achievements.length) return;
+		unlock(achievements[id].title, isGameLoading);
 	}
 }

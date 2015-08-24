@@ -6,6 +6,7 @@ import flash.geom.Rectangle;
 import motion.Actuate;
 class FakeTile extends Enemy {
 	public static var nbBroken = 0;
+	public static var brokens = [false, false, false, false, false, false];
 	var dir : Const.DIR;
 	var rect : Rectangle;
 	var tx : Int;
@@ -42,6 +43,9 @@ class FakeTile extends Enemy {
 			}
 		}
 		update();
+		if(brokens[secretId]) {
+			disappear(true);
+		}
 	}
 	override public function update() {
 		super.update();
@@ -69,7 +73,7 @@ class FakeTile extends Enemy {
 		}
 		return false;
 	}
-	function disappear() {
+	function disappear(?onLoad=false) {
 		var th = ty + hei;
 		if(Game.CUR.level.floor == 3) {
 			th = ty + 1;
@@ -86,13 +90,17 @@ class FakeTile extends Enemy {
 		}
 		//BOOM!
 		die();
+		brokens[secretId] = true;
 		Game.CUR.level.fakeTileWasRemoved(secretId);
-		if(nbBroken == 0) {
-			Achievements.unlock("Secret...");
-		}
-		nbBroken++;
-		if(nbBroken == 6) {
-			Achievements.unlock("Cheater");
+		if(!onLoad) {
+			Save.onFakeTileBroken();
+			if(nbBroken == 0) {
+				Achievements.unlock("Secret...");
+			}
+			if(nbBroken == 6) {
+				Achievements.unlock("Cheater");
+			}
+			nbBroken++;
 		}
 	}
 }

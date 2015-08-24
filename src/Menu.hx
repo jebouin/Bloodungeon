@@ -160,8 +160,12 @@ class Menu extends Scene {
 				Game.continueGame = false;
 				goDown();
 			} else if(selectedOption == 1) {
-				Game.continueGame = true;
-				startGame();
+				if(!Save.so.data.hasSave) {
+					trace("No save!");
+				} else {
+					Game.continueGame = true;
+					startGame();
+				}
 			} else if(selectedOption == 2) {
 				hide();
 				new AchievementMenu();

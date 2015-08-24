@@ -59,7 +59,6 @@ class Level {
 		RHEI = Std.int(Const.HEI / 16);
 		renderLighting();
 		load(levelId);
-		loadEntities(roomIdX, roomIdY);
 	}
 	public function update() {
 		Bow.updateAll();
@@ -310,8 +309,15 @@ class Level {
 			}
 		}
 	}
-	public function loadEntities(idx:Int, idy:Int) {
-		if(idx < 0 || idy < 0 || idx >= nbRoomsX || idy >= nbRoomsY) return false;
+	public function loadEntities(?idx:Int, ?idy:Int) {
+		if(idx == null || idy == null) {
+			idx = roomIdX;
+			idy = roomIdY;
+		} else {
+			if(idx < 0 || idy < 0 || idx >= nbRoomsX || idy >= nbRoomsY) {
+				return;
+			}
+		}
 		var nextRoomX = idx * (RWID - 1) * 16;
 		var nextRoomY = idy * (RHEI - 1) * 16;
 		for(pos in spikePos) {
@@ -405,11 +411,11 @@ class Level {
 				}
 			}
 		}
-		return true;
+		return;
 	}
 	public function reloadEntities() {
 		Game.CUR.clearEntities(true);
-		loadEntities(roomIdX, roomIdY);
+		loadEntities();
 	}
 	public function nextFloor() {
 		for(t in torches) {
@@ -430,7 +436,7 @@ class Level {
 		var dx = (dir == RIGHT ? 1 : (dir == LEFT ? -1 : 0));
 		var dy = (dir == DOWN ? 1 : (dir == UP ? -1 : 0));
 		Game.CUR.hero.computeSpawnPos(dir == UP || dir == DOWN);
-		closeRoom(dir);
+		closeRoom(roomIdX, roomIdY, dir);
 		setRoomId(roomIdX + dx, roomIdY + dy);
 		loadEntities(roomIdX, roomIdY);
 		Game.CUR.lock();
@@ -451,9 +457,9 @@ class Level {
 		});
 		return true;
 	}
-	function closeRoom(dir:Const.DIR) {
-		var tx = roomIdX * (RWID - 1);
-		var ty = roomIdY * (RHEI - 1);
+	public function closeRoom(idx:Int, idy:Int, dir:Const.DIR) {
+		var tx = idx * (RWID - 1);
+		var ty = idy * (RHEI - 1);
 		if(dir == LEFT || dir == RIGHT) {
 			var x = tx + (dir == RIGHT ? RWID-2:1);
 			for(j in 0...10) {
