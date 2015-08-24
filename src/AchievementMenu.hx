@@ -39,12 +39,7 @@ class AchievementMenu extends Scene {
 		var a : Achievements.Achievement;
 		boxes = [];
 		for(i in 0...7) {
-			for(k in Achievements.achievements.keys()) {
-				a = Achievements.achievements.get(k);
-				if(a.id == i) {
-					break;
-				}
-			}
+			var a = Achievements.achievements[i];
 			var hidden = a.secret && !a.unlocked;
 			var b = new Sprite();
 			var backCol = 0x0;

@@ -157,13 +157,17 @@ class Menu extends Scene {
 			}
 		} else if(!isInDungeon) {
 			if(selectedOption == 0) {
+				Game.continueGame = false;
 				goDown();
 			} else if(selectedOption == 1) {
-				goDown();
+				Game.continueGame = true;
+				startGame();
 			} else if(selectedOption == 2) {
+				hide();
 				new AchievementMenu();
 			} else if(selectedOption == 3) {
-				new StatsMenu();
+				hide();
+				new Stats();
 			}
 		}
 	}
@@ -277,11 +281,11 @@ class Menu extends Scene {
 				skipText.visible = true;
 				skipText.alpha = 1.;
 				Timer.delay(function() {
-					Actuate.tween(skipText, 2., {alpha: 0}).ease(Linear.easeNone);
-				}, 1500);
+					Actuate.tween(skipText, 1., {alpha: 0}).ease(Linear.easeNone);
+				}, 1000);
 				startTimer = Timer.delay(function() {
 					startGame();
-				}, 3500);
+				}, 2000);
 			}
 		}, yolo ? 400 : 1300);
 	}

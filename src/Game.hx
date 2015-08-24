@@ -10,6 +10,7 @@ class Game extends Scene {
 	public static var CUR : Game;
 	public static var skipStory : Bool;
 	public static var yoloMode : Bool;
+	public static var continueGame : Bool;
 	public var lm : LayerManager;
 	public var frontlm : LayerManager;
 	public var entities : Array<Entity>;
@@ -30,13 +31,27 @@ class Game extends Scene {
 		cd = new Countdown();
 		entities = [];
 		FakeTile.nbBroken = 0;
-		level = new Level();
+		var floorId = 0;
+		if(continueGame) {
+			floorId = Save.so.data.floorId;
+		} else {
+			Save.onStartGame();
+			if(skipStory) {
+				floorId = 1;
+			}
+		}
+		level = new Level(floorId);
+		if(continueGame) {
+			Save.continueGame();
+		}
+		setCamPos(level.posX, level.posY);
 		hero = new Hero();
 		entities.push(hero);
 		locked = false;
 	}
 	override public function delete() {
 		super.delete();
+		Save.onQuitGame();
 		lm.delete();
 		frontlm.delete();
 		clearEntities();
@@ -67,6 +82,7 @@ class Game extends Scene {
 		if(Input.newKeyPress("escape")) {
 			pause();
 		}
+		Stats.gameTime++;
 	}
 	public function addEntity(e:Entity) {
 		entities.push(e);
@@ -127,7 +143,7 @@ class Game extends Scene {
 	}
 	public function nextFloor() {
 		level.nextFloor();
-		hero.nbDeathBeforFloor = hero.nbDeaths;
+		hero.nbDeathBeforeFloor = hero.nbDeaths;
 	}
 	public function onFocusOut() {
 		pause();

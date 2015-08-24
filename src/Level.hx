@@ -36,8 +36,8 @@ class Level {
 	public var light : Shape;
 	public var light2 : Shape;
 	var exitLight : Shape;
-	var roomIdX : Int;
-	var roomIdY : Int;
+	public var roomIdX : Int;
+	public var roomIdY : Int;
 	var nbRoomsX : Int;
 	var nbRoomsY : Int;
 	var tiles : Array<Array<TILE_COLLISION_TYPE> >;
@@ -54,11 +54,11 @@ class Level {
 	var activeGroup : TiledGroup;
 	var map : TiledMap;
 	var actionRects : Array<{x:Int, y:Int, wid:Int, hei:Int, f:String}>;
-	public function new() {
+	public function new(levelId:Int) {
 		RWID = Std.int(Const.WID / 16);
 		RHEI = Std.int(Const.HEI / 16);
 		renderLighting();
-		load(Game.skipStory ? 1 : 0);
+		load(levelId);
 		loadEntities(roomIdX, roomIdY);
 	}
 	public function update() {
@@ -309,7 +309,6 @@ class Level {
 				}
 			}
 		}
-		Game.CUR.setCamPos(posX, posY);
 	}
 	public function loadEntities(idx:Int, idy:Int) {
 		if(idx < 0 || idy < 0 || idx >= nbRoomsX || idy >= nbRoomsY) return false;
@@ -418,10 +417,12 @@ class Level {
 		}
 		torches = [];
 		Game.CUR.clearEntities(true);
-		Game.CUR.hero.prevRoomDir = null;
+		Hero.prevRoomDir = null;
 		load(floor + 1);
 		loadEntities(roomIdX, roomIdY);
 		Game.CUR.hero.spawn();
+		Save.onNextRoom(floor, roomIdX, roomIdY, Hero.spawnX, Hero.spawnY, null);
+		Game.CUR.setCamPos(posX, posY);
 	}
 	public function nextRoom(dir:Const.DIR) {
 		ROOMID++;
@@ -465,7 +466,7 @@ class Level {
 			}
 		}
 	}
-	function setRoomId(idx:Int, idy:Int) {
+	public function setRoomId(idx:Int, idy:Int) {
 		roomIdX = idx;
 		roomIdY = idy;
 		posX = idx * (RWID - 1) * 16;

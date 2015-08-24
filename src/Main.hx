@@ -144,9 +144,11 @@ class Main {
 		Audio.init();
 		Achievements.init();
 		SceneManager.init();
-		new Game();
-		//new Menu();
+		/*Game.skipStory = true;
+		new Game();*/
+		new Menu();
 		stage.addEventListener(Event.ENTER_FRAME, update);
+		Save.init();
 	}
 	static function update(_) {
 		if(hasFocus) {

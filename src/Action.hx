@@ -9,14 +9,14 @@ class Action {
 	}
 	public static function exitFloor1() {
 		var h = Game.CUR.hero;
-		if(h.nbDeaths == h.nbDeathBeforFloor) {
+		if(h.nbDeaths == h.nbDeathBeforeFloor) {
 			Achievements.unlock("Phrygian warrior");
 		}
 		Game.CUR.nextFloor();
 	}
 	public static function exitFloor2() {
 		var h = Game.CUR.hero;
-		if(h.nbDeaths == h.nbDeathBeforFloor) {
+		if(h.nbDeaths == h.nbDeathBeforeFloor) {
 			Achievements.unlock("Icy hell");
 		}
 		Game.CUR.nextFloor();

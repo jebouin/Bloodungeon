@@ -16,11 +16,12 @@ class Hero extends Entity {
 	public static var spawnX : Float;
 	public static var spawnY : Float;
 	public var nbDeaths : Int;
-	public var nbDeathBeforFloor : Int;
+	public var nbDeathsBeforeRoom : Int;
+	public var nbDeathBeforeFloor : Int;
 	var deathCounter : Bitmap;
 	var targetFrame : Int;
 	var turnTimer : Int;
-	public var prevRoomDir : Const.DIR;
+	public static var prevRoomDir : Const.DIR;
 	var immune : Bool;
 	var fell : Bool;
 	public function new() {
@@ -35,12 +36,11 @@ class Hero extends Entity {
 		turnTimer = 1000;
 		gravity = 0;
 		setOrigin(.5, .6);
-		prevRoomDir = null;
 		shadow.scaleX *= .8;
 		shadow.scaleY *= .5;
 		shadow.alpha *= .4;
 		targetFrame = anim.getFrame();
-		nbDeaths = nbDeathBeforFloor = 0;
+		nbDeaths = nbDeathBeforeFloor = nbDeathsBeforeRoom = 0;
 		deathCounter = new Bitmap();
 		Game.CUR.frontlm.addChild(deathCounter, 0);
 		deathCounter.visible = false;
@@ -157,6 +157,8 @@ class Hero extends Entity {
 		dead = true;
 		locked = true;
 		nbDeaths++;
+		Stats.totalDeaths++;
+		Save.onDeath();
 		showDeaths();
 		if(zz >= 0) {
 			Fx.heroDeath(xx, yy, dx, dy);
@@ -211,7 +213,9 @@ class Hero extends Entity {
 	function goToNextRoom(dir:Const.DIR) {
 		prevRoomDir = dir;
 		vx = vy = 0;
+		nbDeathsBeforeRoom = nbDeaths;
 		Game.CUR.nextRoom(dir);
+		Save.onNextRoom(Game.CUR.level.floor, Game.CUR.level.roomIdX, Game.CUR.level.roomIdY, spawnX, spawnY, dir);
 	}
 	function updateLight() {
 		var level = Game.CUR.level;
