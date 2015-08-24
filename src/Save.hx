@@ -35,6 +35,7 @@ class Save {
 		so.data.yoloMode = Game.yoloMode;
 		so.data.nbFakeTileBroken = 0;
 		so.data.nbDeaths = 0;
+		so.data.isRush = false;
 		so.data.brokens = [false, false, false, false, false, false];
 		so.flush();
 		//trace("Started game with " + Game.skipStory + " " + Game.yoloMode);

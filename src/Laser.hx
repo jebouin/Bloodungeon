@@ -2,6 +2,7 @@ package ;
 import flash.display.BlendMode;
 import flash.display.Shape;
 class Laser extends Enemy {
+	static var nbLasers = 0;
 	var tx : Int;
 	var ty : Int;
 	var beam : Shape;
@@ -23,6 +24,15 @@ class Laser extends Enemy {
 		beam.blendMode = BlendMode.ADD;
 		addChild(beam);
 		update();
+		nbLasers++;
+		Audio.playSound("laser", true);
+	}
+	override public function delete() {
+		super.delete();
+		nbLasers--;
+		if(nbLasers == 0) {
+			Audio.stopSound("laser");
+		}
 	}
 	override public function update() {
 		super.update();
@@ -62,6 +72,10 @@ class Laser extends Enemy {
 	function updateBeam() {
 		length = getBeamLength();
 		renderBeam();
+		if(timer > 2 && timer & 3 == 0) {
+			var angle = (rotation - 90) * Math.PI / 180.;
+			Fx.laserParticle(Math.cos(angle) * length + xx, Math.sin(angle) * length + yy, angle, Game.CUR.level.floor);
+		}
 	}
 	function getBeamLength() {
 		var thwomps = [];

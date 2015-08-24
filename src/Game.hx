@@ -11,6 +11,7 @@ class Game extends Scene {
 	public static var skipStory : Bool;
 	public static var yoloMode : Bool;
 	public static var continueGame : Bool;
+	public static var canPause : Bool;
 	public var lm : LayerManager;
 	public var frontlm : LayerManager;
 	public var entities : Array<Entity>;
@@ -20,6 +21,7 @@ class Game extends Scene {
 	public var camX : Float;
 	public var camY : Float;
 	var locked : Bool;
+	public var respawnTimer : Int;
 	public function new() {
 		super();
 		CUR = this;
@@ -52,14 +54,24 @@ class Game extends Scene {
 		hero = new Hero();
 		entities.push(hero);
 		locked = false;
+		respawnTimer = 0;
+		if(Save.so.data.isRush) {
+			startRush();
+		}
+		canPause = true;
+		if(!skipStory) {
+			Story.start();
+		}
 	}
 	override public function delete() {
-		super.delete();
 		Save.onQuitGame();
+		Particle.deleteAll();
 		lm.delete();
 		frontlm.delete();
 		clearEntities();
 		CUR = null;
+		Audio.playMusic(5);
+		super.delete();
 	}
 	override public function update() {
 		super.update();
@@ -70,6 +82,7 @@ class Game extends Scene {
 			level.update();
 			var toDelete = [];
 			for(e in entities) {
+				//if(respawnTimer > 0 && e == hero) continue;
 				e.update();
 				if(e.deleted) {
 					toDelete.push(e);
@@ -87,6 +100,13 @@ class Game extends Scene {
 			pause();
 		}
 		Stats.gameTime++;
+		if(respawnTimer > 0) {
+			respawnTimer--;
+			if(respawnTimer == 0) {
+				respawn();
+			}
+		}
+		Story.update();
 	}
 	public function addEntity(e:Entity) {
 		entities.push(e);
@@ -141,13 +161,21 @@ class Game extends Scene {
 			e.locked = false;
 		}
 	}
-	public function onRespawn() {
+	public function onHeroDeath() {
+		respawnTimer = 60;
+	}
+	public function respawn() {
+		hero.spawn();
 		Enemy.fade = false;
 		level.reloadEntities();
 	}
 	public function nextFloor() {
 		level.nextFloor();
 		hero.nbDeathBeforeFloor = hero.nbDeaths;
+		Audio.playSound("warp");
+	}
+	public function startRush() {
+		Audio.playMusic(4);
 	}
 	public function onFocusOut() {
 		pause();
@@ -156,6 +184,8 @@ class Game extends Scene {
 		
 	}
 	function pause() {
-		var p = new Pause();
+		if(canPause) {
+			var p = new Pause();
+		}
 	}
 }

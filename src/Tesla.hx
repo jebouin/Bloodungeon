@@ -1,6 +1,8 @@
 package ;
+import com.xay.util.Util;
 import flash.display.BlendMode;
 import flash.display.Shape;
+import flash.filters.GlowFilter;
 import motion.Actuate;
 class Bolt extends Shape {
 	var x0 : Float;
@@ -25,6 +27,7 @@ class Bolt extends Shape {
 		blendMode = BlendMode.ADD;
 		render();
 		Actuate.tween(this, .4, {alpha: 0.});
+		filters = [new GlowFilter(0xFFFFFF, 1., 20, 20, 2, 1)];
 	}
 	function delete() {
 		deleted = true;
@@ -36,6 +39,7 @@ class Bolt extends Shape {
 				Game.CUR.hero.die(Game.CUR.hero.vx, Game.CUR.hero.vy);
 			}
 		}
+		render();
 		timer++;
 		if(timer >= 20) {
 			delete();
@@ -43,9 +47,16 @@ class Bolt extends Shape {
 	}
 	function render() {
 		var g = graphics;
+		var segl = 10;
+		var nseg = Std.int(length / segl);
 		g.clear();
-		g.lineStyle(2., 0xFFFFFFFF, .5);
+		g.lineStyle(1., 0xFFFFFFFF, .5);
 		g.moveTo(x0, y0);
+		var dx = (x1 - x0) / length;
+		var dy = (y1 - y0) / length;
+		for(i in 1...nseg+1) {
+			g.lineTo(x0 + dx * i * segl + dy * Util.randFloat(-4, 4), y0 + dy * i * segl + dx * Util.randFloat(-4, 4));
+		}
 		g.lineTo(x1, y1);
 		g.endFill();
 	}

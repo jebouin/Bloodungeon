@@ -33,7 +33,7 @@ class BitmapFont {
 		var nbWidChars = tl;
 		if(maxWidChars>0) {
 			nbWidChars = Std.int(Util.min(maxWidChars, tl));
-			wid = Std.int(nbWidChars*charWid+nbWidChars-1);
+			wid = Std.int(Util.min(wid, Std.int(nbWidChars*charWid+nbWidChars-1)));
 			hei = Math.ceil(tl/nbWidChars)*(charHei+1) - 1;
 		}
 		var destx = 0;

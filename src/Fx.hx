@@ -93,84 +93,82 @@ class Fx {
 		}
 		var angle = (d < .1 ? 0 : Math.atan2(-dy, -dx));
 		//head
-		for(i in 0...1) {
-			var p = Particle.create();
-			if(p == null) return;
-			SpriteLib.copyFramePixelsFromSliceToGraphics(p.graphics, "heroHead", 0);
-			p.xx = x;
-			p.yy = y;
-			p.zz = 8;
-			var spd = d < .1 ? 0 : Util.randFloat(6., 8.5);
-			var pa = angle + Util.randFloat(-.5, .5);
-			p.vx = Math.cos(pa) * spd;
-			p.vy = Math.sin(pa) * spd;
-			p.vz = Util.randFloat(7.5, 9.);
-			p.gravity = .8;
-			p.bounciness = .7;
-			p.friction = .06;
-			p.rotVel = Util.randFloat(20., 30.) * Util.randSign();
-			p.onBounce = function(p:Particle) {
-				var col = Game.CUR.level.getCollisionAt(p.xx, p.yy);
-				if(Game.CUR.level.entityCollidesFully(p.xx, p.yy, 4, HOLE)) {
-					p.onUpdate = null;
-					p.onDie = null;
-					p.bounciness = -1;
-					p.gravity = 0;
-					p.vz = 0;
-					Actuate.tween(p, .8, {scaleX: 0., scaleY: 0.}).onComplete(function() {
-						p.delete();
-					});
+		var p = Particle.create();
+		if(p == null) return;
+		SpriteLib.copyFramePixelsFromSliceToGraphics(p.graphics, "heroHead", 0);
+		p.xx = x;
+		p.yy = y;
+		p.zz = 8;
+		var spd = d < .1 ? 0 : Util.randFloat(6., 8.5);
+		var pa = angle + Util.randFloat(-.5, .5);
+		p.vx = Math.cos(pa) * spd;
+		p.vy = Math.sin(pa) * spd;
+		p.vz = Util.randFloat(7.5, 9.);
+		p.gravity = .8;
+		p.bounciness = .7;
+		p.friction = .06;
+		p.rotVel = Util.randFloat(20., 30.) * Util.randSign();
+		p.onBounce = function(p:Particle) {
+			var col = Game.CUR.level.getCollisionAt(p.xx, p.yy);
+			if(Game.CUR.level.entityCollidesFully(p.xx, p.yy, 4, HOLE)) {
+				p.onUpdate = null;
+				p.onDie = null;
+				p.bounciness = -1;
+				p.gravity = 0;
+				p.vz = 0;
+				Actuate.tween(p, .8, {scaleX: 0., scaleY: 0.}).onComplete(function() {
+					p.delete();
+				});
+			} else {
+				if(col == ICE) {
+					p.rotVel = 0;
+					if(p.bounciness > 0.) {
+						p.bounciness = 0;
+						p.vx *= 1.3;
+						p.vy *= 1.3;
+						p.friction = .03;
+					}
 				} else {
-					if(col == ICE) {
-						p.rotVel = 0;
-						if(p.bounciness > 0.) {
-							p.bounciness = 0;
-							p.vx *= 1.3;
-							p.vy *= 1.3;
-							p.friction = .03;
-						}
-					} else {
-						p.rotVel *= -.94;
-					}
-				}
-			};
-			p.onUpdate = function(p:Particle) {
-				particleCollision(p, 3);
-				if(p.timer < 50 && !Main.secondUpdate) {
-					for(i in 0...3) {
-						var blood = bloodParticle(false);
-						if(blood == null) return;
-						var headAngle = p.rotation * Math.PI / 180. - Math.PI * .5;
-						headAngle += Util.randFloat(-.4, .4);
-						var speed = Util.randFloat(3., 4.);
-						var ax = -Math.cos(headAngle);
-						var az = Math.sin(headAngle);
-						blood.xx = p.xx + ax * 5.;
-						blood.yy = p.yy;
-						blood.zz = p.zz + az * 8.;
-						blood.vx = ax * speed;
-						blood.vz = az * speed * 2.;
-						blood.vy = Math.sin(p.timer / 10.);
-						Game.CUR.lm.addChild(blood, Const.BACK_L);
-						blood.onUpdate = function(p:Particle) {
-							if(Game.CUR.level.getCollisionAt(blood.xx, blood.yy) == HOLE) {
-								blood.onDie = null;
-								blood.delete();
-							}
-						};
-					}
+					p.rotVel *= -.94;
 				}
 			}
-			p.onDie = function() {
-				p.drawToBD(Game.CUR.level.ground1Layer.bmp.bitmapData);
-			};
-			Timer.delay(function() {
-				if(Game.CUR != null) {
-					p.delete();
+		};
+		p.onUpdate = function(p:Particle) {
+			particleCollision(p, 3);
+			if(p.timer < 50 && !Main.secondUpdate) {
+				for(i in 0...3) {
+					var blood = bloodParticle(false);
+					if(blood == null) return;
+					var headAngle = p.rotation * Math.PI / 180. - Math.PI * .5;
+					headAngle += Util.randFloat(-.4, .4);
+					var speed = Util.randFloat(3., 4.);
+					var ax = -Math.cos(headAngle);
+					var az = Math.sin(headAngle);
+					blood.xx = p.xx + ax * 5.;
+					blood.yy = p.yy;
+					blood.zz = p.zz + az * 8.;
+					blood.vx = ax * speed;
+					blood.vz = az * speed * 2.;
+					blood.vy = Math.sin(p.timer / 10.);
+					Game.CUR.lm.addChild(blood, Const.BACK_L);
+					blood.onUpdate = function(p:Particle) {
+						if(Game.CUR.level.getCollisionAt(blood.xx, blood.yy) == HOLE) {
+							blood.onDie = null;
+							blood.delete();
+						}
+					};
 				}
-			}, 5000);
-			Game.CUR.lm.addChild(p, Const.BACKWALL_L);
+			}
 		}
+		p.onDie = function() {
+			p.drawToBD(Game.CUR.level.ground1Layer.bmp.bitmapData);
+		};
+		Timer.delay(function() {
+			if(Game.CUR != null) {
+				p.delete();
+			}
+		}, 5000);
+		Game.CUR.lm.addChild(p, Const.BACKWALL_L);
 	}
 	public static function bloodParticle(isDark:Bool, ?wid=2.5, ?hei=1.5, ?lifeTime=30) {
 		var p = Particle.create();
@@ -185,19 +183,6 @@ class Fx {
 		p.friction = .12;
 		return p;
 	}
-	/*public static function spark(x:Float, y:Float, dir:Const.DIR) {
-		var s = Particle.create();
-		s.drawRect(1, 1, 0xFFFF00);
-		s.xx = x;
-		s.yy = y;
-		s.lifeTime = 20;
-		s.gravity = .7;
-		s.vz = Util.randFloat(6., 8.);
-		s.vx = Util.randFloat(1., 2.);
-		if(dir == RIGHT) s.vx *= -1;
-		if(dir == UP || dir == DOWN) s.vx = 0.;
-		Game.CUR.lm.addChild(s, Const.BACK_L);
-	}*/
 	public static function doorOpened(tx:Int, ty:Int, wid:Int, hei:Int) {
 		for(j in ty...ty+hei) {
 			for(i in tx...tx+wid) {
@@ -215,9 +200,11 @@ class Fx {
 				}
 			}
 		}
+		screenShake(10, 10, .5, true);
 	}
 	public static function rocketSmoke(x:Float, y:Float) {
 		var p = Particle.create();
+		if(p == null) return;
 		p.xx = x + Util.randFloat(-2, 2);
 		p.yy = y + Util.randFloat(-2, 2);
 		p.drawCircle(4., 0xFFFFFF);
@@ -234,5 +221,30 @@ class Fx {
 				p.transformColor(t * .5, t * .5, t * .5, t);
 			}
 		}
+	}
+	public static function laserParticle(x:Float, y:Float, laserRot:Float, floor:Int) {
+		var p = Particle.create();
+		if(p == null) return;
+		p.xx = x;
+		p.yy = y;
+		if(floor == 2) {
+			var v = Std.random(100) + 100;
+			p.drawCircle(Util.randFloat(1.5, 3.), 0x0000CC + (v << 8) + (v << 16));
+		} else if(floor == 3) {
+			var v = Std.random(100) + 100;
+			p.drawCircle(Util.randFloat(1.5, 3.), v + (v << 8) + (v << 16));
+		}
+		var dir = -laserRot + Util.randFloat(-.5, .5);
+		var spd = Util.randFloat(0., 6.);
+		p.vx = -Math.cos(dir) * spd;
+		p.vy = Math.sin(dir) * spd;
+		p.vz = Util.randFloat(2., 5.5);
+		p.gravity = .3;
+		p.friction = .1;
+		p.lifeTime = 30;
+		p.onUpdate = function(p:Particle) {
+			p.scaleX = p.scaleY = 1. - p.timer / p.lifeTime;
+		}
+		Game.CUR.lm.addChild(p, Const.FRONT_L);
 	}
 }

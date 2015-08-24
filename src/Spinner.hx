@@ -72,7 +72,7 @@ class Spinner extends Enemy {
 	}
 	override public function collidesHero() {
 		var hero = Game.CUR.hero;
-		if(hero == null) return false;
+		if(hero == null || hero.fell) return false;
 		var dx = hero.xx - xx;
 		var dy = hero.yy - yy;
 		var r = 14 + size*16;

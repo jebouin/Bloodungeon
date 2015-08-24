@@ -1,11 +1,13 @@
 package ;
 import com.xay.util.Input;
 import com.xay.util.Util;
+import com.xay.util.XSprite;
 import flash.display.Bitmap;
 import flash.display.BlendMode;
 import flash.filters.DropShadowFilter;
 import flash.geom.Point;
 import flash.text.TextField;
+import haxe.format.JsonPrinter;
 import haxe.Timer;
 import motion.Actuate;
 import motion.easing.Bounce;
@@ -23,7 +25,8 @@ class Hero extends Entity {
 	var turnTimer : Int;
 	public static var prevRoomDir : Const.DIR;
 	var immune : Bool;
-	var fell : Bool;
+	public var fell : Bool;
+	var explosion : XSprite;
 	public function new() {
 		super("heroIdle");
 		anim.playing = false;
@@ -31,6 +34,9 @@ class Hero extends Entity {
 		maxSpeed = 2.3;
 		collides = true;
 		cradius = 4;
+		explosion = new XSprite("explosion", false);
+		explosion.anim.stop();
+		explosion.visible = false;
 		spawn();
 		hooverTimer = 0;
 		turnTimer = 1000;
@@ -48,15 +54,13 @@ class Hero extends Entity {
 		Game.CUR.frontlm.addChild(deathCounter, 0);
 		deathCounter.visible = false;
 		//immune = true;
-		Timer.delay(function() {
-			say("LOL", 600);
-		}, 200);
 	}
 	public function spawn() {
 		xx = spawnX;
 		yy = spawnY;
 		vx = vy = 0;
 		visible = shadow.visible = true;
+		explosion.visible = false;
 		locked = false;
 		dead = false;
 		fell = false;
@@ -72,43 +76,51 @@ class Hero extends Entity {
 		super.delete();
 	}
 	override function update() {
+		if(explosion.parent != null) {
+			explosion.update();
+		}
+		if(Game.CUR.respawnTimer > 0) {
+			return;
+		}
 		if(fell) return;
 		if(!locked) {
-			var curSpeed = onIce ? speed * .05 : speed;
-			if(Input.keyDown("left")) {
-				vx -= curSpeed;
-				targetFrame = 4;
-			}
-			if(Input.keyDown("right")) {
-				vx += curSpeed;
-				targetFrame = 0;
-			}
-			if(Input.keyDown("up")) {
-				vy -= curSpeed;
-				targetFrame = 6;
+			if(!Story.active) {
+				var curSpeed = onIce ? speed * .05 : speed;
 				if(Input.keyDown("left")) {
-					targetFrame--;
-				} else if(Input.keyDown("right")) {
-					targetFrame++;
+					vx -= curSpeed;
+					targetFrame = 4;
 				}
-			}
-			if(Input.keyDown("down")) {
-				vy += curSpeed;
-				targetFrame = 2;
-				if(Input.keyDown("left")) {
-					targetFrame++;
-				} else if(Input.keyDown("right")) {
-					targetFrame--;
+				if(Input.keyDown("right")) {
+					vx += curSpeed;
+					targetFrame = 0;
 				}
-			}
-			if(!Input.keyDown("left") && !Input.keyDown("right") && !Input.keyDown("down") && !Input.keyDown("up")) {
-				targetFrame = -1;
-			}
-			if(Input.keyDown("suicide") && !Input.oldKeyDown("suicide")) {
-				var prevImmune = immune;
-				immune = false;
-				die();
-				immune = prevImmune;
+				if(Input.keyDown("up")) {
+					vy -= curSpeed;
+					targetFrame = 6;
+					if(Input.keyDown("left")) {
+						targetFrame--;
+					} else if(Input.keyDown("right")) {
+						targetFrame++;
+					}
+				}
+				if(Input.keyDown("down")) {
+					vy += curSpeed;
+					targetFrame = 2;
+					if(Input.keyDown("left")) {
+						targetFrame++;
+					} else if(Input.keyDown("right")) {
+						targetFrame--;
+					}
+				}
+				if(!Input.keyDown("left") && !Input.keyDown("right") && !Input.keyDown("down") && !Input.keyDown("up")) {
+					targetFrame = -1;
+				}
+				if(Input.keyDown("suicide") && !Input.oldKeyDown("suicide")) {
+					var prevImmune = immune;
+					immune = false;
+					die();
+					immune = prevImmune;
+				}
 			}
 			super.update();
 			var level = Game.CUR.level;
@@ -164,12 +176,20 @@ class Hero extends Entity {
 		Save.onDeath();
 		showDeaths();
 		if(zz >= 0) {
+			Audio.playSound("explosion");
 			Fx.heroDeath(xx, yy, dx, dy);
+			explosion.visible = true;
+			explosion.setAnim("explosion", false);
+			explosion.anim.play();
+			explosion.x = xx - 5;
+			explosion.y = yy - 8;
+			Game.CUR.lm.addChild(explosion, Const.FRONT_L);
+			explosion.anim.onEnd = function() {
+				explosion.visible = false;
+				explosion.parent.removeChild(explosion);
+			}
 		}
-		Timer.delay(function() {
-			Game.CUR.onRespawn();
-			spawn();
-		}, 1000);
+		Game.CUR.onHeroDeath();
 	}
 	function showDeaths() {
 		if(deathCounter.bitmapData != null) {
@@ -243,6 +263,7 @@ class Hero extends Entity {
 	override public function fall() {
 		locked = true;
 		fell = true;
+		Audio.playSound("fall");
 		super.fall();
 	}
 }

@@ -1,8 +1,20 @@
 package ;
+import haxe.Timer;
 class Action {
+	public static function shake0() {
+		Fx.screenShake(1., 1., 1000000., true);
+		Timer.delay(function() {
+			Game.CUR.hero.say("wtf", 100);
+		}, 400);
+	}
+	public static function shake1() {
+		Fx.screenShake(2., 2., 1000000., true);
+		Timer.delay(function() {
+			Game.CUR.hero.say("!!!", 100);
+		}, 300);
+	}
 	public static function closeExit() {
-		Game.CUR.level.replaceLittleLights();
-		Game.CUR.level.removeExitLight();
+		Game.CUR.level.closeExit();
 	}
 	public static function exitFloor0() {
 		Game.CUR.nextFloor();
@@ -22,6 +34,6 @@ class Action {
 		Game.CUR.nextFloor();
 	}
 	public static function lastRush() {
-		Audio.playMusic(4);
+		Game.CUR.startRush();
 	}
 }

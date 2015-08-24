@@ -51,6 +51,9 @@ class Cannon extends Enemy {
 		timer++;
 		if(timer >= 40) {
 			timer = 0;
+			if(ALL.length > 0) {
+				Audio.playSound("cannon");
+			}
 			for(c in ALL) {
 				c.shoot();
 			}

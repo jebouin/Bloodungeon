@@ -54,5 +54,6 @@ class Button extends Entity {
 		if(onEnd != null) {
 			anim.onEnd = onEnd;
 		}
+		Audio.playSound("button");
 	}
 }

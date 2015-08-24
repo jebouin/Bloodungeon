@@ -59,10 +59,17 @@ class Pause extends Scene {
 		super.update();
 		if(Input.newKeyPress("up") && selected == 1) {
 			select(0);
+			Audio.playSound("moveCursor");
 		} else if(Input.newKeyPress("down") && selected == 0) {
 			select(1);
+			Audio.playSound("moveCursor");
+		}
+		if(Input.newKeyPress("escape")) {
+			select(0);
+			startPressed();
 		}
 		if(Input.newKeyPress("start")) {
+			Audio.playSound("select");
 			startPressed();
 		}
 	}

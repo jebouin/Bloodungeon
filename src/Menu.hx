@@ -121,6 +121,7 @@ class Menu extends Scene {
 				}
 				if(optionChanged) {
 					updateOptions();
+					Audio.playSound("moveCursor");
 				}
 				if(Input.newKeyPress("start")) {
 					startPressed();
@@ -128,9 +129,11 @@ class Menu extends Scene {
 			} else if(!isInDungeon) {
 				if(Input.newKeyPress("down") && selectedMode < 2) {
 					selectMode(selectedMode+1);
+					Audio.playSound("moveCursor");
 				}
 				if(Input.newKeyPress("up") && selectedMode > 0) {
 					selectMode(selectedMode-1);
+					Audio.playSound("moveCursor");
 				}
 				if(Input.newKeyPress("start")) {
 					startPressed();
@@ -140,6 +143,7 @@ class Menu extends Scene {
 				}
 			} else {
 				if(Input.newKeyPress("skip")) {
+					Audio.playSound("select");
 					startGameWithoutStory();
 				}
 			}
@@ -147,6 +151,7 @@ class Menu extends Scene {
 		back.update();
 	}
 	function startPressed() {
+		Audio.playSound("select");
 		if(isDown) {
 			if(selectedMode == 0) {
 				goInDungeon();
@@ -164,7 +169,7 @@ class Menu extends Scene {
 					trace("No save!");
 				} else {
 					Game.continueGame = true;
-					startGame();
+					startGame(true);
 				}
 			} else if(selectedOption == 2) {
 				hide();
@@ -267,6 +272,8 @@ class Menu extends Scene {
 	function goInDungeon(?yolo:Bool=false) {
 		if(!isDown) return;
 		if(isInDungeon) return;
+		Audio.stopMusics();
+		Audio.playSound("enter");
 		isInDungeon = true;
 		transition = true;
 		back.goInDungeon();
@@ -281,6 +288,7 @@ class Menu extends Scene {
 				Game.skipStory = Game.yoloMode = true;
 				startGame();
 			} else {
+				Audio.playSound("ask");
 				Game.skipStory = Game.yoloMode = false;
 				skipText.visible = true;
 				skipText.alpha = 1.;
@@ -306,7 +314,8 @@ class Menu extends Scene {
 		selectMode(0);
 		back.leaveDungeon();
 	}
-	function startGame() {
+	function startGame(?story=false) {
+		if(Game.CUR != null || (Game.skipStory && !story)) return;
 		if(startTimer != null) {
 			startTimer.stop();
 			startTimer = null;
@@ -322,7 +331,7 @@ class Menu extends Scene {
 		Game.skipStory = true;
 		skipText.visible = false;
 		Timer.delay(function() {
-			startGame();
+			startGame(true);
 		}, 950);
 		skippedText.visible = true;
 		for(i in 0...9) {

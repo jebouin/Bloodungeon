@@ -28,7 +28,7 @@
    eJzt2E0KgCAQhmEX1QnqRtE9ovvfoVwMSD9MmjoG7wOzSu0rSi3n6hsi23dFUgAAAAAQsXt0IXv11P53Y4UG5XisLznXozalzXzU8uEcNflrWa1DJOD7ELDn59I+qFQ53+cc61AprWRrJceTEvlyj1nqHv4lJ+KM1gEUT/nunh+Z90V/qs5d14a35ftOSgEAYKmV/xCyRmt5WskLALjaAWODA+Q=
   </data>
  </layer>
- <objectgroup name="active" width="43" height="56" visible="0">
+ <objectgroup name="active" width="43" height="56">
   <object type="Button" x="272" y="800" width="16" height="32">
    <properties>
     <property name="id" value="0"/>
@@ -67,6 +67,16 @@
   <object type="Action" x="560" y="80" width="16" height="16">
    <properties>
     <property name="function" value="exitFloor0"/>
+   </properties>
+  </object>
+  <object type="Action" x="96" y="432" width="48" height="16">
+   <properties>
+    <property name="function" value="shake0"/>
+   </properties>
+  </object>
+  <object type="Action" x="336" y="368" width="48" height="16">
+   <properties>
+    <property name="function" value="shake1"/>
    </properties>
   </object>
  </objectgroup>

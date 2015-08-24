@@ -41,6 +41,9 @@ class Bow extends Enemy {
 		for(b in ALL) {
 			b.shoot();
 		}
+		if(ALL.length > 0) {
+			Audio.playSound("bow");
+		}
 	}
 	public function reload() {
 		arrow = new Arrow(xx, yy, dir);

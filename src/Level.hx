@@ -19,6 +19,9 @@ import flash.filters.GlowFilter;
 import flash.geom.Point;
 import Collision;
 import motion.Actuate;
+import motion.easing.Cubic;
+import motion.easing.Linear;
+import motion.easing.Quad;
 @:file("res/floor0.tmx") class Floor0TMX extends ByteArray {}
 @:file("res/floor1.tmx") class Floor1TMX extends ByteArray {}
 @:file("res/floor2.tmx") class Floor2TMX extends ByteArray {}
@@ -241,21 +244,21 @@ class Level {
 				setRoomId(2, 5);
 				Hero.spawnX = 35 * 16 + 8;
 				Hero.spawnY = 51 * 16 + 8;
-				/*setRoomId(1, 1);
+				/*setRoomId(1, 2);
 				Hero.spawnX = 15 * 16 + 8;
-				Hero.spawnY = 11 * 16 + 8;*/
+				Hero.spawnY = 19 * 16 + 8;*/
 				/*setRoomId(0, 5);
 				Hero.spawnX = 2 * 16 + 8;
 				Hero.spawnY = 52 * 16 + 8;*/
 			case 2:
 				Game.CUR.cd.activate();
 				removeLighting();
-				setRoomId(2, 2);
+				/*setRoomId(2, 2);
 				Hero.spawnX = 34 * 16 + 8;
-				Hero.spawnY = 22 * 16 + 8;
-				/*setRoomId(6, 2);
-				Hero.spawnX = 85 * 16 + 8;
-				Hero.spawnY = 24 * 16 + 8;*/
+				Hero.spawnY = 22 * 16 + 8;*/
+				setRoomId(2, 1);
+				Hero.spawnX = 39 * 16 + 8;
+				Hero.spawnY = 15 * 16 + 8;
 			case 3:
 				Game.CUR.cd.activate();
 				removeLighting();
@@ -583,6 +586,10 @@ class Level {
 						Action.exitFloor2();
 					case "lastRush":
 						Action.lastRush();
+					case "shake0":
+						Action.shake0();
+					case "shake1":
+						Action.shake1();
 					default:
 						trace("Unknown action");
 				}
@@ -631,13 +638,13 @@ class Level {
 		Actuate.tween(light, 2., {scaleX:1., scaleY:1.});
 		Actuate.tween(light2, 2., {scaleX:1., scaleY:1.});
 	}
-	public function replaceLittleLights() {
+	public function replaceLittleLights(s:Float) {
 		light.graphics.clear();
 		light2.graphics.clear();
 		light.graphics.beginFill(0xFFFFFF);
 		light2.graphics.beginFill(0xFFFFFF);
-		light.graphics.drawCircle(0, 0, 40);
-		light2.graphics.drawCircle(0, 0, 30);
+		light.graphics.drawCircle(0, 0, s);
+		light2.graphics.drawCircle(0, 0, s * .75);
 		light.graphics.endFill();
 		light2.graphics.endFill();
 		light.alpha = .2;
@@ -661,5 +668,17 @@ class Level {
 	}
 	public function fakeTileWasRemoved(id:Int) {
 		fakeTileRemoved[id] = true;
+	}
+	public function closeExit() {
+		if(floor != 0) return;
+		Fx.screenShake(50, 50, 3., true);
+		removeExitLight();
+		for(i in 0...4) {
+			setCollision(42, 30 + i, FULL);
+		}
+		var s = {v:0};
+		Actuate.tween(s, .8, {v:40}).onUpdate(function() {
+			replaceLittleLights(s.v);
+		}).ease(Cubic.easeOut);
 	}
 }

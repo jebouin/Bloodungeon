@@ -51,7 +51,6 @@ class Particle extends Shape {
 	public static function deleteAll() {
 		for(p in ALL) {
 			p.onDie = null;
-			p.onUpdate = null;
 			p.delete();
 		}
 	}
@@ -88,6 +87,7 @@ class Particle extends Shape {
 		reset();
 	}
 	public function update() {
+		if(deleted) return;
 		if(onUpdate != null) {
 			onUpdate(this);
 		}

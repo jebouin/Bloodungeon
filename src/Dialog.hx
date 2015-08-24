@@ -1,4 +1,5 @@
 package ;
+import com.xay.util.Input;
 import flash.display.Bitmap;
 import flash.display.Shape;
 import flash.display.Sprite;
@@ -24,8 +25,10 @@ class Dialog extends Sprite {
 		return d;
 	}
 	public static function updateAll() {
+		var n = 0;
 		for(d in ALL) {
 			if(!d.deleted) {
+				n++;
 				d.update();
 			}
 		}
@@ -51,21 +54,29 @@ class Dialog extends Sprite {
 	}
 	function reset() {
 		entity = null;
-		deleted = true;
 		relX = 0;
 		relY = -20;
+		alpha = 1.;
+		visible = true;
 	}
 	public function update() {
 		x = Std.int(entity.xx + relX);
 		y = Std.int(entity.yy + relY);
+		if(timer < -2) {
+			if(Input.newKeyPress("start")) {
+				timer = 20;
+			}
+		} else if(timer >= 0) {
+			if(timer < 20) {
+				alpha = timer / 20;
+				relY -= 1;
+			}
+			if(timer == 0) {
+				delete();
+				return;
+			}
+		}
 		timer--;
-		if(timer < 20) {
-			alpha = timer / 20;
-			relY -= 1;
-		}
-		if(timer == 0) {
-			delete();
-		}
 	}
 	public function init(e:Entity, str:String, time:Int) {
 		entity = e;
@@ -73,7 +84,7 @@ class Dialog extends Sprite {
 		if(bitmap.bitmapData != null) {
 			bitmap.bitmapData.dispose();
 		}
-		bitmap.bitmapData = Main.font.getText(str);
+		bitmap.bitmapData = Main.font.getText(str, 17, true);
 		bitmap.x = Std.int(-bitmap.width * .5);
 		bitmap.y = Std.int(-bitmap.height * .5);
 		this.timer = time;
@@ -82,5 +93,6 @@ class Dialog extends Sprite {
 		back.scrollRect = new Rectangle(0, 0, bw, bh);
 		back.x = Std.int(-bw * .5);
 		back.y = Std.int(-bh * .5);
+		update();
 	}
 }

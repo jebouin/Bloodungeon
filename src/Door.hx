@@ -1,5 +1,6 @@
 package ;
 import com.xay.util.SpriteLib;
+import com.xay.util.Util;
 import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.filters.DropShadowFilter;
@@ -11,6 +12,8 @@ class Door extends Entity {
 	public static var ALL = [];
 	public var horizontal : Bool;
 	public var id : Int;
+	var openTimer : Int;
+	var opened : Bool;
 	var level : Level;
 	var tx : Int;
 	var ty : Int;
@@ -48,6 +51,8 @@ class Door extends Entity {
 		ALL.push(this);
 		filters = [new DropShadowFilter(1., 45, 0xFF000000, .5, 3., 3., 1., 1, false), 
 				   new DropShadowFilter(1., 135, 0xFF000000, .5, 3., 3., 1., 1, false)];
+		opened = false;
+		openTimer = 0;
 	}
 	override public function delete() {
 		super.delete();
@@ -59,7 +64,27 @@ class Door extends Entity {
 		}
 		ALL.remove(this);
 	}
-	public function open() {
+	override public function update() {
+		super.update();
+		if(opened || openTimer <= 0) {
+			return;
+		}
+		openTimer--;
+		var ox = Util.randFloat(-2, 2);
+		var oy = Util.randFloat(-2, 2);
+		xx = tx * 16 + ox;
+		yy = ty * 16 + 16 + oy;
+		top.x = xx + ox*.5;
+		top.y = yy - bmp.height + oy*.5;
+		if(openTimer == 0) {
+			goDown();
+		}
+	}
+	public function goDown() {
+		xx = tx * 16;
+		yy = ty * 16 + 16;
+		top.x = xx;
+		top.y = yy - bmp.height;
 		setCollision(NONE);
 		bmp.scrollRect = new Rectangle(0, 0, width, 13);
 		bmp.y += 12;
@@ -68,6 +93,10 @@ class Door extends Entity {
 		top.bitmapData.dispose();
 		top = null;
 		Fx.doorOpened(tx, ty, wid, hei);
+	}
+	public function open() {
+		Audio.playSound("door");
+		openTimer = 43;
 	}
 	function setCollision(type:Collision.TILE_COLLISION_TYPE) {
 		if(horizontal) {

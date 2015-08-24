@@ -45,8 +45,9 @@ class Spike extends Enemy {
 		if(dir == null) {
 			if(!out) {
 				if(isOnTop(hero)) {
+					out = true;
 					Timer.delay(function() {
-						out = true;
+						Audio.playSound("spike");
 						setAnim("spikeOut", false);
 						anim.play();
 						anim.onEnd = function() {
@@ -62,6 +63,7 @@ class Spike extends Enemy {
 		} else {
 			if(!out) {
 				if(hits(hero)) {
+					Audio.playSound("spike");
 					goOut(null);
 					killHero(hero);
 				}

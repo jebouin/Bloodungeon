@@ -108,6 +108,8 @@ class Main {
 		SpriteLib.addAnim("launcherShoot", "launcher", "0-3", 5);
 		SpriteLib.sliceBD("enemies", "rocket", 227, 252, 19, 16, 1, 1);
 		SpriteLib.addAnim("rocket", "rocket", "0", 60);
+		SpriteLib.sliceBD("enemies", "explosion", 63, 466, 32, 32, 5, 1);
+		SpriteLib.addAnim("explosion", "explosion", "0-4", 1);
 		
 		SpriteLib.addAnim("spikeRightIdle", "sideSpike", "2,3,4,3", 10);
 		SpriteLib.addAnim("spikeLeftIdle", "sideSpike", "7,8,9,8", 10);
@@ -144,11 +146,16 @@ class Main {
 		Audio.init();
 		Achievements.init();
 		SceneManager.init();
-		/*Game.skipStory = true;
-		new Game();*/
-		new Menu();
-		stage.addEventListener(Event.ENTER_FRAME, update);
 		Save.init();
+		Story.init();
+		
+		Game.skipStory = false;
+		Game.continueGame = false;
+		Game.yoloMode = false;
+		new Game();
+		
+		//new Menu();
+		stage.addEventListener(Event.ENTER_FRAME, update);
 	}
 	static function update(_) {
 		if(hasFocus) {

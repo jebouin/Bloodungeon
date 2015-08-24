@@ -133,12 +133,14 @@ class AchievementMenu extends Scene {
 				if(selected >= boxes.length) {
 					delayExit();
 				}
+				Audio.playSound("moveAch");
 			}
 			if(Input.newKeyPress("up")) {
 				select(selected - 1);
 				if(selected < 0) {
 					delayExit();
 				}
+				Audio.playSound("moveAch");
 			}
 			if(Input.newKeyPress("escape")) {
 				delayExit();
