@@ -241,12 +241,12 @@ class Level {
 			case 1:
 				Game.CUR.cd.activate();
 				removeLighting();
-				setRoomId(2, 5);
+				/*setRoomId(2, 5);
 				Hero.spawnX = 35 * 16 + 8;
-				Hero.spawnY = 51 * 16 + 8;
-				/*setRoomId(1, 2);
+				Hero.spawnY = 51 * 16 + 8;*/
+				setRoomId(1, 2);
 				Hero.spawnX = 15 * 16 + 8;
-				Hero.spawnY = 19 * 16 + 8;*/
+				Hero.spawnY = 19 * 16 + 8;
 				/*setRoomId(0, 5);
 				Hero.spawnX = 2 * 16 + 8;
 				Hero.spawnY = 52 * 16 + 8;*/

@@ -140,7 +140,7 @@ class Main {
 		var stats = new Stats();
 		stats.x = stage.stageWidth - Stats.XPOS;
 		stats.y = stage.stageHeight - 100;
-		stage.addChild(stats);
+		//stage.addChild(stats);
 		initGFX();
 		initInput();
 		Audio.init();
@@ -149,12 +149,12 @@ class Main {
 		Save.init();
 		Story.init();
 		
-		Game.skipStory = false;
+		/*Game.skipStory = true;
 		Game.continueGame = false;
 		Game.yoloMode = false;
-		new Game();
+		new Game();*/
 		
-		//new Menu();
+		new Menu();
 		stage.addEventListener(Event.ENTER_FRAME, update);
 	}
 	static function update(_) {

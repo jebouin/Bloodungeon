@@ -4,6 +4,7 @@ import com.xay.util.LayerManager;
 import com.xay.util.SceneManager;
 import com.xay.util.SceneManager.Scene;
 import flash.display.Bitmap;
+import flash.display.BitmapData;
 import flash.display.CapsStyle;
 import flash.display.JointStyle;
 import flash.display.LineScaleMode;
@@ -68,8 +69,8 @@ class AchievementMenu extends Scene {
 			b.graphics.lineStyle(1., a.unlocked ? 0xFFFFFF : 0x808080);
 			b.graphics.moveTo(title.x, title.y + title.height + 1);
 			b.graphics.lineTo(title.x + title.width, title.y + title.height + 1);
-			var desc = new Bitmap(Main.font.getText(hidden ? "???" : a.description, 25, true));
-			desc.x = hidden ? -desc.width * .5 : -BOXWID * .5 + 10;
+			var desc = new Bitmap(Main.font.getText(hidden ? "???" : a.description, 20, true));
+			desc.x = hidden ? -desc.width * .5 : -BOXWID * .5 + 40;
 			desc.y = -BOXHEI * .5 + 26;
 			if(a.unlocked) {
 				desc.transform.colorTransform = new ColorTransform(.3, .6, .75);
@@ -89,6 +90,10 @@ class AchievementMenu extends Scene {
 				check.rotation = 45;
 				b.addChild(check);
 			}
+			var icon = new Bitmap(Achievements.icons[a.unlocked ? i+1 : 0]);
+			icon.x = -BOXWID * .5 + 1;
+			icon.y = b.height * .5 - 33;
+			b.addChild(icon);
 		}
 		exiting = false;
 		select(0);

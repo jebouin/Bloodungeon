@@ -32,6 +32,7 @@ class Story {
 		active = false;
 	}
 	public static function update() {
+		if(!active) return;
 		if(state >= actions.length) {
 			if(!Game.canPause) {
 				Game.canPause = true;

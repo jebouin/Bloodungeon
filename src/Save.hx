@@ -4,7 +4,7 @@ class Save {
 	public static var so : SharedObject;
 	public static function init() {
 		so = SharedObject.getLocal("save");
-		//so.clear();
+		so.clear();
 		if(!so.data.hasOwnProperty("totalDeaths")) {
 			so.data.totalDeaths = 0;
 			so.data.gameTime = 0;
