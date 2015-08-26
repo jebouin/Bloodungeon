@@ -81,6 +81,7 @@ class Achievements {
 			text.y = Const.HEI - 16 - text.height * .5;
 			Main.renderer.addChild(text);
 			var icon = new Bitmap(icons[a.id+1]);
+			icon.filters = [new GlowFilter(0x0, 1., 6., 6., 2., 1)];
 			icon.x = Const.WID;
 			icon.y = Const.HEI - 32;
 			Main.renderer.addChild(icon);
@@ -93,6 +94,14 @@ class Achievements {
 					text.parent.removeChild(text);
 				});
 			}, 5000);
+			for(i in 0...3) {
+				Timer.delay(function() {
+					text.visible = icon.visible = false;
+				}, i*500 + 250);
+				Timer.delay(function() {
+					text.visible = icon.visible = true;
+				}, i*500 + 500);
+			}
 		}
 	}
 	public static function unlockId(id:Int, ?isGameLoading=false) {

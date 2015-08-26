@@ -59,8 +59,9 @@ class Game extends Scene {
 			startRush();
 		}
 		canPause = true;
-		if(!skipStory) {
+		if(!skipStory && !continueGame) {
 			Story.start();
+			Action.onFloor0();
 		}
 	}
 	override public function delete() {
@@ -161,6 +162,16 @@ class Game extends Scene {
 			e.locked = false;
 		}
 	}
+	public function onExitFloor0() {
+		var s = new VoiceScene();
+		lm.getContainer().parent.removeChild(lm.getContainer());
+		frontlm.getContainer().parent.removeChild(frontlm.getContainer());
+		s.onDelete = function() {
+			Main.renderer.addChild(lm.getContainer());
+			Main.renderer.addChild(frontlm.getContainer());
+			nextFloor();
+		}
+	}
 	public function onHeroDeath() {
 		respawnTimer = 60;
 	}
@@ -172,7 +183,6 @@ class Game extends Scene {
 	public function nextFloor() {
 		level.nextFloor();
 		hero.nbDeathBeforeFloor = hero.nbDeaths;
-		Audio.playSound("warp");
 	}
 	public function startRush() {
 		Audio.playMusic(4);

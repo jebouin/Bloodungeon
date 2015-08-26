@@ -15,6 +15,7 @@ import flash.events.FocusEvent;
 import flash.events.MouseEvent;
 import flash.filters.DropShadowFilter;
 import flash.Lib;
+import flash.text.Font;
 import flash.ui.Mouse;
 import motion.Actuate;
 import motion.easing.Cubic;
@@ -23,9 +24,11 @@ import net.hires.debug.Stats;
 @:bitmap("res/hero.png") class HeroBD extends BitmapData {}
 @:bitmap("res/enemies.png") class EnemiesBD extends BitmapData {}
 @:bitmap("res/fontTiny.png") class FontTinyBD extends BitmapData {}
+@:font("res/XLMONO.TTF") class XLMonoFont extends Font {}
 class Main {
 	public static var renderer : Renderer;
 	public static var font : BitmapFont;
+	public static var xlmonoFont : Font;
 	public static var is60FPS : Bool;
 	public static var secondUpdate : Bool;
 	public static var hasFocus = true;
@@ -110,6 +113,9 @@ class Main {
 		SpriteLib.addAnim("rocket", "rocket", "0", 60);
 		SpriteLib.sliceBD("enemies", "explosion", 63, 466, 32, 32, 5, 1);
 		SpriteLib.addAnim("explosion", "explosion", "0-4", 1);
+		SpriteLib.sliceBD("enemies", "rock0", 94, 287, 16, 13, 1, 1);
+		SpriteLib.sliceBD("enemies", "rock1", 111, 287, 13, 13, 1, 1);
+		SpriteLib.sliceBD("enemies", "rock2", 125, 286, 16, 14, 1, 1);
 		
 		SpriteLib.addAnim("spikeRightIdle", "sideSpike", "2,3,4,3", 10);
 		SpriteLib.addAnim("spikeLeftIdle", "sideSpike", "7,8,9,8", 10);
@@ -129,6 +135,7 @@ class Main {
 		SpriteLib.addAnim("spikeUpLeftOut", "frontSpike", "5-8", 5);
 		SpriteLib.addAnim("spikeUpRightOut", "frontSpike", "10-13", 5);
 		font = new BitmapFont(new FontTinyBD(0, 0), 5, 5);
+		xlmonoFont = new XLMonoFont();
 	}
 	static function main() {
 		var stage = Lib.current.stage;
@@ -148,13 +155,16 @@ class Main {
 		SceneManager.init();
 		Save.init();
 		Story.init();
+		Fx.init();
+		Action.init();
 		
-		/*Game.skipStory = true;
+		Game.skipStory = true;
 		Game.continueGame = false;
 		Game.yoloMode = false;
-		new Game();*/
+		new Game();
 		
-		new Menu();
+		//new Menu();
+		//new VoiceScene();
 		stage.addEventListener(Event.ENTER_FRAME, update);
 	}
 	static function update(_) {
@@ -198,7 +208,7 @@ class Main {
 		}
 	}
 	static function onFocusOut(_) {
-		if(!hasFocus) return;
+		if(!hasFocus || VoiceScene.CUR != null) return;
 		hasFocus = false;
 		Audio.onFocusOut();
 		if(Game.CUR != null) {
@@ -213,5 +223,8 @@ class Main {
 		if(Game.CUR != null) {
 			Game.CUR.onFocusIn();
 		}
+	}
+	public static function glitch() {
+		renderer.glitch();
 	}
 }

@@ -57,9 +57,14 @@ class Level {
 	var activeGroup : TiledGroup;
 	var map : TiledMap;
 	var actionRects : Array<{x:Int, y:Int, wid:Int, hei:Int, f:String}>;
+	public var warp : Warp;
+	var warpRX : Int;
+	var warpRY : Int;
 	public function new(levelId:Int) {
 		RWID = Std.int(Const.WID / 16);
 		RHEI = Std.int(Const.HEI / 16);
+		warp = new Warp();
+		Game.CUR.lm.addChild(warp, Const.BACKWALL_L);
 		renderLighting();
 		load(levelId);
 	}
@@ -69,6 +74,22 @@ class Level {
 		Torch.updateAll();
 		Cannon.updateAll();
 		Launcher.updateAll();
+		warp.update();
+		if(floor == 0 && roomIdX == 2 && roomIdY == 0) {
+			var xa = [32, 31, 32, 35, 38, 39, 38];
+			var ya = [7, 5, 3, 2, 3, 5, 7];
+			for(i in 0...7) {
+				if(Std.random(20) == 0) {
+					new Tesla.Bolt(xa[i]*16+8, ya[i]*16+5, 35*16+8, 5*16+8);
+				}
+				if(Std.random(100) == 0) {
+					var j = Std.random(7);
+					if(j != i) {
+						new Tesla.Bolt(xa[i]*16+8, ya[i]*16+8, xa[j]*16+8, ya[j]*16+8);
+					}
+				}
+			}
+		}
 	}
 	public function load(floor:Int) {
 		Audio.playMusic(floor);
@@ -232,33 +253,42 @@ class Level {
 		switch(floor) {
 			case 0:
 				/*setRoomId(2, 3);
-				Hero.spawnX = 31 * 16 + 8;
+				Hero.spawnX = 29 * 16 + 8;
 				Hero.spawnY = 34 * 16 + 8;*/
+				/*setRoomId(0, 3);
+				Hero.spawnX = 6 * 16 + 8;
+				Hero.spawnY = 30 * 16 + 8;*/
 				setRoomId(1, 5);
 				Hero.spawnX = 21 * 16 + 8;
 				Hero.spawnY = 52 * 16 + 8;
 				addLighting();
+				warpRX = warpRY = -42;
 			case 1:
+				Action.onFloor1();
 				Game.CUR.cd.activate();
 				removeLighting();
 				/*setRoomId(2, 5);
 				Hero.spawnX = 35 * 16 + 8;
 				Hero.spawnY = 51 * 16 + 8;*/
-				setRoomId(1, 2);
+				/*setRoomId(1, 2);
 				Hero.spawnX = 15 * 16 + 8;
-				Hero.spawnY = 19 * 16 + 8;
-				/*setRoomId(0, 5);
-				Hero.spawnX = 2 * 16 + 8;
-				Hero.spawnY = 52 * 16 + 8;*/
+				Hero.spawnY = 19 * 16 + 8;*/
+				setRoomId(1, 0);
+				Hero.spawnX = 15 * 16 + 8;
+				Hero.spawnY = 2 * 16 + 8;
+				warpRX = 0;
+				warpRY = 0;
 			case 2:
 				Game.CUR.cd.activate();
 				removeLighting();
-				/*setRoomId(2, 2);
+				setRoomId(2, 2);
 				Hero.spawnX = 34 * 16 + 8;
-				Hero.spawnY = 22 * 16 + 8;*/
-				setRoomId(2, 1);
+				Hero.spawnY = 22 * 16 + 8;
+				/*setRoomId(2, 1);
 				Hero.spawnX = 39 * 16 + 8;
-				Hero.spawnY = 15 * 16 + 8;
+				Hero.spawnY = 15 * 16 + 8;*/
+				warpRX = 1;
+				warpRY = 3;
 			case 3:
 				Game.CUR.cd.activate();
 				removeLighting();
@@ -280,7 +310,9 @@ class Level {
 				/*setRoomId(5, 3);
 				Hero.spawnX = 82 * 16 + 8;
 				Hero.spawnY = 35 * 16 + 8;*/
+				warpRX = warpRY = -42;
 		}
+		warp.visible = false;
 		var bd = ground0Layer.bmp.bitmapData;
 		for(j in 0...HEI) {
 			for(i in 0...WID) {
@@ -372,6 +404,12 @@ class Level {
 					case "Action":
 						var f = o.properties.get("function");
 						actionRects.push({x:tx, y:ty, wid:twid, hei:thei, f:f});
+						if(f.substr(0, 9) == "exitFloor") {
+							warp.x = x + wid * .5;
+							warp.y = y + hei * .5;
+							Hero.warpX = warp.x;
+							Hero.warpY = warp.y;
+						}
 					case "FakeTile":
 						var secretId = Std.parseInt(o.properties.get("secretId"));
 						if(fakeTileRemoved[secretId]) {
@@ -458,6 +496,9 @@ class Level {
 				Game.CUR.entities.remove(e);
 			}
 		});
+		if(roomIdX == warpRX && roomIdY == warpRY) {
+			warp.visible = true;
+		}
 		return true;
 	}
 	public function closeRoom(idx:Int, idy:Int, dir:Const.DIR) {
@@ -590,6 +631,8 @@ class Level {
 						Action.shake0();
 					case "shake1":
 						Action.shake1();
+					case "talkExit":
+						Action.talkExit();
 					default:
 						trace("Unknown action");
 				}

@@ -17,6 +17,8 @@ class Hero extends Entity {
 	public var hooverTimer : Int;
 	public static var spawnX : Float;
 	public static var spawnY : Float;
+	public static var warpX : Float;
+	public static var warpY : Float;
 	public var nbDeaths : Int;
 	public var nbDeathsBeforeRoom : Int;
 	public var nbDeathBeforeFloor : Int;
@@ -27,6 +29,8 @@ class Hero extends Entity {
 	var immune : Bool;
 	public var fell : Bool;
 	var explosion : XSprite;
+	var warping : Bool;
+	var warpTimer : Int;
 	public function new() {
 		super("heroIdle");
 		anim.playing = false;
@@ -68,8 +72,11 @@ class Hero extends Entity {
 		parent.removeChild(this);
 		Game.CUR.lm.addChild(this, Const.HERO_L);
 		setLightPos(xx, yy);
-		update();
 		Game.CUR.cd.reset();
+		warping = false;
+		warpTimer = 0;
+		zz = 0;
+		update();
 		//set dir
 	}
 	override function delete() {
@@ -83,7 +90,35 @@ class Hero extends Entity {
 			return;
 		}
 		if(fell) return;
-		if(!locked) {
+		if(warping) {
+			warpTimer++;
+			var frame = anim.getFrame();
+			var t = warpTimer;
+			if(warpTimer < 100) {
+				if(warpTimer & 7 == 0) {
+					frame++;
+				}
+				zz += .05;
+			} else if(warpTimer < 150) {
+				if(warpTimer & 3 == 0) {
+					frame++;
+				}
+				zz += .1;
+			} else if(warpTimer < 248) {
+				frame++;
+				zz += .42;
+			} else if(warpTimer == 248) {
+				visible = shadow.visible = false;
+				Fx.beam(xx, yy);
+				Game.CUR.level.warp.deactivate();
+			}
+			if(frame == 8) frame = 0;
+			anim.setFrame(frame);
+			xx += (warpX - xx) * .1;
+			yy += (warpY - yy) * .1;
+			super.update();
+			updateShadow();
+		} else if(!locked) {
 			if(!Story.active) {
 				var curSpeed = onIce ? speed * .05 : speed;
 				if(Input.keyDown("left")) {
@@ -162,7 +197,7 @@ class Hero extends Entity {
 				if(frame >= 8) frame -= 8;
 				anim.setFrame(frame);
 			}
-			shadow.rotation = frame * 45;
+			updateShadow();
 		}
 		updateLight();
 	}
@@ -254,6 +289,9 @@ class Hero extends Entity {
 			level.light2.scaleX = level.light2.scaleY = 1. + .05 * Math.sin(hooverTimer * .1 + .6 + .4);
 		}
 	}
+	function updateShadow() {
+		shadow.rotation = anim.getFrame() * 45;
+	}
 	public function setLightPos(lx:Float, ly:Float) {
 		var light = Game.CUR.level.light;
 		var light2 = Game.CUR.level.light2;
@@ -265,5 +303,8 @@ class Hero extends Entity {
 		fell = true;
 		Audio.playSound("fall");
 		super.fall();
+	}
+	public function warp() {
+		warping = true;
 	}
 }

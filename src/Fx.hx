@@ -3,6 +3,7 @@ import com.xay.util.SpriteLib;
 import com.xay.util.Util;
 import flash.display.BlendMode;
 import flash.display.ColorCorrection;
+import flash.display.Shape;
 import flash.filters.BlurFilter;
 import flash.filters.GlowFilter;
 import flash.geom.ColorTransform;
@@ -11,10 +12,21 @@ import flash.Lib;
 import haxe.Timer;
 import motion.Actuate;
 import motion.easing.Elastic;
+import motion.easing.Expo;
 import motion.easing.Linear;
 class Fx {
 	public static var sx = 0.;
 	public static var sy = 0.;
+	public static var flashShape : Shape;
+	public static var flashCT : ColorTransform;
+	public static function init() {
+		flashShape = new Shape();
+		flashShape.graphics.beginFill(0xFFFFFF);
+		flashShape.graphics.drawRect(0, 0, Const.WID, Const.HEI);
+		flashShape.graphics.endFill();
+		flashShape.blendMode = BlendMode.ADD;
+		flashCT = new ColorTransform();
+	}
 	public static function update() {
 		Particle.updateAll();
 	}
@@ -36,6 +48,25 @@ class Fx {
 	}
 	public static function stopScreenShake() {
 		Actuate.stop(Fx, "sx, sy");
+	}
+	public static function flash(r:Float, g:Float, b:Float, t:Float, intensity:Float, ?long=false) {
+		flashCT.redMultiplier = r;
+		flashCT.greenMultiplier = g;
+		flashCT.blueMultiplier = b;
+		flashCT.alphaMultiplier = 1.;
+		flashShape.transform.colorTransform = flashCT;
+		flashShape.alpha = intensity;
+		flashShape.visible = true;
+		Game.CUR.frontlm.addChild(flashShape, 10);
+		if(long) {
+			Actuate.tween(flashShape, t, {alpha: 0.}).onComplete(function() {
+				flashShape.parent.removeChild(flashShape);
+			}).ease(Expo.easeIn);
+		} else {
+			Actuate.tween(flashShape, t, {alpha: 0.}).onComplete(function() {
+				flashShape.parent.removeChild(flashShape);
+			});
+		}
 	}
 	static function particleCollision(p:Particle, radius:Float) {
 		function collides(x:Float, y:Float) {
@@ -80,6 +111,7 @@ class Fx {
 		}
 	}
 	public static function heroDeath(x:Float, y:Float, dx:Float, dy:Float) {
+		flash(1., 0., 0., .5, .3);
 		var d = Math.sqrt(dx*dx + dy*dy);
 		if(d < .1) {
 			screenShake(0, 8, .5, true);
@@ -246,5 +278,23 @@ class Fx {
 			p.scaleX = p.scaleY = 1. - p.timer / p.lifeTime;
 		}
 		Game.CUR.lm.addChild(p, Const.FRONT_L);
+	}
+	public static function beam(x:Float, y:Float) {
+		flash(1., 1., 1., .4, 1.);
+		var s = new Shape();
+		var g = s.graphics;
+		var h = 50;
+		var w = 6;
+		g.beginFill(0xFFFFFF, 1.);
+		g.drawRect(-w*.5, -h, w, h);
+		g.endFill();
+		s.filters = [new GlowFilter(0xFFFFFF, .5, 30., 30., 8., 1)];
+		Game.CUR.lm.addChild(s, Const.FRONT_L);
+		s.x = x;
+		s.y = y + 24;
+		Fx.screenShake(0., -30., 1.4);
+		Actuate.tween(s, .4, {scaleX:0., scaleY:3.}).onComplete(function() {
+			s.parent.removeChild(s);
+		});
 	}
 }

@@ -113,10 +113,12 @@ class Menu extends Scene {
 				var optionChanged = false;
 				if(Input.newKeyPress("down") && selectedOption < texts.length - 1) {
 					selectedOption++;
+					if(!Save.so.data.hasSave && selectedOption == 1) selectedOption++;
 					optionChanged = true;
 				}
 				if(Input.newKeyPress("up") && selectedOption > 0) {
 					selectedOption--;
+					if(!Save.so.data.hasSave && selectedOption == 1) selectedOption--;
 					optionChanged = true;
 				}
 				if(optionChanged) {
@@ -181,13 +183,13 @@ class Menu extends Scene {
 		}
 	}
 	function updateOptions() {
-		for(t in texts) {
-			t.alpha = .5;
-		}
 		for(i in 0...texts.length) {
+			var t = texts[i];
+			t.alpha = .5;
 			if(i == selectedOption) {
-				var t = texts[i];
 				t.alpha = 1.;
+			} else if(i == 1 && !Save.so.data.hasSave) {
+				t.alpha = .2;
 			}
 		}
 	}
@@ -268,6 +270,7 @@ class Menu extends Scene {
 	function resume() {
 		leaveDungeon();
 		lm.getContainer().visible = true;
+		updateOptions();
 	}
 	function goInDungeon(?yolo:Bool=false) {
 		if(!isDown) return;

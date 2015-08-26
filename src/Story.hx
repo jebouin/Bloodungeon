@@ -1,11 +1,14 @@
 package ;
 import com.xay.util.Input;
+import com.xay.util.Util;
 class Story {
 	public static var state = 0;
 	public static var timer = 0;
 	public static var totalTime = 0;
 	public static var active = false;
 	public static var actions = new Array<{t:Int, f:Void->Void, w:Bool}>();
+	public static var talkExit = false;
+	public static var talkTimer = 0;
 	public static function init() {
 		actions = [];
 		totalTime = 0;
@@ -26,12 +29,17 @@ class Story {
 		state = 0;
 		timer = 0;
 		active = true;
+		talkExit = false;
 		Game.canPause = false;
+		talkTimer = 0;
 	}
 	public static function disable() {
 		active = false;
 	}
 	public static function update() {
+		if(talkExit) {
+			doTalkExit();
+		}
 		if(!active) return;
 		if(state >= actions.length) {
 			if(!Game.canPause) {
@@ -58,5 +66,14 @@ class Story {
 	}
 	public static function nothing() {
 		
+	}
+	static function doTalkExit() {
+		talkTimer++;
+		if(talkTimer > 40 && Std.random(20) == 0) {
+			talkTimer = 0;
+			var x = 41 * 16 + Util.randFloat(-8, 8) + 3;
+			var y = Util.randFloat(30 * 16, 34 * 16);
+			Dialog.say(x, y, ["c'mon!", "faster!", "go!", "!!!", "almost there!"][Std.random(5)], 40);
+		}
 	}
 }

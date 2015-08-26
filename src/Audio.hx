@@ -6,6 +6,8 @@ import flash.media.Sound;
 import flash.media.SoundChannel;
 import flash.media.SoundTransform;
 import haxe.ds.StringMap;
+import motion.Actuate;
+import motion.easing.Linear;
 //music should be 160 kbps
 @:sound("res/floor0.mp3") class Floor0Music extends Sound {}
 @:sound("res/floor1.mp3") class Floor1Music extends Sound {}
@@ -27,9 +29,14 @@ import haxe.ds.StringMap;
 @:sound("res/enter.mp3") class EnterSound extends Sound {}
 @:sound("res/ask.wav") class AskSound extends Sound {}
 @:sound("res/cannon.wav") class CannonSound extends Sound {}
+@:sound("res/noise0.wav") class Noise0Sound extends Sound {}
+@:sound("res/noise1.wav") class Noise1Sound extends Sound {}
+@:sound("res/rocks.mp3") class RocksSound extends Sound {}
+@:sound("res/voices.mp3") class VoicesSound extends Sound {}
 class Music {
 	public var sound : Sound;
 	public var chan : SoundChannel;
+	public var trans : SoundTransform;
 	public var length : Float;
 	public var pausePos : Float;
 	public var introLength : Float;
@@ -39,6 +46,7 @@ class Music {
 		this.length = length;
 		this.introLength = introLength;
 		playing = false;
+		trans = new SoundTransform();
 		Lib.current.stage.addEventListener(Event.ENTER_FRAME, update);
 	}
 	public function play(?pos=0) {
@@ -58,10 +66,20 @@ class Music {
 			mute();
 		}
 	}
-	public function stop() {
+	public function stop(?fadeTime:Float=-1) {
 		if(!playing) return;
-		playing = false;
-		chan.stop();
+		if(fadeTime > 0) {
+			trans.volume = 1.;
+			Actuate.tween(trans, fadeTime, {volume:0.}).ease(Linear.easeNone).onComplete(function() {
+				playing = false;
+				chan.stop();
+			}).onUpdate(function() {
+				chan.soundTransform = trans;
+			});
+		} else {
+			playing = false;
+			chan.stop();
+		}
 	}
 	function update(_) {
 		if(playing) {
@@ -111,9 +129,14 @@ class Audio {
 		addSound("enter", new EnterSound());
 		addSound("ask", new AskSound());
 		addSound("cannon", new CannonSound());
+		addSound("noise0", new Noise0Sound());
+		addSound("noise1", new Noise1Sound());
+		addSound("rocks", new RocksSound());
+		addSound("voices", new VoicesSound());
 		muteState = 3;
-		mute(false);
-		mute(false);
+		playingMusic = -1;
+		/*mute(false);
+		mute(false);*/
 	}
 	static function addSound(name:String, snd:Sound) {
 		if(!sounds.exists(name)) {
@@ -121,18 +144,31 @@ class Audio {
 		}
 	}
 	public static function playSound(name:String, ?loop=false) {
-		if(soundsMuted) return;
+		if(name != "voices" && soundsMuted) {
+			return null;
+		}
+		var chan = null;
 		if(sounds.exists(name)) {
 			if(chans.exists(name)) {
 				chans.get(name).stop();
 			}
-			var chan = sounds.get(name).play(0., loop?1<<30:0);
+			if(soundsMuted && name == "voices") {
+				chan = sounds.get(name).play(0., loop?1<<30:0, new SoundTransform(0.));
+			} else {
+				chan = sounds.get(name).play(0., loop?1<<30:0);
+			}
 			chans.set(name, chan);
 		}
+		return chan;
 	}
 	public static function stopSound(name:String) {
 		if(chans.exists(name)) {
 			chans.get(name).stop();
+		}
+	}
+	public static function stopSounds() {
+		for(c in chans.iterator()) {
+			c.stop();
 		}
 	}
 	public static function playMusic(id:Int) {
@@ -144,9 +180,10 @@ class Audio {
 			musics[id].play(0);
 		}
 	}
-	public static function stopMusics() {
+	public static function stopMusics(?fadeTime:Float=-1) {
+		if(musicMuted) return;
 		for(m in musics) {
-			m.stop();
+			m.stop(fadeTime);
 		}
 	}
 	public static function mute(?announce=true) {
@@ -196,9 +233,13 @@ class Audio {
 		}
 	}
 	public static function onFocusOut() {
-		musics[playingMusic].pause();
+		if(playingMusic >= 0) {
+			musics[playingMusic].pause();
+		}
 	}
 	public static function onFocusIn() {
-		musics[playingMusic].resume();
+		if(playingMusic >= 0) {
+			musics[playingMusic].resume();
+		}
 	}
 }

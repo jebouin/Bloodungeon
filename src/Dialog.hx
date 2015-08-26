@@ -13,6 +13,12 @@ class Dialog extends Sprite {
 	var relX : Float;
 	var relY : Float;
 	var timer : Int;
+	var baseX : Float;
+	var baseY : Float;
+	public static function say(x:Float, y:Float, str:String, t:Int) {
+		var d = create();
+		d.init(null, str, t, x, y);
+	}
 	public static function create() {
 		for(d in ALL) {
 			if(d.deleted) {
@@ -60,8 +66,13 @@ class Dialog extends Sprite {
 		visible = true;
 	}
 	public function update() {
-		x = Std.int(entity.xx + relX);
-		y = Std.int(entity.yy + relY);
+		if(entity == null) {
+			x = baseX + relX;
+			y = baseY + relY;
+		} else {
+			x = Std.int(entity.xx + relX);
+			y = Std.int(entity.yy + relY);
+		}
 		if(timer < -2) {
 			if(Input.newKeyPress("start")) {
 				timer = 20;
@@ -78,8 +89,12 @@ class Dialog extends Sprite {
 		}
 		timer--;
 	}
-	public function init(e:Entity, str:String, time:Int) {
+	public function init(e:Entity, str:String, time:Int, ?x:Float, ?y:Float) {
 		entity = e;
+		if(e == null) {
+			baseX = x;
+			baseY = y;
+		}
 		Game.CUR.lm.addChild(this, Const.FRONT_L);
 		if(bitmap.bitmapData != null) {
 			bitmap.bitmapData.dispose();

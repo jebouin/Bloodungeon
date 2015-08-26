@@ -124,7 +124,7 @@ class Laser extends Enemy {
 	}
 	override public function collidesHero() {
 		var hero = Game.CUR.hero;
-		if(hero == null) return false;
+		if(hero == null || hero.fell) return false;
 		var dx = hero.xx - xx;
 		var dy = hero.yy - yy;
 		var dist = Math.sqrt(dx*dx + dy*dy);

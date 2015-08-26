@@ -27,7 +27,7 @@ class Bolt extends Shape {
 		blendMode = BlendMode.ADD;
 		render();
 		Actuate.tween(this, .4, {alpha: 0.});
-		filters = [new GlowFilter(0xFFFFFF, 1., 20, 20, 2, 1)];
+		filters = [new GlowFilter(0xFFFFFF, 1., 20, 20, 2, 0)];
 	}
 	function delete() {
 		deleted = true;

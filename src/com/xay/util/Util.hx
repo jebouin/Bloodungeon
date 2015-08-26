@@ -34,7 +34,10 @@ typedef RGBA = {
 class Util {
 	public static var RADTODEG = 180./Math.PI;
 	public static var DEGTORAD = Math.PI/180.;
-	static public function ABS(v:Float) {
+	static public inline function IABS(v:Int) {
+		return (v<0?-v:v);
+	}
+	static public inline function ABS(v:Float) {
 		return (v<0?-v:v);
 	}
 	static public function SGN(v:Float) {
