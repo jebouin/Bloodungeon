@@ -57,6 +57,25 @@ class GJAPI {
 		}
 		loader.load(req);
 	}
+	public static function unlockTrophy(id:Int) {
+		if(!checkInited()) return;
+		if(!loggedIn) return;
+		var url = baseURL + "trophies/add-achieved/" + "?game_id=" + Std.string(gameId) 
+													+ "&username=" + username
+													+ "&user_token=" + userToken
+													+ "&trophy-id=" + Std.string(id);
+		url = encodeURL(url);
+		req.url = url;
+		if(GJAPI.callback != null) {
+			loader.removeEventListener(Event.COMPLETE, GJAPI.callback);
+		}
+		/*GJAPI.callback = function(e:Event) {
+			trace(e.target.data);
+		}*/
+		loader.addEventListener(Event.COMPLETE, GJAPI.callback);
+		loader.load(req);
+		//trace(url);
+	}
 	public static function getHiscores(callback:Event->Void, limit=10) {
 		if(!checkInited()) return;
 		var url = baseURL+"scores/";

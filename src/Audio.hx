@@ -60,6 +60,8 @@ class Music {
 	public function play(?pos=0, ?fadeTime:Float=-1) {
 		playing = true;
 		chan = sound.play(pos, 0);
+		setVolume(1.);
+		Actuate.stop(trans);
 		if(Audio.musicMuted) {
 			mute();
 		} else if(fadeTime > 0) {
@@ -76,6 +78,7 @@ class Music {
 		chan.stop();
 	}
 	public function resume() {
+		if(!playing) return;
 		chan = sound.play(pausePos);
 		if(Audio.musicMuted) {
 			mute();
@@ -112,6 +115,10 @@ class Music {
 	public function unmute() {
 		if(chan == null) return;
 		chan.soundTransform = new SoundTransform(1.);
+	}
+	public function setVolume(v:Float) {
+		trans.volume = v;
+		chan.soundTransform = trans;
 	}
 }
 class Audio {
@@ -160,8 +167,8 @@ class Audio {
 		addSound("rocketExplosion", new RocketExplosionSound());
 		muteState = 3;
 		playingMusic = -1;
-		/*mute(false);
-		mute(false);*/
+		mute(false);
+		mute(false);
 	}
 	static function addSound(name:String, snd:Sound) {
 		if(!sounds.exists(name)) {

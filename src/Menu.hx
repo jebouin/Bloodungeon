@@ -116,6 +116,7 @@ class Menu extends Scene {
 				front = null;
 				start();
 			});
+			Audio.stopMusics(2.);
 		} else {
 			start();
 		}
@@ -291,7 +292,6 @@ class Menu extends Scene {
 		updateOptions();
 		started = false;
 		startTransition();
-		Audio.stopMusics(2.);
 	}
 	function goInDungeon(?yolo:Bool=false) {
 		if(!isDown) return;

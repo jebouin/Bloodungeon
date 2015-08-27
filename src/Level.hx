@@ -94,16 +94,22 @@ class Level {
 		if(floor == 0 && roomIdX == 2 && roomIdY == 0) {
 			var xa = [32, 31, 32, 35, 38, 39, 38];
 			var ya = [7, 5, 3, 2, 3, 5, 7];
+			var b = false;
 			for(i in 0...7) {
 				if(Std.random(20) == 0) {
 					new Tesla.Bolt(xa[i]*16+8, ya[i]*16+5, 35*16+8, 5*16+8);
+					b = true;
 				}
 				if(Std.random(100) == 0) {
 					var j = Std.random(7);
 					if(j != i) {
 						new Tesla.Bolt(xa[i]*16+8, ya[i]*16+8, xa[j]*16+8, ya[j]*16+8);
+						b = true;
 					}
 				}
+			}
+			if(b) {
+				Audio.playSound("tesla");
 			}
 		}
 		if(computer.parent != null) {
@@ -316,9 +322,9 @@ class Level {
 				/*setRoomId(1, 4);
 				Hero.spawnX = 24 * 16;
 				Hero.spawnY = 41 * 16;*/
-				/*setRoomId(2, 3);
+				setRoomId(2, 3);
 				Hero.spawnX = 30 * 16 + 8;
-				Hero.spawnY = 34 * 16 + 8;*/
+				Hero.spawnY = 34 * 16 + 8;
 				/*setRoomId(0, 0);
 				Hero.spawnX = 11 * 16 + 8;
 				Hero.spawnY = 8 * 16 + 8;*/
@@ -331,9 +337,9 @@ class Level {
 				/*setRoomId(5, 3);
 				Hero.spawnX = 82 * 16 + 8;
 				Hero.spawnY = 35 * 16 + 8;*/
-				setRoomId(3, 1);
+				/*setRoomId(3, 1);
 				Hero.spawnX = 55 * 16 + 8;
-				Hero.spawnY = 11 * 16 + 8;
+				Hero.spawnY = 11 * 16 + 8;*/
 				/*setRoomId(3, 0);
 				Hero.spawnX = 53 * 16 + 8;
 				Hero.spawnY = 5 * 16 + 8;*/

@@ -69,6 +69,9 @@ class Game extends Scene {
 			Story.start();
 			Action.onFloor0();
 		}
+		if(continueGame && Save.so.data.isRush) {
+			startRush(true);
+		}
 	}
 	override public function delete() {
 		Save.onQuitGame();
@@ -202,8 +205,15 @@ class Game extends Scene {
 		level.nextFloor();
 		hero.nbDeathBeforeFloor = hero.nbDeaths;
 	}
-	public function startRush() {
+	public function startRush(?isLoading=false) {
+		if(Save.so.data.isRush) {
+			return;
+		}
 		Audio.playMusic(4);
+		Save.onRush();
+		if(!isLoading) {
+			//fx
+		}
 	}
 	public function onFocusOut() {
 		pause();

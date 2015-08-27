@@ -75,6 +75,10 @@ class Save {
 		so.data.gameTime = Stats.gameTime;
 		so.flush();
 	}
+	public static function onRush() {
+		so.data.isRush = true;
+		so.flush();
+	}
 	public static function onAchievementUnlocked() {
 		so.data.ach0 = Achievements.achievements[0].unlocked;
 		so.data.ach1 = Achievements.achievements[1].unlocked;

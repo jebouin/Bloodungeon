@@ -155,8 +155,8 @@ class Main {
 		renderer = new Renderer(Const.WID, Const.HEI, Const.SCALE);
 		var stats = new Stats();
 		stats.x = stage.stageWidth - Stats.XPOS;
-		stats.y = stage.stageHeight - 100;
-		//stage.addChild(stats);
+		stats.y = stage.stageHeight - 250;
+		stage.addChild(stats);
 		initGFX();
 		initInput();
 		Audio.init();
@@ -172,12 +172,12 @@ class Main {
 		//debug end
 		//GJAPI.init(GAME_ID, PRIV_KEY, params.gjapi_username, params.gjapi_token);
 		
-		Game.skipStory = true;
+		/*Game.skipStory = true;
 		Game.continueGame = false;
 		Game.yoloMode = false;
-		new Game();
+		new Game();*/
 		
-		//new Menu();
+		new Menu();
 		//new VoiceScene();
 		//new Ending();
 		stage.addEventListener(Event.ENTER_FRAME, update);

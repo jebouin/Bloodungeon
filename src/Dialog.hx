@@ -20,10 +20,10 @@ class Dialog extends Sprite {
 		d.init(null, str, t, x, y);
 	}
 	public static function create() {
+		Audio.playSound("dialog");
 		for(d in ALL) {
 			if(d.deleted) {
 				d.deleted = false;
-				Audio.playSound("dialog");
 				return d;
 			}
 		}

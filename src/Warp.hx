@@ -36,13 +36,11 @@ class Warp extends Sprite {
 			}
 		}
 		timer++;
-		var st = Math.sin(timer * .05);
 		for(i in 0...4) {
 			circles[i].rotation += (i + 1.) * Math.cos(timer * .05) * 1.;
 			if(activated) {
 				circles[i].rotation += (i + 1.) * 10.;
 			}
-			//circles[i].scaleX = circles[i].scaleY = (st+1.) * .5 * (i+1)*(i+1) * .1 + 1.;
 		}
 	}
 	function renderArc(g:Graphics, d:Float, startAngle:Float, endAngle:Float, thick:Float) {

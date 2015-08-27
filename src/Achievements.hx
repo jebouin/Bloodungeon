@@ -1,4 +1,5 @@
 package ;
+import com.xay.util.GJAPI;
 import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.display.Sprite;
@@ -20,6 +21,7 @@ typedef Achievement = {
 	id:Int
 }
 class Achievements {
+	public static var GJ_ID = [39720, 39012, 39010, 39013, 39011, 39009, 39008];
 	public static var icons : Array<BitmapData>;
 	public static var unlockedBD : BitmapData;
 	public static var achievements : Array<Achievement>;
@@ -74,6 +76,7 @@ class Achievements {
 		}
 		a.unlocked = true;
 		nbUnlocked++;
+		GJAPI.unlockTrophy(GJ_ID[a.id]);
 		if(!isGameLoading) {
 			Save.onAchievementUnlocked();
 			var text = new Bitmap(unlockedBD);
