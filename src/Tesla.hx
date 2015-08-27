@@ -122,6 +122,7 @@ class Tesla extends Enemy {
 		}
 	}
 	override public function update() {
+		if(Game.CUR.hero != null && (Game.CUR.hero.dead || Game.CUR.hero.fell)) return;
 		if(time > 0) {
 			timer++;
 			if(timer == time - 9) {

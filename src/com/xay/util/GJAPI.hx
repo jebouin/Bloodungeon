@@ -35,7 +35,7 @@ class GJAPI {
 	}
 	static function checkInited() {
 		if(!inited) {
-			trace("GJAPI not inited!");
+			//trace("GJAPI not inited!");
 			return false;
 		}
 		return true;

@@ -43,7 +43,7 @@ class VoiceScene extends Scene {
 		cont.addChild(back);
 		tfs = [];
 		for(i in 0...3) {
-			var tf = Util.createTextField("...", Main.xlmonoFont, null, 40);
+			var tf = Util.createTextField("", Main.xlmonoFont, null, 40);
 			tf.x = -tf.width * .5;
 			tf.y = -tf.height * .5 + (i-1) * Const.HEI * .3;
 			cont.addChild(tf);
@@ -61,7 +61,6 @@ class VoiceScene extends Scene {
 				["", "and now", ""]];
 		timer = 0;
 		textId = 0;
-		nextText();
 	}
 	override public function delete() {
 		super.delete();
@@ -74,24 +73,26 @@ class VoiceScene extends Scene {
 		timer++;
 		cont.rotation = Math.sin(timer * .01) * 10.;
 		switch(textId) {
+			case 0:
+				if(chan.position > 3720) nextText();
 			case 1:
-				if(chan.position > 4640) nextText();
+				if(chan.position > 8360) nextText();
 			case 2:
-				if(chan.position > 7870) nextText();
+				if(chan.position > 11590) nextText();
 			case 3:
-				if(chan.position > 10640) nextText();
+				if(chan.position > 14360) nextText();
 			case 4:
-				if(chan.position > 13390) nextText();
+				if(chan.position > 17110) nextText();
 			case 5:
-				if(chan.position > 18030) nextText();
+				if(chan.position > 21750) nextText();
 			case 6:
-				if(chan.position > 19870) nextText();
+				if(chan.position > 23590) nextText();
 			case 7:
-				if(chan.position > 20800) nextText();
+				if(chan.position > 24520) nextText();
 			case 8:
-				if(chan.position > 25870) nextText();
+				if(chan.position > 29590) nextText();
 			case 9:
-				if(chan.position > 30000) {
+				if(chan.position > 32500) {
 					delete();
 					return;
 				}
@@ -114,6 +115,10 @@ class VoiceScene extends Scene {
 		g.drawRect(-Const.WID * .65, -Const.HEI * .65, Const.WID * 1.3, Const.HEI * 1.3);
 		g.endFill();
 		if(Std.random(20) == 0) {
+			Main.glitch();
+		}
+		if(chan.position > 30000) {
+			Main.glitch();
 			Main.glitch();
 		}
 	}

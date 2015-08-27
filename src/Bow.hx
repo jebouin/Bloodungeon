@@ -31,6 +31,7 @@ class Bow extends Enemy {
 		ALL.remove(this);
 	}
 	public static function updateAll() {
+		if(Game.CUR.hero != null && (Game.CUR.hero.dead || Game.CUR.hero.fell)) return;
 		timer++;
 		if(timer > 50) {
 			shootAll();

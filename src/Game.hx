@@ -183,11 +183,11 @@ class Game extends Scene {
 			nextFloor();
 		}
 	}
-	public function onHeroDeath() {
+	public function onHeroDeath(fell:Bool=false) {
 		if(Level.LAST_ROOM) {
 			Achievements.unlock("I can do that too");
 		}
-		respawnTimer = 60;
+		respawnTimer = fell ? 30 : 60;
 	}
 	public function respawn() {
 		if(yoloMode && hero.dead) {
@@ -229,9 +229,11 @@ class Game extends Scene {
 	function pause() {
 		if(canPause) {
 			canPause = false;
+			Audio.setMusicVolume(.2, .5);
 			var p = new Pause();
 			p.onDelete = function() {
 				canPause = true;
+				Audio.setMusicVolume(1., .5);
 			}
 		}
 	}

@@ -25,7 +25,7 @@ import motion.easing.Linear;
 @:sound("res/button.mp3") class ButtonSound extends Sound {}
 @:sound("res/door.mp3") class DoorSound extends Sound {}
 @:sound("res/fall.mp3") class FallSound extends Sound {}
-@:sound("res/spike.mp3") class SpikeSound extends Sound {}
+@:sound("res/spike.wav") class SpikeSound extends Sound {}
 @:sound("res/bow.mp3") class BowSound extends Sound {}
 @:sound("res/laser.wav") class LaserSound extends Sound {}
 @:sound("res/enter.mp3") class EnterSound extends Sound {}
@@ -116,9 +116,18 @@ class Music {
 		if(chan == null) return;
 		chan.soundTransform = new SoundTransform(1.);
 	}
-	public function setVolume(v:Float) {
-		trans.volume = v;
-		chan.soundTransform = trans;
+	public function setVolume(v:Float, ?t:Float=-1) {
+		Actuate.stop(trans);
+		if(t > 0) {
+			Actuate.tween(trans, t, {volume:v}).ease(Linear.easeNone).onComplete(function() {
+				
+			}).onUpdate(function() {
+				chan.soundTransform = trans;
+			});
+		} else {
+			trans.volume = v;
+			chan.soundTransform = trans;
+		}
 	}
 }
 class Audio {
@@ -167,8 +176,8 @@ class Audio {
 		addSound("rocketExplosion", new RocketExplosionSound());
 		muteState = 3;
 		playingMusic = -1;
-		mute(false);
-		mute(false);
+		/*mute(false);
+		mute(false);*/
 	}
 	static function addSound(name:String, snd:Sound) {
 		if(!sounds.exists(name)) {
@@ -216,6 +225,15 @@ class Audio {
 		if(musicMuted) return;
 		for(m in musics) {
 			m.stop(fadeTime);
+		}
+	}
+	public static function setMusicVolume(v:Float, t:Float) {
+		if(musicMuted) return;
+		if(playingMusic >= 0) {
+			var m = musics[playingMusic];
+			if(m.playing) {
+				m.setVolume(v, t);
+			}
 		}
 	}
 	public static function mute(?announce=true) {

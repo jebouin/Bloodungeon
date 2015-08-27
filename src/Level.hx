@@ -150,7 +150,7 @@ class Level {
 		Game.CUR.lm.addChild(ground1Layer, Const.BACK_L);
 		Game.CUR.lm.addChild(overLayer, Const.BACK_L);
 		Game.CUR.lm.addChild(wall0Layer, Const.BACKWALL_L);
-		Game.CUR.lm.addChild(wall1Layer, Const.BACKWALL_L);
+		Game.CUR.lm.addChild(wall1Layer, Const.FRONT_L);
 		WID = map.wid;
 		HEI = map.hei;
 		nbRoomsX = Std.int(WID / (RWID - 1));
@@ -319,12 +319,12 @@ class Level {
 			case 3:
 				Game.CUR.cd.activate();
 				removeLighting();
-				/*setRoomId(1, 4);
+				setRoomId(1, 4);
 				Hero.spawnX = 24 * 16;
-				Hero.spawnY = 41 * 16;*/
-				setRoomId(2, 3);
+				Hero.spawnY = 41 * 16;
+				/*setRoomId(2, 3);
 				Hero.spawnX = 30 * 16 + 8;
-				Hero.spawnY = 34 * 16 + 8;
+				Hero.spawnY = 34 * 16 + 8;*/
 				/*setRoomId(0, 0);
 				Hero.spawnX = 11 * 16 + 8;
 				Hero.spawnY = 8 * 16 + 8;*/

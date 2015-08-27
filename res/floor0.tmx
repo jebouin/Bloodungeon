@@ -25,7 +25,7 @@
  </layer>
  <layer name="wall1" width="43" height="56">
   <data encoding="base64" compression="zlib">
-   eJzt2E0OgyAQhmEW6AnqjZrew3j/O1QWkxCkQf7H5n2S2SjoR6KAGjPemtnedkkBAAAAQOTu0YXs1Uv7x67lWxPnc9Xk3M86Em3eZ30q7jGSG8s+O0QBvg+B+dxcunhVquX73GId6kVLNi05Qj1zaR1zqHXOp4z7371mB0j4lS/2/Mi8L5agrLmuDXfL9d288sWOAQAwmpb/ELJGp/JoyQsAuPoC01MDnw==
+   eJzt2NENgyAUhWEe1AnadANX6AKme5juv0Mh6U0IxVIUuNj8X3JfBPSQKKjGtDdl9h+qpAAAAAAgct/Rhbyr7x0fO5dvSrTnOpJztfX80j7bWmw9DlyjFZfVzWXVDvJ2y+ir/X14V74+0AO3lo5e7VXyeS6xD9XSS7ZecoRq5up1zqHSOc8y73930Q6QsJUvdv/Iui/GoAbzuTf8Wm7s1Stf7BgAAK1p/4cQsken8vSSF+XN2gEynCkr0NIL1DAEhQ==
   </data>
  </layer>
  <objectgroup name="active" width="43" height="56">

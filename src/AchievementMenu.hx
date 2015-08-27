@@ -150,11 +150,11 @@ class AchievementMenu extends Scene {
 			if(Input.newKeyPress("escape")) {
 				delayExit();
 			}
-			if(Input.newKeyPress("start")) {
+			/*if(Input.newKeyPress("start")) {
 				if(selected >=0 && selected < boxes.length) {
 					Achievements.unlockId(selected);
 				}
-			}
+			}*/
 		}
 	}
 	function delayExit() {

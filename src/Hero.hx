@@ -150,12 +150,12 @@ class Hero extends Entity {
 				if(!Input.keyDown("left") && !Input.keyDown("right") && !Input.keyDown("down") && !Input.keyDown("up")) {
 					targetFrame = -1;
 				}
-				if(Input.keyDown("suicide") && !Input.oldKeyDown("suicide")) {
+				/*if(Input.keyDown("suicide") && !Input.oldKeyDown("suicide")) {
 					var prevImmune = immune;
 					immune = false;
 					die();
 					immune = prevImmune;
-				}
+				}*/
 			}
 			super.update();
 			var level = Game.CUR.level;
@@ -224,7 +224,7 @@ class Hero extends Entity {
 				explosion.parent.removeChild(explosion);
 			}
 		}
-		Game.CUR.onHeroDeath();
+		Game.CUR.onHeroDeath(fell);
 	}
 	function showDeaths() {
 		if(deathCounter.bitmapData != null) {

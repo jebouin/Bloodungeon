@@ -4,7 +4,7 @@ class Save {
 	public static var so : SharedObject;
 	public static function init() {
 		so = SharedObject.getLocal("save");
-		so.clear();
+		//so.clear();
 		if(!so.data.hasOwnProperty("totalDeaths")) {
 			so.data.totalDeaths = 0;
 			so.data.gameTime = 0;
@@ -54,7 +54,6 @@ class Save {
 		FakeTile.nbBroken = so.data.nbFakeTileBroken;
 		FakeTile.brokens = so.data.brokens.copy();
 		//trace(FakeTile.nbBroken, FakeTile.brokens);
-		//trace("Continued game with " + Game.yoloMode + " " + Game.skipStory + " " + so.data.roomX + " " + so.data.roomY + " " + so.data.spawnX + " " + so.data.spawnY);
 	}
 	public static function onNextRoom(floor:Int, roomX:Int, roomY:Int, spawnX:Float, spawnY:Float, prevDir:Const.DIR) {
 		if(Game.yoloMode) return;

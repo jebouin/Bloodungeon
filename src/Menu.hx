@@ -91,10 +91,10 @@ class Menu extends Scene {
 		transition = false;
 		creditsBefore = false;
 		
-		started = false;
-		startTransition();
+		/*started = false;
+		startTransition();*/
 		
-		//started = true;
+		started = true;
 	}
 	function startTransition() {
 		var start = function() {
@@ -127,45 +127,47 @@ class Menu extends Scene {
 	}
 	override public function update() {
 		super.update();
-		if(started && !transition) {
-			if(!isDown) {
-				var optionChanged = false;
-				if(Input.newKeyPress("down") && selectedOption < texts.length - 1) {
-					selectedOption++;
-					if(!Save.so.data.hasSave && selectedOption == 1) selectedOption++;
-					optionChanged = true;
-				}
-				if(Input.newKeyPress("up") && selectedOption > 0) {
-					selectedOption--;
-					if(!Save.so.data.hasSave && selectedOption == 1) selectedOption--;
-					optionChanged = true;
-				}
-				if(optionChanged) {
-					updateOptions();
-					Audio.playSound("moveCursor");
-				}
-				if(Input.newKeyPress("start")) {
-					startPressed();
-				}
-			} else if(!isInDungeon) {
-				if(Input.newKeyPress("down") && selectedMode < 2) {
-					selectMode(selectedMode+1);
-					Audio.playSound("moveCursor");
-				}
-				if(Input.newKeyPress("up") && selectedMode > 0) {
-					selectMode(selectedMode-1);
-					Audio.playSound("moveCursor");
-				}
-				if(Input.newKeyPress("start")) {
-					startPressed();
-				} else if(Input.newKeyPress("escape")) {
-					selectMode(2);
-					startPressed();
-				}
-			} else {
-				if(Input.newKeyPress("skip")) {
-					Audio.playSound("select");
-					startGameWithoutStory();
+		if(!Main.secondUpdate) {
+			if(started && !transition) {
+				if(!isDown) {
+					var optionChanged = false;
+					if(Input.newKeyPress("down") && selectedOption < texts.length - 1) {
+						selectedOption++;
+						if(!Save.so.data.hasSave && selectedOption == 1) selectedOption++;
+						optionChanged = true;
+					}
+					if(Input.newKeyPress("up") && selectedOption > 0) {
+						selectedOption--;
+						if(!Save.so.data.hasSave && selectedOption == 1) selectedOption--;
+						optionChanged = true;
+					}
+					if(optionChanged) {
+						updateOptions();
+						Audio.playSound("moveCursor");
+					}
+					if(Input.newKeyPress("start")) {
+						startPressed();
+					}
+				} else if(!isInDungeon) {
+					if(Input.newKeyPress("down") && selectedMode < 2) {
+						selectMode(selectedMode+1);
+						Audio.playSound("moveCursor");
+					}
+					if(Input.newKeyPress("up") && selectedMode > 0) {
+						selectMode(selectedMode-1);
+						Audio.playSound("moveCursor");
+					}
+					if(Input.newKeyPress("start")) {
+						startPressed();
+					} else if(Input.newKeyPress("escape")) {
+						selectMode(2);
+						startPressed();
+					}
+				} else {
+					if(Input.newKeyPress("skip")) {
+						Audio.playSound("select");
+						startGameWithoutStory();
+					}
 				}
 			}
 		}
@@ -292,6 +294,9 @@ class Menu extends Scene {
 		updateOptions();
 		started = false;
 		startTransition();
+		if(selectedOption == 1 && !Save.so.data.hasSave) {
+			selectedOption = 0;
+		}
 	}
 	function goInDungeon(?yolo:Bool=false) {
 		if(!isDown) return;
