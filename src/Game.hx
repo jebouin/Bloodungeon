@@ -1,9 +1,13 @@
 package ;
+import com.xay.util.GJAPI;
 import com.xay.util.Input;
 import com.xay.util.LayerManager;
 import com.xay.util.SceneManager;
+import flash.display.Shape;
+import haxe.Timer;
 import motion.Actuate;
 import motion.easing.Cubic;
+import motion.easing.Linear;
 import motion.easing.Quad;
 import motion.easing.Sine;
 class Game extends Scene {
@@ -33,13 +37,14 @@ class Game extends Scene {
 		cd = new Countdown();
 		entities = [];
 		FakeTile.nbBroken = 0;
+		FakeTile.brokens = [false, false, false, false, false, false];
 		var floorId = 0;
 		if(continueGame) {
 			floorId = Save.so.data.floorId;
 		} else {
 			Save.onStartGame();
 			if(skipStory) {
-				floorId = 1;
+				floorId = 3;
 			}
 		}
 		level = new Level(floorId);
@@ -71,7 +76,6 @@ class Game extends Scene {
 		frontlm.delete();
 		clearEntities();
 		CUR = null;
-		Audio.playMusic(5);
 		super.delete();
 	}
 	override public function update() {
@@ -100,6 +104,9 @@ class Game extends Scene {
 		if(Input.newKeyPress("escape")) {
 			pause();
 		}
+		/*if(Input.newKeyPress("skip")) {
+			complete();
+		}*/
 		Stats.gameTime++;
 		if(respawnTimer > 0) {
 			respawnTimer--;
@@ -176,9 +183,16 @@ class Game extends Scene {
 		respawnTimer = 60;
 	}
 	public function respawn() {
-		hero.spawn();
-		Enemy.fade = false;
-		level.reloadEntities();
+		if(yoloMode && hero.dead) {
+			var g = new GameOver();
+			g.onDelete = function() {
+				delete();
+			};
+		} else {
+			hero.spawn();
+			Enemy.fade = false;
+			level.reloadEntities();
+		}
 	}
 	public function nextFloor() {
 		level.nextFloor();
@@ -195,7 +209,44 @@ class Game extends Scene {
 	}
 	function pause() {
 		if(canPause) {
+			canPause = false;
 			var p = new Pause();
+			p.onDelete = function() {
+				canPause = true;
+			}
 		}
+	}
+	public function complete() {
+		Achievements.unlock("I did it!");
+		if(yoloMode) {
+			Timer.delay(function() {
+				Achievements.unlock("Survivor");
+			}, 6000);
+		}
+		canPause = false;
+		GJAPI.sendHiscore(hero.nbDeaths);
+		Save.so.data.hasSave = false;
+		hero.update();
+		hero.anim.setFrame(2);
+		hero.anim.update();
+		hero.locked = true;
+		locked = true;
+		Actuate.tween(hero, 1.5, {y:-18}).onComplete(function() {
+			var back = new Shape();
+			back.graphics.beginFill(0xFFFFFF);
+			back.graphics.drawRect(0, 0, Const.WID, Const.HEI);
+			back.graphics.endFill();
+			frontlm.addChild(back, 100);
+			back.alpha = 0.;
+			Audio.stopMusics(1.5);
+			Actuate.tween(back, 3.5, {alpha:1.}).ease(Linear.easeNone).onComplete(function() {
+				var e = new Ending(back, hero.nbDeaths);
+				e.onDelete = onDelete;
+				onDelete = null;
+				delete();
+			});
+		}).ease(Linear.easeNone).onUpdate(function() {
+			hero.shadow.y = hero.y + 2.;
+		});
 	}
 }

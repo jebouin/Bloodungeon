@@ -50,7 +50,6 @@ class JungleBack extends Sprite {
 			s.graphics.endFill();
 			sky.addChild(s);
 			stars.push(s);
-			s.graphics.endFill();
 		}
 		jungle0 = new Bitmap(new JungleBD0(0, 0));
 		addChild(jungle0);
@@ -72,13 +71,10 @@ class JungleBack extends Sprite {
 	}
 	public function startTransition() {
 		started = false;
+		goTresUp();
 		for(s in stars) {
-			s.alpha = 0.;
 			Actuate.tween(s, 3., {alpha: 1.}).ease(Linear.easeNone);
 		}
-		jungle0.y = Const.HEI + 1;
-		jungle1.y = Const.HEI + 50;
-		jungle2.y = Const.HEI + 100;
 		Timer.delay(function() {
 			Actuate.tween(jungle0, 3., {y:0}).ease(Quad.easeOut);
 			Actuate.tween(jungle1, 3., {y:0}).ease(Quad.easeOut);
@@ -124,6 +120,15 @@ class JungleBack extends Sprite {
 		}).onComplete(function() {
 			down = false;
 		}).ease(Quad.easeIn);
+	}
+	public function goTresUp() {
+		started = false;
+		for(s in stars) {
+			s.alpha = 0.;
+		}
+		jungle0.y = Const.HEI + 1;
+		jungle1.y = Const.HEI + 50;
+		jungle2.y = Const.HEI + 100;
 	}
 	public function goInDungeon() {
 		var ty = 320;

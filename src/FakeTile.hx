@@ -2,6 +2,7 @@ package ;
 import com.xay.util.SpriteLib;
 import com.xay.util.Util;
 import flash.display.BitmapData;
+import flash.filters.GlowFilter;
 import flash.geom.Rectangle;
 import motion.Actuate;
 class FakeTile extends Enemy {
@@ -36,23 +37,26 @@ class FakeTile extends Enemy {
 		parent.removeChild(this);
 		Game.CUR.lm.addChild(this, Const.BACK_L);
 		rect = new Rectangle(xx, yy, wid * 16, hei * 16);
-		/*for(j in ty...ty+hei) {
+		for(j in ty...ty+hei) {
 			for(i in tx...tx+wid) {
 				var rcol = level.getCollision(i+1, j);
 				level.setCollision(i, j, FULL);
 			}
-		}*/
+		}
 		update();
 		if(brokens[secretId]) {
 			disappear(true);
+		}
+		if(Game.yoloMode) {
+			filters = [new GlowFilter(0xFFFFFF, .3, 10., 2., 5., 1)];
 		}
 	}
 	override public function update() {
 		super.update();
 		var hero = Game.CUR.hero;
 		if(hero == null) return;
-		var nx = hero.xx + Util.SGN(hero.vx) * (hero.cradius + 2);
-		var ny = hero.yy + Util.SGN(hero.vy) * (hero.cradius + 2);
+		var nx = hero.xx + Util.SGN(hero.vx) * (hero.cradius + 5);
+		var ny = hero.yy + Util.SGN(hero.vy) * (hero.cradius + 5);
 		if(canDisappear() && rect.contains(nx, ny)) {
 			disappear();
 		}

@@ -156,6 +156,7 @@ class Tesla extends Enemy {
 		}*/
 	}
 	public function shoot() {
+		Audio.playSound("tesla");
 		for(l in links) {
 			for(t in ALL) {
 				if(t.id == l) {

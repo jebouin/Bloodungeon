@@ -57,6 +57,8 @@ class Save {
 		//trace("Continued game with " + Game.yoloMode + " " + Game.skipStory + " " + so.data.roomX + " " + so.data.roomY + " " + so.data.spawnX + " " + so.data.spawnY);
 	}
 	public static function onNextRoom(floor:Int, roomX:Int, roomY:Int, spawnX:Float, spawnY:Float, prevDir:Const.DIR) {
+		if(Game.yoloMode) return;
+		if(floor == 3 && roomX == 3 && roomY == 0) return;
 		if(floor > 0) {
 			so.data.hasSave = true;
 			so.data.floorId = floor;

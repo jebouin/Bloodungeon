@@ -8,13 +8,14 @@ import flash.display.Sprite;
 import haxe.Timer;
 import motion.Actuate;
 import motion.easing.Linear;
-class Pause extends Scene {
+class GameOver extends Scene {
 	var lm : LayerManager;
 	var title : Bitmap;
-	var resume : Bitmap;
+	var retry : Bitmap;
 	var quit : Bitmap;
 	var back : Shape;
 	var selected : Int;
+	var active : Bool;
 	public function new() {
 		super();
 		lm = new LayerManager();
@@ -24,20 +25,27 @@ class Pause extends Scene {
 		back.graphics.drawRect(0, 0, Const.WID, Const.HEI);
 		back.graphics.endFill();
 		lm.addChild(back, 0);
-		title = new Bitmap(Main.font.getText("paused"));
+		title = new Bitmap(Main.font.getText("GAME OVER"));
 		title.scaleX = title.scaleY = 2.;
 		title.x = Const.WID * .5 - title.width * .5;
 		title.y = Const.HEI * .2 - title.height * .5;
 		lm.addChild(title, 1);
-		resume = new Bitmap(Main.font.getText("resume"));
-		resume.x = Const.WID * .5 - resume.width * .5;
-		resume.y = Const.HEI * .5;
-		lm.addChild(resume, 1);
+		retry = new Bitmap(Main.font.getText("retry"));
+		retry.x = Const.WID * .5 - retry.width * .5;
+		retry.y = Const.HEI * .5;
+		lm.addChild(retry, 1);
 		quit = new Bitmap(Main.font.getText("quit"));
 		quit.x = Const.WID * .5 - quit.width * .5;
 		quit.y = Const.HEI * .5 + 16;
 		lm.addChild(quit, 1);
 		select(0);
+		active = false;
+		lm.getContainer().alpha = 0.;
+		Actuate.tween(lm.getContainer(), 1., {alpha: 1.}).ease(Linear.easeNone);
+		Timer.delay(function() {
+			active = true;
+		}, 600);
+		Audio.stopMusics(2.);
 	}
 	override public function delete() {
 		super.delete();
@@ -45,16 +53,13 @@ class Pause extends Scene {
 	}
 	override public function update() {
 		super.update();
+		if(!active) return;
 		if(Input.newKeyPress("up") && selected == 1) {
 			select(0);
 			Audio.playSound("moveCursor");
 		} else if(Input.newKeyPress("down") && selected == 0) {
 			select(1);
 			Audio.playSound("moveCursor");
-		}
-		if(Input.newKeyPress("escape")) {
-			select(0);
-			startPressed();
 		}
 		if(Input.newKeyPress("start")) {
 			Audio.playSound("select");
@@ -70,20 +75,25 @@ class Pause extends Scene {
 	function select(id:Int) {
 		selected = id;
 		if(id == 0) {
-			resume.alpha = 1.;
+			retry.alpha = 1.;
 			quit.alpha = .5;
 		} else {
-			resume.alpha = .5;
+			retry.alpha = .5;
 			quit.alpha = 1.;
 		}
 	}
 	function startPressed() {
 		if(selected == 0) {
-			exit();
+			Timer.delay(function() {
+				exit(function() {
+					Save.onStartGame();
+					new Game();
+				});
+			}, 500);
 		} else {
 			Timer.delay(function() {
 				exit(function() {
-					Game.CUR.delete();
+					
 				});
 			}, 500);
 		}

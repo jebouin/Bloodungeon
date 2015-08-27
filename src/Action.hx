@@ -41,6 +41,9 @@ class Action {
 			}
 		}
 	}
+	public static function teleport() {
+		
+	}
 	public static function shake0() {
 		Fx.screenShake(1., 1., 1000000., true);
 		Timer.delay(function() {
@@ -85,12 +88,12 @@ class Action {
 		Audio.playSound("warp");
 		Audio.stopMusics(1.);
 		Game.canPause = false;
-		Game.CUR.cd.lock();
+		Game.CUR.cd.deactivate();
 		Game.CUR.level.warp.activate();
 		Timer.delay(function() {
 			Game.canPause = true;
 			Game.CUR.nextFloor();
-			Game.CUR.cd.unlock();
+			Game.CUR.cd.activate();
 		}, 6000);
 		Fx.screenShake(1., 1., 100000, true);
 	}
@@ -113,5 +116,14 @@ class Action {
 	}
 	public static function lastRush() {
 		Game.CUR.startRush();
+	}
+	public static function endScene() {
+		Game.CUR.cd.deactivate();
+		Game.CUR.cd.visible = false;
+		Audio.stopMusics(1.);
+		Game.CUR.hero.say("!", 120);
+	}
+	public static function theEnd() {
+		Game.CUR.complete();
 	}
 }

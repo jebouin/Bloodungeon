@@ -297,4 +297,19 @@ class Fx {
 			s.parent.removeChild(s);
 		});
 	}
+	public static function rocketExplosion(x:Float, y:Float) {
+		var pos = Util.uniformRandPoint(0, 4);
+		var p = Particle.create();
+		if(p == null) return;
+		p.drawCircle(80, 0xFFFFFF);
+		p.lifeTime = 7;
+		p.xx = x + pos.x;
+		p.yy = y + pos.y;
+		Game.CUR.lm.addChild(p, Const.FRONT_L);
+		p.onUpdate = function(p:Particle) {
+			p.scaleX *= .5;
+			p.scaleY *= .5;
+		}
+		screenShake(5, 5, .7, true);
+	}
 }

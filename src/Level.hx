@@ -267,15 +267,15 @@ class Level {
 				Action.onFloor1();
 				Game.CUR.cd.activate();
 				removeLighting();
-				/*setRoomId(2, 5);
+				setRoomId(2, 5);
 				Hero.spawnX = 35 * 16 + 8;
-				Hero.spawnY = 51 * 16 + 8;*/
-				/*setRoomId(1, 2);
-				Hero.spawnX = 15 * 16 + 8;
+				Hero.spawnY = 51 * 16 + 8;
+				/*setRoomId(2, 2);
+				Hero.spawnX = 39 * 16 + 8;
 				Hero.spawnY = 19 * 16 + 8;*/
-				setRoomId(1, 0);
+				/*setRoomId(1, 0);
 				Hero.spawnX = 15 * 16 + 8;
-				Hero.spawnY = 2 * 16 + 8;
+				Hero.spawnY = 2 * 16 + 8;*/
 				warpRX = 0;
 				warpRY = 0;
 			case 2:
@@ -292,9 +292,9 @@ class Level {
 			case 3:
 				Game.CUR.cd.activate();
 				removeLighting();
-				setRoomId(1, 4);
+				/*setRoomId(1, 4);
 				Hero.spawnX = 24 * 16;
-				Hero.spawnY = 41 * 16;
+				Hero.spawnY = 41 * 16;*/
 				/*setRoomId(2, 3);
 				Hero.spawnX = 30 * 16 + 8;
 				Hero.spawnY = 34 * 16 + 8;*/
@@ -310,6 +310,12 @@ class Level {
 				/*setRoomId(5, 3);
 				Hero.spawnX = 82 * 16 + 8;
 				Hero.spawnY = 35 * 16 + 8;*/
+				/*setRoomId(3, 1);
+				Hero.spawnX = 55 * 16 + 8;
+				Hero.spawnY = 11 * 16 + 8;*/
+				setRoomId(3, 0);
+				Hero.spawnX = 53 * 16 + 8;
+				Hero.spawnY = 3 * 16 + 8;
 				warpRX = warpRY = -42;
 		}
 		warp.visible = false;
@@ -499,6 +505,9 @@ class Level {
 		if(roomIdX == warpRX && roomIdY == warpRY) {
 			warp.visible = true;
 		}
+		if(floor == 3 && roomIdX == 3 && roomIdY == 0) {
+			Action.endScene();
+		}
 		return true;
 	}
 	public function closeRoom(idx:Int, idy:Int, dir:Const.DIR) {
@@ -633,6 +642,10 @@ class Level {
 						Action.shake1();
 					case "talkExit":
 						Action.talkExit();
+					case "teleport":
+						Action.teleport();
+					case "theEnd":
+						Action.theEnd();
 					default:
 						trace("Unknown action");
 				}

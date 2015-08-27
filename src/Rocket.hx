@@ -61,6 +61,7 @@ class Rocket extends Enemy {
 		dy *= spd;
 		var level = Game.CUR.level;
 		if(level.pointCollides(cx, cy, false, false)) {
+			Fx.rocketExplosion(xx, yy);
 			die();
 			return;
 		}
@@ -91,5 +92,6 @@ class Rocket extends Enemy {
 		var dx = (ndx + nvx) * .5;
 		var dy = (ndy + nvy) * .5;
 		h.die(-dx, -dy);
+		Fx.rocketExplosion(xx, yy);
 	}
 }

@@ -20,10 +20,12 @@ import motion.easing.Linear;
 import motion.easing.Quad;
 class Menu extends Scene {
 	public static var CUR : Menu;
+	public static var creditsBefore : Bool;
+	public static var front : Shape;
 	public var lm : LayerManager;
 	var selectedOption : Int;
 	var selectedMode : Int;
-	var back : JungleBack;
+	public var back : JungleBack;
 	var texts : Array<Bitmap>;
 	var normalMode : Bitmap;
 	var yoloMode : Bitmap;
@@ -87,20 +89,36 @@ class Menu extends Scene {
 		isDown = false;
 		isInDungeon = false;
 		transition = false;
+		creditsBefore = false;
 		
-		/*started = false;
-		startTransition();*/
+		started = false;
+		startTransition();
 		
-		started = true;
+		//started = true;
 	}
 	function startTransition() {
-		back.startTransition();
-		textContainer.y = Const.HEI;
-		Timer.delay(function() {
-			Actuate.tween(textContainer, 1.2, {y:0}).ease(Quad.easeOut).onComplete(function() {
-				started = true;
+		var start = function() {
+			Audio.playMusic(5);
+			back.startTransition();
+			textContainer.y = Const.HEI;
+			Timer.delay(function() {
+				Actuate.tween(textContainer, 1.2, {y:0}).ease(Quad.easeOut).onComplete(function() {
+					started = true;
+				});
+			}, 4800);
+		};
+		if(creditsBefore && front != null) {
+			textContainer.y = Const.HEI;
+			back.goTresUp();
+			lm.addChild(front, 1000);
+			Actuate.tween(front, 2., {alpha: 0.}).ease(Linear.easeNone).onComplete(function() {
+				front.parent.removeChild(front);
+				front = null;
+				start();
 			});
-		}, 4800);
+		} else {
+			start();
+		}
 	}
 	override public function delete() {
 		super.delete();
@@ -271,6 +289,9 @@ class Menu extends Scene {
 		leaveDungeon();
 		lm.getContainer().visible = true;
 		updateOptions();
+		started = false;
+		startTransition();
+		Audio.stopMusics(2.);
 	}
 	function goInDungeon(?yolo:Bool=false) {
 		if(!isDown) return;
@@ -289,7 +310,9 @@ class Menu extends Scene {
 			transition = false;
 			if(yolo) {
 				Game.skipStory = Game.yoloMode = true;
-				startGame();
+				Timer.delay(function() {
+					startGame(true);
+				}, 1000);
 			} else {
 				Audio.playSound("ask");
 				Game.skipStory = Game.yoloMode = false;
@@ -323,6 +346,7 @@ class Menu extends Scene {
 			startTimer.stop();
 			startTimer = null;
 		}
+		creditsBefore = false;
 		Actuate.stop(skipText);
 		skipText.visible = false;
 		transition = false;

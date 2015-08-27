@@ -604,5 +604,10 @@
     <property name="function" value="lastRush"/>
    </properties>
   </object>
+  <object type="Action" x="848" y="0" width="32" height="16">
+   <properties>
+    <property name="function" value="theEnd"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

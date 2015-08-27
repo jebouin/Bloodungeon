@@ -15,6 +15,7 @@ import motion.easing.Linear;
 @:sound("res/floor3.mp3") class Floor3Music extends Sound {}
 @:sound("res/rush.mp3") class RushMusic extends Sound {}
 @:sound("res/title.mp3") class TitleMusic extends Sound {}
+@:sound("res/endingShort.mp3") class EndingMusic extends Sound {}
 @:sound("res/select.mp3") class SelectSound extends Sound {}
 @:sound("res/moveCursor.mp3") class MoveCursorSound extends Sound {}
 @:sound("res/moveAch.mp3") class MoveAchSound extends Sound {}
@@ -33,6 +34,10 @@ import motion.easing.Linear;
 @:sound("res/noise1.wav") class Noise1Sound extends Sound {}
 @:sound("res/rocks.mp3") class RocksSound extends Sound {}
 @:sound("res/voices.mp3") class VoicesSound extends Sound {}
+@:sound("res/launcher.mp3") class LauncherSound extends Sound {}
+@:sound("res/tesla.mp3") class TeslaSound extends Sound {}
+@:sound("res/thwomp.mp3") class ThwompSound extends Sound {}
+@:sound("res/achievementUnlocked.wav") class AchievementUnlockedSound extends Sound {}
 class Music {
 	public var sound : Sound;
 	public var chan : SoundChannel;
@@ -83,8 +88,10 @@ class Music {
 	}
 	function update(_) {
 		if(playing) {
-			if(chan.position / 1000. > length) {
-				play(Std.int(introLength * 1000.));
+			if(length > 0) {
+				if(chan.position / 1000. > length) {
+					play(Std.int(introLength * 1000.));
+				}
 			}
 		}
 	}
@@ -113,6 +120,7 @@ class Audio {
 		musics.push(new Music(new Floor3Music(), 0, 80));
 		musics.push(new Music(new RushMusic(), 5.672, 80.47));
 		musics.push(new Music(new TitleMusic(), 18.02, 66));
+		musics.push(new Music(new EndingMusic(), 0, 0));
 		sounds = new StringMap<Sound>();
 		chans = new StringMap<SoundChannel>();
 		addSound("moveCursor", new MoveCursorSound());
@@ -133,6 +141,10 @@ class Audio {
 		addSound("noise1", new Noise1Sound());
 		addSound("rocks", new RocksSound());
 		addSound("voices", new VoicesSound());
+		addSound("launcher", new LauncherSound());
+		addSound("tesla", new TeslaSound());
+		addSound("thwomp", new ThwompSound());
+		addSound("achievementUnlocked", new AchievementUnlockedSound());
 		muteState = 3;
 		playingMusic = -1;
 		/*mute(false);

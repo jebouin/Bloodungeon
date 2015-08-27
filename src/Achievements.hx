@@ -94,12 +94,14 @@ class Achievements {
 					text.parent.removeChild(text);
 				});
 			}, 5000);
-			for(i in 0...3) {
+			for(i in 0...4) {
+				Audio.playSound("achievementUnlocked");
 				Timer.delay(function() {
 					text.visible = icon.visible = false;
 				}, i*500 + 250);
 				Timer.delay(function() {
 					text.visible = icon.visible = true;
+					Audio.playSound("achievementUnlocked");
 				}, i*500 + 500);
 			}
 		}

@@ -4,6 +4,7 @@ import flash.geom.Rectangle;
 import haxe.Timer;
 import motion.Actuate;
 class Thwomp extends Enemy {
+	static var nbCharging = 0;
 	public var charging : Bool;
 	public var chargeX : Float;
 	public var chargeY : Float;
@@ -20,6 +21,12 @@ class Thwomp extends Enemy {
 		this.maxSpeed = 6.;
 		charging = false;
 		crushedHero = false;
+	}
+	override public function delete() {
+		if(charging) {
+			nbCharging--;
+		}
+		super.delete();
 	}
 	override public function update() {
 		if(!charging) {
@@ -62,6 +69,10 @@ class Thwomp extends Enemy {
 				}
 			}
 			if(!charging) {
+				nbCharging--;
+				if(nbCharging == 0) {
+					Audio.stopSound("thwomp");
+				}
 				crushedHero = false;
 				chargeX = chargeY = vx = vy = 0;
 				setAnim("thwompIdle", false);
@@ -134,12 +145,16 @@ class Thwomp extends Enemy {
 		return false;
 	}
 	function startCharge(cx:Float, cy:Float) {
+		if(nbCharging == 0) {
+			Audio.playSound("thwomp");
+		}
 		if(Math.abs(Math.abs(cx) + Math.abs(cy) - 1.) > .1) return;
 		charging = true;
 		chargeX = cx;
 		chargeY = cy;
 		setAnim("thwompCharge");
 		anim.play();
+		nbCharging++;
 	}
 	override function collidesHero() {
 		var hero = Game.CUR.hero;

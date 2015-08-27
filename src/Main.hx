@@ -1,5 +1,6 @@
 package;
 import com.xay.util.BitmapFont;
+import com.xay.util.GJAPI;
 import com.xay.util.Input;
 import com.xay.util.Renderer;
 import com.xay.util.SceneManager;
@@ -26,6 +27,8 @@ import net.hires.debug.Stats;
 @:bitmap("res/fontTiny.png") class FontTinyBD extends BitmapData {}
 @:font("res/XLMONO.TTF") class XLMonoFont extends Font {}
 class Main {
+	public static inline var GAME_ID = 87205;
+	public static inline var PRIV_KEY = "20ba3a79cf6e539f4ec9c9149d0d0d1a";
 	public static var renderer : Renderer;
 	public static var font : BitmapFont;
 	public static var xlmonoFont : Font;
@@ -157,14 +160,20 @@ class Main {
 		Story.init();
 		Fx.init();
 		Action.init();
+		var params = Lib.current.root.loaderInfo.parameters;
+		//debug
+		GJAPI.init(GAME_ID, PRIV_KEY, "Xaychru", "7ae68f");
+		//debug end
+		//GJAPI.init(GAME_ID, PRIV_KEY, params.gjapi_username, params.gjapi_token);
 		
-		Game.skipStory = true;
+		/*Game.skipStory = true;
 		Game.continueGame = false;
 		Game.yoloMode = false;
-		new Game();
+		new Game();*/
 		
-		//new Menu();
+		new Menu();
 		//new VoiceScene();
+		//new Ending();
 		stage.addEventListener(Event.ENTER_FRAME, update);
 	}
 	static function update(_) {
@@ -208,7 +217,7 @@ class Main {
 		}
 	}
 	static function onFocusOut(_) {
-		if(!hasFocus || VoiceScene.CUR != null) return;
+		if(!hasFocus || VoiceScene.CUR != null || Ending.CUR != null) return;
 		hasFocus = false;
 		Audio.onFocusOut();
 		if(Game.CUR != null) {

@@ -35,8 +35,13 @@ class Launcher extends Enemy {
 		timer++;
 		if(timer >= 100) {
 			timer = 0;
-			for(l in ALL) {
-				l.shoot();
+			if(!(Game.CUR.hero.dead || Game.CUR.hero.fell)) {
+				if(ALL.length > 0) {
+					Audio.playSound("launcher");
+				}
+				for(l in ALL) {
+					l.shoot();
+				}
 			}
 		}
 	}
