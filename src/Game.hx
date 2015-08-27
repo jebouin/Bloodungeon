@@ -21,6 +21,7 @@ class Game extends Scene {
 	public var entities : Array<Entity>;
 	public var level : Level;
 	public var hero : Hero;
+	public var badger : Badger;
 	public var cd : Countdown;
 	public var camX : Float;
 	public var camY : Float;
@@ -180,6 +181,9 @@ class Game extends Scene {
 		}
 	}
 	public function onHeroDeath() {
+		if(Level.LAST_ROOM) {
+			Achievements.unlock("I can do that too");
+		}
 		respawnTimer = 60;
 	}
 	public function respawn() {
@@ -206,6 +210,11 @@ class Game extends Scene {
 	}
 	public function onFocusIn() {
 		
+	}
+	public function onLastRoom() {
+		badger = new Badger();
+		badger.roomId = Level.ROOMID;
+		entities.push(badger);
 	}
 	function pause() {
 		if(canPause) {

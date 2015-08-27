@@ -16,6 +16,7 @@ import motion.easing.Linear;
 @:sound("res/rush.mp3") class RushMusic extends Sound {}
 @:sound("res/title.mp3") class TitleMusic extends Sound {}
 @:sound("res/endingShort.mp3") class EndingMusic extends Sound {}
+@:sound("res/floor3end.mp3") class Floor3EndMusic extends Sound {}
 @:sound("res/select.mp3") class SelectSound extends Sound {}
 @:sound("res/moveCursor.mp3") class MoveCursorSound extends Sound {}
 @:sound("res/moveAch.mp3") class MoveAchSound extends Sound {}
@@ -38,6 +39,8 @@ import motion.easing.Linear;
 @:sound("res/tesla.mp3") class TeslaSound extends Sound {}
 @:sound("res/thwomp.mp3") class ThwompSound extends Sound {}
 @:sound("res/achievementUnlocked.wav") class AchievementUnlockedSound extends Sound {}
+@:sound("res/dialog.wav") class DialogSound extends Sound {}
+@:sound("res/rocketExplosion.wav") class RocketExplosionSound extends Sound {}
 class Music {
 	public var sound : Sound;
 	public var chan : SoundChannel;
@@ -54,11 +57,18 @@ class Music {
 		trans = new SoundTransform();
 		Lib.current.stage.addEventListener(Event.ENTER_FRAME, update);
 	}
-	public function play(?pos=0) {
+	public function play(?pos=0, ?fadeTime:Float=-1) {
 		playing = true;
 		chan = sound.play(pos, 0);
 		if(Audio.musicMuted) {
 			mute();
+		} else if(fadeTime > 0) {
+			trans.volume = 0.;
+			Actuate.tween(trans, fadeTime, {volume:1.}).ease(Linear.easeNone).onComplete(function() {
+				
+			}).onUpdate(function() {
+				chan.soundTransform = trans;
+			});
 		}
 	}
 	public function pause() {
@@ -121,6 +131,7 @@ class Audio {
 		musics.push(new Music(new RushMusic(), 5.672, 80.47));
 		musics.push(new Music(new TitleMusic(), 18.02, 66));
 		musics.push(new Music(new EndingMusic(), 0, 0));
+		musics.push(new Music(new Floor3EndMusic(), .031, 5.7));
 		sounds = new StringMap<Sound>();
 		chans = new StringMap<SoundChannel>();
 		addSound("moveCursor", new MoveCursorSound());
@@ -145,6 +156,8 @@ class Audio {
 		addSound("tesla", new TeslaSound());
 		addSound("thwomp", new ThwompSound());
 		addSound("achievementUnlocked", new AchievementUnlockedSound());
+		addSound("dialog", new DialogSound());
+		addSound("rocketExplosion", new RocketExplosionSound());
 		muteState = 3;
 		playingMusic = -1;
 		/*mute(false);
@@ -183,13 +196,13 @@ class Audio {
 			c.stop();
 		}
 	}
-	public static function playMusic(id:Int) {
+	public static function playMusic(id:Int, ?fadeTime:Float=-1) {
 		if(id >= 0 && id < musics.length) {
 			playingMusic = id;
 			for(m in musics) {
 				m.stop();
 			}
-			musics[id].play(0);
+			musics[id].play(0, fadeTime);
 		}
 	}
 	public static function stopMusics(?fadeTime:Float=-1) {

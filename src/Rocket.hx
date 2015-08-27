@@ -11,6 +11,7 @@ class Rocket extends Enemy {
 		this.rotation = rot;
 		onHeroKilled = function() {
 			die();
+			Audio.playSound("rocketExplosion");
 		};
 		update();
 	}
@@ -62,6 +63,7 @@ class Rocket extends Enemy {
 		var level = Game.CUR.level;
 		if(level.pointCollides(cx, cy, false, false)) {
 			Fx.rocketExplosion(xx, yy);
+			Audio.playSound("rocketExplosion");
 			die();
 			return;
 		}

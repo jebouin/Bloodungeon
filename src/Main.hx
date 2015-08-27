@@ -119,6 +119,12 @@ class Main {
 		SpriteLib.sliceBD("enemies", "rock0", 94, 287, 16, 13, 1, 1);
 		SpriteLib.sliceBD("enemies", "rock1", 111, 287, 13, 13, 1, 1);
 		SpriteLib.sliceBD("enemies", "rock2", 125, 286, 16, 14, 1, 1);
+		SpriteLib.sliceBD("enemies", "computer", 89, 307, 92, 23, 1, 1);
+		SpriteLib.sliceBD("enemies", "badger", 92, 339, 19, 15, 5, 1);
+		SpriteLib.addAnim("badgerBack", "badger", "0-1", 8);
+		SpriteLib.addAnim("badgerFront", "badger", "2", 60);
+		SpriteLib.addAnim("badgerSide", "badger", "3-4", 4);
+		SpriteLib.sliceBD("enemies", "badgerHead", 95, 358, 9, 8, 1, 1);
 		
 		SpriteLib.addAnim("spikeRightIdle", "sideSpike", "2,3,4,3", 10);
 		SpriteLib.addAnim("spikeLeftIdle", "sideSpike", "7,8,9,8", 10);
@@ -166,12 +172,12 @@ class Main {
 		//debug end
 		//GJAPI.init(GAME_ID, PRIV_KEY, params.gjapi_username, params.gjapi_token);
 		
-		/*Game.skipStory = true;
+		Game.skipStory = true;
 		Game.continueGame = false;
 		Game.yoloMode = false;
-		new Game();*/
+		new Game();
 		
-		new Menu();
+		//new Menu();
 		//new VoiceScene();
 		//new Ending();
 		stage.addEventListener(Event.ENTER_FRAME, update);

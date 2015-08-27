@@ -4,6 +4,8 @@ import com.xay.util.Util;
 import flash.display.Bitmap;
 import flash.display.BitmapData;
 import haxe.Timer;
+import motion.Actuate;
+import motion.easing.Linear;
 class Action {
 	static var rocks : Array<Bitmap> = [];
 	public static function init() {
@@ -121,7 +123,45 @@ class Action {
 		Game.CUR.cd.deactivate();
 		Game.CUR.cd.visible = false;
 		Audio.stopMusics(1.);
+		Timer.delay(function() {
+			Audio.playMusic(7, 2.);
+		}, 800);
 		Game.CUR.hero.say("!", 120);
+		var b = Game.CUR.badger;
+		var h = Game.CUR.hero;
+		Actuate.tween(h, 1.5, {yy:h.yy-30}).ease(Linear.easeNone).onComplete(function() {
+			h.locked = false;
+			h.anim.setFrame(4);
+			h.update();
+			h.locked = true;
+		}).onUpdate(function() {
+			h.y = h.yy - 2;
+			h.shadow.y = h.y + 4;
+		});
+		Timer.delay(function() {
+			b.setAnim("badgerFront", false);
+			b.anim.play();
+			b.yy += 10;
+			b.say("!", 120);
+			Timer.delay(function() {
+				b.say("I...", 50);
+				Timer.delay(function() {
+					b.say("I, huh", 50);
+					Timer.delay(function() {
+						b.say("I can explain...", 160);
+						Timer.delay(function() {
+							h.say("...", 120);
+							Timer.delay(function() {
+								b.vx = 2.;
+								b.setAnim("badgerSide", true);
+								b.anim.play();
+								h.locked = false;
+							}, 1000);
+						}, 900);
+					}, 1000);
+				}, 800);
+			}, 2000);
+		}, 2000);
 	}
 	public static function theEnd() {
 		Game.CUR.complete();

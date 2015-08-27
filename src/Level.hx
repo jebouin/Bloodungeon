@@ -8,6 +8,7 @@ import flash.display.GradientType;
 import flash.display.Sprite;
 import flash.filters.ShaderFilter;
 import flash.geom.Matrix;
+import flash.geom.Rectangle;
 import flash.net.drm.DRMVoucherDownloadContext;
 import flash.utils.ByteArray;
 import com.xay.util.SpriteLib;
@@ -32,6 +33,7 @@ class Level {
 	public static var RHEI : Int;
 	public static var WID : Int;
 	public static var HEI : Int;
+	public static var LAST_ROOM : Bool;
 	public var floor : Int;
 	public var posX : Float;
 	public var posY : Float;
@@ -60,7 +62,20 @@ class Level {
 	public var warp : Warp;
 	var warpRX : Int;
 	var warpRY : Int;
+	static var computer : Bitmap;
+	static var computerRect0 : Rectangle;
+	static var computerRect1 : Rectangle;
+	var timer : Int;
 	public function new(levelId:Int) {
+		if(computer == null) {
+			computer = new Bitmap(new BitmapData(92, 23, true, 0x0));
+			SpriteLib.copyFramePixelsFromSlice(computer.bitmapData, "computer");
+			computer.x = 46 * 16;
+			computer.y = 2 * 16 - 5;
+			computerRect0 = new Rectangle(0, 0, 46, 23);
+			computerRect1 = new Rectangle(46, 0, 46, 23);
+		}
+		timer = 0;
 		RWID = Std.int(Const.WID / 16);
 		RHEI = Std.int(Const.HEI / 16);
 		warp = new Warp();
@@ -69,6 +84,7 @@ class Level {
 		load(levelId);
 	}
 	public function update() {
+		timer++;
 		Bow.updateAll();
 		Spinner.updateAll();
 		Torch.updateAll();
@@ -88,6 +104,11 @@ class Level {
 						new Tesla.Bolt(xa[i]*16+8, ya[i]*16+8, xa[j]*16+8, ya[j]*16+8);
 					}
 				}
+			}
+		}
+		if(computer.parent != null) {
+			if(timer & 7 == 0) {
+				computer.scrollRect = (((timer >> 3) & 1) == 0 ? computerRect0 : computerRect1);
 			}
 		}
 	}
@@ -310,12 +331,12 @@ class Level {
 				/*setRoomId(5, 3);
 				Hero.spawnX = 82 * 16 + 8;
 				Hero.spawnY = 35 * 16 + 8;*/
-				/*setRoomId(3, 1);
+				setRoomId(3, 1);
 				Hero.spawnX = 55 * 16 + 8;
-				Hero.spawnY = 11 * 16 + 8;*/
-				setRoomId(3, 0);
+				Hero.spawnY = 11 * 16 + 8;
+				/*setRoomId(3, 0);
 				Hero.spawnX = 53 * 16 + 8;
-				Hero.spawnY = 3 * 16 + 8;
+				Hero.spawnY = 5 * 16 + 8;*/
 				warpRX = warpRY = -42;
 		}
 		warp.visible = false;
@@ -487,6 +508,7 @@ class Level {
 		setRoomId(roomIdX + dx, roomIdY + dy);
 		loadEntities(roomIdX, roomIdY);
 		Game.CUR.lock();
+		var isLastRoom = (floor == 3 && roomIdX == 3 && roomIdY == 0);
 		Game.CUR.moveCameraTo(posX, posY, .5, function() {
 			Game.CUR.unlock();
 			var toDelete = [];
@@ -501,11 +523,20 @@ class Level {
 				e.delete();
 				Game.CUR.entities.remove(e);
 			}
+			if(isLastRoom) {
+				Game.CUR.hero.locked = true;
+			}
 		});
 		if(roomIdX == warpRX && roomIdY == warpRY) {
 			warp.visible = true;
 		}
-		if(floor == 3 && roomIdX == 3 && roomIdY == 0) {
+		if(isLastRoom) {
+			for(i in 46...49) {
+				setCollision(i, 2, FULL);
+			}
+			Game.CUR.lm.addChild(computer, Const.ENEMY_L);
+			computer.scrollRect = computerRect0;
+			Game.CUR.onLastRoom();
 			Action.endScene();
 		}
 		return true;
@@ -533,6 +564,7 @@ class Level {
 		if(floor == 0 && idx == 2 && idy == 3) {
 			addExitLight();
 		}
+		LAST_ROOM = (floor == 3 && roomIdX == 3 && roomIdY == 0);
 	}
 	public inline function isOnMap(x:Int, y:Int) {
 		return x >= 0 && y >= 0 && x < WID && y < HEI;

@@ -23,6 +23,7 @@ class Dialog extends Sprite {
 		for(d in ALL) {
 			if(d.deleted) {
 				d.deleted = false;
+				Audio.playSound("dialog");
 				return d;
 			}
 		}
@@ -103,10 +104,10 @@ class Dialog extends Sprite {
 		bitmap.x = Std.int(-bitmap.width * .5);
 		bitmap.y = Std.int(-bitmap.height * .5);
 		this.timer = time;
-		var bw = bitmap.width + 2;
+		var bw = bitmap.width - 2;
 		var bh = bitmap.height + 2;
 		back.scrollRect = new Rectangle(0, 0, bw, bh);
-		back.x = Std.int(-bw * .5);
+		back.x = Std.int(-bw * .5) - 3;
 		back.y = Std.int(-bh * .5);
 		update();
 	}

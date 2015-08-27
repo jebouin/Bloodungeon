@@ -46,6 +46,18 @@ class Fx {
 			}).ease(Elastic.easeOut);
 		}
 	}
+	public static function deathScreenShake(dx:Float, dy:Float) {
+		var d = Math.sqrt(dx*dx + dy*dy);
+		if(d < .1) {
+			screenShake(0, 8, .5, true);
+			dx = 0;
+			dy = 0;
+		} else {
+			dx /= d;
+			dy /= d;
+			screenShake(dx * 12., dy * 12., .6);
+		}
+	}
 	public static function stopScreenShake() {
 		Actuate.stop(Fx, "sx, sy");
 	}
@@ -98,36 +110,12 @@ class Fx {
 			}
 		}
 	}
-	public static function test() {
-		for(i in 0...10) {
-			var p = Particle.create();
-			if(p == null) break;
-			Game.CUR.lm.addChild(p, Const.FRONT_L);
-			p.drawRect(8, 8, 0xFF0000);
-			p.xx = -Game.CUR.lm.getContainer().x + Std.random(Const.WID) - 100;
-			p.yy = -Game.CUR.lm.getContainer().y + Std.random(Const.HEI);
-			p.vx = 10.;
-			p.blendMode = BlendMode.ADD;
-		}
-	}
-	public static function heroDeath(x:Float, y:Float, dx:Float, dy:Float) {
-		flash(1., 0., 0., .5, .3);
+	public static function bouncingHead(x:Float, y:Float, dx:Float, dy:Float, slice:String) {
 		var d = Math.sqrt(dx*dx + dy*dy);
-		if(d < .1) {
-			screenShake(0, 8, .5, true);
-			dx = 0;
-			dy = 0;
-		} else {
-			dx /= d;
-			dy /= d;
-			screenShake(dx * 12., dy * 12., .6);
-			
-		}
 		var angle = (d < .1 ? 0 : Math.atan2(-dy, -dx));
-		//head
 		var p = Particle.create();
 		if(p == null) return;
-		SpriteLib.copyFramePixelsFromSliceToGraphics(p.graphics, "heroHead", 0);
+		SpriteLib.copyFramePixelsFromSliceToGraphics(p.graphics, slice, 0);
 		p.xx = x;
 		p.yy = y;
 		p.zz = 8;
@@ -201,6 +189,15 @@ class Fx {
 			}
 		}, 5000);
 		Game.CUR.lm.addChild(p, Const.BACKWALL_L);
+	}
+	public static function badgerDeath(x:Float, y:Float, dx:Float, dy:Float) {
+		deathScreenShake(dx, dy);
+		bouncingHead(x, y, dx, dy, "badgerHead");
+	}
+	public static function heroDeath(x:Float, y:Float, dx:Float, dy:Float) {
+		flash(1., 0., 0., .5, .3);
+		deathScreenShake(dx, dy);
+		bouncingHead(x, y, dx, dy, "heroHead");
 	}
 	public static function bloodParticle(isDark:Bool, ?wid=2.5, ?hei=1.5, ?lifeTime=30) {
 		var p = Particle.create();

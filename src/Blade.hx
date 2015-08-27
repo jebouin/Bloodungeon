@@ -75,6 +75,29 @@ class Blade extends Enemy {
 			super.update();
 		}
 	}
+	public function collidesBadger() {
+		var badger = Game.CUR.badger;
+		if(badger == null) return false;
+		if(badger.dead) return false;
+		if(lastDir == UP || lastDir == DOWN) {
+			return Collision.circleToRect(badger.xx, badger.yy, badger.cradius, new Rectangle(xx - 10 + 8, yy - 8 + 2, 3, 14));
+		} else {
+			return Collision.circleToRect(badger.xx, badger.yy, badger.cradius, new Rectangle(xx - 10 + 2, yy - 8 + 3, 16, 6));
+		}
+		return false;
+	}
+	public function killBadger(b:Badger) {
+		var ndx = b.xx - xx;
+		var ndy = b.yy - yy;
+		var dist = Math.sqrt(ndx * ndx + ndy * ndy);
+		ndx /= dist;
+		ndy /= dist;
+		var nvx = Const.getDirX(lastDir);
+		var nvy = Const.getDirY(lastDir);
+		var dx = (ndx + nvx) * .5;
+		var dy = (ndy + nvy) * .5;
+		b.die(-dx, -dy);
+	}
 	override function collidesHero() {
 		var hero = Game.CUR.hero;
 		if(hero == null) return false;
