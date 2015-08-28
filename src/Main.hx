@@ -7,6 +7,7 @@ import com.xay.util.SceneManager;
 import com.xay.util.SpriteLib;
 import flash.display.Bitmap;
 import flash.display.BitmapData;
+import flash.display.Shape;
 import flash.display.Sprite;
 import flash.display.StageAlign;
 import flash.display.StageQuality;
@@ -146,17 +147,17 @@ class Main {
 		font = new BitmapFont(new FontTinyBD(0, 0), 5, 5);
 		xlmonoFont = new XLMonoFont();
 	}
-	static function main() {
+	public static function main() {
 		var stage = Lib.current.stage;
 		stage.scaleMode = StageScaleMode.NO_SCALE;
 		stage.quality = StageQuality.BEST;
 		stage.align = StageAlign.TOP_LEFT;
 		is60FPS = true;
 		renderer = new Renderer(Const.WID, Const.HEI, Const.SCALE);
-		var stats = new Stats();
+		/*var stats = new Stats();
 		stats.x = stage.stageWidth - Stats.XPOS;
 		stats.y = stage.stageHeight - 250;
-		stage.addChild(stats);
+		stage.addChild(stats);*/
 		initGFX();
 		initInput();
 		Audio.init();
@@ -179,7 +180,7 @@ class Main {
 		
 		new Menu();
 		//new VoiceScene();
-		//new Ending();
+		//new Ending(new Shape(), 0);
 		stage.addEventListener(Event.ENTER_FRAME, update);
 	}
 	static function update(_) {
@@ -241,5 +242,8 @@ class Main {
 	}
 	public static function glitch() {
 		renderer.glitch();
+	}
+	public function new() {
+		main();
 	}
 }

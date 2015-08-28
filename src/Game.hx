@@ -45,7 +45,7 @@ class Game extends Scene {
 		} else {
 			Save.onStartGame();
 			if(skipStory) {
-				floorId = 3;
+				floorId = 1;
 			}
 		}
 		level = new Level(floorId);
@@ -206,14 +206,8 @@ class Game extends Scene {
 		hero.nbDeathBeforeFloor = hero.nbDeaths;
 	}
 	public function startRush(?isLoading=false) {
-		if(Save.so.data.isRush) {
-			return;
-		}
 		Audio.playMusic(4);
-		Save.onRush();
-		if(!isLoading) {
-			//fx
-		}
+		if(!isLoading) Save.onRush();
 	}
 	public function onFocusOut() {
 		pause();

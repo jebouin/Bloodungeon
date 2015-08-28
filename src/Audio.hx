@@ -80,6 +80,7 @@ class Music {
 	public function resume() {
 		if(!playing) return;
 		chan = sound.play(pausePos);
+		chan.soundTransform = trans;
 		if(Audio.musicMuted) {
 			mute();
 		}

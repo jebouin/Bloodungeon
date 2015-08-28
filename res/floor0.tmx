@@ -69,7 +69,7 @@
     <property name="function" value="exitFloor0"/>
    </properties>
   </object>
-  <object type="Action" x="96" y="432" width="48" height="16">
+  <object type="Action" x="96" y="416" width="48" height="16">
    <properties>
     <property name="function" value="shake0"/>
    </properties>

@@ -101,10 +101,10 @@ class FakeTile extends Enemy {
 			if(nbBroken == 0) {
 				Achievements.unlock("Secret...");
 			}
+			nbBroken++;
 			if(nbBroken == 6) {
 				Achievements.unlock("Cheater");
 			}
-			nbBroken++;
 		}
 	}
 }

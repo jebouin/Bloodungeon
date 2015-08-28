@@ -133,14 +133,14 @@ class AchievementMenu extends Scene {
 	override public function update() {
 		super.update();
 		if(!exiting) {
-			if(Input.newKeyPress("down")) {
+			if(Input.newKeyPress("down") && !Main.secondUpdate) {
 				select(selected + 1);
 				if(selected >= boxes.length) {
 					delayExit();
 				}
 				Audio.playSound("moveAch");
 			}
-			if(Input.newKeyPress("up")) {
+			if(Input.newKeyPress("up") && !Main.secondUpdate) {
 				select(selected - 1);
 				if(selected < 0) {
 					delayExit();

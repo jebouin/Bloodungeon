@@ -151,5 +151,6 @@ class Arrow extends Enemy {
 	}
 	override function killHero(h:Hero) {
 		h.die(-vx, -vy);
+		die();
 	}
 }

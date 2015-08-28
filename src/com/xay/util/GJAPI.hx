@@ -69,10 +69,6 @@ class GJAPI {
 		if(GJAPI.callback != null) {
 			loader.removeEventListener(Event.COMPLETE, GJAPI.callback);
 		}
-		/*GJAPI.callback = function(e:Event) {
-			trace(e.target.data);
-		}*/
-		loader.addEventListener(Event.COMPLETE, GJAPI.callback);
 		loader.load(req);
 		//trace(url);
 	}

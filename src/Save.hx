@@ -86,6 +86,7 @@ class Save {
 		so.data.ach4 = Achievements.achievements[4].unlocked;
 		so.data.ach5 = Achievements.achievements[5].unlocked;
 		so.data.ach6 = Achievements.achievements[6].unlocked;
+		so.flush();
 	}
 	public static function onQuitGame() {
 		so.data.gameTime = Stats.gameTime;

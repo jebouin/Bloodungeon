@@ -91,10 +91,10 @@ class Menu extends Scene {
 		transition = false;
 		creditsBefore = false;
 		
-		/*started = false;
-		startTransition();*/
+		started = false;
+		startTransition();
 		
-		started = true;
+		//started = true;
 	}
 	function startTransition() {
 		var start = function() {
