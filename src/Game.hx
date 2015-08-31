@@ -75,6 +75,9 @@ class Game extends Scene {
 		if(continueGame && Save.so.data.isRush) {
 			startRush(true);
 		}
+		if(yoloMode && !continueGame) {
+			Hero.prevRoomDir = null;
+		}
 	}
 	override public function delete() {
 		Save.onQuitGame();

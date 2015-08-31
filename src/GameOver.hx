@@ -85,9 +85,12 @@ class GameOver extends Scene {
 	function startPressed() {
 		if(selected == 0) {
 			Timer.delay(function() {
+				var od = Game.CUR.onDelete;
+				Game.CUR.onDelete = null;
 				exit(function() {
 					Save.onStartGame();
-					new Game();
+					var g = new Game();
+					g.onDelete = od;
 				});
 			}, 500);
 		} else {

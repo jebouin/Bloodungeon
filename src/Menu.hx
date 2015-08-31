@@ -292,9 +292,7 @@ class Menu extends Scene {
 		updateOptions();
 		started = false;
 		startTransition();
-		if(selectedOption == 1 && !Save.so.data.hasSave) {
-			selectedOption = 0;
-		}
+		selectedOption = 0;
 	}
 	function goInDungeon(?yolo:Bool=false) {
 		if(!isDown) return;
