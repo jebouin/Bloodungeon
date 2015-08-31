@@ -90,10 +90,8 @@ class Menu extends Scene {
 		isInDungeon = false;
 		transition = false;
 		creditsBefore = false;
-		
 		started = false;
 		startTransition();
-		
 		//started = true;
 	}
 	function startTransition() {
@@ -102,10 +100,10 @@ class Menu extends Scene {
 			back.startTransition();
 			textContainer.y = Const.HEI;
 			Timer.delay(function() {
-				Actuate.tween(textContainer, 1.2, {y:0}).ease(Quad.easeOut).onComplete(function() {
+				Actuate.tween(textContainer, 1., {y:0}).ease(Quad.easeOut).onComplete(function() {
 					started = true;
 				});
-			}, 4800);
+			}, 2000);
 		};
 		if(creditsBefore && front != null) {
 			textContainer.y = Const.HEI;

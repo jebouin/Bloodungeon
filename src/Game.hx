@@ -16,6 +16,7 @@ class Game extends Scene {
 	public static var yoloMode : Bool;
 	public static var continueGame : Bool;
 	public static var canPause : Bool;
+	public static var curGameTime : Int;
 	public var lm : LayerManager;
 	public var frontlm : LayerManager;
 	public var entities : Array<Entity>;
@@ -42,6 +43,7 @@ class Game extends Scene {
 		var floorId = 0;
 		if(continueGame) {
 			floorId = Save.so.data.floorId;
+			curGameTime = Save.so.data.curGameTime;
 		} else {
 			Save.onStartGame();
 			if(skipStory) {
@@ -61,6 +63,7 @@ class Game extends Scene {
 		entities.push(hero);
 		locked = false;
 		respawnTimer = 0;
+		curGameTime = 0;
 		if(Save.so.data.isRush) {
 			startRush();
 		}
@@ -105,13 +108,11 @@ class Game extends Scene {
 		}
 		Dialog.updateAll();
 		Fx.update();
-		if(Input.newKeyPress("escape")) {
+		if(Input.newKeyPress("escape") && !Main.secondUpdate) {
 			pause();
 		}
-		/*if(Input.newKeyPress("skip")) {
-			complete();
-		}*/
 		Stats.gameTime++;
+		curGameTime++;
 		if(respawnTimer > 0) {
 			respawnTimer--;
 			if(respawnTimer == 0) {
@@ -187,6 +188,11 @@ class Game extends Scene {
 		if(Level.LAST_ROOM) {
 			Achievements.unlock("I can do that too");
 		}
+		if(yoloMode) {
+			continueGame = false;
+			Save.so.data.hasSave = false;
+			Save.so.flush();
+		}
 		respawnTimer = fell ? 30 : 60;
 	}
 	public function respawn() {
@@ -202,6 +208,11 @@ class Game extends Scene {
 		}
 	}
 	public function nextFloor() {
+		if(level.floor == 1) {
+			GJAPI.sendHiscore(hero.nbDeaths, 93249, Std.string(curGameTime));
+		} else if(level.floor == 2) {
+			GJAPI.sendHiscore(hero.nbDeaths, 93250, Std.string(curGameTime));
+		}
 		level.nextFloor();
 		hero.nbDeathBeforeFloor = hero.nbDeaths;
 	}
@@ -239,7 +250,7 @@ class Game extends Scene {
 			}, 6000);
 		}
 		canPause = false;
-		GJAPI.sendHiscore(hero.nbDeaths);
+		GJAPI.sendHiscore(hero.nbDeaths, 90637, Std.string(curGameTime));
 		Save.so.data.hasSave = false;
 		hero.update();
 		hero.anim.setFrame(2);

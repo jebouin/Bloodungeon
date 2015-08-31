@@ -73,16 +73,16 @@ class JungleBack extends Sprite {
 		started = false;
 		goTresUp();
 		for(s in stars) {
-			Actuate.tween(s, 3., {alpha: 1.}).ease(Linear.easeNone);
+			Actuate.tween(s, 1.5, {alpha: 1.}).ease(Linear.easeNone);
 		}
 		Timer.delay(function() {
-			Actuate.tween(jungle0, 3., {y:0}).ease(Quad.easeOut);
-			Actuate.tween(jungle1, 3., {y:0}).ease(Quad.easeOut);
-			Actuate.tween(jungle2, 3., {y:0}).ease(Quad.easeOut);
-		}, 3000);
+			Actuate.tween(jungle0, 1.5, {y:0}).ease(Quad.easeOut);
+			Actuate.tween(jungle1, 1.5, {y:0}).ease(Quad.easeOut);
+			Actuate.tween(jungle2, 1.5, {y:0}).ease(Quad.easeOut);
+		}, 1500);
 		Timer.delay(function() {
 			started = true;
-		}, 6000);
+		}, 3000);
 	}
 	public function update() {
 		timer++;

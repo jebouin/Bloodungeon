@@ -169,9 +169,9 @@ class Main {
 		Action.init();
 		var params = Lib.current.root.loaderInfo.parameters;
 		//debug
-		//GJAPI.init(GAME_ID, PRIV_KEY, "Xaychru", "7ae68f");
+		GJAPI.init(GAME_ID, PRIV_KEY, "Xaychru", "7ae68f");
 		//debug end
-		GJAPI.init(GAME_ID, PRIV_KEY, params.gjapi_username, params.gjapi_token);
+		//GJAPI.init(GAME_ID, PRIV_KEY, params.gjapi_username, params.gjapi_token);
 		
 		/*Game.skipStory = true;
 		Game.continueGame = false;

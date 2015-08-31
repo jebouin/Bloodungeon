@@ -177,8 +177,8 @@ class Audio {
 		addSound("rocketExplosion", new RocketExplosionSound());
 		muteState = 3;
 		playingMusic = -1;
-		/*mute(false);
-		mute(false);*/
+		mute(false);
+		mute(false);
 	}
 	static function addSound(name:String, snd:Sound) {
 		if(!sounds.exists(name)) {

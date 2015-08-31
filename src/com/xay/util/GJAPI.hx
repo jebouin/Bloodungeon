@@ -40,7 +40,7 @@ class GJAPI {
 		}
 		return true;
 	}
-	public static function sendHiscore(score:Int, guestName:String=null) {
+	public static function sendHiscore(score:Int, tableId:Int, extraData:String=null, guestName:String=null) {
 		if(!checkInited()) return;
 		var nameToUse = (guestName!=null?guestName:username);
 		var url = baseURL+"scores/add/";
@@ -48,8 +48,12 @@ class GJAPI {
 		if(!loggedIn) {
 			url+="&username=&user_token=&guest="+nameToUse;
 		} else {
-			url+="&username=" + nameToUse + "&user_token=" + userToken + "&guest=";
+			url+="&username=" + nameToUse + "&user_token=" + userToken;
 		}
+		if(extraData != null) {
+			url += "&extra_data=" + extraData;
+		}
+		url += "&table_id=" + Std.string(tableId);
 		url = encodeURL(url);
 		req.url = url;
 		if(GJAPI.callback!=null) {
@@ -63,7 +67,7 @@ class GJAPI {
 		var url = baseURL + "trophies/add-achieved/" + "?game_id=" + Std.string(gameId) 
 													+ "&username=" + username
 													+ "&user_token=" + userToken
-													+ "&trophy-id=" + Std.string(id);
+													+ "&trophy_id=" + Std.string(id);
 		url = encodeURL(url);
 		req.url = url;
 		if(GJAPI.callback != null) {

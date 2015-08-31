@@ -52,11 +52,11 @@ class Pause extends Scene {
 			select(1);
 			Audio.playSound("moveCursor");
 		}
-		if(Input.newKeyPress("escape")) {
+		if(Input.newKeyPress("escape") && !Main.secondUpdate) {
 			select(0);
 			startPressed();
 		}
-		if(Input.newKeyPress("start")) {
+		if(Input.newKeyPress("start") && !Main.secondUpdate) {
 			Audio.playSound("select");
 			startPressed();
 		}

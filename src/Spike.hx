@@ -3,6 +3,7 @@ import haxe.Timer;
 class Spike extends Enemy {
 	public static var ALL : Array<Spike> = [];
 	public var timer : Timer;
+	public var outTimer : Int;
 	public var out : Bool;
 	public var tx : Int;
 	public var ty : Int;
@@ -46,18 +47,21 @@ class Spike extends Enemy {
 			if(!out) {
 				if(isOnTop(hero)) {
 					out = true;
-					Timer.delay(function() {
-						Audio.playSound("spike");
-						setAnim("spikeOut", false);
-						anim.play();
-						anim.onEnd = function() {
-							out = false;
-							setAnim("spikeIdle", false);
-						}
-						if(hits(hero)) {
-							killHero(hero);
-						}
-					}, 300);
+					outTimer = 18;
+				}
+			} else {
+				outTimer--;
+				if(outTimer == 0) {
+					Audio.playSound("spike");
+					setAnim("spikeOut", false);
+					anim.play();
+					anim.onEnd = function() {
+						out = false;
+						setAnim("spikeIdle", false);
+					}
+					if(hits(hero)) {
+						killHero(hero);
+					}
 				}
 			}
 		} else {
